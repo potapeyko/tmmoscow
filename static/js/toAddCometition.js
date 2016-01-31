@@ -377,3 +377,10 @@ $('#swapVisMemNew1').click(function(){
     $(blockName).slideToggle(250);
     componentHandler.upgradeAllRegistered();
 });
+
+$('#btnLogIn').click(function(){
+    var dc = $('#countStart');
+    if (dc.val() != '1'){
+       daysCount = dc.val();
+   }
+});

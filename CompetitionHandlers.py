@@ -25,6 +25,12 @@ class NewCompetition(webapp2.RequestHandler):
         user = users.get_current_user()
         if user:
             email = user.email()
+            # common info about competition
+            logo = self.request.POST['logoNew']
+            start_date = self.request.POST['dateStartNew']
+            finish_date = self.request.POST['dateFinishNew']
+            comp_name = self.request.POST['nameCompNew']
+            # info about each day
 
             temp_values = {'user_email':email, 'logout':users.create_logout_url('/login')}
             template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/AddCompetition.html')
