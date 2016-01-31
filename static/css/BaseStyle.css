@@ -1,0 +1,38 @@
+body {
+    background: #fafafa; 
+    font-family: Yu Gothic UI;
+    font-size: 20px;
+}
+.mdl-button{
+    height: 40px;
+    
+}
+h3.mdl-card__title-text{
+    font-size: 20px;
+}
+h2.mdl-card__title-text{
+    font-size: 24px;
+}
+
+img {
+    border-radius: 50%;
+    opacity: 40%;
+}
+.mdl-card{
+    background: #42A5F5;
+}
+.mdl-card__actions.mdl-card--border {
+    border-top: 1px solid #ffffff ;
+    opacity: 40%;
+}
+.open-comp{
+    background: #42A5F5;
+    
+}
+.close-comp{
+    background: #90CAF9;
+    opacity: 60%;
+}
+input{
+    font-family: Yu Gothic UI;
+}

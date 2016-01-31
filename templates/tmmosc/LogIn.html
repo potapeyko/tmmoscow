@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Вход | Регистрация</title>
+       
+   <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+   <link rel="stylesheet" href="../../static/css/material.min.css">
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+   <script type = "text/javascript" src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>        
+   <style>
+    .demo-card-wide.mdl-card {
+      width: 320px;
+      margin: auto;
+      background: #ffffff;
+    }       
+    .demo-card-wide > .mdl-card__menu {
+      color: #fff;
+    }
+    .demo-card-wide > .mdl-card__actions{
+        height: 60px;
+    }   
+    </style>
+    <link rel="stylesheet" href="../../static/css/BaseStyle.css">
+    
+</head>
+<body>          
+      <div style="width:100%; height:100%; margin-top: 50px;" >
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp">   
+          <form action="#" id="formIn" name="formIn">
+            <div class="mdl-card__supporting-text" style="text-align: center; margin: auto; height: 420px;">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin-top:30px;">
+                <input class="mdl-textfield__input" type="email" id="login" name="login" style="text-align: center; color: #42A5F5;">
+                <label class="mdl-textfield__label" for="login" style="text-align: center;">Введите e-mail</label>
+              </div>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin-top:10px;">
+                <input class="mdl-textfield__input" type="password" id="pass" name="pass" style="text-align: center; color: #42A5F5; ">
+                <label class="mdl-textfield__label" for="pass" style="text-align: center;">Введите пароль</label>
+              </div>            
+            </div>    
+            <div class="mdl-card__actions mdl-card--border">
+              <button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="LogIn" name="LogIn">
+                ВОЙТИ
+              </button>
+              <button type="button" id="btnToReg" name="btnToReg" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" >
+                ПЕРЕЙТИ К РЕГИСТРАЦИИ
+              </button>
+            </div>
+          </form>       <!--  formIn  -->
+              
+          <form action="#" id="formReg" style="display: none;">    
+            <div class="mdl-card__supporting-text" style="text-align: center; margin: auto; height: 420px;">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin-top:30px;">
+                <input class="mdl-textfield__input" type="email" id="loginR" name="loginR" style="text-align: center; color: #42A5F5;">
+                <label class="mdl-textfield__label" for="loginR" style="text-align: center;">Введите e-mail</label>
+              </div>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin-top:10px;">
+                <input class="mdl-textfield__input" type="password" id="passR" name="passR" style="text-align: center; color: #42A5F5; ">
+                <label class="mdl-textfield__label" for="passR" style="text-align: center;">Введите пароль</label>
+              </div> 
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin-top:10px;">
+                <input class="mdl-textfield__input" type="password" id="pass2R" name="pass2R" style="text-align: center; color: #42A5F5; ">
+                <label class="mdl-textfield__label" for="pass2R" style="text-align: center;">Подтвердите пароль</label>
+              </div>
+            </div>    
+            <div class="mdl-card__actions mdl-card--border" style="text-align: center;">
+              <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="btnBack" name="btnBack">
+                НАЗАД
+              </button>
+              <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="submit" id="Registrate" name="Registrate">
+                ЗАРЕГИСТРИРОВАТЬСЯ
+              </button>
+            </div>
+          </form>  <!--  formReg  -->
+        </div>
+      </div>      
+        
+       
+       
+</body>   
+    
+    <script type="text/javascript">
+        $('#btnBack').click(function(){
+                $('#formReg').hide();
+                $('#formIn').show();
+        });
+        $('#btnToReg').click(function(){
+            $('#formIn').hide();
+            $('#formReg').show();
+        });
+    </script> 
+    
+</html>

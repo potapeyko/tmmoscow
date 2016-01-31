@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Список руководителей</title>
+       
+   <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+   <link rel="stylesheet" href="../../../static/css/material.min.css">
+   <link rel="stylesheet" href="../../../static/css/BaseStyle.css">
+    
+   
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+   <script type = "text/javascript" src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>          
+    
+   <style>
+       body, .mdl-card__title{
+           color: #ffffff;
+       } 
+
+        .tabs ul {list-style:none;margin:0;width:100%;overflow:hidden;padding:0;margin-left:16px;}
+        .tabs ul li {float:left;width:100px}
+        .tabs a {position:relative;color:white;text-decoration:none;display:block;width:100px;height:50px;text-align:center;line-height:52px;font-weight:700;font-size:14px;color:rgba(255,255,255,0.6);overflow:hidden;}   
+
+       .mdl-tabs.is-upgraded .mdl-tabs__tab.is-active {
+            color: rgba(255, 255, 255, 1);
+        }
+       .mdl-button {
+            height: 56px;
+            width: 56px;
+        }
+       .mdl-button--fab.mdl-button--colored {
+            background: rgb(178,255,89);
+            color: rgb(255,255,255);
+        }
+       .tab-content{
+           margin-top: 40px; margin-left: 10%; margin-right: 10%; margin-bottom: 50px;
+       }
+       .myP, th.myP{
+           font-size: 16px;
+           color: #42a5f5;
+       }
+       th, .mdl-data-table__cell--non-numeric.mdl-data-table__cell--non-numeric, 
+.mdl-data-table th{
+           text-align: center;
+       }
+       .to-excel{
+           position: absolute;
+           left: 50%;
+           top: 50%;
+           background: #fff;
+           vertical-align: middle;
+       }
+       .search.mdl-textfield__label:after {
+            background-color: rgb(255, 255, 255);
+       }
+
+   </style>      
+    
+</head>
+<body> 
+
+    <!--  Header and Menu   -->
+    <div class="mdl-layout mdl-js-layout">
+      <header class="mdl-layout__header mdl-layout__header--scroll">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">Организатор</span> <!-- Здесь заменить Организатор на переменную шаблона -->
+          <div class="mdl-layout-spacer"></div>
+          <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="">{{ user_email }}</a>
+            <a class="mdl-navigation__link" href="{{ logout }}">Выход</a>
+          </nav>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title"></span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="/">Список соревнований</a>
+          <a class="mdl-navigation__link" href="/reg/newCompetition">Новое соревнование</a>
+          <a class="mdl-navigation__link" href="/reg/memberList">Список участников</a>
+          <a class="mdl-navigation__link" href="/reg/leaderList">Список руководителей</a>
+          <a class="mdl-navigation__link" href="/reg/organizerList">Список организаторов</a>
+        </nav>
+      </div>
+      <main class="mdl-layout__content">
+          
+        <!--  Content  -->
+        <div class="page-content">  
+          <div class="mdl-grid" style="margin-top:15px;">
+              <div class="mdl-cell mdl-cell--1-col"></div>  
+              <div class="mdl-cell mdl-cell--10-col">       
+                   
+                 
+                  
+                  
+                  <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; min-height: 80px; margin-top: 35px;">
+                      <div class="mdl-grid mdl-card__title" style="height: 120px; width: 100%; text-align: center; border: none;">
+                          <div class="mdl-cell mdl-cell--1-col"></div>
+                          <div style="text-align: center; margin-top: 24px;" class="mdl-cell mdl-cell--4-col">
+                              <h2 class="mdl-card__title-text">Список руководителей</h2>
+                          </div>
+                          <div class="mdl-cell mdl-cell--5-col">
+                            <form action="/reg/leaderList" id="formSearchL" method="post" name="formSearchL">
+                              <div class="search mdl-textfield mdl-js-textfield mdl-textfield--expandable" style="width: 100%;">
+                                <div class="mdl-textfield__expandable-holder" style="width: 70%;">
+                                  <input class="mdl-textfield__input" type="text" id="findLeader" name="findLeader">
+                                  <label class="mdl-textfield__label search" for="sample-expandable">Expandable Input</label>
+                                </div>
+                                <label class="mdl-button mdl-js-button mdl-button--icon" for="findLeader" style="width: 32px; height: 32px; left: 90%;">
+                                  <i class="material-icons">search</i>
+                                </label>
+                              </div>
+                            </form>     <!--  formSearchL  -->    
+                          </div>
+                          <div class="mdl-cell mdl-cell--2-col"></div>
+                          <div class="mdl-cell mdl-cell--7-col"></div>
+                          <div class="mdl-cell mdl-cell--5-col">
+                              <button id="addLeader" type="button" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="bottom: 10px; left: 10px;">
+                                  <i class="material-icons">add</i>
+                              </button>
+                          </div>
+                      </div>   <!--   .mdl-card__title  -->
+                       
+                      <div class="mdl-card__actions mdl-card--border" style="border: none; background: #fff; padding: 0px;">
+
+                        <div class="acd" style="margin-left:30px; margin-top: 30px;">
+                            <div class="mdl-grid" style="padding-top: 0px; height: 24px; padding-bottom: 0px; display:none;" id="sect0">
+                                <div class="mdl-cell--1-col"></div>
+                                <div class="mdl-cell--10-col"><p class="myP" style="padding-left: 24px;">Добавить нового руководителя:</p></div>
+                                <div class="mdl-cell--1-col"></div>
+                            </div>     
+                            <form action="/reg/addLeader" method="post" id="formNewLeader" name="formNewLeader" style="display:none;">
+                                <div class="mdl-grid" style="padding-top: 0px; margin-left: 10px;">
+                                    <div class="mdl-layout-spacer"></div>
+                                    <div class="mdl-cell--1-col">
+                                        <input type="text" id="llKey" name="llKey" style="display: none;">
+                                    </div>
+                                    <div class="mdl-cell--10-col">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 30%;">
+                                          <input class="mdl-textfield__input myP" type="text" id="llFio" name="llFio">
+                                          <label class="mdl-textfield__label" for="llFio">ФИО руководителя</label>
+                                        </div>
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 2%;"></div>
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 17%;">
+                                          <input class="mdl-textfield__input myP" type="text" id="llComand" name="llComand">
+                                          <label class="mdl-textfield__label" for="llComand">Команда</label>
+                                        </div>
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 2%;"></div>
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 17%;">
+                                          <input class="mdl-textfield__input myP" type="text" id="llTerritory" name="llTerritory">
+                                          <label class="mdl-textfield__label" for="llTerritory">Территория</label>
+                                        </div>
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 2%;"></div>
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 25%;">
+                                          <input class="mdl-textfield__input myP" type="text" id="llContact" name="llContact">
+                                          <label class="mdl-textfield__label" for="llContact">Контактные данные</label>
+                                        </div>
+                                    </div>
+                                    <div class="mdl-cell--1-col"></div>
+                                    <div class="mdl-layout-spacer"></div>
+                                </div>
+                            </form>  <!-- formNewLeader  -->        
+                            <div class="mdl-grid" id="sect2" style="display:none;">
+                                <!--  row3  -->
+                                <div class="mdl-cell--7-col"></div>
+								<div class="mdl-cell--2-col">
+									<button class="mdl-button mdl-button--colored mdl-js-button" style="width: 80%; height: 56px;" id="changeLeaderBack" type="button">Отмена</button>
+								</div>
+                                <div class="mdl-cell--2-col">
+                                    <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="width: 100%;" id="changeLeaderSubmit" type="submit" form="formNewLeader" name="changeLeaderSubmit">Изменить</button>
+                                </div>   
+                                <div class="mdl-cell--1-col"></div>
+                            </div>   
+							<form action="#" id="formAddLeader" name="formAddLeader" style="display:none;">
+								<div class="mdl-grid" style="padding-top: 12px; height: 24px; padding-bottom: 0px;">
+									<div class="mdl-cell--1-col"></div>
+									<div class="mdl-cell--5-col"><p class="myP" style="padding-left: 24px;">или из списка организаторов:</p></div>
+									<div class="mdl-cell--5-col"><p class="myP" style="padding-left: 24px;">или из списка участников:</p></div>
+									<div class="mdl-cell--1-col"></div>
+								</div>
+                                <div class="mdl-grid" style="padding-top: 0px; height: 50px; padding-bottom: 0px;">
+                                    <div class="mdl-layout-spacer"></div>
+                                    <div class="mdl-cell--1-col"></div>
+                                    <div class="mdl-cell--5-col">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 62%;">
+                                          <input class="mdl-textfield__input myP" type="text" id="lloFio">
+                                              <label class="mdl-textfield__label" for="lloFio">ФИО организатора</label>
+                                        </div>
+                                    </div>
+                                    <div class="mdl-cell--5-col">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 62%;">
+                                          <input class="mdl-textfield__input myP" type="text" id="llmFio">
+                                          <label class="mdl-textfield__label" for="llmFio">ФИО участника</label>
+                                        </div>
+                                    </div>
+                                    <div class="mdl-cell--1-col"></div>
+                                    <div class="mdl-layout-spacer"></div>
+                                </div>   
+                                <div class="mdl-grid">
+                                    <!--  row3  -->
+                                    <div class="mdl-cell--7-col"></div>
+									<div class="mdl-cell--2-col">
+										<button class="mdl-button mdl-button--colored mdl-js-button" style="width: 80%; height: 56px;" id="addLeaderBack" type="button">Отмена</button>
+									</div>
+                                    <div class="mdl-cell--2-col">
+                                        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="width: 100%;" type="submit" form="formNewLeader" id="addLeaderSubmit" name="addLeaderSubmit">Добавить</button>
+                                    </div>   
+                                    <div class="mdl-cell--1-col"></div>
+                                </div>  
+                            </form>   <!--  formAddLeader  -->          
+                        </div>  <!--  .acd  -->
+                          
+                          
+                        <div class="mdl-grid" style="padding-top: 30px;">
+                          <!--  row3  -->    
+                          <div class="mdl-cell mdl-cell--1-col"></div>
+                          <div class="mdl-cell mdl-cell--10-col">
+                              <div style="width: 100%;">    
+                                <table class="mdl-data-table mdl-js-data-table">
+                                  <thead>
+                                      <tr style="font-size: 18px;">
+                                        <th class="myP" style="width: 33%; color: #42a5f5;">ФИО</th>
+                                        <th class="myP" style="width: 20%; color: #42a5f5;">Команда</th>
+                                        <th class="myP" style="width: 20%; color: #42a5f5;">Территория</th>
+                                        <th class="myP" style="width: 20%; color: #42a5f5;">Контакт</th>
+                                        <th class="myP" style="width: 1%; color: #42a5f5;"></th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                    {% for lead in leads %}
+                                      <tr style="color: #42a5f5;">
+                                        <td class="myP" style="width: 33%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ lead.nickname }}</td>
+                                        <td class="myP" style="width: 20%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ lead.command }}</td>
+                                        <td class="myP" style="width: 20%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ lead.territory }}</td>
+                                        <td class="myP" style="width: 20%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ lead.contact }}</td>
+                                        <td style="width: 1%; text-align: center; bottom: 4px;">
+                                          <form id="deleteLead" action="/reg/deleteLeader" method="post" style="display: inline;">
+                                            <button class="mdl-button mdl-js-button mdl-button--icon changeLeader" type="button" style="width: 32px; height: 32px;">
+                                                <i class="material-icons">mode_edit</i>
+                                            </button>
+                                            <input type="text" style="display: none;" value="{{ lead.nickname }}" name="leadFio">
+                                            <input type="text" style="display: none;" value="{{ keys[loop.index0] }}" name="idToDeleteChange">
+                                            <button class="mdl-button mdl-js-button mdl-button--icon" type="submit" style="width: 32px; height: 32px;">
+                                                <i class="material-icons">delete</i>
+                                            </button>
+                                          </form>
+                                        </td>
+                                      </tr>
+                                    {% endfor %}
+                                  </tbody>
+                                </table>   
+                              </div> 
+                          </div>    
+                          <div class="mdl-cell mdl-cell--1-col"></div>    
+                        </div>     
+                      </div>    <!--  mdl-cerds__actions  -->
+                   </div> 
+              <div class="mdl-cell mdl-cell--1-col"></div>  
+          </div>  <!-- mdl-grid -->     
+        </div>  <!-- page-content -->
+      </main>
+    </div>
+    </div>
+    <div class="mdl-card mdl-shadow--8dp" style="z-index: 5; height: 44px; min-height: 44px; opacity: 0.85; position: fixed; bottom: 30px; left: 20%; right: 20%; width: 60%; display: {{ disp_tool }};" id="sovDiv" onclick="fadeMe();" onload="$(this).fadeIn(100); $('#sovDiv').trigger('click');">
+      <div class="mdl-card__actions">
+          <p class="myP" style="color: #fff; text-align: center;" id="sovText">{{ tool }}</p>
+      </div>
+    </div>  
+</body>   
+    <script type="application/javascript" src="../../../static/js/omlList.js"></script>
+    <script>
+        function fadeMe(){
+            $("#sovDiv").fadeOut();
+        }
+    </script>
+</html>

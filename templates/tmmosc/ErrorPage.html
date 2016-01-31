@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Ошибка {{ er_name }}</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="../../static/css/material.min.css">
+
+</head>
+<body>
+    <div class="mdl-grid" style="height: 100%;">
+        <div class="mdl-cell mdl-cell--1-col"></div>
+        <div class="mdl-cell mdl-cell--1-col" style="height: 100%; margin-top: 22%;">
+            <a href="{{ back_redir }}">
+                <button type="button" class="mdl-button mdl-js-button mdl-button--icon" style="width: 80px; height: 80px; color: #000;">
+                  <i class="material-icons">arrow_back</i>
+                </button>
+            </a>
+        </div>
+        <div class="mdl-cell mdl-cell--8-col">
+            <img src="{{ img_src }}" style="height: 100%; position: fixed;">
+        </div>
+        <div class="mdl-cell mdl-cell--2-col" style="height: 100%; margin-top: 22%;">
+            <a href="{{ login_redir }}">
+                <button type="button" class="mdl-button mdl-js-button mdl-button--icon" style="width: 80px; height: 80px; color: #000;">
+                   <i class="material-icons">arrow_forward</i>
+                </button>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
