@@ -57,6 +57,7 @@ app = webapp2.WSGIApplication([
     ('/reg/addOrganizer', AddOrganizer),
     ('/reg/deleteOrganizer', DeleteOrganizer),
     ('/reg/searchOrganizer', OrganizersHandler),
+    ('/reg/addCometition', NewCompetition),
     ('/test', Test),
 
 ], debug=True)
