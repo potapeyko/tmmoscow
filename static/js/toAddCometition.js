@@ -27,7 +27,7 @@ $('#addOrgNew').click(function(){
         var textfield1 = document.createElement('div');
         textfield1.setAttribute('style', 'width: 100%; padding: 20px 0 20px 0;');
         textfield1.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            var IdName = 'orgFioNew'+orgCount.toString()+daysCount.toString();
+            var IdName = 'orgFioNew';
             var in1 = document.createElement('input');
             in1.className = 'mdl-textfield__input';
             in1.setAttribute('style', 'font-size: 16px;');
@@ -45,7 +45,7 @@ $('#addOrgNew').click(function(){
         var textfield2 = document.createElement('div');
         textfield2.setAttribute('style', 'width: 100%; padding:20px 0 20px 0;');
         textfield2.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            var Dol = 'orgDolNew'+orgCount.toString()+daysCount.toString();
+            var Dol = 'orgDolNew';
             var in2 = document.createElement('input');
             in2.className = 'mdl-textfield__input';
             in2.setAttribute('style', 'font-size: 16px;');
@@ -63,7 +63,7 @@ $('#addOrgNew').click(function(){
         var textfield3 = document.createElement('div');
         textfield3.setAttribute('style', 'width: 100%; padding: 20px 0 20px 0;');
         textfield3.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            var Cont = 'orgContNew'+orgCount.toString()+daysCount.toString();
+            var Cont = 'orgContNew';
             var in3 = document.createElement('input');
             in3.className = 'mdl-textfield__input';
             in3.setAttribute('style', 'font-size: 16px;');

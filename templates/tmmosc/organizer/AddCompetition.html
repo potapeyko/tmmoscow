@@ -84,12 +84,13 @@
       <main class="mdl-layout__content">
           
         <!--  Content  -->
-        <div class="page-content">  
+        <div class="page-content">
+          <form action="/reg/addCompetition" id="formNewComp" method="post" name="formNewComp">
           <div class="mdl-grid" style="margin-top:15px;">
               <div class="mdl-cell mdl-cell--1-col"></div>  
               <div class="mdl-cell mdl-cell--10-col">       
                    <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; min-height: 150px; margin-top: 35px;">
-                      <form action="#" id="formHeaderNew" name="formHeaderNew">                   
+
                           <div class="mdl-grid mdl-card__title" style="height: 150px; width: 100%; text-align: center; border: none;">
                               <div style="width: 15%;"> 
                                   <img src="../../../static/img/logo.bmp" style="width:60%; height: 60%; margin-top: 10%;" onclick="$('#logoNew').click();">
@@ -114,8 +115,6 @@
                                 </div>
                               </div>
                           </div>   <!--   .mdl-card__title  -->
-                        </form>  <!--  formHeaderNew  -->
-                      <h1><div name="daysCount" style="display: block;">1</div></h1>
                       <div class="mdl-card__actions mdl-card--border" style="border: none; background: #fff; padding: 0px;">
                           <div style="width: 100%;">    
                               <div class="mdl-tabs mdl-js-tabs tabs mdl-js-ripple-effect">
@@ -126,7 +125,7 @@
                                           <a href="#member-panel" class="mdl-tabs__tab" style="width: 15%;">Участники</a>
                                           <a href="#statistic-panel" class="mdl-tabs__tab" style="width: 15%;">Статистика</a>
                                       </span>    
-                                      <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" id="SaveAllNew" style="top: 20px;" form="formHeaderNew">
+                                      <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" id="SaveAllNew" type="submit" style="top: 20px;" form="formNewComp">
                                         <i class="material-icons">save</i>
                                       </button> 
                                       <div class="mdl-tooltip mdl-tooltip--large" for="SaveAllNew">
@@ -134,7 +133,7 @@
                                       </div>
                                   </div>                            
                                   <div class="mdl-tabs__panel is-active" id="info-panel" style="background: #fff; color: #42A5F5;">
-                                     <form action="#" id="formInfoNew" name="formInfoNew">
+
                                        <div class="tab-content" id="infoTab">                  
                                           <div class="mdl-grid" style="padding-top: 0px; padding-bottom: 0 px;">
                                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col" style="width: 200px; margin-left: 0px;">
@@ -146,6 +145,7 @@
                                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--12-col" style="padding: 0 0 0 0;">
                                                 <p class="myP" style="margin-bottom: 0px;">Найдите на карте место старта, затем нажмите кнопку "Запомнить". Теперь это место будет видно участникам.</p>
                                             </div>
+                                            <input name="startPlaces" type="text" style="">ул. Дмитриевского, 11</input>
                                           </div>    
                                           <div class="mdl-grid">
                                             <div id="myMap" class="mdl-cell--12-col" style="width: 100%; height: 436px;"  ></div>
@@ -175,7 +175,18 @@
                                                 <div class="mdl-cell--12-col">
                                                     <p class="myP" style="margin-bottom: 0px; top: 6px;">Предварительная заявка:</p>
                                                 </div>
-                                            </div>    
+                                            </div>
+
+
+
+
+
+
+
+
+
+
+
                                             <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 50px;">
                                                 <!--  row2  -->
                                                 <div class="mdl-cell--1-col"></div>
@@ -240,22 +251,22 @@
                                                 <div class="mdl-cell--1-col"></div>
                                                 <div class="mdl-cell--3-col">
                                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100%;">
-                                                      <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="orgFioNew11" name="orgFioNew1">
-                                                      <label class="mdl-textfield__label" for="orgFioNew11">Введите ФИО</label>
+                                                      <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="orgFioNew" name="orgFioNew">
+                                                      <label class="mdl-textfield__label" for="orgFioNew">Введите ФИО</label>
                                                     </div>
                                                 </div>
                                                 <div class="mdl-cell--1-col"></div>
                                                 <div class="mdl-cell--3-col">
                                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100%;">
-                                                      <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="orgDolNew11" name="orgDolNew1">
-                                                      <label class="mdl-textfield__label" for="orgDolNew11">Введите должность</label>
+                                                      <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="orgDolNew" name="orgDolNew">
+                                                      <label class="mdl-textfield__label" for="orgDolNew">Введите должность</label>
                                                     </div>
                                                 </div>
                                                 <div class="mdl-cell--1-col"></div>
                                                 <div class="mdl-cell--3-col">
                                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100%;">
-                                                      <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="orgContNew11">
-                                                      <label class="mdl-textfield__label" for="orgContNew11" name="orgContNew1">Введите контакт</label>
+                                                      <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="orgContNew" name="orgContNew">
+                                                      <label class="mdl-textfield__label" for="orgContNew11" name="orgContNew">Введите контакт</label>
                                                     </div>
                                                 </div>
                                             </div>   
@@ -270,12 +281,22 @@
                                             <div class="mdl-cell--10-col"></div>
                                             <div class="mdl-cell--2-col"></div>
                                           </div>
-                                        </div>   <!--   .tab-content   -->  
-                                      </form>  <!--  formInfoNew  --> 
-                                  </div>   <!--   #info-panel    --> 
-                             
+                                        </div>   <!--   .tab-content   -->
+
+                                    </div>   <!--   #info-panel    -->
+
+
+
+
+
+
+
+
+
+
+
+
                                   <div class="mdl-tabs__panel" id="diz-panel" style="background: #fff; color: #42A5F5;">
-                                      <form action="#" id="formDizNew">    
                                           <div class="tab-content">
                                             <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%;">    
                                                 <!--  row1  -->
@@ -429,8 +450,7 @@
                                                 <div class="mdl-cell--10-col"></div>
                                                 <div class="mdl-cell--2-col"></div>
                                             </div>
-                                        </div>      <!--  tab-content  --> 
-                                      </form>   <!--  formDizNew  -->
+                                        </div>      <!--  tab-content  -->
                                   </div>    <!--  #diz-panel  -->
                                   
                                   <div class="mdl-tabs__panel" id="member-panel" style="background: #fff; color: #42A5F5;">
@@ -478,8 +498,7 @@
                                   </div>    <!--  #member-panel  -->         
                               
                                   <div class="mdl-tabs__panel" id="statistic-panel" style="background: #fff; color: #42A5F5;">
-                                    <!--  СТАТИСТИКА  --> 
-                                    <form action="#" id="formStatNew" name="formStatNew">
+                                    <!--  СТАТИСТИКА  -->
                                       <div class="tab-content">
                                           <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%;"> 
                                             <!--  row1  -->
@@ -522,7 +541,7 @@
                                             <div class="mdl-cell--2-col"></div>
                                           </div>
                                         </div>     <!--  .tab-content  -->   
-                                      </form>
+
                                       
                                   </div>    <!--  #statistic-panel  -->
                                   
@@ -535,6 +554,7 @@
               <div class="mdl-cell mdl-cell--1-col"></div>  
           </div>  <!-- mdl-grid -->     
         </div>  <!-- page-content -->
+      </form>  <!--  formNewComp  -->
       </main>
     </div>
     <div class="mdl-card mdl-shadow--8dp" style="z-index: 5; height: 44px; min-height: 44px; opacity: 0.85; position: fixed; bottom: 30px; left: 20%; right: 20%; width: 60%; display: none;">

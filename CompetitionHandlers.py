@@ -30,10 +30,27 @@ class NewCompetition(webapp2.RequestHandler):
             start_date = self.request.POST['dateStartNew']
             finish_date = self.request.POST['dateFinishNew']
             comp_name = self.request.POST['nameCompNew']
+            count_start = self.request.POST['countStart']
+            start_places = self.request.POST['startPlaces']
             # info about each day
+            pz = self.request.POST.getall('trPzNew')                        # list of triggers is PZ open
+            pz_end_add = self.request.POST.getall('pzEndAddNew')            # list of dates when PZ will be closed to adding
+            pz_end_change = self.request.POST.getall('pzEndChangeNew')      # list of dates when PZ will be closed to changing
+            tz = self.request.POST.getall('trTzNew')                        # list of triggers is TZ open
+            link_to_tmmosc = self.request.POST.getall('toTmMoscowNew')      # list of link to official site
+            org_fios = self.request.POST.getall('orgFioNew')                # list of organizer's fios
+            org_dols = self.request.POST.getall('orgDolNew')                # list of organizer's dols
+            org_contacts = self.request.POST.getall('orgContNew')           # list of organizer's contacts
+            org_info = []
+            for i in range(0, len(org_fios)):
+                org_info[i] = [org_fios[i], org_dols[i], org_contacts[i]]
 
-            temp_values = {'user_email':email, 'logout':users.create_logout_url('/login')}
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/AddCompetition.html')
+            temp_values = {'user_email':email, 'logout':users.create_logout_url('/login'),   'logo':logo, 'start':start_date,
+                           'finish': finish_date, 'name':comp_name, 'count_start':count_start, 'start_places':start_places,
+                           'pzs':pz, 'pzEndAdds':pz_end_add, 'pzEndChanges':pz_end_change, 'tzs':tz, 'links':link_to_tmmosc,
+                           'orgs': org_info}
+            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
+            #template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/AddCompetition.html')
             self.response.write(template.render(temp_values))
 
 class CertainCompetition(webapp2.RequestHandler):

@@ -50,6 +50,7 @@ app = webapp2.WSGIApplication([
     ('/reg/memberList', MembersHandler),
     ('/reg/leaderList', LeadersHandler),
     ('/reg/organizerList', OrganizersHandler),
+    ('/reg/addCompetition', NewCompetition),
     ('/reg/addLeader', AddLeader),
     ('/reg/deleteLeader', DeleteLeader),
     ('/reg/addMember', AddMember),
@@ -57,7 +58,6 @@ app = webapp2.WSGIApplication([
     ('/reg/addOrganizer', AddOrganizer),
     ('/reg/deleteOrganizer', DeleteOrganizer),
     ('/reg/searchOrganizer', OrganizersHandler),
-    ('/reg/addCometition', NewCompetition),
     ('/test', Test),
 
 ], debug=True)
