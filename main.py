@@ -50,7 +50,6 @@ app = webapp2.WSGIApplication([
     ('/reg/memberList', MembersHandler),
     ('/reg/leaderList', LeadersHandler),
     ('/reg/organizerList', OrganizersHandler),
-    ('/reg/addCompetition', NewCompetition),
     ('/reg/addLeader', AddLeader),
     ('/reg/deleteLeader', DeleteLeader),
     ('/reg/addMember', AddMember),
@@ -87,9 +86,9 @@ def handle_503(request, response, exception):
     temp_values = {'img_src':'../../static/img/er503.png', 'er_name':'503', 'back_redir':request.referer}
     response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
 
-app.error_handlers[401] = handle_404
-app.error_handlers[403] = handle_404
+app.error_handlers[401] = handle_401
+app.error_handlers[403] = handle_403
 app.error_handlers[404] = handle_404
 app.error_handlers[405] = handle_405
-app.error_handlers[500] = handle_404
-app.error_handlers[503] = handle_404
+app.error_handlers[500] = handle_500
+app.error_handlers[503] = handle_503

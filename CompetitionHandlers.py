@@ -1,6 +1,8 @@
 __author__ = 'Daria'
 
 from google.appengine.api import users
+from google.appengine.api import images
+from google.appengine.ext import blobstore
 import os
 import jinja2
 import webapp2
@@ -43,15 +45,27 @@ class NewCompetition(webapp2.RequestHandler):
             org_contacts = self.request.POST.getall('orgContNew')           # list of organizer's contacts
             org_info = []
             for i in range(0, len(org_fios)):
-                org_info[i] = [org_fios[i], org_dols[i], org_contacts[i]]
-
+                org_info.append([org_fios[i], org_dols[i], org_contacts[i]])
             temp_values = {'user_email':email, 'logout':users.create_logout_url('/login'),   'logo':logo, 'start':start_date,
                            'finish': finish_date, 'name':comp_name, 'count_start':count_start, 'start_places':start_places,
                            'pzs':pz, 'pzEndAdds':pz_end_add, 'pzEndChanges':pz_end_change, 'tzs':tz, 'links':link_to_tmmosc,
                            'orgs': org_info}
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
+            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/Competition.html')
             #template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/AddCompetition.html')
             self.response.write(template.render(temp_values))
+        else:
+            temp_values = {'img_src':'../static/img/er401.png', 'er_name':'401', 'login_redir':users.create_login_url('/reg/newCompetition')}
+            self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
+
+    def getClientCompInfo(self):
+        pass
+    def getCientDizInfo(self):
+        pass
+    def getClientStatistic(self):
+        pass
+
+
+
 
 class CertainCompetition(webapp2.RequestHandler):
     def get(self):
