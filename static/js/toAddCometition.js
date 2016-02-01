@@ -108,7 +108,7 @@ $("#addGroupDizNew1").click(function(){
         var textfield1 = document.createElement('div');
         textfield1.setAttribute('style', 'width: 110%; max-width: 110%; padding: 20px 0 20px 0;');
         textfield1.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            var IdName = 'dizGroupNew'+distCount.toString()+daysCount.toString();
+            var IdName = 'dizGroupNew';
             var in1 = document.createElement('input');
             in1.className = 'mdl-textfield__input';
             in1.setAttribute('style', 'font-size: 16px;');
@@ -126,7 +126,7 @@ $("#addGroupDizNew1").click(function(){
         var textfield2 = document.createElement('div');
         textfield2.setAttribute('style', 'width: 120%; max-width: 120%; padding: 20px 0 20px 0;');
         textfield2.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            IdName = 'dizLenNew'+distCount.toString()+daysCount.toString();
+            IdName = 'dizLenNew';
             var in2 = document.createElement('input');
             in2.className = 'mdl-textfield__input';
             in2.setAttribute('style', 'font-size: 16px;');
@@ -143,7 +143,7 @@ $("#addGroupDizNew1").click(function(){
         var textfield3 = document.createElement('div');
         textfield3.setAttribute('style', 'width: 120%; max-width: 120%; padding: 20px 0 20px 0; left: 40px;');
         textfield3.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            IdName = 'dizClassNew'+distCount.toString()+daysCount.toString();
+            IdName = 'dizClassNew';
             var in3 = document.createElement('input');
             in3.className = 'mdl-textfield__input';
             in3.setAttribute('style', 'font-size: 16px;');
@@ -163,7 +163,7 @@ $("#addGroupDizNew1").click(function(){
         var textfield4 = document.createElement('div');
         textfield4.setAttribute('style', 'width: 70%; padding: 20px 0 20px 0;');
         textfield4.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            IdName = 'dizCCminNew'+distCount.toString()+daysCount.toString();
+            IdName = 'dizCCminNew';
             var in4 = document.createElement('input');
             in4.className = 'mdl-textfield__input';
             in4.setAttribute('style', 'font-size: 16px;');
@@ -180,7 +180,7 @@ $("#addGroupDizNew1").click(function(){
         var textfield5 = document.createElement('div');
         textfield5.setAttribute('style', 'width: 70%; padding: 20px 0 20px 0;');
         textfield5.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            IdName = 'dizCCmaxNew'+distCount.toString()+daysCount.toString();
+            IdName = 'dizCCmaxNew';
             var in5 = document.createElement('input');
             in5.className = 'mdl-textfield__input';
             in5.setAttribute('style', 'font-size: 16px;');
@@ -221,7 +221,7 @@ $("#addMemDizNew1").click(function(){
         var textfield1 = document.createElement('div');
         textfield1.setAttribute('style', 'width: 110%; max-width: 110%; padding: 20px 0 20px 0;');
         textfield1.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            var IdName = 'duGroupNew'+duCount.toString()+daysCount.toString();
+            var IdName = 'duGroupNew';
             var in1 = document.createElement('input');
             in1.className = 'mdl-textfield__input';
             in1.setAttribute('style', 'font-size: 16px;');
@@ -239,7 +239,7 @@ $("#addMemDizNew1").click(function(){
         var textfield2 = document.createElement('div');
         textfield2.setAttribute('style', 'width: 70%; padding: 20px 0 20px 0;');
         textfield2.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            IdName = 'duSalaryNew'+duCount.toString()+daysCount.toString();
+            IdName = 'duSalaryNew';
             var in2 = document.createElement('input');
             in2.className = 'mdl-textfield__input';
             in2.setAttribute('style', 'font-size: 16px;');
@@ -259,7 +259,7 @@ $("#addMemDizNew1").click(function(){
         var textfield3 = document.createElement('div');
         textfield3.setAttribute('style', 'width: 70%; padding: 20px 0 20px 0;');
         textfield3.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            IdName = 'duAgeminNew'+duCount.toString()+daysCount.toString();
+            IdName = 'duAgeminNew';
             var in3 = document.createElement('input');
             in3.className = 'mdl-textfield__input';
             in3.setAttribute('style', 'font-size: 16px;');
@@ -276,7 +276,7 @@ $("#addMemDizNew1").click(function(){
         var textfield4 = document.createElement('div');
         textfield4.setAttribute('style', 'width: 70%; padding: 20px 0 20px 0;');
         textfield4.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            IdName = 'duAgemaxNew'+duCount.toString()+daysCount.toString();
+            IdName = 'duAgemaxNew';
             var in4 = document.createElement('input');
             in4.className = 'mdl-textfield__input';
             in4.setAttribute('style', 'font-size: 16px;');
@@ -297,7 +297,7 @@ $("#addMemDizNew1").click(function(){
         var textfield5 = document.createElement('div');
         textfield5.setAttribute('style', 'width: 70%; padding: 20px 0 20px 0;');
         textfield5.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            IdName = 'duQualNewmin'+duCount.toString()+daysCount.toString();
+            IdName = 'duQualNewmin';
             var in5 = document.createElement('input');
             in5.className = 'mdl-textfield__input';
             in5.setAttribute('style', 'font-size: 16px;');
@@ -314,7 +314,7 @@ $("#addMemDizNew1").click(function(){
         var textfield6 = document.createElement('div');
         textfield6.setAttribute('style', 'width: 70%; padding: 20px 0 20px 0;');
         textfield6.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            IdName = 'duQualNewmax'+duCount.toString()+daysCount.toString();
+            IdName = 'duQualNewmax';
             var in6 = document.createElement('input');
             in6.className = 'mdl-textfield__input';
             in6.setAttribute('style', 'font-size: 16px;');

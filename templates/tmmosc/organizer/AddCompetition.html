@@ -156,126 +156,121 @@
                                                 <button type="button" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="btnLogIn" style="width: 100%;" id="AddPlaceNew" name="AddPlaceNew">Запомнить</button>
                                             </div>    
                                           </div>
-                                          <div class="mdl-grid" style="margin: 0 0 0 10px; padding: 0 0 0 0; width: 105%;">    
-                                            <!--  row1  -->
-                                            <div class="mdl-cell--1-col"><p class="myP" style="padding-top: 10px;">День 1 </p></div>
-                                            <div class="mdl-cell--10-col">
-                                                <img src="../../../static/img/line.png" style="width: 100%; margin-top: 20px;">
-                                            </div>
-                                            <div class="mdl-cell--1-col">
-                                              <button type="button" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="padding: 0 0 0 0; min-height: 46px; height: 46px; min-width: 46px; width: 46px;" id="swapVisInfoNew1" value="1">
-                                                <img id="swapImgInfoUp1" src="../../../static/img/chevron-up.png">
-                                                <img id="swapImgInfoDown1" src="../../../static/img/chevron-down.png" style="display: none;">
-                                              </button>   
-                                            </div>
-                                          </div>  
-                                          <div id="toSwapInfo1" style="margin-left: 70px;">        
-                                            <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0;">
-                                                <!--  row1  -->
-                                                <div class="mdl-cell--12-col">
-                                                    <p class="myP" style="margin-bottom: 0px; top: 6px;">Предварительная заявка:</p>
-                                                </div>
-                                            </div>
+                                            {% for day_numb in days %}
+
+                                                          <div class="mdl-grid" style="margin: 0 0 0 10px; padding: 0 0 0 0; width: 105%;">
+                                                            <!--  row1  -->
+                                                            <div class="mdl-cell--1-col"><p class="myP" style="padding-top: 10px;">День {{ day_numb }} </p></div>
+                                                            <div class="mdl-cell--10-col">
+                                                                <img src="../../../static/img/line.png" style="width: 100%; margin-top: 20px;">
+                                                            </div>
+                                                            <div class="mdl-cell--1-col">
+                                                              <button type="button" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="padding: 0 0 0 0; min-height: 46px; height: 46px; min-width: 46px; width: 46px;" id="swapVisInfoNew" value="{{ day_numb }}">
+                                                                <img id="swapImgInfoUp1" src="../../../static/img/chevron-up.png">
+                                                                <img id="swapImgInfoDown1" src="../../../static/img/chevron-down.png" style="display: none;">
+                                                              </button>
+                                                            </div>
+                                                          </div>
+                                                          <div id="toSwapInfo{{ day_numb }}" style="margin-left: 70px;">
+                                                            <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0;">
+                                                                <!--  row1  -->
+                                                                <div class="mdl-cell--12-col">
+                                                                    <p class="myP" style="margin-bottom: 0px; top: 6px;">Предварительная заявка:</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 50px;">
+                                                                <!--  row2  -->
+                                                                <div class="mdl-cell--1-col"></div>
+                                                                <div class="mdl-cell--5-col" style="padding-top: 20px; top: -10px;">
+                                                                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="trPzNew">
+                                                                      <span class="mdl-switch__label">Текущее состояние: <span id="PzState1">Открыта</span></span><span id="PzState2" style="display:none; margin-left: 25px;">Закрыта</span></span>
+                                                                      <input type="checkbox" id="trPzNew" name="trPzNew{{ day_numb }}" class="mdl-switch__input" checked>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="mdl-cell--1-col"></div>
+                                                                <div class="mdl-cell--5-col">
+                                                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 280px;">
+                                                                      <input class="mdl-textfield__input" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" style="font-size:16px;" id="pzEndAddNew" name="pzEndAddNew{{ day_numb }}">
+                                                                      <label class="mdl-textfield__label" for="pzEndAddNew">Окончание добавления заявок</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 50px;">
+                                                                <!-- row3  -->
+                                                                <div class="mdl-cell--1-col"></div>
+                                                                <div class="mdl-cell--5-col"></div>
+                                                                <div class="mdl-cell--1-col"></div>
+                                                                <div class="mdl-cell--5-col">
+                                                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 280px;">
+                                                                      <input class="mdl-textfield__input" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" style="font-size:16px;" id="pzEndChangeNew" name="pzEndChangeNew{{ day_numb }}">
+                                                                      <label class="mdl-textfield__label" for="pzEndChangeNew">Окончание изменения заявок</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mdl-grid" style="margin: 40px 0 0 0; padding: 0 0 0 0; height: 24px;">
+                                                                <!-- row4  -->
+                                                                <div class="mdl-cell--6-col">
+                                                                    <p class="myP" style="margin-bottom: 0px; top: 6px;">Техническая заявка:</p>
+                                                                </div>
+                                                                <div class="mdl-cell--6-col">
+                                                                    <p class="myP" style="margin-bottom: 0px; top: 6px;">Ссылка на официальный сайт:</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 50px;">
+                                                                <!-- row5  -->
+                                                                <div class="mdl-cell--1-col"></div>
+                                                                <div class="mdl-cell--5-col" style="padding-top: 20px; top: -10px;">
+                                                                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="trTzNew">
+                                                                      <span class="mdl-switch__label">Текущее состояние: <span id="TzState1">Включена</span><span id="TzState2" style="display: none;">Отключена</span></span>
+                                                                      <input type="checkbox" id="trTzNew" name="trTzNew{{ day_numb }}" class="mdl-switch__input" checked>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="mdl-cell--1-col"></div>
+                                                                <div class="mdl-cell--5-col">
+                                                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 280px;">
+                                                                      <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="toTmMoscowNew" name="toTmMoscowNew{{ day_numb }}">
+                                                                      <label class="mdl-textfield__label" for="toTmMoscowNew">Введите ссылку</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mdl-grid" style="margin: 40px 0 0 0; padding: 0 0 0 0;" id="addOrgLine0">
+                                                                <!--  row6  -->
+                                                                <div class="mdl-cell--12-col">
+                                                                    <p class="myP" style="margin-bottom: 0px; top: 6px;">Контакты организаторов:</p>
+                                                                </div>
+                                                                <!--  row7  -->
+                                                                <div class="mdl-cell--1-col"></div>
+                                                                <div class="mdl-cell--3-col">
+                                                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100%;">
+                                                                      <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="orgFioNew" name="orgFioNew">
+                                                                      <label class="mdl-textfield__label" for="orgFioNew">Введите ФИО</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mdl-cell--1-col"></div>
+                                                                <div class="mdl-cell--3-col">
+                                                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100%;">
+                                                                      <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="orgDolNew" name="orgDolNew">
+                                                                      <label class="mdl-textfield__label" for="orgDolNew">Введите должность</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mdl-cell--1-col"></div>
+                                                                <div class="mdl-cell--3-col">
+                                                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100%;">
+                                                                      <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="orgContNew" name="orgContNew">
+                                                                      <label class="mdl-textfield__label" for="orgContNew11" name="orgContNew">Введите контакт</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mdl-grid" style="margin: 0 0 20px 10px; padding: 0 0 0 0; height: 50px; vertical-align: middle;" id="addOrgNewInsert">
+                                                                <!--  row8  -->
+                                                                <div class="mdl-cell--1-col"></div>
+                                                                <div class="mdl-cell--11-col"><p class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-js-accent" id="addOrgNew" style="height: 40px; width: 120px; color: #42A5F5; font-size: 16px; font-family: Yu Gothic UI; font-weight: normal; text-transform: lowercase;">+ еще один</p></div>
+                                                            </div>
+                                                          </div>  <!--  #toSwapInfo1  -->
+                                            {% endfor %}
 
 
 
-
-
-
-
-
-
-
-
-                                            <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 50px;">
-                                                <!--  row2  -->
-                                                <div class="mdl-cell--1-col"></div>
-                                                <div class="mdl-cell--5-col" style="padding-top: 20px; top: -10px;">
-                                                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="trPzNew">
-                                                      <span class="mdl-switch__label">Текущее состояние: <span id="PzState1">Открыта</span></span><span id="PzState2" style="display:none; margin-left: 25px;">Закрыта</span></span>
-                                                      <input type="checkbox" id="trPzNew" name="trPzNew" class="mdl-switch__input" checked>      
-                                                    </label>
-                                                </div>
-                                                <div class="mdl-cell--1-col"></div>
-                                                <div class="mdl-cell--5-col">
-                                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 280px;">
-                                                      <input class="mdl-textfield__input" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" style="font-size:16px;" id="pzEndAddNew" name="pzEndAddNew">
-                                                      <label class="mdl-textfield__label" for="pzEndAddNew">Окончание добавления заявок</label>
-                                                    </div>
-                                                </div>                              
-                                            </div>
-                                            <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 50px;">
-                                                <!-- row3  -->
-                                                <div class="mdl-cell--1-col"></div>
-                                                <div class="mdl-cell--5-col"></div>
-                                                <div class="mdl-cell--1-col"></div>
-                                                <div class="mdl-cell--5-col">
-                                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 280px;">
-                                                      <input class="mdl-textfield__input" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" style="font-size:16px;" id="pzEndChangeNew" name="pzEndChangeNew">
-                                                      <label class="mdl-textfield__label" for="pzEndChangeNew">Окончание изменения заявок</label>
-                                                    </div>
-                                                </div>            
-                                            </div>    
-                                            <div class="mdl-grid" style="margin: 40px 0 0 0; padding: 0 0 0 0; height: 24px;">
-                                                <!-- row4  -->
-                                                <div class="mdl-cell--6-col">
-                                                    <p class="myP" style="margin-bottom: 0px; top: 6px;">Техническая заявка:</p>
-                                                </div>
-                                                <div class="mdl-cell--6-col">
-                                                    <p class="myP" style="margin-bottom: 0px; top: 6px;">Ссылка на официальный сайт:</p>
-                                                </div>    
-                                            </div>    
-                                            <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 50px;">
-                                                <!-- row5  -->
-                                                <div class="mdl-cell--1-col"></div>
-                                                <div class="mdl-cell--5-col" style="padding-top: 20px; top: -10px;">
-                                                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="trTzNew">
-                                                      <span class="mdl-switch__label">Текущее состояние: <span id="TzState1">Включена</span><span id="TzState2" style="display: none;">Отключена</span></span>
-                                                      <input type="checkbox" id="trTzNew" name="trTzNew" class="mdl-switch__input" checked> 
-                                                    </label>
-                                                </div>
-                                                <div class="mdl-cell--1-col"></div>
-                                                <div class="mdl-cell--5-col">
-                                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 280px;">
-                                                      <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="toTmMoscowNew">
-                                                      <label class="mdl-textfield__label" for="toTmMoscowNew">Введите ссылку</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="mdl-grid" style="margin: 40px 0 0 0; padding: 0 0 0 0;" id="addOrgLine0">
-                                                <!--  row6  -->
-                                                <div class="mdl-cell--12-col">
-                                                    <p class="myP" style="margin-bottom: 0px; top: 6px;">Контакты организаторов:</p>
-                                                </div>   
-                                                <!--  row7  -->
-                                                <div class="mdl-cell--1-col"></div>
-                                                <div class="mdl-cell--3-col">
-                                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100%;">
-                                                      <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="orgFioNew" name="orgFioNew">
-                                                      <label class="mdl-textfield__label" for="orgFioNew">Введите ФИО</label>
-                                                    </div>
-                                                </div>
-                                                <div class="mdl-cell--1-col"></div>
-                                                <div class="mdl-cell--3-col">
-                                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100%;">
-                                                      <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="orgDolNew" name="orgDolNew">
-                                                      <label class="mdl-textfield__label" for="orgDolNew">Введите должность</label>
-                                                    </div>
-                                                </div>
-                                                <div class="mdl-cell--1-col"></div>
-                                                <div class="mdl-cell--3-col">
-                                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100%;">
-                                                      <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="orgContNew" name="orgContNew">
-                                                      <label class="mdl-textfield__label" for="orgContNew11" name="orgContNew">Введите контакт</label>
-                                                    </div>
-                                                </div>
-                                            </div>   
-                                            <div class="mdl-grid" style="margin: 0 0 20px 10px; padding: 0 0 0 0; height: 50px; vertical-align: middle;" id="addOrgNewInsert">
-                                                <!--  row8  -->
-                                                <div class="mdl-cell--1-col"></div>
-                                                <div class="mdl-cell--11-col"><p class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-js-accent" id="addOrgNew" name="addOrgNew" style="height: 40px; width: 120px; color: #42A5F5; font-size: 16px; font-family: Yu Gothic UI; font-weight: normal; text-transform: lowercase;">+ еще один</p></div>
-                                            </div>
-                                          </div>  <!--  #toSwapInfo1  --> 
                                           <div class="mdl-grid">
                                             <!--  row9  -->
                                             <div class="mdl-cell--10-col"></div>
@@ -298,151 +293,153 @@
 
                                   <div class="mdl-tabs__panel" id="diz-panel" style="background: #fff; color: #42A5F5;">
                                           <div class="tab-content">
-                                            <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%;">    
-                                                <!--  row1  -->
-                                                <div class="mdl-cell--1-col"><p class="myP" style="padding-top: 10px;">День 1 </p></div>
-                                                <div class="mdl-cell--10-col">
-                                                    <img src="../../../static/img/line.png" style="width: 100%; margin-top: 20px;">
-                                                </div>
-                                                <div class="mdl-cell--1-col">
-                                                  <button type="button" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="padding: 0 0 0 0; min-height: 46px; height: 46px; min-width: 46px; width: 46px;" id="swapVisDizNew1" value="1">
-                                                    <img id="swapImgDizUp1" src="../../../static/img/chevron-up.png">
-                                                    <img id="swapImgDizDown1" src="../../../static/img/chevron-down.png" style="display: none;">
-                                                  </button>   
-                                                </div>
-                                            </div>
-                                            
-                                            <div id="toSwapDiz1">  
-                                                <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0;">    
-                                                    <!--  row2  -->
-                                                    <div class="mdl-cell--1-col"></div>
-                                                    <div class="mdl-cell--2-col"><p class="myP">Дистанция:</p></div>
-                                                    <div class="mdl-cell--1-col"></div>
-                                                    <div class="mdl-cell--3-col">
-                                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="pesh">
-                                                          <input type="radio" id="pesh" class="mdl-radio__button" name="dizDisciplineNew" value="1" checked>
-                                                          <span class="mdl-radio__label">Пешеходная</span>
-                                                        </label>
-                                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="svyaz">
-                                                          <input type="radio" id="svyaz" class="mdl-radio__button" name="dizDisciplineNew" value="2">
-                                                          <span class="mdl-radio__label">Пешеходная-связка</span>
-                                                        </label>
-                                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="group">
-                                                          <input type="radio" id="group" class="mdl-radio__button" name="dizDisciplineNew" value="3">
-                                                          <span class="mdl-radio__label">Пешеходная-группа</span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="mdl-cell--1-col"></div>
-                                                    <div class="mdl-cell--3-col">
-                                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="dlin">
-                                                          <input type="radio" id="dlin" class="mdl-radio__button" name="dizLengthNew" value="1" checked>
-                                                          <span class="mdl-radio__label">Длинная</span>
-                                                        </label></br>
-                                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="corot">
-                                                          <input type="radio" id="corot" class="mdl-radio__button" name="dizLengthNew" value="2">
-                                                          <span class="mdl-radio__label">Короткая</span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="mdl-cell--1-col"></div>
-                                                </div>
-                                                <div class="mdl-grid" style="margin: 0 0 20px 0; padding: 0 0 0 0; height: 50px;"> 
-                                                    <!--  row3  -->
-                                                    <div class="mdl-cell--2-col"></div>
-                                                    <div class="mdl-cell--1-col">
-                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 110%; max-width: 120%;">
-                                                          <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="dizGroupNew11" name="dizGroupNew11">
-                                                          <label class="mdl-textfield__label" for="dizGroupNew11">Группа</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mdl-cell--1-col"></div>
-                                                    <div class="mdl-cell--1-col">
-                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120%; max-width: 120%;">
-                                                          <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="dizLenNew11" name="dizLenNew11">
-                                                          <label class="mdl-textfield__label" for="dizLenNew11">Длина</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mdl-cell--1-col">
-                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120%; max-width: 120%; left: 40px;">
-                                                          <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="dizClassNew11" name="dizClassNew11">
-                                                          <label class="mdl-textfield__label" for="dizClassNew11">Класс</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mdl-cell--4-col" style="margin: 23px 10px 0 0; text-align: right;">Число команд от делегации </div>
-                                                    <div class="mdl-cell--1-col">
-                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
-                                                          <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="dizCCminNew11" name="dizCCminNew11">
-                                                          <label class="mdl-textfield__label" for="dizCCminNew11">min</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mdl-cell--1-col">
-                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
-                                                          <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="dizCCmaxNew11" name="dizCCmaxNew11">
-                                                          <label class="mdl-textfield__label" for="dizCCmaxNew11">max</label>
-                                                        </div>
-                                                    </div>
-                                                </div>  
-                                               
-                                                <div class="mdl-grid" style="margin: 0 0 0 10px; padding: 0 0 0 0; height: 50px;" id="addGroupNewInsert">    
-                                                    <!--  row4  -->
-                                                    <div class="mdl-cell--2-col"></div>
-                                                    <div class="mdl-cell--10-col"><p class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-js-accent" id="addGroupDizNew1" style="height: 40px; width: 120px; color: #42A5F5; font-size: 16px; font-family: Yu Gothic UI; font-weight: normal; text-transform: lowercase;" value="1">+ еще одна</p></div>
-                                                </div>
-                                                <div class="mdl-grid" style="margin: 0 0 0 0; padding: 6px 0 0 0; height: 24px;">  
-                                                    <!--  row5  -->
-                                                    <div class="mdl-cell--1-col"></div>
-                                                    <div class="mdl-cell--11-col"><p class="myP">Участники:</p></div>
-                                                </div>
-                                                <div class="mdl-grid" style="margin: 0 0 20px 0; padding: 0 0 0 0; height: 50px;">  
-                                                    <!--  row6  -->
-                                                    <div class="mdl-cell--2-col"></div>
-                                                    <div class="mdl-cell--1-col">
-                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 110%; max-width: 110%;">
-                                                          <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="duGroupNew11" name="duGroupNew11">
-                                                          <label class="mdl-textfield__label" for="duGroupNew11">Группа</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mdl-cell--1-col"></div>    
-                                                    <div class="mdl-cell--2-col">
-                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
-                                                          <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="duSalaryNew11" name="duSalaryNew11">
-                                                          <label class="mdl-textfield__label" for="duSalaryNew11">Стартовый</label>
-                                                        </div>
-                                                    </div>         
-                                                    <div class="mdl-cell--1-col" style="margin-top: 24px; margin-right: 7px;">Возраст</div>
-                                                    <div class="mdl-cell--1-col">
-                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
-                                                          <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="duAgeminNew11" name="duAgeminNew11">
-                                                          <label class="mdl-textfield__label" for="duAgeminNew11">min</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mdl-cell--1-col">
-                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
-                                                          <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="duAgemaxNew11" name="duAgemaxNew11">
-                                                          <label class="mdl-textfield__label" for="duAgemaxNew11">max</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mdl-cell--1-col"></div>
-                                                    <div class="mdl-cell--1-col" style="margin-top: 24px;">Разряд</div>
-                                                    <div class="mdl-cell--1-col">
-                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
-                                                          <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="duQualNewmin11" name="duQualNewmin11">
-                                                          <label class="mdl-textfield__label" for="duQualNewmin11">min</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mdl-cell--1-col">
-                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
-                                                          <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="duQualNewmax11" name="duQualNewmax11">
-                                                          <label class="mdl-textfield__label" for="duQualNewmax11">max</label>
-                                                        </div>
-                                                    </div>                                                       
-                                                </div>
-                                                <div class="mdl-grid" style="margin: 0 0 0 10px; padding: 0 0 0 0; height: 50px;" id="addMemNewInsert">    
-                                                    <!--  row7  -->
-                                                    <div class="mdl-cell--2-col"></div>
-                                                    <div class="mdl-cell--10-col"><p class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-js-accent" id="addMemDizNew1" style="height: 40px; width: 120px; color: #42A5F5; font-size: 16px; font-family: Yu Gothic UI; font-weight: normal; text-transform: lowercase;" value="1">+ еще одна</p></div>
-                                                </div>
-                                            </div>
-                                          
+
+                                              {% for day_numb in days %}
+                                                            <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%;">
+                                                                <!--  row1  -->
+                                                                <div class="mdl-cell--1-col"><p class="myP" style="padding-top: 10px;">День {{ day_numb }} </p></div>
+                                                                <div class="mdl-cell--10-col">
+                                                                    <img src="../../../static/img/line.png" style="width: 100%; margin-top: 20px;">
+                                                                </div>
+                                                                <div class="mdl-cell--1-col">
+                                                                  <button type="button" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="padding: 0 0 0 0; min-height: 46px; height: 46px; min-width: 46px; width: 46px;" id="swapVisDizNew" value="{{ day_numb }}">
+                                                                    <img id="swapImgDizUp1" src="../../../static/img/chevron-up.png">
+                                                                    <img id="swapImgDizDown1" src="../../../static/img/chevron-down.png" style="display: none;">
+                                                                  </button>
+                                                                </div>
+                                                            </div>
+
+                                                            <div id="toSwapDiz{{ day_numb }}">
+                                                                <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0;">
+                                                                    <!--  row2  -->
+                                                                    <div class="mdl-cell--1-col"></div>
+                                                                    <div class="mdl-cell--2-col"><p class="myP">Дистанция:</p></div>
+                                                                    <div class="mdl-cell--1-col"></div>
+                                                                    <div class="mdl-cell--3-col">
+                                                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="pesh">
+                                                                          <input type="radio" id="pesh" class="mdl-radio__button" name="dizDisciplineNew{{ day_numb }}" value="1" checked>
+                                                                          <span class="mdl-radio__label">Пешеходная</span>
+                                                                        </label>
+                                                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="svyaz">
+                                                                          <input type="radio" id="svyaz" class="mdl-radio__button" name="dizDisciplineNew{{ day_numb }}" value="2">
+                                                                          <span class="mdl-radio__label">Пешеходная-связка</span>
+                                                                        </label>
+                                                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="group">
+                                                                          <input type="radio" id="group" class="mdl-radio__button" name="dizDisciplineNew{{ day_numb }}" value="3">
+                                                                          <span class="mdl-radio__label">Пешеходная-группа</span>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="mdl-cell--1-col"></div>
+                                                                    <div class="mdl-cell--3-col">
+                                                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="dlin">
+                                                                          <input type="radio" id="dlin" class="mdl-radio__button" name="dizLengthNew{{ day_numb }}" value="1" checked>
+                                                                          <span class="mdl-radio__label">Длинная</span>
+                                                                        </label></br>
+                                                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="corot">
+                                                                          <input type="radio" id="corot" class="mdl-radio__button" name="dizLengthNew{{ day_numb }}" value="2">
+                                                                          <span class="mdl-radio__label">Короткая</span>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="mdl-cell--1-col"></div>
+                                                                </div>
+                                                                <div class="mdl-grid" style="margin: 0 0 20px 0; padding: 0 0 0 0; height: 50px;">
+                                                                    <!--  row3  -->
+                                                                    <div class="mdl-cell--2-col"></div>
+                                                                    <div class="mdl-cell--1-col">
+                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 110%; max-width: 120%;">
+                                                                          <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="dizGroupNew11" name="dizGroupNew{{ day_numb }}">
+                                                                          <label class="mdl-textfield__label" for="dizGroupNew11">Группа</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="mdl-cell--1-col"></div>
+                                                                    <div class="mdl-cell--1-col">
+                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120%; max-width: 120%;">
+                                                                          <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="dizLenNew11" name="dizLenNew{{ day_numb }}">
+                                                                          <label class="mdl-textfield__label" for="dizLenNew11">Длина</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="mdl-cell--1-col">
+                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120%; max-width: 120%; left: 40px;">
+                                                                          <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="dizClassNew11" name="dizClassNew{{ day_numb }}">
+                                                                          <label class="mdl-textfield__label" for="dizClassNew11">Класс</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="mdl-cell--4-col" style="margin: 23px 10px 0 0; text-align: right;">Число команд от делегации </div>
+                                                                    <div class="mdl-cell--1-col">
+                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
+                                                                          <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="dizCCminNew11" name="dizCCminNew{{ day_numb }}">
+                                                                          <label class="mdl-textfield__label" for="dizCCminNew11">min</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="mdl-cell--1-col">
+                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
+                                                                          <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="dizCCmaxNew11" name="dizCCmaxNew{{ day_numb }}">
+                                                                          <label class="mdl-textfield__label" for="dizCCmaxNew11">max</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="mdl-grid" style="margin: 0 0 0 10px; padding: 0 0 0 0; height: 50px;" id="addGroupNewInsert">
+                                                                    <!--  row4  -->
+                                                                    <div class="mdl-cell--2-col"></div>
+                                                                    <div class="mdl-cell--10-col"><p class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-js-accent" id="addGroupDizNew1" style="height: 40px; width: 120px; color: #42A5F5; font-size: 16px; font-family: Yu Gothic UI; font-weight: normal; text-transform: lowercase;" value="1">+ еще одна</p></div>
+                                                                </div>
+                                                                <div class="mdl-grid" style="margin: 0 0 0 0; padding: 6px 0 0 0; height: 24px;">
+                                                                    <!--  row5  -->
+                                                                    <div class="mdl-cell--1-col"></div>
+                                                                    <div class="mdl-cell--11-col"><p class="myP">Участники:</p></div>
+                                                                </div>
+                                                                <div class="mdl-grid" style="margin: 0 0 20px 0; padding: 0 0 0 0; height: 50px;">
+                                                                    <!--  row6  -->
+                                                                    <div class="mdl-cell--2-col"></div>
+                                                                    <div class="mdl-cell--1-col">
+                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 110%; max-width: 110%;">
+                                                                          <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="duGroupNew11" name="duGroupNew{{ day_numb }}">
+                                                                          <label class="mdl-textfield__label" for="duGroupNew11">Группа</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="mdl-cell--1-col"></div>
+                                                                    <div class="mdl-cell--2-col">
+                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
+                                                                          <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="duSalaryNew11" name="duSalaryNew{{ day_numb }}">
+                                                                          <label class="mdl-textfield__label" for="duSalaryNew11">Стартовый</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="mdl-cell--1-col" style="margin-top: 24px; margin-right: 7px;">Возраст</div>
+                                                                    <div class="mdl-cell--1-col">
+                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
+                                                                          <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="duAgeminNew11" name="duAgeminNew{{ day_numb }}">
+                                                                          <label class="mdl-textfield__label" for="duAgeminNew11">min</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="mdl-cell--1-col">
+                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
+                                                                          <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="duAgemaxNew11" name="duAgemaxNew{{ day_numb }}">
+                                                                          <label class="mdl-textfield__label" for="duAgemaxNew11">max</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="mdl-cell--1-col"></div>
+                                                                    <div class="mdl-cell--1-col" style="margin-top: 24px;">Разряд</div>
+                                                                    <div class="mdl-cell--1-col">
+                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
+                                                                          <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="duQualNewmin11" name="duQualNewmin{{ day_numb }}">
+                                                                          <label class="mdl-textfield__label" for="duQualNewmin11">min</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="mdl-cell--1-col">
+                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
+                                                                          <input class="mdl-textfield__input" type="text" style="font-size:16px;" id="duQualNewmax11" name="duQualNewmax{{ day_numb }}">
+                                                                          <label class="mdl-textfield__label" for="duQualNewmax11">max</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mdl-grid" style="margin: 0 0 0 10px; padding: 0 0 0 0; height: 50px;" id="addMemNewInsert">
+                                                                    <!--  row7  -->
+                                                                    <div class="mdl-cell--2-col"></div>
+                                                                    <div class="mdl-cell--10-col"><p class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-js-accent" id="addMemDizNew1" style="height: 40px; width: 120px; color: #42A5F5; font-size: 16px; font-family: Yu Gothic UI; font-weight: normal; text-transform: lowercase;" value="1">+ еще одна</p></div>
+                                                                </div>
+                                                            </div>
+                                              {% endfor %}
                                           
                                           
                                             <div class="mdl-grid">

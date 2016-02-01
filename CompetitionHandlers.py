@@ -45,6 +45,26 @@ class NewCompetition(webapp2.RequestHandler):
             org_info = []
             for i in range(0, len(org_fios)):
                 org_info.append([org_fios[i], org_dols[i], org_contacts[i]])
+            # info about distances
+            disciplines = self.request.POST['dizDisciplineNew']             # list of all disciplines for all days
+            lengths = self.request.POST['dizLengthNew']                     # list of all lengths for all days
+            groups_info = []
+            for day_num in range(0, count_start):
+                groups_for_day = self.request.POST['dizGroupNew'+str(day_num)]
+                lengths_for_day = self.request.POST['dizLenNew'+str(day_num)]
+                classes_for_day = self.request.POST['dizClassNew'+str(day_num)]
+                min_comm_for_day = self.request.POST['dizCCminNew'+str(day_num)]
+                max_comm_for_day = self.request.POST['dizCCmaxNew'+str(day_num)]
+                groups_info.append([groups_for_day, lengths_for_day, classes_for_day, min_comm_for_day, max_comm_for_day])
+            members_info = []
+            for day_num in range(0, count_start):
+                groups_info[i][0]
+                salary_for_day = self.request.POST['duSalaryNew'+str(day_num)]
+                min_age = self.request.POST['duAgeminNew'+str(day_num)]
+                max_age = self.request.POST['duAgemaxNew'+str(day_num)]
+                min_qual = self.request.POST['duQualNewmin'+str(day_num)]
+                max_qual = self.request.POST['duQualNewmax']+str(day_num)
+
 
             temp_values = {'user_email':email, 'logout':users.create_logout_url('/login'),   'logo':logo, 'start':start_date,
                            'finish': finish_date, 'name':comp_name, 'count_start':count_start, 'start_places':start_places,
