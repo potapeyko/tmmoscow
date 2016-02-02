@@ -2,7 +2,7 @@ var orgCount = 1;
 var daysCount = 1;
 var distCount = 1;
 var duCount = 1;
-
+var firstlyRemember = true;
 
 $('#trPzNew').click(function(){
     $('#PzState1').toggle();
@@ -14,20 +14,21 @@ $('#trTzNew').click(function(){
     $('#TzState2').toggle();
 });
 
-$('#addOrgNew').click(function(){
+$('.addOrgNew').click(function(){
      var grid = document.createElement('div');
+     var dayNumber = $(this).siblings()[0].innerHTML;         // Номер дня, в который вносим изменения
      grid.className = 'mdl-grid';
      grid.style.margin = "-20px 0 20px 0";
      grid.style.padding = '0 0 0 0';
      grid.style.height = '50px';
      grid.style.bottom = '20px';
-     grid.setAttribute('id', 'addOrgLine'+orgCount.toString());
+     grid.setAttribute('id', 'addOrgLine'+orgCount.toString()+dayNumber.toString());                               //   Добавить номер дня соревнования
      var col1 = document.createElement('div'); col1.className = 'mdl-cell--1-col';
      var col2 = document.createElement('div'); col2.className = 'mdl-cell--3-col';
         var textfield1 = document.createElement('div');
         textfield1.setAttribute('style', 'width: 100%; padding: 20px 0 20px 0;');
         textfield1.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            var IdName = 'orgFioNew';
+            var IdName = 'orgFioNew'+dayNumber.toString();                                                         //   Добавить номер дня соревнования
             var in1 = document.createElement('input');
             in1.className = 'mdl-textfield__input';
             in1.setAttribute('style', 'font-size: 16px;');
@@ -45,7 +46,7 @@ $('#addOrgNew').click(function(){
         var textfield2 = document.createElement('div');
         textfield2.setAttribute('style', 'width: 100%; padding:20px 0 20px 0;');
         textfield2.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            var Dol = 'orgDolNew';
+            var Dol = 'orgDolNew'+dayNumber.toString();
             var in2 = document.createElement('input');
             in2.className = 'mdl-textfield__input';
             in2.setAttribute('style', 'font-size: 16px;');
@@ -63,7 +64,7 @@ $('#addOrgNew').click(function(){
         var textfield3 = document.createElement('div');
         textfield3.setAttribute('style', 'width: 100%; padding: 20px 0 20px 0;');
         textfield3.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            var Cont = 'orgContNew';
+            var Cont = 'orgContNew'+dayNumber.toString();
             var in3 = document.createElement('input');
             in3.className = 'mdl-textfield__input';
             in3.setAttribute('style', 'font-size: 16px;');
@@ -82,7 +83,7 @@ $('#addOrgNew').click(function(){
      grid.appendChild(col4);
      grid.appendChild(col5);
      grid.appendChild(col6);
-     var addButtonDiv = document.getElementById('addOrgNewInsert');
+     var addButtonDiv = document.getElementById('addOrgNewInsert'+dayNumber.toString());
      var blockInsert = addButtonDiv.parentNode;
      blockInsert.insertBefore(grid, addButtonDiv);
      orgCount = orgCount+1;
@@ -345,7 +346,9 @@ $("#addMemDizNew1").click(function(){
     duCount = duCount + 1;
 });
 
-$('#swapVisInfoNew1').click(function(){
+
+$('.swapVisInfoNew').click(function(){
+
     var dayToSwap = $(this).val();
     var blockName = "#toSwapInfo" + dayToSwap.toString();
     var butImgUp = "#swapImgInfoUp" + dayToSwap.toString();
@@ -383,4 +386,22 @@ $('#btnLogIn').click(function(){
     if (dc.val() != '1'){
        daysCount = dc.val();
    }
+});
+
+$('#AddPlaceNew').click(function(){
+
+    if (firstlyRemember){               // Запоминаем первое место, отображаем столько пустых шаблонов для инфы и дистанций, сколько дней указал чел
+        daysCount = $('#countStart').val();
+        for (i=0; i<daysCount-1; i++){
+            var day = $('#cloneMe').clone(withDataAndEvents=true);
+            alert('1');
+            //day.getElementsByClassName('dayNumb')[0].innerHTML = i.toString();
+            //alert('2');
+            day.insertAfter($('#cloneMe'));
+        }
+        firstlyRemember = false;
+    }
+    else{                               // Запоминаем остальные дни
+        alert('another days');
+    }
 });
