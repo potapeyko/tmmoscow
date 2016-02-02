@@ -394,14 +394,31 @@ $('#AddPlaceNew').click(function(){
         daysCount = $('#countStart').val();
         for (i=0; i<daysCount-1; i++){
             var day = $('#cloneMe').clone(withDataAndEvents=true);
-            alert('1');
-            //day.getElementsByClassName('dayNumb')[0].innerHTML = i.toString();
-            //alert('2');
+          //  alert('1');
+
+          //  var temp = day.getElementById('toTmMoscowNew');
+          //  alert(temp.innerHTML);
+          //  alert('2');
             day.insertAfter($('#cloneMe'));
+
         }
         firstlyRemember = false;
     }
     else{                               // Запоминаем остальные дни
         alert('another days');
     }
+    alert('out');
+    renameDays();
 });
+
+function renameDays(){
+    var days = document.getElementsByClassName('cloneMe');
+    day1 = days[1];
+    var numbers = day1.getElementsByClassName('dayNumb');
+    alert(numbers);
+    for (var i=0; i<2; i++){
+        numbers[i].innerHTML = '2';
+        alert(numbers[i]);
+    }
+    alert('end');
+}
