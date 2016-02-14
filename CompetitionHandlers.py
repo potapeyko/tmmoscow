@@ -11,16 +11,45 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
+class NewCompetitionInfo(webapp2.RequestHandler):
+    def get(self):  # shows empty form for adding new competition's common info
+        user = users.get_current_user()
+        if user:
+            email = user.email()
+            temp_values = {'user_email':email, 'logout':users.create_logout_url('/login')}
+            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/NewCompetitionInfo.html')
+            self.response.write(template.render(temp_values))
+        else:
+            temp_values = {'img_src':'../static/img/er401.png', 'er_name':'401', 'login_redir':users.create_login_url('/reg/newCompetition')}
+            self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
+    def post(self): # save filled form about new competition
+        user = users.get_current_user()
+        if user:
+            email = user.email()
+            temp_values = {'user_email':email, 'logout':users.create_logout_url('/login')}
+            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/NewCompetitionInfo.html')
+            self.response.write(template.render(temp_values))
+
 class NewCompetition(webapp2.RequestHandler):
     def get(self):  # shows empty form for adding new competition
         user = users.get_current_user()
         if user:
             email = user.email()
-            temp_values = {'user_email':email, 'logout':users.create_logout_url('/login')}
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/AddCompetition.html')
+            name = self.request.GET['nameCompNew']
+            d_s = self.request.GET['dateStartNew']
+            d_f = self.request.GET['dateFinishNew']
+            d_count = self.request.GET['countStart']
+            try:
+                write_places = self.request.GET['checkPlaces']
+                write_places = True
+            except:
+                write_places = False
+            show_map = self.request.GET['checkPlacesMap']
+            temp_values = {'user_email':email, 'logout':users.create_logout_url('/login'), 'd_start':formatDate(d_s), 'd_finish':formatDate(d_f), 'name':name, 'days_count':range(1, int(d_count)+1), 'write_places':write_places}
+            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/AddCompetition.html', )
             self.response.write(template.render(temp_values))
         else:
-            temp_values = {'img_src':'../static/img/er401.png', 'er_name':'401', 'login_redir':users.create_login_url('/reg/newCompetition')}
+            temp_values = {'img_src':'../static/img/er401.png', 'er_name':'401', 'login_redir':users.create_login_url('/reg/addCompetition')}
             self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
     def post(self): # save filled form about new competition
         user = users.get_current_user()
@@ -101,3 +130,17 @@ class CertainCompetition(webapp2.RequestHandler):
         self.response.write(template.render(temp_values))
     def post(self):
         self.response.write('POST Add new info about competition (ORG)')
+
+def formatDate(bad_date):
+    ymd = bad_date.split('-')
+    y = ymd[0]
+    m = ymd[1]
+    d = ymd[2]
+    return str(d)+'.'+str(m)+'.'+str(y)
+
+def dayNumbers(count):
+    days = []
+    for i in range(0,count):
+        days.append(i)
+    return days
+

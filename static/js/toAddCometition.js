@@ -3,16 +3,18 @@ var daysCount = 1;
 var distCount = 1;
 var duCount = 1;
 var firstlyRemember = true;
+var clicked_day = 1;
 
-$('#trPzNew').click(function(){
-    $('#PzState1').toggle();
-    $('#PzState2').toggle();
-});
+function trPzClick(day_n){
+    $('#PzState1'+day_n.toString()).toggle();
+    $('#PzState2'+day_n.toString()).toggle();
 
-$('#trTzNew').click(function(){
-    $('#TzState1').toggle();
-    $('#TzState2').toggle();
-});
+};
+
+function trTzClick(day_n){
+    $('#TzState1'+day_n.toString()).toggle();
+    $('#TzState2'+day_n.toString()).toggle();
+};
 
 $('.addOrgNew').click(function(){
      var grid = document.createElement('div');
@@ -22,13 +24,12 @@ $('.addOrgNew').click(function(){
      grid.style.padding = '0 0 0 0';
      grid.style.height = '50px';
      grid.style.bottom = '20px';
-     grid.setAttribute('id', 'addOrgLine'+orgCount.toString()+dayNumber.toString());                               //   Добавить номер дня соревнования
      var col1 = document.createElement('div'); col1.className = 'mdl-cell--1-col';
      var col2 = document.createElement('div'); col2.className = 'mdl-cell--3-col';
         var textfield1 = document.createElement('div');
         textfield1.setAttribute('style', 'width: 100%; padding: 20px 0 20px 0;');
         textfield1.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            var IdName = 'orgFioNew'+dayNumber.toString();                                                         //   Добавить номер дня соревнования
+            var IdName = 'orgFioNew'+dayNumber.toString();
             var in1 = document.createElement('input');
             in1.className = 'mdl-textfield__input';
             in1.setAttribute('style', 'font-size: 16px;');
@@ -87,13 +88,7 @@ $('.addOrgNew').click(function(){
      var blockInsert = addButtonDiv.parentNode;
      blockInsert.insertBefore(grid, addButtonDiv);
      orgCount = orgCount+1;
-     componentHandler.upgradeAllRegistered();                 
-
-    /*   $.ajax({
-             type: "POST",
-             data: {'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(), 'old_paper': oldPaperCount},
-             url: "/add_paper/",
-         });        */ 
+     componentHandler.upgradeAllRegistered();
 });
 
 $("#addGroupDizNew1").click(function(){    
@@ -348,7 +343,6 @@ $("#addMemDizNew1").click(function(){
 
 
 $('.swapVisInfoNew').click(function(){
-
     var dayToSwap = $(this).val();
     var blockName = "#toSwapInfo" + dayToSwap.toString();
     var butImgUp = "#swapImgInfoUp" + dayToSwap.toString();
@@ -388,37 +382,9 @@ $('#btnLogIn').click(function(){
    }
 });
 
-$('#AddPlaceNew').click(function(){
 
-    if (firstlyRemember){               // Запоминаем первое место, отображаем столько пустых шаблонов для инфы и дистанций, сколько дней указал чел
-        daysCount = $('#countStart').val();
-        for (i=0; i<daysCount-1; i++){
-            var day = $('#cloneMe').clone(withDataAndEvents=true);
-          //  alert('1');
-
-          //  var temp = day.getElementById('toTmMoscowNew');
-          //  alert(temp.innerHTML);
-          //  alert('2');
-            day.insertAfter($('#cloneMe'));
-
-        }
-        firstlyRemember = false;
-    }
-    else{                               // Запоминаем остальные дни
-        alert('another days');
-    }
+$('#logoNew').change(function () {
+   // alert($(this).val());
+    $('#logoImg').src = $(this).val();
     alert('out');
-    renameDays();
 });
-
-function renameDays(){
-    var days = document.getElementsByClassName('cloneMe');
-    day1 = days[1];
-    var numbers = day1.getElementsByClassName('dayNumb');
-    alert(numbers);
-    for (var i=0; i<2; i++){
-        numbers[i].innerHTML = '2';
-        alert(numbers[i]);
-    }
-    alert('end');
-}
