@@ -10,6 +10,8 @@ class Test(webapp2.RequestHandler):
         temp_values = {'test_data': usrs}
         self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/tmp.html').render(temp_values))
 
+
+
 ќтлавливание ошибки и вывод ее сообщени€:
 try:
         pz = self.request.POST.getall('trPzNew')                        # list of triggers is PZ open
@@ -26,3 +28,20 @@ try:
 except Exception as exp:
         temp_values = {'img_src':'', 'er_name':'MY ERROR', 'login_redir':users.create_login_url('/reg/newCompetition'), 'txt':exp.message}
         self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
+
+
+
+яндекс-карта:
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script type="text/javascript">
+     var myMap;
+     ymaps.ready(function () {
+         myMap = new ymaps.Map("myMap", {
+             center: [55.76, 37.64],
+             zoom: 10
+         });
+     });
+   </script>
+   <div class="mdl-grid">
+       <div id="myMap" class="mdl-cell--12-col" style="width: 100%; height: 436px;"  ></div>
+   </div>

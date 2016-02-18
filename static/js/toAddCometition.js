@@ -17,8 +17,8 @@ function trTzClick(day_n){
 };
 
 $('.addOrgNew').click(function(){
+     var dayNum= $(this).siblings()[0].innerHTML;         // Номер дня, в который вносим изменения
      var grid = document.createElement('div');
-     var dayNumber = $(this).siblings()[0].innerHTML;         // Номер дня, в который вносим изменения
      grid.className = 'mdl-grid';
      grid.style.margin = "-20px 0 20px 0";
      grid.style.padding = '0 0 0 0';
@@ -29,15 +29,13 @@ $('.addOrgNew').click(function(){
         var textfield1 = document.createElement('div');
         textfield1.setAttribute('style', 'width: 100%; padding: 20px 0 20px 0;');
         textfield1.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            var IdName = 'orgFioNew'+dayNumber.toString();
+            var IdName = 'orgFioNew'+dayNum.toString();
             var in1 = document.createElement('input');
             in1.className = 'mdl-textfield__input';
             in1.setAttribute('style', 'font-size: 16px;');
             in1.setAttribute('name', IdName);
-            in1.setAttribute('id', IdName);
             var label1 = document.createElement('label');
             label1.className = 'mdl-textfield__label';
-            label1.htmlFor = IdName;
             label1.innerHTML = "Введите ФИО";
         textfield1.appendChild(in1);
         textfield1.appendChild(label1);
@@ -47,15 +45,13 @@ $('.addOrgNew').click(function(){
         var textfield2 = document.createElement('div');
         textfield2.setAttribute('style', 'width: 100%; padding:20px 0 20px 0;');
         textfield2.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            var Dol = 'orgDolNew'+dayNumber.toString();
+            var Dol = 'orgDolNew'+dayNum.toString();
             var in2 = document.createElement('input');
             in2.className = 'mdl-textfield__input';
             in2.setAttribute('style', 'font-size: 16px;');
             in2.setAttribute('name', Dol);
-            in2.setAttribute('id', Dol);
             var label2 = document.createElement('label');
             label2.className = 'mdl-textfield__label';
-            label2.htmlFor = Dol;
             label2.innerHTML = "Введите должность";
         textfield2.appendChild(in2);
         textfield2.appendChild(label2);
@@ -65,15 +61,13 @@ $('.addOrgNew').click(function(){
         var textfield3 = document.createElement('div');
         textfield3.setAttribute('style', 'width: 100%; padding: 20px 0 20px 0;');
         textfield3.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            var Cont = 'orgContNew'+dayNumber.toString();
+            var Cont = 'orgContNew'+dayNum.toString();
             var in3 = document.createElement('input');
             in3.className = 'mdl-textfield__input';
             in3.setAttribute('style', 'font-size: 16px;');
             in3.setAttribute('name', Cont);
-            in3.setAttribute('id', Cont);
             var label3 = document.createElement('label');
             label3.className = 'mdl-textfield__label';
-            label3.htmlFor = Cont;
             label3.innerHTML = "Введите контакт";
         textfield3.appendChild(in3);
         textfield3.appendChild(label3);
@@ -84,35 +78,33 @@ $('.addOrgNew').click(function(){
      grid.appendChild(col4);
      grid.appendChild(col5);
      grid.appendChild(col6);
-     var addButtonDiv = document.getElementById('addOrgNewInsert'+dayNumber.toString());
+     var addButtonDiv = document.getElementById('addOrgNewInsert'+dayNum.toString());
      var blockInsert = addButtonDiv.parentNode;
      blockInsert.insertBefore(grid, addButtonDiv);
      orgCount = orgCount+1;
      componentHandler.upgradeAllRegistered();
 });
 
-$("#addGroupDizNew1").click(function(){    
+$(".addGroupDizNew").click(function(){
+    var dayNum = $(this).siblings()[0].innerHTML;         // Номер дня, в который вносим изменения
     var grid = document.createElement('div');
     grid.className = 'mdl-grid';
     grid.style.margin = "-20px 0 20px 0";
     grid.style.padding = '0 0 0 0';
     grid.style.height = '50px';
     grid.style.bottom = '20px';
-    grid.setAttribute('id', 'addDistLine'+distCount.toString());
     var col1 = document.createElement('div'); col1.className = 'mdl-cell--2-col';
     var col2 = document.createElement('div'); col2.className = 'mdl-cell--1-col';
         var textfield1 = document.createElement('div');
         textfield1.setAttribute('style', 'width: 110%; max-width: 110%; padding: 20px 0 20px 0;');
         textfield1.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            var IdName = 'dizGroupNew';
+            var IdName = 'dizGroupNew'+dayNum;
             var in1 = document.createElement('input');
             in1.className = 'mdl-textfield__input';
             in1.setAttribute('style', 'font-size: 16px;');
             in1.setAttribute('name', IdName);
-            in1.setAttribute('id', IdName);
             var label1 = document.createElement('label');
             label1.className = 'mdl-textfield__label';
-            label1.htmlFor = IdName;
             label1.innerHTML = "Группа";
         textfield1.appendChild(in1);
         textfield1.appendChild(label1);
@@ -122,15 +114,13 @@ $("#addGroupDizNew1").click(function(){
         var textfield2 = document.createElement('div');
         textfield2.setAttribute('style', 'width: 120%; max-width: 120%; padding: 20px 0 20px 0;');
         textfield2.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            IdName = 'dizLenNew';
+            IdName = 'dizLenNew'+dayNum;
             var in2 = document.createElement('input');
             in2.className = 'mdl-textfield__input';
             in2.setAttribute('style', 'font-size: 16px;');
             in2.setAttribute('name', IdName);
-            in2.setAttribute('id', IdName);
             var label2 = document.createElement('label');
             label2.className = 'mdl-textfield__label';
-            label2.htmlFor = IdName;
             label2.innerHTML = "Длина";
         textfield2.appendChild(in2);
         textfield2.appendChild(label2);
@@ -139,15 +129,13 @@ $("#addGroupDizNew1").click(function(){
         var textfield3 = document.createElement('div');
         textfield3.setAttribute('style', 'width: 120%; max-width: 120%; padding: 20px 0 20px 0; left: 40px;');
         textfield3.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            IdName = 'dizClassNew';
+            IdName = 'dizClassNew'+dayNum;
             var in3 = document.createElement('input');
             in3.className = 'mdl-textfield__input';
             in3.setAttribute('style', 'font-size: 16px;');
             in3.setAttribute('name', IdName);
-            in3.setAttribute('id', IdName);
             var label3 = document.createElement('label');
             label3.className = 'mdl-textfield__label';
-            label3.htmlFor = IdName;
             label3.innerHTML = "Класс";
         textfield3.appendChild(in3);
         textfield3.appendChild(label3);
@@ -159,15 +147,13 @@ $("#addGroupDizNew1").click(function(){
         var textfield4 = document.createElement('div');
         textfield4.setAttribute('style', 'width: 70%; padding: 20px 0 20px 0;');
         textfield4.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            IdName = 'dizCCminNew';
+            IdName = 'dizCCminNew'+dayNum;
             var in4 = document.createElement('input');
             in4.className = 'mdl-textfield__input';
             in4.setAttribute('style', 'font-size: 16px;');
             in4.setAttribute('name', IdName);
-            in4.setAttribute('id', IdName);
             var label4 = document.createElement('label');
             label4.className = 'mdl-textfield__label';
-            label4.htmlFor = IdName;
             label4.innerHTML = "min";
         textfield4.appendChild(in4);
         textfield4.appendChild(label4);
@@ -176,15 +162,13 @@ $("#addGroupDizNew1").click(function(){
         var textfield5 = document.createElement('div');
         textfield5.setAttribute('style', 'width: 70%; padding: 20px 0 20px 0;');
         textfield5.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            IdName = 'dizCCmaxNew';
+            IdName = 'dizCCmaxNew'+dayNum;
             var in5 = document.createElement('input');
             in5.className = 'mdl-textfield__input';
             in5.setAttribute('style', 'font-size: 16px;');
             in5.setAttribute('name', IdName);
-            in5.setAttribute('id', IdName);
             var label5 = document.createElement('label');
             label5.className = 'mdl-textfield__label';
-            label5.htmlFor = IdName;
             label5.innerHTML = "max";
         textfield5.appendChild(in5);
         textfield5.appendChild(label5);
@@ -197,35 +181,33 @@ $("#addGroupDizNew1").click(function(){
     grid.appendChild(col6);
     grid.appendChild(col7);
     grid.appendChild(col8);
-    var addButtonDiv = document.getElementById('addGroupNewInsert');
+    var addButtonDiv = document.getElementById('addGroupNewInsert'+dayNum);
     var blockInsert = addButtonDiv.parentNode;
     blockInsert.insertBefore(grid, addButtonDiv);
     componentHandler.upgradeAllRegistered();
     distCount = distCount + 1;
 });
 
-$("#addMemDizNew1").click(function(){
+$(".addMemDizNew").click(function(){
+    var dayNum = $(this).siblings()[0].innerHTML;         // Номер дня, в который вносим изменения
     var grid = document.createElement('div');
     grid.className = 'mdl-grid';
     grid.style.margin = "-20px 0 20px 0";
     grid.style.padding = '0 0 0 0';
     grid.style.height = '50px';
     grid.style.bottom = '20px';
-    grid.setAttribute('id', 'addDistLine'+duCount.toString());
     var col1 = document.createElement('div'); col1.className = 'mdl-cell--2-col';
     var col2 = document.createElement('div'); col2.className = 'mdl-cell--1-col';
         var textfield1 = document.createElement('div');
         textfield1.setAttribute('style', 'width: 110%; max-width: 110%; padding: 20px 0 20px 0;');
         textfield1.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            var IdName = 'duGroupNew';
+            var IdName = 'duGroupNew'+dayNum;
             var in1 = document.createElement('input');
             in1.className = 'mdl-textfield__input';
             in1.setAttribute('style', 'font-size: 16px;');
             in1.setAttribute('name', IdName);
-            in1.setAttribute('id', IdName);
             var label1 = document.createElement('label');
             label1.className = 'mdl-textfield__label';
-            label1.htmlFor = IdName;
             label1.innerHTML = "Группа";
         textfield1.appendChild(in1);
         textfield1.appendChild(label1);
@@ -235,15 +217,13 @@ $("#addMemDizNew1").click(function(){
         var textfield2 = document.createElement('div');
         textfield2.setAttribute('style', 'width: 70%; padding: 20px 0 20px 0;');
         textfield2.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            IdName = 'duSalaryNew';
+            IdName = 'duSalaryNew'+dayNum;
             var in2 = document.createElement('input');
             in2.className = 'mdl-textfield__input';
             in2.setAttribute('style', 'font-size: 16px;');
             in2.setAttribute('name', IdName);
-            in2.setAttribute('id', IdName);
             var label2 = document.createElement('label');
             label2.className = 'mdl-textfield__label';
-            label2.htmlFor = IdName;
             label2.innerHTML = "Стартовый";
         textfield2.appendChild(in2);
         textfield2.appendChild(label2);
@@ -255,15 +235,13 @@ $("#addMemDizNew1").click(function(){
         var textfield3 = document.createElement('div');
         textfield3.setAttribute('style', 'width: 70%; padding: 20px 0 20px 0;');
         textfield3.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            IdName = 'duAgeminNew';
+            IdName = 'duAgeminNew'+dayNum;
             var in3 = document.createElement('input');
             in3.className = 'mdl-textfield__input';
             in3.setAttribute('style', 'font-size: 16px;');
             in3.setAttribute('name', IdName);
-            in3.setAttribute('id', IdName);
             var label3 = document.createElement('label');
             label3.className = 'mdl-textfield__label';
-            label3.htmlFor = IdName;
             label3.innerHTML = "min";
         textfield3.appendChild(in3);
         textfield3.appendChild(label3);
@@ -272,15 +250,13 @@ $("#addMemDizNew1").click(function(){
         var textfield4 = document.createElement('div');
         textfield4.setAttribute('style', 'width: 70%; padding: 20px 0 20px 0;');
         textfield4.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            IdName = 'duAgemaxNew';
+            IdName = 'duAgemaxNew'+dayNum;
             var in4 = document.createElement('input');
             in4.className = 'mdl-textfield__input';
             in4.setAttribute('style', 'font-size: 16px;');
             in4.setAttribute('name', IdName);
-            in4.setAttribute('id', IdName);
             var label4 = document.createElement('label');
             label4.className = 'mdl-textfield__label';
-            label4.htmlFor = IdName;
             label4.innerHTML = "max";
         textfield4.appendChild(in4);
         textfield4.appendChild(label4);
@@ -293,15 +269,13 @@ $("#addMemDizNew1").click(function(){
         var textfield5 = document.createElement('div');
         textfield5.setAttribute('style', 'width: 70%; padding: 20px 0 20px 0;');
         textfield5.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            IdName = 'duQualNewmin';
+            IdName = 'duQualNewmin'+dayNum;
             var in5 = document.createElement('input');
             in5.className = 'mdl-textfield__input';
             in5.setAttribute('style', 'font-size: 16px;');
             in5.setAttribute('name', IdName);
-            in5.setAttribute('id', IdName);
             var label5 = document.createElement('label');
             label5.className = 'mdl-textfield__label';
-            label5.htmlFor = IdName;
             label5.innerHTML = "min";
         textfield5.appendChild(in5);
         textfield5.appendChild(label5);
@@ -310,15 +284,13 @@ $("#addMemDizNew1").click(function(){
         var textfield6 = document.createElement('div');
         textfield6.setAttribute('style', 'width: 70%; padding: 20px 0 20px 0;');
         textfield6.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
-            IdName = 'duQualNewmax';
+            IdName = 'duQualNewmax'+dayNum;
             var in6 = document.createElement('input');
             in6.className = 'mdl-textfield__input';
             in6.setAttribute('style', 'font-size: 16px;');
             in6.setAttribute('name', IdName);
-            in6.setAttribute('id', IdName);
             var label6 = document.createElement('label');
             label6.className = 'mdl-textfield__label';
-            label6.htmlFor = IdName;
             label6.innerHTML = "max";
         textfield6.appendChild(in6);
         textfield6.appendChild(label6);
@@ -334,7 +306,7 @@ $("#addMemDizNew1").click(function(){
     grid.appendChild(col9);
     grid.appendChild(col10);
     grid.appendChild(col11);
-    var addButtonDiv = document.getElementById('addMemNewInsert');
+    var addButtonDiv = document.getElementById('addMemNewInsert'+dayNum);
     var blockInsert = addButtonDiv.parentNode;
     blockInsert.insertBefore(grid, addButtonDiv);
     componentHandler.upgradeAllRegistered();
@@ -353,7 +325,7 @@ $('.swapVisInfoNew').click(function(){
     componentHandler.upgradeAllRegistered();
 });
 
-$('#swapVisDizNew1').click(function(){
+$('.swapVisDizNew').click(function(){
     var dayToSwap = $(this).val();
     var blockName = "#toSwapDiz" + dayToSwap.toString();
     var butImgUp = "#swapImgDizUp" + dayToSwap.toString();

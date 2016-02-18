@@ -56,7 +56,9 @@ class NewCompetition(webapp2.RequestHandler):
         if user:
             email = user.email()
             # common info about competition
-            logo = self.request.POST['logoNew']
+            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/Competition.html')
+            temp_values = {'user_email':email}
+            self.response.write(template.render(temp_values))
             start_date = self.request.POST['dateStartNew']
             finish_date = self.request.POST['dateFinishNew']
             comp_name = self.request.POST['nameCompNew']
@@ -95,12 +97,11 @@ class NewCompetition(webapp2.RequestHandler):
                 max_qual = self.request.POST['duQualNewmax']+str(day_num)
 
 
-            temp_values = {'user_email':email, 'logout':users.create_logout_url('/login'),   'logo':logo, 'start':start_date,
+            temp_values = {'user_email':email, 'logout':users.create_logout_url('/login'), 'start':start_date,
                            'finish': finish_date, 'name':comp_name, 'count_start':count_start, 'start_places':start_places,
                            'pzs':pz, 'pzEndAdds':pz_end_add, 'pzEndChanges':pz_end_change, 'tzs':tz, 'links':link_to_tmmosc,
                            'orgs': org_info}
             template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/Competition.html')
-            #template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/AddCompetition.html')
             self.response.write(template.render(temp_values))
         else:
             temp_values = {'img_src':'../static/img/er401.png', 'er_name':'401', 'login_redir':users.create_login_url('/reg/newCompetition')}
