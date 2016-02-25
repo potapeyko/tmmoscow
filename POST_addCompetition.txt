@@ -1,0 +1,38 @@
+count_start = self.request.POST['countStart']
+            start_places = self.request.POST['startPlaces']
+            # info about each day
+            pz = [];   pz_end_add = []; pz_end_change = []; tz = []; link_to_tmmosc = []
+            org_info = []; groups_info = []; members_info = []
+            for i in range(1, count_start+1):
+                j = str(i)
+                pz = self.request.POST.getall('trPzNew'+j)                        # trigger of J-day is PZ open
+                pz_end_add = self.request.POST.getall('pzEndAddNew'+j)            # date of J-day when PZ will be closed to adding
+                pz_end_change = self.request.POST.getall('pzEndChangeNew'+j)      # date of J-day when PZ will be closed to changing
+                tz = self.request.POST.getall('trTzNew'+j)                        # trigger of J-day is TZ open
+                link_to_tmmosc = self.request.POST.getall('toTmMoscowNew'+j)      # link of J-day to official site
+                org_fios = self.request.POST.getall('orgFioNew'+j)                # list of organizer's fios of J-day
+                org_dols = self.request.POST.getall('orgDolNew'+j)                # list of organizer's dols of J-day
+                org_contacts = self.request.POST.getall('orgContNew'+j)           # list of organizer's contacts of J-day
+                org_info[i] = []
+                for k in range(len(org_fios)):
+                    org_info[i].append([org_fios[k], org_dols[k], org_contacts[k]])
+                # info about distances
+                disciplines = self.request.POST['dizDisciplineNew'+j]             # list of all disciplines for J-day
+                lengths = self.request.POST['dizLengthNew'+j]                     # list of all lengths for J-day
+                groups_for_day = self.request.POST['dizGroupNew'+j]               # list of group name for J-day
+                lengths_for_day = self.request.POST['dizLenNew'+j]                # list of length for J-day
+                classes_for_day = self.request.POST['dizClassNew'+j]              # list of classes for J-day
+                min_comm_for_day = self.request.POST['dizCCminNew'+j]             # list of min command count for J-day
+                max_comm_for_day = self.request.POST['dizCCmaxNew'+j]             # list of max command count for J-day
+                groups_info[i] = []
+                for k in range(len(groups_for_day)):
+                    groups_info[i].append([groups_for_day[k], lengths_for_day[k], classes_for_day[k], min_comm_for_day[k], max_comm_for_day[k]])
+                groups = self.request.POST['duGroupNew'+j]                      # list of all group to J-day
+                salary_for_day = self.request.POST['duSalaryNew'+j]             # list of all pays for J-day
+                min_age = self.request.POST['duAgeminNew'+j]                    # list of all min ages for J-day
+                max_age = self.request.POST['duAgemaxNew'+j]                    # list of all max ages for J-day
+                min_qual = self.request.POST['duQualNewmin'+j]                  # list of min qualification for J-day
+                max_qual = self.request.POST['duQualNewmax'+j]                  # list of max qualification for J-day
+                members_info[i] = []
+                for k in range(len(groups)):
+                    members_info[i].append([groups[k], salary_for_day[k], min_age[k], max_age[k], min_qual[k], max_qual[k]])

@@ -11,17 +11,7 @@
     
    
    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-   <script type = "text/javascript" src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>     
-   <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-   <script type="text/javascript">
-     var myMap;
-     ymaps.ready(function () {
-         myMap = new ymaps.Map("myMap", {
-             center: [55.76, 37.64],
-             zoom: 10
-         });
-     });
-   </script>   
+   <script type = "text/javascript" src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
    <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
@@ -38,7 +28,6 @@
           pieSliceText: 'none',    
           titleTextStyle: {color: '#42A5F5', fontSize: 16},    
           fontSize: 16,
-          fontName: 'Yu Gothic UI', 
           height: 300,
           width: 400,   
           tooltip: {textStyle: {color: '#42A5F5'}, showColorCode: true},
@@ -66,7 +55,6 @@
           pieSliceText: 'none',    
           titleTextStyle: {color: '#42A5F5', fontSize: 16},    
           fontSize: 16,
-          fontName: 'Yu Gothic UI', 
           height: 300,
           width: 400,
           tooltip: {textStyle: {color: '#42A5F5'}, showColorCode: true},
@@ -152,28 +140,28 @@
               <div class="mdl-cell mdl-cell--1-col"></div>  
               <div class="mdl-cell mdl-cell--10-col">       
                    <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; min-height: 150px; margin-top: 35px;">
-                     <form action="#" id="formHeader" name="formHeader"> 
-                       <div class="mdl-grid mdl-card__title" style="height: 150px; width: 100%; text-align: center; border: none;">
-                          <div style="width: 15%;">
-                            <img src="../../../static/img/logo.bmp" style="width:60%; height: 60%; margin-top: 10%;" onclick="$('#logo').click();">
-                            <input type="file" id="logo" name="logo" style="display:none;" accept="image/jpeg,image/bmp,image/png">
-                          </div>
-                          <div style="width: 85%;">
-                            <div style="margin-top: 40px;">  
-                                <div class="mdl-textfield mdl-js-textfield" style="display: inline;">
-                                    <h3 class="mdl-card__title-text" style="">
-                                        <span style="margin-top: 5px; margin-right: 10px; padding-bottom: 10px;" ondblclick="$('#dateStart').toggle();">{{ start }} </span>
-                                        <input class="mdl-textfield__input" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" style="width: 18%; margin-right: 10px; margin-bottom: 5px; border-bottom: 1px solid rgba(255,255,255,.5); display: none;" id="dateStart" name="dateStart">                
-                                        <span class="myP" style="margin-top: 5px; margin-right: 10px; padding-bottom: 10px;"> - </span>
-                                        <span style="margin-top: 5px; margin-right: 10px; padding-bottom: 10px;" ondblclick="$('#dateFinish').toggle();">{{ finish }}  </span>
-                                        <input class="mdl-textfield__input" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" style="width: 18%; margin-right: 10px; margin-bottom: 5px; border-bottom: 1px solid rgba(255,255,255,.5); display: none;" id="dateFinish" name="dateFinish">
-                                    </h3>                                  
-                                </div>    
-                                <div><h2 class="mdl-card__title-text" style="">{{ name }}</h2></div>
+                     <div class="mdl-grid mdl-card__title" style="height: 150px; width: 100%; text-align: center; border: none;">
+                          <div class="mdl-cell--2-col"><h2>Comp</h2></div>
+                          <div class="mdl-cell--10-col">
+                            <div style="margin-top: 40px;">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="display: inline;">
+                                    <h3 class="mdl-card__title-text">
+                                        <span style="margin-top: 5px; margin-right: 5px; padding-bottom: 10px;"> {{ start }} - </span>
+                                        <input class="mdl-textfield__input" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" style="display:none; width: 18%; margin-right: 10px; margin-bottom: 5px; border-bottom: 1px solid rgba(255,255,255,.5);" id="dateStart" name="dateStart" value="{{ start }}">
+                                        <span style="margin-top: 5px; margin-right: 10px; padding-bottom: 10px;"> {{ finish }}  </span>
+                                        <input class="mdl-textfield__input" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" style="display:none; width: 18%; margin-right: 10px; margin-bottom: 5px; border-bottom: 1px solid rgba(255,255,255,.5);" id="dateFinish" name="dateFinish" value="{{ finish }}">
+                                    </h3>
+                                </div>
+                                <div>
+                                    <h2 class="mdl-card__title-text" style="vert-align: middle;">
+                                        <span style="margin-right: 10px; font-size: 28px;">{{ name }} </span>
+                                        <input class="mdl-textfield__input" type="text" style="display:none; width: 80%; border-bottom: 1px solid rgba(255,255,255,.5); margin-top: 5px; padding: 0px;" id="nameComp" name="nameComp" value="{{ name }}">
+                                    </h2>
+                                </div>
                             </div>
                           </div>
-                        </div>   <!--   .mdl-card__title  -->
-                      </form> <!--  formHeader  -->
+                      </div>   <!--   .mdl-card__title  -->
+
                        
                       <div class="mdl-card__actions mdl-card--border" style="border: none; background: #fff; padding: 0px;">
                           <div style="width: 100%;">    
@@ -196,186 +184,173 @@
                                   <div class="mdl-tabs__panel is-active" id="info-panel" style="background: #fff; color: #42A5F5;">
                                     <!--   ИНФОРМАЦИЯ  -->
                                     <form action="#" id="formInfo" name="formInfo">
-                                      <div class="tab-content">              
-                                        <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%;">    
-                                            <!--  row1  -->
-                                            <div class="mdl-cell--1-col"><p class="myP" style="padding-top: 10px;">День 1 </p></div>
-                                            <div class="mdl-cell--10-col">
-                                                <img src="../../../static/img/line.png" style="width: 100%; margin-top: 20px;">
-                                            </div>
-                                            <div class="mdl-cell--1-col">
-                                              <button type="button" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="padding: 0 0 0 0; min-height: 46px; height: 46px; min-width: 46px; width: 46px;" id="swapVisInfo1" value="1">
-                                                <img id="swapImgInfoUp1" src="../../../static/img/chevron-up.png">
-                                                <img id="swapImgInfoDown1" src="../../../static/img/chevron-down.png" style="display: none;">
-                                              </button>   
-                                            </div>
-                                        </div>
-                                          
-                                          
-                                        <div id="toSwapInfo1">  
-                                            <div class="mdl-grid" style="padding: 0 0 0 0; margin: 0 0 0 0;">
-                                                <!--  row2  -->
-                                                <div class="mdl-cell--1-col"></div>
-                                                <div class="mdl-cell--10-col">
-                                                    <div class="mdl-textfield mdl-js-textfield mdl-cell--12-col" style="padding: 0 0 0 0;">
-                                                        <p class="myP" style="margin-bottom: 0px;"><b>Место проведения:</b> адрес, адрес, адрес, адрес</p>
+                                        {% for day_numb in days_count %}
+                                              <div class="tab-content">
+                                                <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%;">
+                                                    <!--  row1  -->
+                                                    <div class="mdl-cell--1-col"><p class="myP" style="padding-top: 10px;">День {{ day_numb }} </p></div>
+                                                    <div class="mdl-cell--10-col">
+                                                        <img src="../../../static/img/line.png" style="width: 100%; margin-top: 20px;">
                                                     </div>
-                                                </div>
-                                                <div class="mdl-cell--10-col"></div>
-                                            </div>    
-                                            <div class="mdl-grid" style="padding: 10px 0 20px 0; margin: 0 0 0 0;">
-                                                <!--  row3  -->
-                                                <div class="mdl-cell--1-col"></div>
-                                                <div class="mdl-cell--10-col">
-                                                    <div id="myMap" class="mdl-cell--12-col" style="width: 100%; height: 436px;"  ></div>
-                                                </div>
-                                                <div class="mdl-cell--1-col"></div>
-                                            </div>                                        
-                                            <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 30px;">
-                                                <!--  row4  -->
-                                                <div class="mdl-cell--1-col"></div>
-                                                <div class="mdl-cell--11-col">
-                                                    <p class="myP" style="margin-bottom: 0px; top: 6px;"><b>Предварительная заявка:</b></p>
-                                                </div>
-                                            </div>    
-                                            <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 30px;">
-                                                <!--  row5  -->
-                                                <div class="mdl-cell--2-col" style="width: 85px;"></div>
-                                                <div class="mdl-cell--5-col" style="padding-top: 6px;">
-                                                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="trPz">
-                                                      <span class="mdl-switch__label">Текущее состояние: <span id="PzState1">Открыта</span></span><span id="PzState2" style="display:none; margin-left: 25px;">Закрыта</span></span>
-                                                      <input type="checkbox" id="trPz" name="trPz" class="mdl-switch__input" checked>      
-                                                    </label>
-                                                </div>
-                                                <div class="mdl-cell--1-col" style="width: 20px;"></div>
-                                                <div class="mdl-cell--5-col">
-                                                    <p class="myP" style="margin: 6px 0 0 0;" ondblclick="$('#eaDiv').toggle();">Окончание добавления заявок: дд.мм.гггг</p>
+                                                    <div class="mdl-cell--1-col">
+                                                      <button type="button" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect swapVisInfo" style="padding: 0 0 0 0; min-height: 46px; height: 46px; min-width: 46px; width: 46px;"" value="{{ day_numb }}">
+                                                        <img id="swapImgInfoUp{{ day_numb }}" src="../../../static/img/chevron-up.png">
+                                                        <img id="swapImgInfoDown{{ day_numb }}" src="../../../static/img/chevron-down.png" style="display: none;">
+                                                      </button>
+                                                    </div>
                                                 </div>
 
-                                            </div>
-                                            <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 20px 0 0; height: 30px; display: none;" id="eaDiv">
-                                                <div class="mdl-cell--2-col" style="width: 85px;"></div>
-                                                <div class="mdl-cell--5-col"></div>
-                                                <div class="mdl-cell--5-col" style="text-align: right;">
-                                                    <div class="mdl-textfield mdl-js-textfield" style="width: 140px; padding: 0 0 0 0;">
-                                                        <input class="mdl-textfield__input" type="date" id="pzEndAdd">
+
+                                                <div id="toSwapInfo{{ day_numb }}">
+                                                    <div class="mdl-grid" style="padding: 0 0 0 0; margin: 0 0 24px 0;">
+                                                        <!--  row2  -->
+                                                        <div class="mdl-cell--1-col"></div>
+                                                        <div class="mdl-cell--10-col">
+                                                            <div class="mdl-textfield mdl-js-textfield mdl-cell--12-col" style="padding: 0 0 0 0;">
+                                                                <p class="myP" style="margin-bottom: 0px;"><b>Место проведения:</b> адрес, адрес, адрес, адрес</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mdl-cell--10-col"></div>
                                                     </div>
-                                                </div>
-                                            </div>    
-                                            <div class="mdl-grid" style="margin: 10px 0 0 0; padding: 0 0 0 0; height: 30px;">
-                                                <!-- row6  -->
-                                                <div class="mdl-cell--2-col" style="width: 85px;"></div>
-                                                <div class="mdl-cell--5-col"></div>
-                                                <div class="mdl-cell--1-col" style="width: 20px;"></div>
-                                                <div class="mdl-cell--5-col" id="old2">
-                                                    <p class="myP" style="margin: 6px 0 0 0; bottom: 20px;"  ondblclick="$('#ecDiv').toggle();">Окончание изменения заявок: дд.мм.гггг</p>
-                                                </div>   
-                                            </div> 
-                                            <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 20px 0 0; height: 30px; display: none;" id="ecDiv">
-                                                <div class="mdl-cell--2-col" style="width: 85px;"></div>
-                                                <div class="mdl-cell--5-col"></div>
-                                                <div class="mdl-cell--5-col" style="text-align: right;">
-                                                    <div class="mdl-textfield mdl-js-textfield" style="width: 140px; padding: 0 0 0 0;">
-                                                        <input class="mdl-textfield__input" type="date" id="pzEndChange">
+                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 30px;">
+                                                        <!--  row4  -->
+                                                        <div class="mdl-cell--1-col"></div>
+                                                        <div class="mdl-cell--11-col">
+                                                            <p class="myP" style="margin-bottom: 0px; top: 6px;"><b>Предварительная заявка:</b></p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div> 
-                                            <div class="mdl-grid" style="margin: 20px 0 0 0; padding: 0 0 0 0; height: 30px;">
-                                                <!--  row7  -->
-                                                <div class="mdl-cell--1-col"></div>
-                                                <div class="mdl-cell--5-col">
-                                                    <p class="myP" style="margin-bottom: 0px; top: 6px;"><b>Техническая заявка:</b></p>
-                                                </div>
-                                                <div class="mdl-cell--1-col" style="width: 20px;"></div>
-                                                <div class="mdl-cell--5-col">
-                                                    <p class="myP" style="margin-bottom: 0px; top: 6px;"><b>Ссылка на официальный сайт:</b></p>
-                                                </div>
-                                            </div>  
-                                            <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 50px;">
-                                                <!--  row8  -->
-                                                <div class="mdl-cell--2-col" style="width: 85px;"></div>
-                                                <div class="mdl-cell--5-col" style="padding-top: 6px;">
-                                                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="trTz">
-                                                      <span class="mdl-switch__label">Текущее состояние: <span id="TzState1">Включена</span><span id="TzState2" style="display: none;">Отключена</span></span>
-                                                      <input type="checkbox" id="trTz" name="trTz" class="mdl-switch__input" checked> 
-                                                    </label>
-                                                </div>
-                                                <div class="mdl-cell--1-col" style="width: 20px;"></div>
-                                                <div class="mdl-cell--4-col" id="old3">
-                                                    <p class="myP" style="margin: 6px 0 0 0;" ondblclick="$('#tmDiv').toggle();">**Ссылка на официальную страницу на tmmoscow**</p>
-                                                </div>                    
-                                            </div>
-                                            <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 30px; display: none;"id="tmDiv">
-                                                <div class="mdl-cell--2-col" style="width: 85px;"></div>
-                                                <div class="mdl-cell--5-col" style="padding-top: 6px;"></div>
-                                                <div class="mdl-cell--1-col" style="width: 20px;"></div>
-                                                <div class="mdl-cell--4-col" id="new3" style="padding-top: 18px;">
-                                                    <div class="mdl-textfield mdl-js-textfield" style="padding-top: 0px;">
-                                                        <input class="mdl-textfield__input" type="text" id="toTmMoscow" name="toTmMoscow" style="padding-top: 0px;">
-                                                        <label class="mdl-textfield__label" for="toTmMoscow" style="top: 0px;">Введите новую ссылку</label>
+                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 30px;">
+                                                        <!--  row5  -->
+                                                        <div class="mdl-cell--2-col" style="width: 85px;"></div>
+                                                        <div class="mdl-cell--5-col" style="padding-top: 6px;">
+                                                            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="trPz">
+                                                              <span class="mdl-switch__label">Текущее состояние: <span id="PzState1">Открыта</span></span><span id="PzState2" style="display:none; margin-left: 25px;">Закрыта</span></span>
+                                                              <input type="checkbox" id="trPz" name="trPz" class="mdl-switch__input" checked>
+                                                            </label>
+                                                        </div>
+                                                        <div class="mdl-cell--1-col" style="width: 20px;"></div>
+                                                        <div class="mdl-cell--5-col">
+                                                            <p class="myP" style="margin: 6px 0 0 0;" ondblclick="$('#eaDiv').toggle();">Окончание добавления заявок: дд.мм.гггг</p>
+                                                        </div>
+
                                                     </div>
-                                                </div>    
-                                            </div>
-                                            <div class="mdl-grid" style="margin: 20px 0 0 0; padding: 0 0 0 0; height: 30px;">
-                                                <!--  row9  -->
-                                                <div class="mdl-cell--1-col"></div>
-                                                <div class="mdl-cell--11-col">
-                                                    <p class="myP" style="margin-bottom: 0px; top: 6px;"><b>Контакты организаторов:</b></p>
-                                                </div>           
-                                            </div> 
-                                            <div class="mdl-grid" style="margin: 10px 0 20px 70px; padding: 0 0 0 0; vertical-align:middle; height: 30px; width: 90%;">
-                                                <!--  row10  -->
-                                                <div class="mdl-cell--1-col"></div>
-                                                <div class="mdl-cell--3-col">
-                                                    <p class="myP" style="margin-bottom: 0px; top: 6px;">ФИО организатора</p>
-                                                </div>
-                                                <div class="mdl-cell--1-col" style="width: 20px;"></div>
-                                                <div class="mdl-cell--3-col" style="text-align: center;">
-                                                    <p class="myP">Должность</p>
-                                                </div>
-                                                <div class="mdl-cell--1-col"></div>
-                                                <div class="mdl-cell--3-col" style="text-align: center;">
-                                                    <p class="myP">Контакт</p>
-                                                </div>
-                                            </div> 
-                                            <div class="mdl-grid" style="margin: -10px 0 10px 70px; padding: 0 0 0 0; vertical-align:middle; height: 30px; width: 90%;">
-                                                <!--  row11  РЕДАКТИРОВАНИЕ И ДОБАВЛЕНИЕ ЗАПИСИ  -->
-                                                <div class="mdl-cell--1-col"></div>
-                                                <div class="mdl-cell--3-col" style="padding-top: 0px;">
-                                                    <div class="mdl-textfield mdl-js-textfield" style="padding-top: 0px;">
-                                                        <input class="mdl-textfield__input" type="text" id="orgFio11" name="orgFio11" style="padding-top: 0px;">
-                                                        <label class="mdl-textfield__label" for="orgFio11" style="top: 0px;">**ФИО организатора**</label>
+                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 20px 0 0; height: 30px; display: none;" id="eaDiv">
+                                                        <div class="mdl-cell--2-col" style="width: 85px;"></div>
+                                                        <div class="mdl-cell--5-col"></div>
+                                                        <div class="mdl-cell--5-col" style="text-align: right;">
+                                                            <div class="mdl-textfield mdl-js-textfield" style="width: 140px; padding: 0 0 0 0;">
+                                                                <input class="mdl-textfield__input" type="date" id="pzEndAdd">
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="mdl-cell--1-col"></div>
-                                                <div class="mdl-cell--3-col" style="text-align: center; padding-top: 0px;">
-                                                    <div class="mdl-textfield mdl-js-textfield" style="padding-top: 0px;">
-                                                        <input class="mdl-textfield__input" type="text" id="orgDol11" name="orgDol11" style="padding-top: 0px;">
-                                                        <label class="mdl-textfield__label" for="orgDol11" style="top: 0px;">**Должность**</label>
+                                                    <div class="mdl-grid" style="margin: 10px 0 0 0; padding: 0 0 0 0; height: 30px;">
+                                                        <!-- row6  -->
+                                                        <div class="mdl-cell--2-col" style="width: 85px;"></div>
+                                                        <div class="mdl-cell--5-col"></div>
+                                                        <div class="mdl-cell--1-col" style="width: 20px;"></div>
+                                                        <div class="mdl-cell--5-col" id="old2">
+                                                            <p class="myP" style="margin: 6px 0 0 0; bottom: 20px;"  ondblclick="$('#ecDiv').toggle();">Окончание изменения заявок: дд.мм.гггг</p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="mdl-cell--1-col"></div>
-                                                <div class="mdl-cell--3-col" style="padding-top: 0px;">
-                                                    <div class="mdl-textfield mdl-js-textfield" style="padding-top: 0px;">
-                                                        <input class="mdl-textfield__input" type="text" id="orgCont11" name="orgCont11" style="padding-top: 0px; text-align: center;">
-                                                        <label class="mdl-textfield__label" for="orgCont11" style="top: 0px; text-align: center;">**Контакт**</label>
+                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 20px 0 0; height: 30px; display: none;" id="ecDiv">
+                                                        <div class="mdl-cell--2-col" style="width: 85px;"></div>
+                                                        <div class="mdl-cell--5-col"></div>
+                                                        <div class="mdl-cell--5-col" style="text-align: right;">
+                                                            <div class="mdl-textfield mdl-js-textfield" style="width: 140px; padding: 0 0 0 0;">
+                                                                <input class="mdl-textfield__input" type="date" id="pzEndChange">
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 30px;" id="addOrgInsert">    
-                                                <!--  row12  -->
-                                                <div class="mdl-cell--2-col"></div>
-                                                <div class="mdl-cell--10-col" style="margin-left: 10px;"><p class="myP" id="addOrg" style="width: 130px;">+ еще один</p></div>
-                                            </div>
-                                          </div>      <!--   #toSwapInfo1  -->
-                                            <div class="mdl-grid">
-                                                <!--  row9  -->
-                                                <div class="mdl-cell--10-col"></div>
-                                                <div class="mdl-cell--2-col">
-                                                    <button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="btnLogIn" style="width: 100%;" id="SaveInfo" name="SaveInfo">Сохранить</button>
-                                                </div>    
-                                            </div>       
-                                      </div>  <!--   .tab-content   -->     
+                                                    <div class="mdl-grid" style="margin: 20px 0 0 0; padding: 0 0 0 0; height: 30px;">
+                                                        <!--  row7  -->
+                                                        <div class="mdl-cell--1-col"></div>
+                                                        <div class="mdl-cell--5-col">
+                                                            <p class="myP" style="margin-bottom: 0px; top: 6px;"><b>Техническая заявка:</b></p>
+                                                        </div>
+                                                        <div class="mdl-cell--1-col" style="width: 20px;"></div>
+                                                        <div class="mdl-cell--5-col">
+                                                            <p class="myP" style="margin-bottom: 0px; top: 6px;"><b>Ссылка на официальный сайт:</b></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 50px;">
+                                                        <!--  row8  -->
+                                                        <div class="mdl-cell--2-col" style="width: 85px;"></div>
+                                                        <div class="mdl-cell--5-col" style="padding-top: 6px;">
+                                                            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="trTz">
+                                                              <span class="mdl-switch__label">Текущее состояние: <span id="TzState1">Включена</span><span id="TzState2" style="display: none;">Отключена</span></span>
+                                                              <input type="checkbox" id="trTz" name="trTz" class="mdl-switch__input" checked>
+                                                            </label>
+                                                        </div>
+                                                        <div class="mdl-cell--1-col" style="width: 20px;"></div>
+                                                        <div class="mdl-cell--4-col" id="old3">
+                                                            <p class="myP" style="margin: 6px 0 0 0;" ondblclick="$('#tmDiv').toggle();">**Ссылка на официальную страницу на tmmoscow**</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 30px; display: none;"id="tmDiv">
+                                                        <div class="mdl-cell--2-col" style="width: 85px;"></div>
+                                                        <div class="mdl-cell--5-col" style="padding-top: 6px;"></div>
+                                                        <div class="mdl-cell--1-col" style="width: 20px;"></div>
+                                                        <div class="mdl-cell--4-col" id="new3" style="padding-top: 18px;">
+                                                            <div class="mdl-textfield mdl-js-textfield" style="padding-top: 0px;">
+                                                                <input class="mdl-textfield__input" type="text" id="toTmMoscow" name="toTmMoscow" style="padding-top: 0px;">
+                                                                <label class="mdl-textfield__label" for="toTmMoscow" style="top: 0px;">Введите новую ссылку</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mdl-grid" style="margin: 20px 0 0 0; padding: 0 0 0 0; height: 30px;">
+                                                        <!--  row9  -->
+                                                        <div class="mdl-cell--1-col"></div>
+                                                        <div class="mdl-cell--11-col">
+                                                            <p class="myP" style="margin-bottom: 0px; top: 6px;"><b>Контакты организаторов:</b></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mdl-grid" style="margin: 10px 0 20px 70px; padding: 0 0 0 0; vertical-align:middle; height: 30px; width: 90%;">
+                                                        <!--  row10  -->
+                                                        <div class="mdl-cell--1-col"></div>
+                                                        <div class="mdl-cell--3-col">
+                                                            <p class="myP" style="margin-bottom: 0px; top: 6px;">ФИО организатора</p>
+                                                        </div>
+                                                        <div class="mdl-cell--1-col" style="width: 20px;"></div>
+                                                        <div class="mdl-cell--3-col" style="text-align: center;">
+                                                            <p class="myP">Должность</p>
+                                                        </div>
+                                                        <div class="mdl-cell--1-col"></div>
+                                                        <div class="mdl-cell--3-col" style="text-align: center;">
+                                                            <p class="myP">Контакт</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mdl-grid" style="margin: -10px 0 10px 70px; padding: 0 0 0 0; vertical-align:middle; height: 30px; width: 90%;">
+                                                        <!--  row11  РЕДАКТИРОВАНИЕ И ДОБАВЛЕНИЕ ЗАПИСИ  -->
+                                                        <div class="mdl-cell--1-col"></div>
+                                                        <div class="mdl-cell--3-col" style="padding-top: 0px;">
+                                                            <div class="mdl-textfield mdl-js-textfield" style="padding-top: 0px;">
+                                                                <input class="mdl-textfield__input" type="text" id="orgFio11" name="orgFio11" style="padding-top: 0px;">
+                                                                <label class="mdl-textfield__label" for="orgFio11" style="top: 0px;">**ФИО организатора**</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mdl-cell--1-col"></div>
+                                                        <div class="mdl-cell--3-col" style="text-align: center; padding-top: 0px;">
+                                                            <div class="mdl-textfield mdl-js-textfield" style="padding-top: 0px;">
+                                                                <input class="mdl-textfield__input" type="text" id="orgDol11" name="orgDol11" style="padding-top: 0px;">
+                                                                <label class="mdl-textfield__label" for="orgDol11" style="top: 0px;">**Должность**</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mdl-cell--1-col"></div>
+                                                        <div class="mdl-cell--3-col" style="padding-top: 0px;">
+                                                            <div class="mdl-textfield mdl-js-textfield" style="padding-top: 0px;">
+                                                                <input class="mdl-textfield__input" type="text" id="orgCont11" name="orgCont11" style="padding-top: 0px; text-align: center;">
+                                                                <label class="mdl-textfield__label" for="orgCont11" style="top: 0px; text-align: center;">**Контакт**</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 30px;" id="addOrgInsert">
+                                                        <!--  row12  -->
+                                                        <div class="mdl-cell--2-col"></div>
+                                                        <div class="mdl-cell--10-col" style="margin-left: 10px;"><p class="myP" id="addOrg" style="width: 130px;">+ еще один</p></div>
+                                                    </div>
+                                                  </div>      <!--   #toSwapInfo1  -->
+                                              </div>  <!--   .tab-content   -->
+                                        {% endfor %}
                                     </form>  <!--  formInfo  -->
                                   </div>   <!--   #info-panel    --> 
                                   
@@ -588,18 +563,6 @@
                                                 <div class="mdl-cell--10-col"><p class="myP" style="margin-left: 10px; width: 130px;" id="addMemDiz" value="1"> + еще одна</p></div>
                                             </div>
                                         </div>  <!--   #toSwapDiz1  -->
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        <div class="mdl-grid">
-                                            <!--  row9  -->
-                                            <div class="mdl-cell--10-col"></div>
-                                            <div class="mdl-cell--2-col">
-                                                <button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="btnLogIn" style="width: 100%;" id="SaveDiz" name="SaveDiz">Сохранить</button>
-                                            </div>    
-                                        </div>
                                       </div>  <!--  tab-content  -->   
                                     </form>
                                   </div>    <!--  #diz-panel  -->

@@ -12,7 +12,7 @@ $('#trTz').click(function(){
     $('#TzState2').toggle();
 });
 
-$('#swapVisInfo1').click(function(){
+$('.swapVisInfo').click(function(){
     var dayToSwap = $(this).val();
     var blockName = "#toSwapInfo" + dayToSwap.toString();
     var butImgUp = "#swapImgInfoUp" + dayToSwap.toString();

@@ -44,8 +44,12 @@ class NewCompetition(webapp2.RequestHandler):
                 write_places = True
             except:
                 write_places = False
-            show_map = self.request.GET['checkPlacesMap']
-            temp_values = {'user_email':email, 'logout':users.create_logout_url('/login'), 'd_start':formatDate(d_s), 'd_finish':formatDate(d_f), 'name':name, 'days_count':range(1, int(d_count)+1), 'write_places':write_places}
+            try:
+                show_map = self.request.GET['checkPlacesMap']
+                show_map = True
+            except:
+                show_map = False
+            temp_values = {'user_email':email, 'logout':users.create_logout_url('/login'), 'd_start':formatDate(d_s), 'd_finish':formatDate(d_f), 'name':name, 'days_count':range(1, int(d_count)+1), 'write_places':write_places, 'show_map':show_map, 'd_count':d_count}
             template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/AddCompetition.html', )
             self.response.write(template.render(temp_values))
         else:
@@ -56,51 +60,17 @@ class NewCompetition(webapp2.RequestHandler):
         if user:
             email = user.email()
             # common info about competition
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/Competition.html')
-            temp_values = {'user_email':email}
-            self.response.write(template.render(temp_values))
             start_date = self.request.POST['dateStartNew']
             finish_date = self.request.POST['dateFinishNew']
             comp_name = self.request.POST['nameCompNew']
-            count_start = self.request.POST['countStart']
-            start_places = self.request.POST['startPlaces']
-            # info about each day
-            pz = self.request.POST.getall('trPzNew')                        # list of triggers is PZ open
-            pz_end_add = self.request.POST.getall('pzEndAddNew')            # list of dates when PZ will be closed to adding
-            pz_end_change = self.request.POST.getall('pzEndChangeNew')      # list of dates when PZ will be closed to changing
-            tz = self.request.POST.getall('trTzNew')                        # list of triggers is TZ open
-            link_to_tmmosc = self.request.POST.getall('toTmMoscowNew')      # list of link to official site
-            org_fios = self.request.POST.getall('orgFioNew')                # list of organizer's fios
-            org_dols = self.request.POST.getall('orgDolNew')                # list of organizer's dols
-            org_contacts = self.request.POST.getall('orgContNew')           # list of organizer's contacts
-            org_info = []
-            for i in range(0, len(org_fios)):
-                org_info.append([org_fios[i], org_dols[i], org_contacts[i]])
-            # info about distances
-            disciplines = self.request.POST['dizDisciplineNew']             # list of all disciplines for all days
-            lengths = self.request.POST['dizLengthNew']                     # list of all lengths for all days
-            groups_info = []
-            for day_num in range(0, count_start):
-                groups_for_day = self.request.POST['dizGroupNew'+str(day_num)]
-                lengths_for_day = self.request.POST['dizLenNew'+str(day_num)]
-                classes_for_day = self.request.POST['dizClassNew'+str(day_num)]
-                min_comm_for_day = self.request.POST['dizCCminNew'+str(day_num)]
-                max_comm_for_day = self.request.POST['dizCCmaxNew'+str(day_num)]
-                groups_info.append([groups_for_day, lengths_for_day, classes_for_day, min_comm_for_day, max_comm_for_day])
-            members_info = []
-            for day_num in range(0, count_start):
-                groups_info[i][0]
-                salary_for_day = self.request.POST['duSalaryNew'+str(day_num)]
-                min_age = self.request.POST['duAgeminNew'+str(day_num)]
-                max_age = self.request.POST['duAgemaxNew'+str(day_num)]
-                min_qual = self.request.POST['duQualNewmin'+str(day_num)]
-                max_qual = self.request.POST['duQualNewmax']+str(day_num)
-
-
+            d_count = self.request.POST['dayCount']
+            show_places = self.request.POST['writePlaces']
+            show_map = self.request.POST['showMap']
             temp_values = {'user_email':email, 'logout':users.create_logout_url('/login'), 'start':start_date,
-                           'finish': finish_date, 'name':comp_name, 'count_start':count_start, 'start_places':start_places,
-                           'pzs':pz, 'pzEndAdds':pz_end_add, 'pzEndChanges':pz_end_change, 'tzs':tz, 'links':link_to_tmmosc,
-                           'orgs': org_info}
+                           'finish': finish_date, 'name':comp_name, 'show_places':show_places, 'show_map':show_map, 'days_count':range(1,int(d_count)+1)}
+                           #, 'count_start':count_start, 'start_places':start_places,
+                           #'pzs':pz, 'pzEndAdds':pz_end_add, 'pzEndChanges':pz_end_change, 'tzs':tz, 'links':link_to_tmmosc,
+                           #'orgs': org_info}
             template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/Competition.html')
             self.response.write(template.render(temp_values))
         else:

@@ -86,15 +86,15 @@
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="display: inline;">
                                     <h3 class="mdl-card__title-text">
                                         <span style="margin-top: 5px; margin-right: 5px; padding-bottom: 10px;"> {{ d_start }} - </span>
-                                        <input class="mdl-textfield__input" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" style="display:none; width: 18%; margin-right: 10px; margin-bottom: 5px; border-bottom: 1px solid rgba(255,255,255,.5);" id="dateStartNew" name="dateStartNew">
+                                        <input class="mdl-textfield__input" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" style="display:none; width: 18%; margin-right: 10px; margin-bottom: 5px; border-bottom: 1px solid rgba(255,255,255,.5);" id="dateStartNew" name="dateStartNew" value="{{ d_start }}">
                                         <span style="margin-top: 5px; margin-right: 10px; padding-bottom: 10px;"> {{ d_finish }}  </span>
-                                        <input class="mdl-textfield__input" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" style="display:none; width: 18%; margin-right: 10px; margin-bottom: 5px; border-bottom: 1px solid rgba(255,255,255,.5);" id="dateFinishNew" name="dateFinishNew">
+                                        <input class="mdl-textfield__input" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" style="display:none; width: 18%; margin-right: 10px; margin-bottom: 5px; border-bottom: 1px solid rgba(255,255,255,.5);" id="dateFinishNew" name="dateFinishNew" value="{{ d_finish }}">
                                     </h3>
                                 </div>
                                 <div>
                                     <h2 class="mdl-card__title-text" style="vert-align: middle;">
                                         <span style="margin-right: 10px; font-size: 28px;">{{ name }} </span>
-                                        <input class="mdl-textfield__input" type="text" style="display:none; width: 80%; border-bottom: 1px solid rgba(255,255,255,.5); margin-top: 5px; padding: 0px;" id="nameCompNew" name="nameCompNew">
+                                        <input class="mdl-textfield__input" type="text" style="display:none; width: 80%; border-bottom: 1px solid rgba(255,255,255,.5); margin-top: 5px; padding: 0px;" id="nameCompNew" name="nameCompNew" value="{{ name }}">
                                     </h2>
                                 </div>
                             </div>
@@ -120,7 +120,9 @@
                                   <div class="mdl-tabs__panel is-active" id="info-panel" style="background: #fff; color: #42A5F5;">
 
                                        <div class="tab-content" id="infoTab">
-
+                                            <input style="display: none;" value="{{ write_places }}" name="writePlaces">
+                                            <input style="display: none;" value="{{ show_map }}" name="showMap">
+                                            <input style="display: none;" value="{{ d_count }}" name="dayCount">
                                            {% for day_numb in days_count %}
                                                   <div class="mdl-grid" style="margin: 0 0 0 10px; padding: 0 0 0 0; width: 105%;">
                                                     <!--  row1  -->
@@ -223,7 +225,7 @@
                                                         </div>
                                                         <div class="mdl-grid" id="addOrgNewInsert{{ day_numb }}" style="margin: 0 0 0 10px; padding: 0 0 0 0; height: 50px; vertical-align: middle;">
                                                             <div class="mdl-cell--1-col"></div>
-                                                            <div class="mdl-cell--11-col"><span style="display: none;">{{ day_numb }}</span><p class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-js-accent addOrgNew" style="height: 40px; width: 120px; color: #42A5F5; font-size: 16px; font-family: Yu Gothic UI; font-weight: normal; text-transform: lowercase;">+ еще один</p></div>
+                                                            <div class="mdl-cell--11-col"><span style="display: none;">{{ day_numb }}</span><p class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-js-accent addOrgNew" style="height: 40px; width: 120px; color: #42A5F5; font-size: 16px; font-weight: normal; text-transform: lowercase;">+ еще один</p></div>
                                                         </div>
                                                         <div class="mdl-grid" style="margin: 0 0 20px 0; padding: 0 0 0 0; {% if not write_places %}display:none;{% endif %}">
                                                             <div class="mdl-cell--12-col"><p class="myP" style="margin-bottom: 0px; top: 6px;">Место старта:</p></div>
@@ -282,11 +284,11 @@
                                                             </div>
                                                             <div class="mdl-cell--1-col"></div>
                                                             <div class="mdl-cell--3-col">
-                                                                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="dlin{{ day_numb }}">
+                                                                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="dlin{{ day_numb }}" style="display: block;">
                                                                   <input type="radio" id="dlin{{ day_numb }}" class="mdl-radio__button" name="dizLengthNew{{ day_numb }}" value="1" checked>
                                                                   <span class="mdl-radio__label">Длинная</span>
                                                                 </label>
-                                                                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="corot{{ day_numb }}">
+                                                                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="corot{{ day_numb }}" style="display: block;">
                                                                   <input type="radio" id="corot{{ day_numb }}" class="mdl-radio__button" name="dizLengthNew{{ day_numb }}" value="2">
                                                                   <span class="mdl-radio__label">Короткая</span>
                                                                 </label>
@@ -333,7 +335,7 @@
                                                         <div class="mdl-grid" style="margin: 0 0 0 10px; padding: 0 0 0 0; height: 50px;" id="addGroupNewInsert{{ day_numb }}">
                                                             <!--  row4  -->
                                                             <div class="mdl-cell--2-col"></div>
-                                                            <div class="mdl-cell--10-col"><span style="display:none;">{{ day_numb }}</span><p class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-js-accent addGroupDizNew" style="height: 40px; width: 120px; color: #42A5F5; font-size: 16px; font-family: Yu Gothic UI; font-weight: normal; text-transform: lowercase;">+ еще одна</p></div>
+                                                            <div class="mdl-cell--10-col"><span style="display:none;">{{ day_numb }}</span><p class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-js-accent addGroupDizNew" style="height: 40px; width: 120px; color: #42A5F5; font-size: 16px; font-weight: normal; text-transform: lowercase;">+ еще одна</p></div>
                                                         </div>
                                                         <div class="mdl-grid" style="margin: 0 0 0 0; padding: 6px 0 0 0; height: 24px;">
                                                             <!--  row5  -->
@@ -387,7 +389,7 @@
                                                         <div class="mdl-grid" style="margin: 0 0 0 10px; padding: 0 0 0 0; height: 50px;" id="addMemNewInsert{{ day_numb }}">
                                                             <!--  row7  -->
                                                             <div class="mdl-cell--2-col"></div>
-                                                            <div class="mdl-cell--10-col"><span style="display: none;">{{ day_numb }}</span><p class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-js-accent addMemDizNew" style="height: 40px; width: 120px; color: #42A5F5; font-size: 16px; font-family: Yu Gothic UI; font-weight: normal; text-transform: lowercase;">+ еще одна</p></div>
+                                                            <div class="mdl-cell--10-col"><span style="display: none;">{{ day_numb }}</span><p class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-js-accent addMemDizNew" style="height: 40px; width: 120px; color: #42A5F5; font-size: 16px; font-weight: normal; text-transform: lowercase;">+ еще одна</p></div>
                                                         </div>
                                                     </div>
                                             {% endfor %}
