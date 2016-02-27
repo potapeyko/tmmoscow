@@ -187,6 +187,7 @@
                                     <!--   ИНФОРМАЦИЯ  -->
                                     <form action="#" id="formInfo" name="formInfo">
                                     <h3>{{ pzs }}</h3>
+                                    <h3>{{ tzs }}</h3>
                                         {% for day_numb in days_count %}
                                               <div class="tab-content">
                                                 <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%;">
@@ -284,9 +285,13 @@
                                                         <!--  row8  -->
                                                         <div class="mdl-cell--2-col" style="width: 85px;"></div>
                                                         <div class="mdl-cell--5-col" style="padding-top: 6px;">
-                                                            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="trTz">
-                                                              <span class="mdl-switch__label">Текущее состояние: <span id="TzState1">Включена</span><span id="TzState2" style="display: none;">Отключена</span></span>
-                                                              <input type="checkbox" id="trTz" name="trTz" class="mdl-switch__input" checked>
+                                                            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="trTz{{ day_numb }}">
+                                                              {% if tzs[loop.index0] != ''%}
+                                                                <span class="mdl-switch__label">Текущее состояние: <span id="TzState1{{ day_numb }}">Включена</span><span id="TzState2{{ day_numb }}" style="display: none;">Отключена</span></span>
+                                                              {% else %}
+                                                                <span class="mdl-switch__label">Текущее состояние: <span id="TzState1{{ day_numb }}">Отключена</span><span id="TzState2{{ day_numb }}" style="display: none;">Включена</span></span>
+                                                              {% endif %}
+                                                              <input type="checkbox" id="trTz{{ day_numb }}" name="trTz" class="mdl-switch__input" onclick="trTzClick({{ day_numb }});" {{ tzs[loop.index0] }}>
                                                             </label>
                                                         </div>
                                                         <div class="mdl-cell--1-col" style="width: 20px;"></div>

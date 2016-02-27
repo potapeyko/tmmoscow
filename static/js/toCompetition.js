@@ -8,10 +8,10 @@ function trPzClick(day_n){
     $('#PzState2'+day_n.toString()).toggle();
 };
 
-$('#trTz').click(function(){
-    $('#TzState1').toggle();
-    $('#TzState2').toggle();
-});
+function trTzClick(day_n){
+    $('#TzState1'+day_n.toString()).toggle();
+    $('#TzState2'+day_n.toString()).toggle();
+};
 
 $('.swapVisInfo').click(function(){
     var dayToSwap = $(this).val();

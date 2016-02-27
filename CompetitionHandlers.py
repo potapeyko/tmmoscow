@@ -81,14 +81,17 @@ class NewCompetition(webapp2.RequestHandler):
             links = self.request.POST.getall('toTmMoscowNew')
             places = self.request.POST.getall('placeNew')
             pzs = []
+            tzs = []
             for i in range(1, int(d_count)+1):
                 pzs.append(self.request.POST.getall('trPzNew'+str(i)))
+                tzs.append(self.request.POST.getall('trTzNew'+str(i)))
             pzs = onToChecked(pzs)
+            tzs = onToChecked(tzs)
 
             temp_values = {'user_email': email, 'logout': users.create_logout_url('/login'), 'start': start_date,
                            'finish': finish_date, 'name': comp_name, 'show_places': show_places, 'show_map': show_map,
                            'days_count': range(1, int(d_count) + 1), 'pz_end_add': pz_end_add, 'pz_end_change':
-                           pz_end_change, 'links': links, 'places': places, 'pzs': pzs}
+                           pz_end_change, 'links': links, 'places': places, 'pzs': pzs, 'tzs': tzs}
 
 
             # , 'count_start':count_start, 'start_places':start_places,
@@ -150,7 +153,7 @@ def dayNumbers(count):
 def onToChecked(check_list):
     checked_list = []
     for check in check_list:
-        if str(check).find('on') > 0 :
+        if str(check).find('on') > 0:
             checked_list.append('checked')
         else:
             checked_list.append('')
