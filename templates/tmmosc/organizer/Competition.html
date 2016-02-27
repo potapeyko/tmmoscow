@@ -156,10 +156,12 @@
                                     <h2 class="mdl-card__title-text" style="vert-align: middle;">
                                         <span style="margin-right: 10px; font-size: 28px;">{{ name }} </span>
                                         <input class="mdl-textfield__input" type="text" style="display:none; width: 80%; border-bottom: 1px solid rgba(255,255,255,.5); margin-top: 5px; padding: 0px;" id="nameComp" name="nameComp" value="{{ name }}">
+
                                     </h2>
                                 </div>
                             </div>
                           </div>
+
                       </div>   <!--   .mdl-card__title  -->
 
                        
@@ -207,7 +209,8 @@
                                                         <div class="mdl-cell--1-col"></div>
                                                         <div class="mdl-cell--10-col">
                                                             <div class="mdl-textfield mdl-js-textfield mdl-cell--12-col" style="padding: 0 0 0 0;">
-                                                                <p class="myP" style="margin-bottom: 0px;"><b>Место проведения:</b> адрес, адрес, адрес, адрес</p>
+                                                                <p class="myP" style="margin-bottom: 0px;"><b>Место проведения:</b> {{ places[loop.index0] }}</p>
+
                                                             </div>
                                                         </div>
                                                         <div class="mdl-cell--10-col"></div>
@@ -230,7 +233,7 @@
                                                         </div>
                                                         <div class="mdl-cell--1-col" style="width: 20px;"></div>
                                                         <div class="mdl-cell--5-col">
-                                                            <p class="myP" style="margin: 6px 0 0 0;" ondblclick="$('#eaDiv').toggle();">Окончание добавления заявок: дд.мм.гггг</p>
+                                                            <p class="myP" style="margin: 6px 0 0 0;" ondblclick="$('#eaDiv').toggle();">Окончание добавления заявок: {{ pz_end_add[loop.index0] }}</p>
                                                         </div>
 
                                                     </div>
@@ -249,7 +252,7 @@
                                                         <div class="mdl-cell--5-col"></div>
                                                         <div class="mdl-cell--1-col" style="width: 20px;"></div>
                                                         <div class="mdl-cell--5-col" id="old2">
-                                                            <p class="myP" style="margin: 6px 0 0 0; bottom: 20px;"  ondblclick="$('#ecDiv').toggle();">Окончание изменения заявок: дд.мм.гггг</p>
+                                                            <p class="myP" style="margin: 6px 0 0 0; bottom: 20px;"  ondblclick="$('#ecDiv').toggle();">Окончание изменения заявок: {{ pz_end_change[loop.index0] }}</p>
                                                         </div>
                                                     </div>
                                                     <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 20px 0 0; height: 30px; display: none;" id="ecDiv">
@@ -283,7 +286,7 @@
                                                         </div>
                                                         <div class="mdl-cell--1-col" style="width: 20px;"></div>
                                                         <div class="mdl-cell--4-col" id="old3">
-                                                            <p class="myP" style="margin: 6px 0 0 0;" ondblclick="$('#tmDiv').toggle();">**Ссылка на официальную страницу на tmmoscow**</p>
+                                                            <p class="myP" style="margin: 6px 0 0 0;" ondblclick="$('#tmDiv').toggle();">{{ links[loop.index0] }}</p>
                                                         </div>
                                                     </div>
                                                     <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 30px; display: none;"id="tmDiv">
