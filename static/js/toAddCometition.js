@@ -8,7 +8,6 @@ var clicked_day = 1;
 function trPzClick(day_n){
     $('#PzState1'+day_n.toString()).toggle();
     $('#PzState2'+day_n.toString()).toggle();
-
 };
 
 function trTzClick(day_n){

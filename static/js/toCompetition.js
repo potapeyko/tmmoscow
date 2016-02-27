@@ -3,10 +3,11 @@ var dayCount = 1;
 var distCount = 1;
 var duCount = 1;
 
-$('#trPz').click(function(){
-    $('#PzState1').toggle();
-    $('#PzState2').toggle();
-});
+function trPzClick(day_n){
+    $('#PzState1'+day_n.toString()).toggle();
+    $('#PzState2'+day_n.toString()).toggle();
+};
+
 $('#trTz').click(function(){
     $('#TzState1').toggle();
     $('#TzState2').toggle();

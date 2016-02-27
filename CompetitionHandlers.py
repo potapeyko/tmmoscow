@@ -76,23 +76,21 @@ class NewCompetition(webapp2.RequestHandler):
             show_map = self.request.POST['showMap']
 
             # info tab
-            pz_end_add = []
-            #for i in range(1, d_count):
-            i = 1
-            pz_end_add_list = self.request.POST.getall('pzEndAddNew')
-            pz_end_add = []
-            for date in pz_end_add_list:
-                pz_end_add.append(formatDate(date))
-            pz_end_change_list = self.request.POST.getall('pzEndChangeNew')
-            pz_end_change = []
-            for date in pz_end_change_list:
-                pz_end_change.append(formatDate(date))
+            pz_end_add = formatDateList(self.request.POST.getall('pzEndAddNew'))
+            pz_end_change = formatDateList(self.request.POST.getall('pzEndChangeNew'))
             links = self.request.POST.getall('toTmMoscowNew')
             places = self.request.POST.getall('placeNew')
+            pzs = []
+            for i in range(1, int(d_count)+1):
+                pzs.append(self.request.POST.getall('trPzNew'+str(i)))
+            pzs = onToChecked(pzs)
+
             temp_values = {'user_email': email, 'logout': users.create_logout_url('/login'), 'start': start_date,
                            'finish': finish_date, 'name': comp_name, 'show_places': show_places, 'show_map': show_map,
                            'days_count': range(1, int(d_count) + 1), 'pz_end_add': pz_end_add, 'pz_end_change':
-                           pz_end_change, 'links': links, 'places': places}
+                           pz_end_change, 'links': links, 'places': places, 'pzs': pzs}
+
+
             # , 'count_start':count_start, 'start_places':start_places,
             # 'pzs':pz, 'pzEndAdds':pz_end_add, 'pzEndChanges':pz_end_change, 'tzs':tz, 'links':link_to_tmmosc,
             # 'orgs': org_info}
@@ -137,9 +135,23 @@ def formatDate(bad_date):
     d = ymd[2]
     return str(d) + '.' + str(m) + '.' + str(y)
 
+def formatDateList(bad_date_list):
+    good_dates = []
+    for date in bad_date_list:
+        good_dates.append(formatDate(date))
+    return good_dates
 
 def dayNumbers(count):
     days = []
     for i in range(0, count):
         days.append(i)
     return days
+
+def onToChecked(check_list):
+    checked_list = []
+    for check in check_list:
+        if str(check).find('on') > 0 :
+            checked_list.append('checked')
+        else:
+            checked_list.append('')
+    return checked_list
