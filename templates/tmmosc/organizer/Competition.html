@@ -186,8 +186,6 @@
                                   <div class="mdl-tabs__panel is-active" id="info-panel" style="background: #fff; color: #42A5F5;">
                                     <!--   ИНФОРМАЦИЯ  -->
                                     <form action="#" id="formInfo" name="formInfo">
-                                    <h3>{{ pzs }}</h3>
-                                    <h3>{{ tzs }}</h3>
                                         {% for day_numb in days_count %}
                                               <div class="tab-content">
                                                 <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%;">
@@ -317,42 +315,46 @@
                                                             <p class="myP" style="margin-bottom: 0px; top: 6px;"><b>Контакты организаторов:</b></p>
                                                         </div>
                                                     </div>
-                                                    <div class="mdl-grid" style="margin: 10px 0 20px 70px; padding: 0 0 0 0; vertical-align:middle; height: 30px; width: 90%;">
-                                                        <!--  row10  -->
-                                                        <div class="mdl-cell--1-col"></div>
-                                                        <div class="mdl-cell--3-col">
-                                                            <p class="myP" style="margin-bottom: 0px; top: 6px;">ФИО организатора</p>
-                                                        </div>
-                                                        <div class="mdl-cell--1-col" style="width: 20px;"></div>
-                                                        <div class="mdl-cell--3-col" style="text-align: center;">
-                                                            <p class="myP">Должность</p>
-                                                        </div>
-                                                        <div class="mdl-cell--1-col"></div>
-                                                        <div class="mdl-cell--3-col" style="text-align: center;">
-                                                            <p class="myP">Контакт</p>
-                                                        </div>
-                                                    </div>
+                                                    {% for orgs_in_day in orgs[loop.index0] %}
+                                                         {% for org in orgs_in_day %}
+                                                            <div class="mdl-grid" style="margin: 10px 0 20px 70px; padding: 0 0 0 0; vertical-align:middle; height: 30px; width: 90%;">
+                                                                <!--  row10  -->
+                                                                <div class="mdl-cell--1-col"></div>
+                                                                <div class="mdl-cell--3-col">
+                                                                    <p class="myP" style="margin-bottom: 0px; top: 6px;">{{ org }}</p>
+                                                                </div>
+                                                                <div class="mdl-cell--1-col" style="width: 20px;"></div>
+                                                                <div class="mdl-cell--3-col" style="text-align: center;">
+                                                                    <p class="myP">{{ org }}</p>
+                                                                </div>
+                                                                <div class="mdl-cell--1-col"></div>
+                                                                <div class="mdl-cell--3-col" style="text-align: center;">
+                                                                    <p class="myP">{{ org }}</p>
+                                                                </div>
+                                                            </div>
+                                                         {% endfor %}
+                                                    {% endfor %}
                                                     <div class="mdl-grid" style="margin: -10px 0 10px 70px; padding: 0 0 0 0; vertical-align:middle; height: 30px; width: 90%;">
                                                         <!--  row11  РЕДАКТИРОВАНИЕ И ДОБАВЛЕНИЕ ЗАПИСИ  -->
                                                         <div class="mdl-cell--1-col"></div>
                                                         <div class="mdl-cell--3-col" style="padding-top: 0px;">
                                                             <div class="mdl-textfield mdl-js-textfield" style="padding-top: 0px;">
                                                                 <input class="mdl-textfield__input" type="text" id="orgFio11" name="orgFio11" style="padding-top: 0px;">
-                                                                <label class="mdl-textfield__label" for="orgFio11" style="top: 0px;">**ФИО организатора**</label>
+                                                                <label class="mdl-textfield__label" for="orgFio11" style="top: 0px;">ФИО огранизатора</label>
                                                             </div>
                                                         </div>
                                                         <div class="mdl-cell--1-col"></div>
                                                         <div class="mdl-cell--3-col" style="text-align: center; padding-top: 0px;">
                                                             <div class="mdl-textfield mdl-js-textfield" style="padding-top: 0px;">
                                                                 <input class="mdl-textfield__input" type="text" id="orgDol11" name="orgDol11" style="padding-top: 0px;">
-                                                                <label class="mdl-textfield__label" for="orgDol11" style="top: 0px;">**Должность**</label>
+                                                                <label class="mdl-textfield__label" for="orgDol11" style="top: 0px;">Должность организатора</label>
                                                             </div>
                                                         </div>
                                                         <div class="mdl-cell--1-col"></div>
                                                         <div class="mdl-cell--3-col" style="padding-top: 0px;">
                                                             <div class="mdl-textfield mdl-js-textfield" style="padding-top: 0px;">
                                                                 <input class="mdl-textfield__input" type="text" id="orgCont11" name="orgCont11" style="padding-top: 0px; text-align: center;">
-                                                                <label class="mdl-textfield__label" for="orgCont11" style="top: 0px; text-align: center;">**Контакт**</label>
+                                                                <label class="mdl-textfield__label" for="orgCont11" style="top: 0px; text-align: center;">Контакты организатора</label>
                                                             </div>
                                                         </div>
                                                     </div>
