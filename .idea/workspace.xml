@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1a4ee0a1-5209-4064-a7af-a6fd0b434d59" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CompetitionHandlers.py" afterPath="$PROJECT_DIR$/CompetitionHandlers.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/tmmosc/organizer/Competition.html" afterPath="$PROJECT_DIR$/templates/tmmosc/organizer/Competition.html" />
     </list>
     <ignored path="tmmosc.iws" />
@@ -31,8 +30,8 @@
       <file leaf-file-name="Competition.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/tmmosc/organizer/Competition.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4204672">
-              <caret line="317" column="84" selection-start-line="317" selection-start-column="84" selection-end-line="317" selection-end-column="84" />
+            <state vertical-scroll-proportion="0.56062293">
+              <caret line="324" column="69" selection-start-line="324" selection-start-column="69" selection-end-line="324" selection-end-column="69" />
               <folding>
                 <element signature="n#style#0;n#div#10;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#p#0;n#div#1;n#div#10;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -957,8 +956,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/tmmosc/organizer/Competition.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4204672">
-          <caret line="317" column="84" selection-start-line="317" selection-start-column="84" selection-end-line="317" selection-end-column="84" />
+        <state vertical-scroll-proportion="0.56062293">
+          <caret line="324" column="69" selection-start-line="324" selection-start-column="69" selection-end-line="324" selection-end-column="69" />
           <folding>
             <element signature="n#style#0;n#div#10;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#p#0;n#div#1;n#div#10;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
