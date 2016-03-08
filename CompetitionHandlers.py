@@ -82,15 +82,17 @@ class NewCompetition(webapp2.RequestHandler):
             places = self.request.POST.getall('placeNew')
             pzs = []
             tzs = []
-            org_fios = []; org_dols = []; org_conts=[]; orgs = []
+            orgs = []
+            org_fios = []; org_dols = []; org_conts=[];
             for i in range(1, int(d_count)+1):
-                orgs_in_days = []
+                #org_fios = []; org_dols = []; org_conts=[];
                 pzs.append(self.request.POST.getall('trPzNew'+str(i)))
                 tzs.append(self.request.POST.getall('trTzNew'+str(i)))
                 org_fios.append(self.request.POST.getall('orgFioNew'+str(i)))
                 org_dols.append(self.request.POST.getall('orgDolNew'+str(i)))
                 org_conts.append(self.request.POST.getall('orgContNew'+str(i)))
-                #orgs.append([org_fios[i], org_dols[i], org_conts[i]])
+            for i in range(int(d_count)):
+                orgs.append(zip(org_fios[i], org_dols[i], org_conts[i]))
             pzs = onToChecked(pzs)
             tzs = onToChecked(tzs)
 
@@ -99,9 +101,8 @@ class NewCompetition(webapp2.RequestHandler):
             temp_values = {'user_email': email, 'logout': users.create_logout_url('/login'), 'start': start_date,
                            'finish': finish_date, 'name': comp_name, 'show_places': show_places, 'show_map': show_map,
                            'days_count': range(1, int(d_count) + 1), 'pz_end_add': pz_end_add, 'pz_end_change':
-                           pz_end_change, 'links': links, 'places': places, 'pzs': pzs, 'tzs': tzs, 'orgs': zip(org_fios,
-                           org_dols, org_conts)}
-
+                           pz_end_change, 'links': links, 'places': places, 'pzs': pzs, 'tzs': tzs, 'org_infos': orgs}
+            # zip(org_fios, org_dols, org_conts)
 
             # , 'count_start':count_start, 'start_places':start_places,
             # 'pzs':pz, 'pzEndAdds':pz_end_add, 'pzEndChanges':pz_end_change, 'tzs':tz, 'links':link_to_tmmosc,

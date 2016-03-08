@@ -315,24 +315,24 @@
                                                             <p class="myP" style="margin-bottom: 0px; top: 6px;"><b>Контакты организаторов:</b></p>
                                                         </div>
                                                     </div>
-                                                    {% for orgs_in_day in orgs[loop.index0] %}
-                                                         {% for org in orgs_in_day %}
+                                                    {% for orgs_ind_day in org_infos %}
+                                                        {% for org in orgs_ind_day %}
                                                             <div class="mdl-grid" style="margin: 10px 0 20px 70px; padding: 0 0 0 0; vertical-align:middle; height: 30px; width: 90%;">
                                                                 <!--  row10  -->
                                                                 <div class="mdl-cell--1-col"></div>
                                                                 <div class="mdl-cell--3-col">
-                                                                    <p class="myP" style="margin-bottom: 0px; top: 6px;">{{ org }}</p>
+                                                                    <p class="myP" style="margin-bottom: 0px; top: 6px;">{{ org[0] }}</p>
                                                                 </div>
                                                                 <div class="mdl-cell--1-col" style="width: 20px;"></div>
                                                                 <div class="mdl-cell--3-col" style="text-align: center;">
-                                                                    <p class="myP">{{ org }}</p>
+                                                                    <p class="myP">{{ org[1] }}</p>
                                                                 </div>
                                                                 <div class="mdl-cell--1-col"></div>
                                                                 <div class="mdl-cell--3-col" style="text-align: center;">
-                                                                    <p class="myP">{{ org }}</p>
+                                                                    <p class="myP">{{ org[2] }}</p>
                                                                 </div>
                                                             </div>
-                                                         {% endfor %}
+                                                        {%  endfor %}
                                                     {% endfor %}
                                                     <div class="mdl-grid" style="margin: -10px 0 10px 70px; padding: 0 0 0 0; vertical-align:middle; height: 30px; width: 90%;">
                                                         <!--  row11  РЕДАКТИРОВАНИЕ И ДОБАВЛЕНИЕ ЗАПИСИ  -->
