@@ -45,7 +45,8 @@ $('#swapVisMem1').click(function(){
 });
 
 
-$('#addOrg').click(function(){
+$('.addOrg').click(function(){
+     var dayNum= $(this).siblings()[0].innerHTML;
      var grid = document.createElement('div');
      grid.className = 'mdl-grid';
      grid.style.margin = "-20px 0 20px 70px";
@@ -114,7 +115,7 @@ $('#addOrg').click(function(){
      grid.appendChild(col4);
      grid.appendChild(col5);
      grid.appendChild(col6);
-     var addButtonDiv = document.getElementById('addOrgInsert');
+     var addButtonDiv = document.getElementById('addOrgInsert'+dayNum.toString());
      var blockInsert = addButtonDiv.parentNode;
      blockInsert.insertBefore(grid, addButtonDiv);
      orgCount = orgCount+1;

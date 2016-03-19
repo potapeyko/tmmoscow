@@ -332,34 +332,10 @@
                                                             </div>
                                                         </div>
                                                     {% endfor %}
-                                                    <div class="mdl-grid" style="margin: -10px 0 10px 70px; padding: 0 0 0 0; vertical-align:middle; height: 30px; width: 90%;">
-                                                        <!--  row11  РЕДАКТИРОВАНИЕ И ДОБАВЛЕНИЕ ЗАПИСИ  -->
-                                                        <div class="mdl-cell--1-col"></div>
-                                                        <div class="mdl-cell--3-col" style="padding-top: 0px;">
-                                                            <div class="mdl-textfield mdl-js-textfield" style="padding-top: 0px;">
-                                                                <input class="mdl-textfield__input" type="text" id="orgFio11" name="orgFio11" style="padding-top: 0px;">
-                                                                <label class="mdl-textfield__label" for="orgFio11" style="top: 0px;">ФИО огранизатора</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="mdl-cell--1-col"></div>
-                                                        <div class="mdl-cell--3-col" style="text-align: center; padding-top: 0px;">
-                                                            <div class="mdl-textfield mdl-js-textfield" style="padding-top: 0px;">
-                                                                <input class="mdl-textfield__input" type="text" id="orgDol11" name="orgDol11" style="padding-top: 0px;">
-                                                                <label class="mdl-textfield__label" for="orgDol11" style="top: 0px;">Должность организатора</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="mdl-cell--1-col"></div>
-                                                        <div class="mdl-cell--3-col" style="padding-top: 0px;">
-                                                            <div class="mdl-textfield mdl-js-textfield" style="padding-top: 0px;">
-                                                                <input class="mdl-textfield__input" type="text" id="orgCont11" name="orgCont11" style="padding-top: 0px; text-align: center;">
-                                                                <label class="mdl-textfield__label" for="orgCont11" style="top: 0px; text-align: center;">Контакты организатора</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 30px;" id="addOrgInsert">
+                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 30px;" id="addOrgInsert{{ day_numb }}">
                                                         <!--  row12  -->
                                                         <div class="mdl-cell--2-col"></div>
-                                                        <div class="mdl-cell--10-col" style="margin-left: 10px;"><p class="myP mdl-button mdl-js-button mdl-js-ripple-effect mdl-js-accent" id="addOrg" style="height: 40px; width: 120px; color: #42A5F5; font-size: 16px; font-weight: normal; text-transform: lowercase;">+ еще один</p></div>
+                                                        <div class="mdl-cell--10-col" style="margin-left: 10px;"><span style="display: none;">{{ day_numb }}</span><p class="myP mdl-button mdl-js-button mdl-js-ripple-effect mdl-js-accent addOrg" style="height: 40px; width: 120px; color: #42A5F5; font-size: 16px; font-weight: normal; text-transform: lowercase;">+ еще один</p></div>
                                                     </div>
                                                   </div>      <!--   #toSwapInfo1  -->
                                               </div>  <!--   .tab-content   -->
