@@ -99,16 +99,16 @@ class NewCompetition(webapp2.RequestHandler):
 
             # diz tab
             disciplines = []
+            lengths = []
             for i in range(1, int(d_count)+1):
                 disciplines.append(self.request.POST['dizDisciplineNew'+str(i)])
-            disciplines = convertToDiscString(disciplines)
-
+                lengths.append(self.request.POST['dizLengthNew'+str(i)])
 
             temp_values = {'user_email': email, 'logout': users.create_logout_url('/login'), 'start': start_date,
                            'finish': finish_date, 'name': comp_name, 'show_places': show_places, 'show_map': show_map,
                            'days_count': range(1, int(d_count) + 1), 'pz_end_add': pz_end_add, 'pz_end_change':
                            pz_end_change, 'links': links, 'places': places, 'pzs': pzs, 'tzs': tzs, 'org_infos': orgs,
-                           'discs': disciplines}
+                           'discs': disciplines, 'lens': lengths}
             # zip(org_fios, org_dols, org_conts)
 
             # , 'count_start':count_start, 'start_places':start_places,
@@ -175,17 +175,3 @@ def onToChecked(check_list):
         else:
             checked_list.append('')
     return checked_list
-
-def convertToDiscString(disciplines):
-    stringDiscs = []
-    for discipline in disciplines:
-        if discipline == '1':
-            stringDiscs.append(u'Пешеходная')
-            continue
-        if discipline == '2':
-            stringDiscs.append(u'Пешеходная-связка')
-            continue
-        if discipline == '3':
-            stringDiscs.append(u'Пешеходная-группа')
-            continue
-    return stringDiscs

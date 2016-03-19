@@ -344,7 +344,14 @@
                                   </div>   <!--   #info-panel    --> 
                                   
                                   
-                                  
+
+
+
+
+
+
+
+
                                   
                                   <div class="mdl-tabs__panel" id="diz-panel" style="background: #fff; color: #42A5F5;">
                                     <!--  ДИСТАНЦИИ И ЗАЧЕТЫ  -->
@@ -353,29 +360,29 @@
                                             <div class="tab-content">
                                                     <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%;">
                                                         <!--  row1  -->
-                                                        <div class="mdl-cell--1-col"><p class="myP" style="padding-top: 10px;">День 1 </p></div>
+                                                        <div class="mdl-cell--1-col"><p class="myP" style="padding-top: 10px;">День {{ day_numb }} </p></div>
                                                         <div class="mdl-cell--10-col">
                                                             <img src="../../../static/img/line.png" style="width: 100%; margin-top: 20px;">
                                                         </div>
                                                         <div class="mdl-cell--1-col">
-                                                      <button type="button" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="padding: 0 0 0 0; min-height: 46px; height: 46px; min-width: 46px; width: 46px;" id="swapVisDiz1" value="1">
-                                                        <img id="swapImgDizUp1" src="../../../static/img/chevron-up.png">
-                                                        <img id="swapImgDizDown1" src="../../../static/img/chevron-down.png" style="display: none;">
+                                                      <button type="button" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect swapVisDiz" style="padding: 0 0 0 0; min-height: 46px; height: 46px; min-width: 46px; width: 46px;" value="{{ day_numb }}">
+                                                        <img id="swapImgDizUp{{ day_numb }}" src="../../../static/img/chevron-up.png">
+                                                        <img id="swapImgDizDown{{ day_numb }}" src="../../../static/img/chevron-down.png" style="display: none;">
                                                       </button>
                                                     </div>
                                                 </div>
-                                                <div id="toSwapDiz1">
+                                                <div id="toSwapDiz{{ day_numb }}">
                                                     <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0;">
                                                         <!--  row2  -->
                                                         <div class="mdl-cell--1-col"></div>
                                                         <div class="mdl-cell--2-col"><p class="myP"><b>Дистанция:</b></p></div>
                                                         <div class="mdl-cell--1-col"></div>
                                                         <div class="mdl-cell--3-col" id="old4">
-                                                            <p class="myP" ondblclick="$('#discDiv').toggle();">{{ discs[0] }}</p>
+                                                            <p class="myP" ondblclick="$('#discDiv').toggle();">{{ discs[loop.index0] }}</p>
                                                         </div>
                                                         <div class="mdl-cell--1-col"></div>
                                                         <div class="mdl-cell--3-col" id="old5">
-                                                            <p class="myP" ondblclick="$('#discDiv').toggle();">Длинная</p>
+                                                            <p class="myP" ondblclick="$('#discDiv').toggle();">{{ lens[loop.index0] }}</p>
                                                         </div>
                                                         <div class="mdl-cell--1-col"></div>
                                                     </div>
@@ -557,7 +564,16 @@
                                         {% endfor %}
                                     </form>
                                   </div>    <!--  #diz-panel  -->
-                              
+
+
+
+
+
+
+
+
+
+
                                   <div class="mdl-tabs__panel" id="member-panel" style="background: #fff; color: #42A5F5;">
                                     <!--  УЧАСТНИКИ  -->
                                     <form action="#" id="formMember" name="formMember">

@@ -23,7 +23,7 @@ $('.swapVisInfo').click(function(){
     $(blockName).slideToggle(400);
     componentHandler.upgradeAllRegistered();
 });
-$('#swapVisDiz1').click(function(){
+$('.swapVisDiz').click(function(){
     var dayToSwap = $(this).val();
     var blockName = "#toSwapDiz" + dayToSwap.toString();
     var butImgUp = "#swapImgDizUp" + dayToSwap.toString();
