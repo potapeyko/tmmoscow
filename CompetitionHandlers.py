@@ -46,7 +46,7 @@ class NewCompetition(webapp2.RequestHandler):
             d_count = self.request.GET['countStart']
             write_places = readCheckboxGet(self, 'checkPlaces')
             show_map = readCheckboxGet(self, 'checkPlacesMap')
-            
+
             temp_values = {'user_email': email, 'logout': users.create_logout_url('/login'), 'd_start': formatDate(d_s),
                            'd_finish': formatDate(d_f), 'name': name, 'days_count': range(1, int(d_count) + 1),
                            'write_places': write_places, 'show_map': show_map, 'd_count': d_count}

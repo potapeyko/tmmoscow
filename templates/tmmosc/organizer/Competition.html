@@ -611,6 +611,13 @@
                                   <div class="mdl-tabs__panel" id="statistic-panel" style="background: #fff; color: #42A5F5;">
                                     <!--  СТАТИСТИКА  -->
                                     <div class="tab-content">
+                                       {%  if not stat_day and not stat_sex and not stat_qual%}
+                                           <div class="mdl-grid" style="margin: 60px 0 0 0; padding: 0 0 0 0; width: 100%; text-align: center;">
+                                                <div class="mdl-cell--1-col"></div>
+                                                <div class="mdl-cell--10-col"><p class="myP">Организаторы не запрашивали статистику по участникам</p></div>
+                                                <div class="mdl-cell--1-col"></div>
+                                            </div>
+                                       {% endif %}
                                        <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%; {% if not stat_day %}display: none;{% endif %}">
                                             <!--  row1  -->
                                             <div class="mdl-cell--1-col"></div>
