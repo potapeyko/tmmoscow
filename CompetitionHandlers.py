@@ -44,16 +44,9 @@ class NewCompetition(webapp2.RequestHandler):
             d_s = self.request.GET['dateStartNew']
             d_f = self.request.GET['dateFinishNew']
             d_count = self.request.GET['countStart']
-            try:
-                write_places = self.request.GET['checkPlaces']
-                write_places = True
-            except:
-                write_places = False
-            try:
-                show_map = self.request.GET['checkPlacesMap']
-                show_map = True
-            except:
-                show_map = False
+            write_places = readCheckboxGet(self, 'checkPlaces')
+            show_map = readCheckboxGet(self, 'checkPlacesMap')
+            
             temp_values = {'user_email': email, 'logout': users.create_logout_url('/login'), 'd_start': formatDate(d_s),
                            'd_finish': formatDate(d_f), 'name': name, 'days_count': range(1, int(d_count) + 1),
                            'write_places': write_places, 'show_map': show_map, 'd_count': d_count}
@@ -122,13 +115,17 @@ class NewCompetition(webapp2.RequestHandler):
                 dizs.append(zip(diz_groups[i], diz_length[i], diz_class[i], diz_min_com[i], diz_max_com[i]))
                 dus.append(zip(du_group[i], du_salary[i], du_age_min[i], du_age_max[i], du_qual_min[i],du_qual_max[i]))
 
-            #du_group = []; du_salary = []; du_age_min = []; du_age_max = []; du_qual_min = []; du_qual_max = [];
+            # statistic tab
+            stat_day = readCheckboxPost(self, 'statistic0')
+            stat_sex = readCheckboxPost(self, 'statistic1')
+            stat_qual = readCheckboxPost(self, 'statistic2')
 
             temp_values = {'user_email': email, 'logout': users.create_logout_url('/login'), 'start': start_date,
                            'finish': finish_date, 'name': comp_name, 'show_places': show_places, 'show_map': show_map,
                            'days_count': range(1, int(d_count) + 1), 'pz_end_add': pz_end_add, 'pz_end_change':
                                pz_end_change, 'links': links, 'places': places, 'pzs': pzs, 'tzs': tzs, 'org_infos': orgs,
-                           'discs': disciplines, 'lens': lengths, 'dizs':dizs, 'dus':dus}
+                           'discs': disciplines, 'lens': lengths, 'dizs':dizs, 'dus':dus, 'stat_day':stat_day, 'stat_sex':stat_sex,
+                           'stat_qual':stat_qual}
             # zip(org_fios, org_dols, org_conts)
 
             # , 'count_start':count_start, 'start_places':start_places,
@@ -195,3 +192,19 @@ def onToChecked(check_list):
         else:
             checked_list.append('')
     return checked_list
+
+def readCheckboxPost(request, post_name):
+    try:
+        bool_value = request.request.POST[post_name]
+        bool_value = True
+    except:
+        bool_value = False
+    return bool_value
+
+def readCheckboxGet(request, get_name):
+    try:
+        bool_value = request.request.GET[get_name]
+        bool_value = True
+    except:
+        bool_value = False
+    return bool_value

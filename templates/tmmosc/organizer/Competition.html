@@ -13,61 +13,9 @@
    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
    <script type = "text/javascript" src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-   <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-
-        var data1 = google.visualization.arrayToDataTable([
-          ['Участники по возрастным группам', 'Группы'],
-          ['МЖ20',     2],
-          ['МЖЭ',      3]
-        ]);
-        var options = {
-          title: 'Участники по возрастным группам',    
-          pieSliceText: 'none',    
-          titleTextStyle: {color: '#42A5F5', fontSize: 16},    
-          fontSize: 16,
-          height: 300,
-          width: 400,   
-          tooltip: {textStyle: {color: '#42A5F5'}, showColorCode: true},
-          legend: {position: 'right', textStyle: {color: '#42A5F5', fontSize: 16}},
-          colors: ['#40C4FF','#01579B','#B2FF59','#76FF03','#64DD17','#B3E5FC','#81D4FA','#4FC3F7','#039BE5','#0288D1','#0277BD',
-                   '#01579B','#DCEDC8','#C5E1A5','#AED581','#9CCC65','#8BC34A','#7CB342']
-        }; 
-        var chart1 = new google.visualization.PieChart(document.getElementById('piechart1'));
-        chart1.draw(data1, options); 
-      }
-    </script>
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data2 = google.visualization.arrayToDataTable([
-          ['Участники по разрядам', 'Разряды'],
-          ['МС',     11],
-          ['КМС',      23],
-          ['I', 15]    
-        ]);  
-          
-        var options = {
-          title: 'Участники по разрядам',    
-          pieSliceText: 'none',    
-          titleTextStyle: {color: '#42A5F5', fontSize: 16},    
-          fontSize: 16,
-          height: 300,
-          width: 400,
-          tooltip: {textStyle: {color: '#42A5F5'}, showColorCode: true},
-          legend: {position: 'right', textStyle: {color: '#42A5F5', fontSize: 16}},  
-          colors: ['#40C4FF','#01579B','#B2FF59','#76FF03','#64DD17','#B3E5FC','#81D4FA','#4FC3F7','#039BE5','#0288D1','#0277BD',
-                   '#01579B','#DCEDC8','#C5E1A5','#AED581','#9CCC65','#8BC34A','#7CB342']    
-        };  
-        var chart2 = new google.visualization.PieChart(document.getElementById('piechart2'));
-        chart2.draw(data2, options);   
-      }
-    </script>
-    
-    
+   <script type="text/javascript" src="../../../static/js/drawStatisticCharts.js"></script>
+   <script type="text/javascript" src="../../../static/js/loader.js"></script>
+   <script type="text/javascript"></script>
    <style>
        body, .mdl-card__title{
            color: #ffffff;
@@ -569,15 +517,6 @@
                                     </form>
                                   </div>    <!--  #diz-panel  -->
 
-
-
-
-
-
-
-
-
-
                                   <div class="mdl-tabs__panel" id="member-panel" style="background: #fff; color: #42A5F5;">
                                     <!--  УЧАСТНИКИ  -->
                                     <form action="#" id="formMember" name="formMember">
@@ -637,9 +576,7 @@
                                                 </div>
                                                 <div class="mdl-cell--1-col"></div>
                                             </div>
-                                        </div>  <!--   #toSwapMem1  -->  
-                                          
-                                          
+                                        </div>  <!--   #toSwapMem1  -->
                                         <div class="mdl-card mdl-shadow--8dp excel" id="excelPanel" style="z-index: 5; height: 250px; position: fixed; top: 30%; left: 35%; width: 400px; background: #fff; display:none;" >
                                            <div class="mdl-card__actions">
                                                <h5 style="color: #42a5f5;; text-align: center; height: 24px; margin-top: 30px;">Выберите списки для экспорта</h5>
@@ -673,14 +610,34 @@
                               
                                   <div class="mdl-tabs__panel" id="statistic-panel" style="background: #fff; color: #42A5F5;">
                                     <!--  СТАТИСТИКА  -->
-                                    <div class="tab-content">        
-                                       <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%;"> 
+                                    <div class="tab-content">
+                                       <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%; {% if not stat_day %}display: none;{% endif %}">
                                             <!--  row1  -->
                                             <div class="mdl-cell--1-col"></div>
-                                            <div class="mdl-cell--5-col"><span id="piechart1" class="myP"></span> </div>
-                                            <div class="mdl-cell--5-col"><span id="piechart2" class="myP"></span></div>
+                                            <div class="mdl-cell--10-col">
+                                                <p class="myP" style="margin-bottom: 10px; margin-top: 26px;"><b>Количество участников по дням соревнований</b></p>
+                                                <div id="chart_onDay" class="myP" style="width: 100%;"></div>
+                                            </div>
                                             <div class="mdl-cell--1-col"></div>
-                                        </div> 
+                                        </div>
+                                        <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%; {% if not stat_sex %}display: none;{% endif %}">
+                                            <!--  row1  -->
+                                            <div class="mdl-cell--1-col"></div>
+                                            <div class="mdl-cell--10-col">
+                                                <p class="myP" style="margin-bottom: 10px; margin-top: 26px;"><b>Количество участников по полу</b></p>
+                                                <div id="chart_onSex" class="myP" style="width: 100%;"></div>
+                                            </div>
+                                            <div class="mdl-cell--1-col"></div>
+                                        </div>
+                                        <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%; {% if not stat_qual %}display: none;{% endif %}">
+                                            <!--  row1  -->
+                                            <div class="mdl-cell--1-col"></div>
+                                            <div class="mdl-cell--10-col">
+                                                <p class="myP" style="margin-bottom: 10px; margin-top: 26px;"><b>Количество участников по званиям и разрядам</b></p>
+                                                <div id="chart_onQual" class="myP" style="width: 100%;"></div>
+                                            </div>
+                                            <div class="mdl-cell--1-col"></div>
+                                        </div>
                                     </div>    <!--  .tab-content  -->                    
                                   </div>    <!--  #statistic-panel  -->
                                   
