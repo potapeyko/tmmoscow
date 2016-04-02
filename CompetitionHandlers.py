@@ -72,7 +72,7 @@ class NewCompetition(webapp2.RequestHandler):
             start_date = self.request.POST['dateStartNew']
             finish_date = self.request.POST['dateFinishNew']
             comp_name = self.request.POST['nameCompNew']
-            d_count = self.request.POST['dayCount']
+            d_count = int(self.request.POST['dayCount'])
             show_places = self.request.POST['writePlaces']
             show_map = self.request.POST['showMap']
 
@@ -85,14 +85,14 @@ class NewCompetition(webapp2.RequestHandler):
             tzs = []
             orgs = []
             org_fios = []; org_dols = []; org_conts=[];
-            for i in range(1, int(d_count)+1):
+            for i in range(1, d_count+1):
                 #org_fios = []; org_dols = []; org_conts=[];
                 pzs.append(self.request.POST.getall('trPzNew'+str(i)))
                 tzs.append(self.request.POST.getall('trTzNew'+str(i)))
                 org_fios.append(self.request.POST.getall('orgFioNew'+str(i)))
                 org_dols.append(self.request.POST.getall('orgDolNew'+str(i)))
                 org_conts.append(self.request.POST.getall('orgContNew'+str(i)))
-            for i in range(int(d_count)):
+            for i in range(d_count):
                 orgs.append(zip(org_fios[i], org_dols[i], org_conts[i]))
             pzs = onToChecked(pzs)
             tzs = onToChecked(tzs)
@@ -100,15 +100,35 @@ class NewCompetition(webapp2.RequestHandler):
             # diz tab
             disciplines = []
             lengths = []
-            for i in range(1, int(d_count)+1):
+            dizs = []
+            dus = []
+            diz_groups = []; diz_length = []; diz_class = []; diz_min_com = []; diz_max_com = [];
+            du_group = []; du_salary = []; du_age_min = []; du_age_max = []; du_qual_min = []; du_qual_max = [];
+            for i in range(1, d_count+1):
                 disciplines.append(self.request.POST['dizDisciplineNew'+str(i)])
                 lengths.append(self.request.POST['dizLengthNew'+str(i)])
+                diz_groups.append(self.request.POST.getall('dizGroupNew'+str(i)))
+                diz_length.append(self.request.POST.getall('dizLenNew'+str(i)))
+                diz_class.append(self.request.POST.getall('dizClassNew'+str(i)))
+                diz_min_com.append(self.request.POST.getall('dizCCminNew'+str(i)))
+                diz_max_com.append(self.request.POST.getall('dizCCmaxNew'+str(i)))
+                du_group.append(self.request.POST.getall('duGroupNew'+str(i)))
+                du_salary.append(self.request.POST.getall('duSalaryNew'+str(i)))
+                du_age_min.append(self.request.POST.getall('duAgeminNew'+str(i)))
+                du_age_max.append(self.request.POST.getall('duAgemaxNew'+str(i)))
+                du_qual_min.append(self.request.POST.getall('duQualNewmin'+str(i)))
+                du_qual_max.append(self.request.POST.getall('duQualNewmax'+str(i)))
+            for i in range(d_count):
+                dizs.append(zip(diz_groups[i], diz_length[i], diz_class[i], diz_min_com[i], diz_max_com[i]))
+                dus.append(zip(du_group[i], du_salary[i], du_age_min[i], du_age_max[i], du_qual_min[i],du_qual_max[i]))
+
+            #du_group = []; du_salary = []; du_age_min = []; du_age_max = []; du_qual_min = []; du_qual_max = [];
 
             temp_values = {'user_email': email, 'logout': users.create_logout_url('/login'), 'start': start_date,
                            'finish': finish_date, 'name': comp_name, 'show_places': show_places, 'show_map': show_map,
                            'days_count': range(1, int(d_count) + 1), 'pz_end_add': pz_end_add, 'pz_end_change':
-                           pz_end_change, 'links': links, 'places': places, 'pzs': pzs, 'tzs': tzs, 'org_infos': orgs,
-                           'discs': disciplines, 'lens': lengths}
+                               pz_end_change, 'links': links, 'places': places, 'pzs': pzs, 'tzs': tzs, 'org_infos': orgs,
+                           'discs': disciplines, 'lens': lengths, 'dizs':dizs, 'dus':dus}
             # zip(org_fios, org_dols, org_conts)
 
             # , 'count_start':count_start, 'start_places':start_places,

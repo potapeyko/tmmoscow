@@ -187,7 +187,7 @@
                                     <!--   ИНФОРМАЦИЯ  -->
                                     <form action="#" id="formInfo" name="formInfo">
                                         {% for day_numb in days_count %}
-                                              <div class="tab-content">
+                                              <div class="tab-content" style="margin-bottom: 10px;{% if day_numb != 1 %}margin-top: 0;{% endif %}">
                                                 <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%;">
                                                     <!--  row1  -->
                                                     <div class="mdl-cell--1-col"><p class="myP" style="padding-top: 10px;">День {{ day_numb }} </p></div>
@@ -195,7 +195,7 @@
                                                         <img src="../../../static/img/line.png" style="width: 100%; margin-top: 20px;">
                                                     </div>
                                                     <div class="mdl-cell--1-col">
-                                                      <button type="button" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect swapVisInfo" style="padding: 0 0 0 0; min-height: 46px; height: 46px; min-width: 46px; width: 46px;"" value="{{ day_numb }}">
+                                                      <button type="button" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect swapVisInfo" style="padding: 0 0 0 0; min-height: 46px; height: 46px; min-width: 46px; width: 46px;" value="{{ day_numb }}">
                                                         <img id="swapImgInfoUp{{ day_numb }}" src="../../../static/img/chevron-up.png">
                                                         <img id="swapImgInfoDown{{ day_numb }}" src="../../../static/img/chevron-down.png" style="display: none;">
                                                       </button>
@@ -332,7 +332,7 @@
                                                             </div>
                                                         </div>
                                                     {% endfor %}
-                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 30px;" id="addOrgInsert{{ day_numb }}">
+                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 30px; display: none;" id="addOrgInsert{{ day_numb }}">
                                                         <!--  row12  -->
                                                         <div class="mdl-cell--2-col"></div>
                                                         <div class="mdl-cell--10-col" style="margin-left: 10px;"><span style="display: none;">{{ day_numb }}</span><p class="myP mdl-button mdl-js-button mdl-js-ripple-effect mdl-js-accent addOrg" style="height: 40px; width: 120px; color: #42A5F5; font-size: 16px; font-weight: normal; text-transform: lowercase;">+ еще один</p></div>
@@ -357,7 +357,7 @@
                                     <!--  ДИСТАНЦИИ И ЗАЧЕТЫ  -->
                                     <form action="#" id="formDiz" name="formDiz">
                                         {% for day_numb in days_count %}
-                                            <div class="tab-content">
+                                            <div class="tab-content" style="margin-bottom: 10px;{% if day_numb != 1 %}margin-top: 0;{% endif %}">
                                                     <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%;">
                                                         <!--  row1  -->
                                                         <div class="mdl-cell--1-col"><p class="myP" style="padding-top: 10px;">День {{ day_numb }} </p></div>
@@ -430,17 +430,19 @@
                                                         <div class="mdl-cell--1-col"></div>
                                                     </div>
                                                   <!--  Этот кусок будет множиться на все записи  -->
-                                                    <div class="mdl-grid" style="margin: 10px 0 0 0; padding: 0 0 0 0; text-align: center;">
-                                                        <!--  row4  -->
-                                                        <div class="mdl-cell--2-col"></div>
-                                                        <div class="mdl-cell--1-col"><p class="myP">МЖ 20</p></div>
-                                                        <div class="mdl-cell--1-col"></div>
-                                                        <div class="mdl-cell--1-col"><p class="myP">4,4</p></div>
-                                                        <div class="mdl-cell--1-col"><p class="myP" style="margin-left: 55px;">4</p></div>
-                                                        <div class="mdl-cell--5-col" style="height: 30px;"><p class="myP">1 - 2</p></div>
-                                                        <div class="mdl-cell--1-col"></div>
-                                                    </div>
-                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; text-align: center;">
+                                                    {%  for group_in_day in dizs[loop.index0] %}
+                                                        <div class="mdl-grid" style="margin: 10px 0 0 0; padding: 0 0 0 0; text-align: center;">
+                                                            <!--  row4  -->
+                                                            <div class="mdl-cell--2-col"></div>
+                                                            <div class="mdl-cell--1-col"><p class="myP">{{ group_in_day[0] }}</p></div>
+                                                            <div class="mdl-cell--1-col"></div>
+                                                            <div class="mdl-cell--1-col"><p class="myP">{{ group_in_day[1] }}</p></div>
+                                                            <div class="mdl-cell--1-col"><p class="myP" style="margin-left: 55px;">{{ group_in_day[2] }}</p></div>
+                                                            <div class="mdl-cell--5-col" style="height: 30px;"><p class="myP">{{ group_in_day[3] }} - {{ group_in_day[4] }}</p></div>
+                                                            <div class="mdl-cell--1-col"></div>
+                                                        </div>
+                                                    {% endfor %}
+                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; text-align: center; display: none;">
                                                     <!--  РЕДАКТИРОВАНиЕ И ДОБАВЛЕНИЕ ЗАПИСИ  -->
                                                         <!--  row4  -->
                                                         <div class="mdl-cell--2-col"></div>
@@ -476,7 +478,7 @@
                                                         </div>
                                                         <div class="mdl-cell--1-col"></div>
                                                     </div>
-                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 30px;" id="addGroupInsert">
+                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 30px; display: none;" id="addGroupInsert">
                                                         <!--  row5  -->
                                                         <div class="mdl-cell--2-col"></div>
                                                         <div class="mdl-cell--10-col"><p class="myP mdl-button mdl-js-button mdl-js-ripple-effect mdl-js-accent" style="height: 40px; width: 120px; color: #42A5F5; font-size: 16px; font-weight: normal; text-transform: lowercase;" id="addGroupDiz" value="1"> + еще одна</p></div>
@@ -499,19 +501,21 @@
                                                         <div class="mdl-cell--1-col"></div>
                                                     </div>
                                                   <!--  Этот кусок будет множиться на все записи  -->
-                                                    <div class="mdl-grid" style="margin: 10px 0 0 0; padding: 0 0 0 0;text-align: center;">
-                                                        <!--  row8  -->
-                                                        <div class="mdl-cell--2-col"></div>
-                                                        <div class="mdl-cell--1-col"><p id="old71" class="myP">МЖ 20</p></div>
-                                                        <div class="mdl-cell--1-col"></div>
-                                                        <div class="mdl-cell--1-col"><p class="myP">200</p></div>
-                                                        <div class="mdl-cell--1-col"></div>
-                                                        <div class="mdl-cell--2-col"><p class="myP">18 - 21</p></div>
-                                                        <div class="mdl-cell--1-col"></div>
-                                                        <div class="mdl-cell--2-col"><p class="myP">III - МС</p></div>
-                                                        <div class="mdl-cell--1-col"></div>
-                                                    </div>
-                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; text-align: center;">
+                                                    {%  for membs_in_day in dus[loop.index0] %}
+                                                        <div class="mdl-grid" style="margin: 10px 0 0 0; padding: 0 0 0 0;text-align: center;">
+                                                            <!--  row8  -->
+                                                            <div class="mdl-cell--2-col"></div>
+                                                            <div class="mdl-cell--1-col"><p id="old71" class="myP">{{ membs_in_day[0] }}</p></div>
+                                                            <div class="mdl-cell--1-col"></div>
+                                                            <div class="mdl-cell--1-col"><p class="myP">{{ membs_in_day[1] }}</p></div>
+                                                            <div class="mdl-cell--1-col"></div>
+                                                            <div class="mdl-cell--2-col"><p class="myP">{{ membs_in_day[2] }} - {{ membs_in_day[3] }}</p></div>
+                                                            <div class="mdl-cell--1-col"></div>
+                                                            <div class="mdl-cell--2-col"><p class="myP">{{ membs_in_day[4] }} - {{ membs_in_day[5] }}</p></div>
+                                                            <div class="mdl-cell--1-col"></div>
+                                                        </div>
+                                                    {% endfor %}
+                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; text-align: center; display: none;">
                                                     <!--  row11 РЕДАКТИРОВАНИЕ И ДОБАВЛЕНИЕ ЗАПИСИ  -->
                                                         <div class="mdl-cell--2-col"></div>
                                                         <div class="mdl-cell--1-col">
@@ -554,7 +558,7 @@
                                                         <div class="mdl-cell--1-col"></div>
                                                     </div>
 
-                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 30px;" id="addMemDizInsert">
+                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 30px; display: none;" id="addMemDizInsert">
                                                         <!--  row9  -->
                                                         <div class="mdl-cell--2-col"></div>
                                                         <div class="mdl-cell--10-col"><p class="myP mdl-button mdl-js-button mdl-js-ripple-effect mdl-js-accent" style="height: 40px; width: 120px; color: #42A5F5; font-size: 16px; font-weight: normal; text-transform: lowercase;" id="addMemDiz" value="1"> + еще одна</p></div>
