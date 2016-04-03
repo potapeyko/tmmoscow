@@ -40,7 +40,7 @@
            margin-top: 40px; margin-left: 10%; margin-right: 10%; margin-bottom: 50px;
        }
        .myP{
-           font-size: 16px;
+
        }
        th, .mdl-data-table__cell--non-numeric.mdl-data-table__cell--non-numeric, 
 .mdl-data-table th{
@@ -544,28 +544,62 @@
                                                     <!--  row2  -->
                                                     <div class="mdl-cell--1-col"></div>
                                                     <div class="mdl-cell--10-col">
-                                                        <p class="myP"><b>Дистанция:</b> {{ discs[loop.index0] }} | {{ lens[loop.index0] }}</p>
-                                                        <p class="myP"><b>Пол:</b> <b>М</b> Ж</p>
-                                                        <p class="myP"><b>Класс дистанции:</b> 2 3 <b>4</b> 5 </p>
+                                                        <p class="myP" style="display: inline; float: left;"><b>Дистанция:</b> {{ discs[loop.index0] }} | {{ lens[loop.index0] }}</p>
+                                                        <p class="myP" style="display: inline; float: right;"><b>Пол:</b> M</p>
                                                         <table class="mdl-data-table mdl-js-data-table">
                                                           <thead>
                                                               <tr>
-                                                                <th style="width: 5%; color: #42a5f5;">№</th>
-                                                                <th style="width: 35%; color: #42a5f5;">ФИО</th>
-                                                                <th style="width: 10%; color: #42a5f5;">Год рождения</th>
-                                                                <th style="width: 10%; color: #42a5f5;">Разряд</th>
-                                                                <th style="width: 20%; color: #42a5f5;">Команда</th>
-                                                                <th style="width: 20%; color: #42a5f5;">Территория</th>
+                                                                <th style="width: 5%; color: #42a5f5; ">№</th>
+                                                                <th style="width: 35%; color: #42a5f5; ">ФИО</th>
+                                                                <th style="width: 5%; color: #42a5f5; ">Класс</th>
+                                                                <th style="width: 5%; color: #42a5f5; ">Год рождения</th>
+                                                                <th style="width: 10%; color: #42a5f5; ">Разряд</th>
+                                                                <th style="width: 20%; color: #42a5f5; ">Команда</th>
+                                                                <th style="width: 20%; color: #42a5f5; ">Территория</th>
                                                               </tr>
                                                           </thead>
                                                           <tbody>
                                                               <tr>
-                                                                <td style="width: 5%;">**№**</td>
-                                                                <td style="width: 35%; text-align: center;">**ФИО**</td>
-                                                                <td style="width: 10%;">**Год рождения**</td>
-                                                                <td style="width: 10%;">**Разряд**</td>
-                                                                <td style="width: 20%;">**Команда**</td>
-                                                                <td style="width: 20%;">**Территория**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**№**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**ФИО**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**Класс**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**Год рождения**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**Разряд**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**Команда**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**Территория**</td>
+                                                              </tr>
+                                                          </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="mdl-cell--1-col"></div>
+                                                </div>
+                                                <div class="mdl-grid" style="margin: 26px 0 0 0; padding: 0 0 0 0; width: 100%;">
+                                                    <!--  row3  -->
+                                                    <div class="mdl-cell--1-col"></div>
+                                                    <div class="mdl-cell--10-col">
+                                                        <p class="myP" style="display: inline; float: left;"><b>Дистанция:</b> {{ discs[loop.index0] }} | {{ lens[loop.index0] }}</p>
+                                                        <p class="myP" style="display: inline; float: right;"><b>Пол:</b> Ж</p>
+                                                        <table class="mdl-data-table mdl-js-data-table">
+                                                          <thead>
+                                                              <tr>
+                                                                <th style="width: 5%; color: #42a5f5; ">№</th>
+                                                                <th style="width: 35%; color: #42a5f5; ">ФИО</th>
+                                                                <th style="width: 5%; color: #42a5f5; ">Класс</th>
+                                                                <th style="width: 5%; color: #42a5f5; ">Год рождения</th>
+                                                                <th style="width: 10%; color: #42a5f5; ">Разряд</th>
+                                                                <th style="width: 20%; color: #42a5f5; ">Команда</th>
+                                                                <th style="width: 20%; color: #42a5f5; ">Территория</th>
+                                                              </tr>
+                                                          </thead>
+                                                          <tbody>
+                                                              <tr>
+                                                                <td class="mdl-data-table__cell--non-numeric">**№**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**ФИО**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**Класс**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**Год рождения**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**Разряд**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**Команда**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**Территория**</td>
                                                               </tr>
                                                           </tbody>
                                                         </table>
@@ -573,7 +607,7 @@
                                                     <div class="mdl-cell--1-col"></div>
                                                 </div>
                                                 <div class="mdl-grid" style="margin: 0 0 0 0; padding: 16px 0 0 0; width: 100%;">
-                                                    <!--  row3  -->
+                                                    <!--  row4  -->
                                                     <div class="mdl-cell--7-col"></div>
                                                     <div class="mdl-cell--4-col">
                                                         <button type="button" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="btnLogIn" style="width: 100%;" id="openExport" onclick="$('#excelPanel').show();">Экспортировать в Excel</button>
