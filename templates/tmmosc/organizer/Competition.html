@@ -517,66 +517,72 @@
                                     </form>
                                   </div>    <!--  #diz-panel  -->
 
+
+
+
+
                                   <div class="mdl-tabs__panel" id="member-panel" style="background: #fff; color: #42A5F5;">
                                     <!--  УЧАСТНИКИ  -->
                                     <form action="#" id="formMember" name="formMember">
                                       <div class="tab-content">
-                                        <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%;">    
-                                            <!--  row1  -->
-                                            <div class="mdl-cell--1-col"><p class="myP" style="padding-top: 10px;">День 1 </p></div>
-                                            <div class="mdl-cell--10-col">
-                                                <img src="../../../static/img/line.png" style="width: 100%; margin-top: 20px;">
-                                            </div>
-                                            <div class="mdl-cell--1-col">
-                                              <button type="button" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="padding: 0 0 0 0; min-height: 46px; height: 46px; min-width: 46px; width: 46px;" id="swapVisMem1" value="1">
-                                                <img id="swapImgMemUp1" src="../../../static/img/chevron-up.png">
-                                                <img id="swapImgMemDown1" src="../../../static/img/chevron-down.png" style="display: none;">
-                                              </button>   
-                                            </div>
-                                        </div>
-                                          
-                                        <div id="toSwapMem1">  
-                                            <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%;"> 
-                                                <!--  row2  -->
-                                                <div class="mdl-cell--1-col"></div>
+                                        {% for day_numb in days_count %}
+                                            <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%;">
+                                                <!--  row1  -->
+                                                <div class="mdl-cell--1-col"><p class="myP" style="padding-top: 10px;">День {{ day_numb }} </p></div>
                                                 <div class="mdl-cell--10-col">
-                                                    <p class="myP"><b>Дистанция:</b> Пешеходная группа</p>
-                                                    <p class="myP"><b>Пол:</b> <b>М</b> Ж</p>
-                                                    <p class="myP"><b>Класс дистанции:</b> 2 3 <b>4</b> 5 </p>
-                                                    <table class="mdl-data-table mdl-js-data-table">
-                                                      <thead>
-                                                          <tr>
-                                                            <th style="width: 5%; color: #42a5f5;">№</th>  
-                                                            <th style="width: 35%; color: #42a5f5;">ФИО</th>
-                                                            <th style="width: 10%; color: #42a5f5;">Год рождения</th>
-                                                            <th style="width: 10%; color: #42a5f5;">Разряд</th>
-                                                            <th style="width: 20%; color: #42a5f5;">Команда</th>  
-                                                            <th style="width: 20%; color: #42a5f5;">Территория</th>  
-                                                          </tr>
-                                                      </thead>
-                                                      <tbody>
-                                                          <tr>
-                                                            <td style="width: 5%;">**№**</td>
-                                                            <td style="width: 35%; text-align: center;">**ФИО**</td>
-                                                            <td style="width: 10%;">**Год рождения**</td>
-                                                            <td style="width: 10%;">**Разряд**</td>
-                                                            <td style="width: 20%;">**Команда**</td>
-                                                            <td style="width: 20%;">**Территория**</td>  
-                                                          </tr>
-                                                      </tbody>
-                                                    </table>
+                                                    <img src="../../../static/img/line.png" style="width: 100%; margin-top: 20px;">
                                                 </div>
-                                                <div class="mdl-cell--1-col"></div>
-                                            </div>
-                                            <div class="mdl-grid" style="margin: 0 0 0 0; padding: 16px 0 0 0; width: 100%;"> 
-                                                <!--  row3  -->
-                                                <div class="mdl-cell--7-col"></div>
-                                                <div class="mdl-cell--4-col">
-                                                    <button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="btnLogIn" style="width: 100%;" id="openExport" onclick="$('#excelPanel').show();">Экспортировать в Excel</button>
+                                                <div class="mdl-cell--1-col">
+                                                  <button type="button" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect swapVisMem" style="padding: 0 0 0 0; min-height: 46px; height: 46px; min-width: 46px; width: 46px;" value="{{ day_numb }}">
+                                                    <img id="swapImgMemUp{{ day_numb }}" src="../../../static/img/chevron-up.png">
+                                                    <img id="swapImgMemDown{{ day_numb }}" src="../../../static/img/chevron-down.png" style="display: none;">
+                                                  </button>
                                                 </div>
-                                                <div class="mdl-cell--1-col"></div>
                                             </div>
-                                        </div>  <!--   #toSwapMem1  -->
+                                            <div id="toSwapMem{{ day_numb }}">
+                                                <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%;">
+                                                    <!--  row2  -->
+                                                    <div class="mdl-cell--1-col"></div>
+                                                    <div class="mdl-cell--10-col">
+                                                        <p class="myP"><b>Дистанция:</b> {{ discs[loop.index0] }} | {{ lens[loop.index0] }}</p>
+                                                        <p class="myP"><b>Пол:</b> <b>М</b> Ж</p>
+                                                        <p class="myP"><b>Класс дистанции:</b> 2 3 <b>4</b> 5 </p>
+                                                        <table class="mdl-data-table mdl-js-data-table">
+                                                          <thead>
+                                                              <tr>
+                                                                <th style="width: 5%; color: #42a5f5;">№</th>
+                                                                <th style="width: 35%; color: #42a5f5;">ФИО</th>
+                                                                <th style="width: 10%; color: #42a5f5;">Год рождения</th>
+                                                                <th style="width: 10%; color: #42a5f5;">Разряд</th>
+                                                                <th style="width: 20%; color: #42a5f5;">Команда</th>
+                                                                <th style="width: 20%; color: #42a5f5;">Территория</th>
+                                                              </tr>
+                                                          </thead>
+                                                          <tbody>
+                                                              <tr>
+                                                                <td style="width: 5%;">**№**</td>
+                                                                <td style="width: 35%; text-align: center;">**ФИО**</td>
+                                                                <td style="width: 10%;">**Год рождения**</td>
+                                                                <td style="width: 10%;">**Разряд**</td>
+                                                                <td style="width: 20%;">**Команда**</td>
+                                                                <td style="width: 20%;">**Территория**</td>
+                                                              </tr>
+                                                          </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="mdl-cell--1-col"></div>
+                                                </div>
+                                                <div class="mdl-grid" style="margin: 0 0 0 0; padding: 16px 0 0 0; width: 100%;">
+                                                    <!--  row3  -->
+                                                    <div class="mdl-cell--7-col"></div>
+                                                    <div class="mdl-cell--4-col">
+                                                        <button type="button" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="btnLogIn" style="width: 100%;" id="openExport" onclick="$('#excelPanel').show();">Экспортировать в Excel</button>
+                                                    </div>
+                                                    <div class="mdl-cell--1-col"></div>
+                                                </div>
+                                            </div>  <!--   #toSwapMem1  -->
+                                        {% endfor %}
+
                                         <div class="mdl-card mdl-shadow--8dp excel" id="excelPanel" style="z-index: 5; height: 250px; position: fixed; top: 30%; left: 35%; width: 400px; background: #fff; display:none;" >
                                            <div class="mdl-card__actions">
                                                <h5 style="color: #42a5f5;; text-align: center; height: 24px; margin-top: 30px;">Выберите списки для экспорта</h5>
@@ -596,10 +602,10 @@
                                                </div>      
                                             </div>
                                             <div class="mdl-card__actions" style="text-align: right;">
-                                                <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="width: 25%; height: 40px; min-height: 40px;" onclick="$('#excelPanel').hide();">
+                                                <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="width: 25%; height: 40px; min-height: 40px;" type="button" onclick="$('#excelPanel').hide();">
                                                     Отмена
                                                 </button>
-                                                <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="width: 45%; height: 40px; min-height: 40px; margin-right: 20px;" id="ToExcel" name="ToExcel">
+                                                <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="button" style="width: 45%; height: 40px; min-height: 40px; margin-right: 20px;" id="ToExcel" name="ToExcel">
                                                     Экспортировать
                                                 </button>
                                             </div>
@@ -607,7 +613,27 @@
                                       </div>  <!--  .tab-content  -->
                                     </form>  <!--  formMember  -->
                                   </div>    <!--  #member-panel  -->  
-                              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                   <div class="mdl-tabs__panel" id="statistic-panel" style="background: #fff; color: #42A5F5;">
                                     <!--  СТАТИСТИКА  -->
                                     <div class="tab-content">

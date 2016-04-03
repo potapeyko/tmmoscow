@@ -45,7 +45,6 @@ class Info(db.Model):
 
 class Competition(db.Model):
     name = db.StringProperty(required=True, multiline=False, default=u'Название соревнований')
-    logo = db.BlobProperty(required=False)
     d_start = db.DateProperty(required=True)
     d_finish = db.DateProperty(required=True)
     days_count = db.IntegerProperty(required=True, default=1)

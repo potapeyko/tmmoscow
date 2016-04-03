@@ -33,7 +33,7 @@ $('.swapVisDiz').click(function(){
     $(blockName).slideToggle(400);
     componentHandler.upgradeAllRegistered();
 });
-$('#swapVisMem1').click(function(){
+$('.swapVisMem').click(function(){
     var dayToSwap = $(this).val();
     var blockName = "#toSwapMem" + dayToSwap.toString();
     var butImgUp = "#swapImgMemUp" + dayToSwap.toString();
