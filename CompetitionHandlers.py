@@ -4,7 +4,7 @@ __author__ = 'Daria'
 from google.appengine.api import users
 from datetime import date
 from google.appengine.api import images
-from modelCompetition import MemInfo, DistInfo, Competition
+from modelCompetition import MemInfo, DistInfo, Competition, Distance
 import os
 import jinja2
 import webapp2
@@ -118,6 +118,8 @@ class NewCompetition(webapp2.RequestHandler):
                 du_qual_min.append(self.request.POST.getall('duQualNewmin'+str(i)))
                 du_qual_max.append(self.request.POST.getall('duQualNewmax'+str(i)))
             for i in range(d_count):    # Run through days
+                distance = Distance(comp_id=competition, day_numb=d_count, type=disciplines[i], lent=lengths[i])
+                distance.save()
                 dizs.append(zip(diz_groups[i], diz_length[i], diz_class[i], diz_min_com[i], diz_max_com[i]))
                 dus.append(zip(du_group[i], du_salary[i], du_age_min[i], du_age_max[i], du_qual_min[i], du_qual_max[i]))
                 for j in range(len(du_group[i])):      # Run through groups in one day
@@ -126,7 +128,7 @@ class NewCompetition(webapp2.RequestHandler):
                     mem.save()
                     dist = DistInfo(group_name=diz_groups[i][j], length=float(diz_length[i][j]),
                                     dist_class=int(diz_class[i][j]), min_com=int(diz_min_com[i][j]),
-                                    max_com=int(diz_max_com[i][j]), mem_info=mem)
+                                    max_com=int(diz_max_com[i][j]), mem_info=mem, distance=distance)
                     dist.save()
 
 

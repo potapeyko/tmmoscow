@@ -19,6 +19,7 @@ from ListHandlers import *
 from CompetitionHandlers import *
 from OtherHandlers import *
 from modelVisitor import *
+from modelCompetition import *
 
 import os
 import jinja2
@@ -37,8 +38,9 @@ class Test(webapp2.RequestHandler):
         user_members = db.Query(Member).filter('leader =', cur_lead)
         memInfos = MemInfo.all()
         usrs = "MemInfo: " + str(db.Query(MemInfo).count())
-        usrs += "   DistInfo: " + str(db.Query(DistInfo).count())
-        usrs += "   Competition: " + str(db.Query(Competition).count())
+        usrs += " | DistInfo: " + str(db.Query(DistInfo).count())
+        usrs += " | Competition: " + str(db.Query(Competition).count())
+        usrs += " | Distance: " + str(db.Query(Distance).count())
         temp_values = {'test_data': usrs}
         self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/tmp.html').render(temp_values))
 

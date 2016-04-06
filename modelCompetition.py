@@ -13,15 +13,6 @@ class MemInfo(db.Model):
     qual_max = db.StringProperty(multiline=False, default=u'ЗМС')
 
 
-class DistInfo(db.Model):
-    group_name = db.StringProperty(default=u'МЖЭ')
-    length = db.FloatProperty(default=0)
-    dist_class = db.IntegerProperty(default=1)
-    min_com = db.IntegerProperty(default=1)
-    max_com = db.IntegerProperty(default=1)
-    mem_info = db.ReferenceProperty(MemInfo)
-
-
 class Competition(db.Model):
     name = db.StringProperty(multiline=False, default=u'Название соревнований')
     d_start = db.DateProperty(required=True)
@@ -31,17 +22,26 @@ class Competition(db.Model):
     statistic = db.ListProperty(bool, default=[True, True, True, True, True])
 
 
-class CompMemb(db.Model):
-    competition = db.ReferenceProperty(Competition)
-    member = db.ReferenceProperty(Member)
-
-
 class Distance(db.Model):
     comp_id = db.ReferenceProperty(Competition)
     day_numb = db.IntegerProperty(default=1)
-    type = db.StringProperty(choices=['g', 's', 'l'], default='l')
-    lent = db.StringProperty(choices=['l', 's'], default='s')
-    distInfo = db.ReferenceProperty(DistInfo)
+    type = db.StringProperty()
+    lent = db.StringProperty()
+
+
+class DistInfo(db.Model):
+    group_name = db.StringProperty(default=u'МЖЭ')
+    length = db.FloatProperty(default=0)
+    dist_class = db.IntegerProperty(default=1)
+    min_com = db.IntegerProperty(default=1)
+    max_com = db.IntegerProperty(default=1)
+    mem_info = db.ReferenceProperty(MemInfo)
+    distance = db.ReferenceProperty(Distance)
+
+
+class CompMemb(db.Model):
+    competition = db.ReferenceProperty(Competition)
+    member = db.ReferenceProperty(Member)
 
 
 class Info(db.Model):

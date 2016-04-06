@@ -28,14 +28,14 @@
     <favorites_list name="tmmosc" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.61627907">
+    <splitter split-orientation="horizontal" split-proportion="0.6358629">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="CompetitionHandlers.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/CompetitionHandlers.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-270">
-                  <caret line="75" column="29" selection-start-line="75" selection-start-column="29" selection-end-line="75" selection-end-column="29" />
+                <state relative-caret-position="460">
+                  <caret line="120" column="66" selection-start-line="120" selection-start-column="66" selection-end-line="120" selection-end-column="66" />
                   <folding>
                     <element signature="e#46#84#0" expanded="true" />
                   </folding>
@@ -46,8 +46,8 @@
           <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/main.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="602">
-                  <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
+                <state relative-caret-position="594">
+                  <caret line="42" column="20" selection-start-line="42" selection-start-column="20" selection-end-line="42" selection-end-column="20" />
                   <folding>
                     <element signature="e#602#628#0" expanded="true" />
                   </folding>
@@ -62,8 +62,8 @@
           <file leaf-file-name="modelCompetition.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/modelCompetition.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="18">
-                  <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="29" />
+                <state relative-caret-position="332">
+                  <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
                   <folding>
                     <element signature="e#24#64#0" expanded="true" />
                   </folding>
@@ -150,9 +150,9 @@
         <option value="$PROJECT_DIR$/templates/tmmosc/organizer/Competition.html" />
         <option value="$PROJECT_DIR$/ListHandlers.py" />
         <option value="$PROJECT_DIR$/modelVisitor.py" />
-        <option value="$PROJECT_DIR$/modelCompetition.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/CompetitionHandlers.py" />
+        <option value="$PROJECT_DIR$/modelCompetition.py" />
       </list>
     </option>
   </component>
@@ -906,20 +906,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modelCompetition.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="29" />
-          <folding>
-            <element signature="e#24#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="602">
-          <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
+        <state relative-caret-position="594">
+          <caret line="42" column="20" selection-start-line="42" selection-start-column="20" selection-end-line="42" selection-end-column="20" />
           <folding>
             <element signature="e#602#628#0" expanded="true" />
           </folding>
@@ -928,10 +918,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CompetitionHandlers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-270">
-          <caret line="75" column="29" selection-start-line="75" selection-start-column="29" selection-end-line="75" selection-end-column="29" />
+        <state relative-caret-position="460">
+          <caret line="120" column="66" selection-start-line="120" selection-start-column="66" selection-end-line="120" selection-end-column="66" />
           <folding>
             <element signature="e#46#84#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modelCompetition.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding>
+            <element signature="e#24#64#0" expanded="true" />
           </folding>
         </state>
       </provider>
