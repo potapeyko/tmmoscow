@@ -19,7 +19,7 @@ class Competition(db.Model):
     d_finish = db.DateProperty(required=True)
     days_count = db.IntegerProperty(default=1)
     places = db.ListProperty(str)
-    statistic = db.ListProperty(bool, default=[True, True, True, True, True])
+    statistic = db.ListProperty(bool, default=[True, True, True])
 
 
 class Distance(db.Model):
@@ -54,5 +54,5 @@ class Info(db.Model):
     pzChangeEnd = db.DateProperty(default=datetime.today()+timedelta(weeks=4))
     tzIsOn = db.BooleanProperty(default=False)
     link = db.LinkProperty(default=u'http://tmmoscow.ru/')
-    orgs = db.ReferenceProperty(Organizer)
-    dols = db.ListProperty(str, default=[])
+    orgs = db.ListProperty(str)
+    dols = db.ListProperty(str)

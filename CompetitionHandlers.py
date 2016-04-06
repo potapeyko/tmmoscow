@@ -71,8 +71,15 @@ class NewCompetition(webapp2.RequestHandler):
             d_count = int(self.request.POST['dayCount'])
             show_places = self.request.POST['writePlaces']
             show_map = self.request.POST['showMap']
+
+            # statistic tab
+            stat_day = readCheckboxPost(self, 'statistic0')
+            stat_sex = readCheckboxPost(self, 'statistic1')
+            stat_qual = readCheckboxPost(self, 'statistic2')
+
             competition = Competition(name=comp_name, d_start=dateToPython(start_date),
-                                      d_finish=dateToPython(finish_date), days_count=d_count, places=["place1"])
+                                      d_finish=dateToPython(finish_date), days_count=d_count, places=["place1"],
+                                      statistic=[stat_day, stat_sex, stat_qual])
             competition.save()
 
             # info tab
@@ -130,13 +137,6 @@ class NewCompetition(webapp2.RequestHandler):
                                     dist_class=int(diz_class[i][j]), min_com=int(diz_min_com[i][j]),
                                     max_com=int(diz_max_com[i][j]), mem_info=mem, distance=distance)
                     dist.save()
-
-
-
-            # statistic tab
-            stat_day = readCheckboxPost(self, 'statistic0')
-            stat_sex = readCheckboxPost(self, 'statistic1')
-            stat_qual = readCheckboxPost(self, 'statistic2')
 
             temp_values = {'user_email': email, 'logout': users.create_logout_url('/login'), 'start': start_date,
                            'finish': finish_date, 'name': comp_name, 'show_places': show_places, 'show_map': show_map,
