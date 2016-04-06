@@ -92,7 +92,6 @@ class NewCompetition(webapp2.RequestHandler):
             orgs = []
             org_fios = []; org_dols = []; org_conts=[];
             for i in range(1, d_count+1):
-                #org_fios = []; org_dols = []; org_conts=[];
                 pzs.append(self.request.POST.getall('trPzNew'+str(i)))
                 tzs.append(self.request.POST.getall('trTzNew'+str(i)))
                 org_fios.append(self.request.POST.getall('orgFioNew'+str(i)))
@@ -125,7 +124,7 @@ class NewCompetition(webapp2.RequestHandler):
                 du_qual_min.append(self.request.POST.getall('duQualNewmin'+str(i)))
                 du_qual_max.append(self.request.POST.getall('duQualNewmax'+str(i)))
             for i in range(d_count):    # Run through days
-                distance = Distance(comp_id=competition, day_numb=d_count, type=disciplines[i], lent=lengths[i])
+                distance = Distance(competition=competition, day_numb=i, type=disciplines[i], lent=lengths[i])
                 distance.save()
                 dizs.append(zip(diz_groups[i], diz_length[i], diz_class[i], diz_min_com[i], diz_max_com[i]))
                 dus.append(zip(du_group[i], du_salary[i], du_age_min[i], du_age_max[i], du_qual_min[i], du_qual_max[i]))
@@ -144,11 +143,7 @@ class NewCompetition(webapp2.RequestHandler):
                                pz_end_change, 'links': links, 'places': places, 'pzs': pzs, 'tzs': tzs, 'org_infos': orgs,
                            'discs': disciplines, 'lens': lengths, 'dizs':dizs, 'dus':dus, 'stat_day':stat_day, 'stat_sex':stat_sex,
                            'stat_qual':stat_qual}
-            # zip(org_fios, org_dols, org_conts)
 
-            # , 'count_start':count_start, 'start_places':start_places,
-            # 'pzs':pz, 'pzEndAdds':pz_end_add, 'pzEndChanges':pz_end_change, 'tzs':tz, 'links':link_to_tmmosc,
-            # 'orgs': org_info}
             template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/Competition.html')
             self.response.write(template.render(temp_values))
         else:

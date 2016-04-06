@@ -23,7 +23,7 @@ class Competition(db.Model):
 
 
 class Distance(db.Model):
-    comp_id = db.ReferenceProperty(Competition)
+    competition = db.ReferenceProperty(Competition)
     day_numb = db.IntegerProperty(default=1)
     type = db.StringProperty()
     lent = db.StringProperty()
@@ -45,7 +45,7 @@ class CompMemb(db.Model):
 
 
 class Info(db.Model):
-    comp_id = db.ReferenceProperty(Competition)
+    competition = db.ReferenceProperty(Competition)
     day_numb = db.IntegerProperty(default=1)
     place_addr = db.StringProperty()
     place_img = db.BlobProperty()

@@ -41,6 +41,7 @@ class Test(webapp2.RequestHandler):
         usrs += " | DistInfo: " + str(db.Query(DistInfo).count())
         usrs += " | Competition: " + str(db.Query(Competition).count())
         usrs += " | Distance: " + str(db.Query(Distance).count())
+        usrs += " | Info: " + str(db.Query(Info).count())
         temp_values = {'test_data': usrs}
         self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/tmp.html').render(temp_values))
 
