@@ -29,7 +29,11 @@ class Competition(db.Model):
     days_count = db.IntegerProperty(default=1)
     places = db.ListProperty(str)
     statistic = db.ListProperty(bool, default=[True, True, True, True, True])
-    members = db.ReferenceProperty(Member)
+
+
+class CompMemb(db.Model):
+    competition = db.ReferenceProperty(Competition)
+    member = db.ReferenceProperty(Member)
 
 
 class Distance(db.Model):

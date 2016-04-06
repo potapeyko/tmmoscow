@@ -2,8 +2,9 @@
 __author__ = 'Daria'
 
 from google.appengine.api import users
+from datetime import date
 from google.appengine.api import images
-from modelCompetition import MemInfo, DistInfo
+from modelCompetition import MemInfo, DistInfo, Competition
 import os
 import jinja2
 import webapp2
@@ -70,6 +71,9 @@ class NewCompetition(webapp2.RequestHandler):
             d_count = int(self.request.POST['dayCount'])
             show_places = self.request.POST['writePlaces']
             show_map = self.request.POST['showMap']
+            competition = Competition(name=comp_name, d_start=dateToPython(start_date),
+                                      d_finish=dateToPython(finish_date), days_count=d_count, places=["place1"])
+            competition.save()
 
             # info tab
             pz_end_add = formatDateList(self.request.POST.getall('pzEndAddNew'))
@@ -189,6 +193,13 @@ def formatDateList(bad_date_list):
     for date in bad_date_list:
         good_dates.append(formatDate(date))
     return good_dates
+
+def dateToPython(string_date):
+    dmy = string_date.split('.')
+    d = int(dmy[0])
+    m = int(dmy[1])
+    y = int(dmy[2])
+    return date(y, m, d)
 
 def dayNumbers(count):
     days = []
