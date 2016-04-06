@@ -4,7 +4,7 @@ __author__ = 'Daria'
 from google.appengine.api import users
 from datetime import date
 from google.appengine.api import images
-from modelCompetition import MemInfo, DistInfo, Competition, Distance
+from modelCompetition import MemInfo, DistInfo, Competition, Distance, Info
 import os
 import jinja2
 import webapp2
@@ -98,7 +98,13 @@ class NewCompetition(webapp2.RequestHandler):
                 org_dols.append(self.request.POST.getall('orgDolNew'+str(i)))
                 org_conts.append(self.request.POST.getall('orgContNew'+str(i)))
             for i in range(d_count):
-                orgs.append(zip(org_fios[i], org_dols[i], org_conts[i]))
+                one_day_orgs = zip(org_fios[i], org_dols[i], org_conts[i])
+                orgs.append(one_day_orgs)
+                info = Info(competition=competition, day_numb=i, place_addr=places[i],
+                            pz_is_open=onToBoolean(pzs[i]), pz_add_end=dateToPython(pz_end_add[i]),
+                            pz_change_end=dateToPython(pz_end_change[i]), tz_is_on=onToBoolean(tzs[i]),
+                            link=links[i], orgs=['orgs'])
+                info.save()
             pzs = onToChecked(pzs)
             tzs = onToChecked(tzs)
 
@@ -192,11 +198,18 @@ def formatDateList(bad_date_list):
     return good_dates
 
 def dateToPython(string_date):
-    dmy = string_date.split('.')
-    d = int(dmy[0])
-    m = int(dmy[1])
-    y = int(dmy[2])
-    return date(y, m, d)
+    if '.' in string_date:
+        dmy = string_date.split('.')
+        d = int(dmy[0])
+        m = int(dmy[1])
+        y = int(dmy[2])
+        return date(y, m, d)
+    else:
+        ymd = string_date.split('-')
+        y = ymd[0]
+        m = ymd[1]
+        d = ymd[2]
+        return date(y, m, d)
 
 def dayNumbers(count):
     days = []
@@ -212,6 +225,12 @@ def onToChecked(check_list):
         else:
             checked_list.append('')
     return checked_list
+
+def onToBoolean(on_off):
+    if str(on_off).find('on') > 0:
+        return True
+    else:
+        return False
 
 def readCheckboxPost(request, post_name):
     try:
