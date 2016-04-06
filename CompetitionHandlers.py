@@ -3,9 +3,11 @@ __author__ = 'Daria'
 
 from google.appengine.api import users
 from google.appengine.api import images
+from modelCompetition import MemInfo
 import os
 import jinja2
 import webapp2
+
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -26,7 +28,7 @@ class NewCompetitionInfo(webapp2.RequestHandler):
                            'login_redir': users.create_login_url('/reg/newCompetition')}
             self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
 
-    def post(self):  # save filled form about new competition
+    def post(self):  # ??? save filled form about new competition
         user = users.get_current_user()
         if user:
             email = user.email()
@@ -111,9 +113,14 @@ class NewCompetition(webapp2.RequestHandler):
                 du_age_max.append(self.request.POST.getall('duAgemaxNew'+str(i)))
                 du_qual_min.append(self.request.POST.getall('duQualNewmin'+str(i)))
                 du_qual_max.append(self.request.POST.getall('duQualNewmax'+str(i)))
-            for i in range(d_count):
+            memInfos = []
+            for i in range(d_count):    # Run through days
                 dizs.append(zip(diz_groups[i], diz_length[i], diz_class[i], diz_min_com[i], diz_max_com[i]))
-                dus.append(zip(du_group[i], du_salary[i], du_age_min[i], du_age_max[i], du_qual_min[i],du_qual_max[i]))
+                dus.append(zip(du_group[i], du_salary[i], du_age_min[i], du_age_max[i], du_qual_min[i], du_qual_max[i]))
+                for j in range(len(du_group[i])):      # Run through groups in one day
+                    memInfos.append(MemInfo(salary=float(du_salary[i][j]), age_min=int(du_age_min[i][j]),
+                                            age_max=int(du_age_max[i][j]), qual_min=du_qual_min[i][j], qual_max=du_qual_max[i][j]))
+
 
             # statistic tab
             stat_day = readCheckboxPost(self, 'statistic0')
