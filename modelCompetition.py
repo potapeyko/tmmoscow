@@ -29,7 +29,7 @@ class Competition(db.Model):
     days_count = db.IntegerProperty(default=1)
     places = db.ListProperty(str)
     statistic = db.ListProperty(bool, default=[True, True, True, True, True])
-    #members = db.ListProperty(item_type=Member)
+    members = db.ReferenceProperty(Member)
 
 
 class Distance(db.Model):
@@ -37,7 +37,7 @@ class Distance(db.Model):
     day_numb = db.IntegerProperty(default=1)
     type = db.StringProperty(choices=['g', 's', 'l'], default='l')
     lent = db.StringProperty(choices=['l', 's'], default='s')
-    #distInfo = db.ListProperty(DistInfo)
+    distInfo = db.ReferenceProperty(DistInfo)
 
 
 class Info(db.Model):
@@ -50,5 +50,5 @@ class Info(db.Model):
     pzChangeEnd = db.DateProperty(default=datetime.today()+timedelta(weeks=4))
     tzIsOn = db.BooleanProperty(default=False)
     link = db.LinkProperty(default=u'http://tmmoscow.ru/')
-    #orgs = db.ListProperty(Organizer, default=[])
+    orgs = db.ReferenceProperty(Organizer)
     dols = db.ListProperty(str, default=[])
