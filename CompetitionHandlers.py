@@ -3,7 +3,7 @@ __author__ = 'Daria'
 
 from google.appengine.api import users
 from google.appengine.api import images
-from modelCompetition import MemInfo
+from modelCompetition import MemInfo, DistInfo
 import os
 import jinja2
 import webapp2
@@ -113,13 +113,18 @@ class NewCompetition(webapp2.RequestHandler):
                 du_age_max.append(self.request.POST.getall('duAgemaxNew'+str(i)))
                 du_qual_min.append(self.request.POST.getall('duQualNewmin'+str(i)))
                 du_qual_max.append(self.request.POST.getall('duQualNewmax'+str(i)))
-            memInfos = []
             for i in range(d_count):    # Run through days
                 dizs.append(zip(diz_groups[i], diz_length[i], diz_class[i], diz_min_com[i], diz_max_com[i]))
                 dus.append(zip(du_group[i], du_salary[i], du_age_min[i], du_age_max[i], du_qual_min[i], du_qual_max[i]))
                 for j in range(len(du_group[i])):      # Run through groups in one day
-                    memInfos.append(MemInfo(salary=float(du_salary[i][j]), age_min=int(du_age_min[i][j]),
-                                            age_max=int(du_age_max[i][j]), qual_min=du_qual_min[i][j], qual_max=du_qual_max[i][j]))
+                    mem = MemInfo(salary=float(du_salary[i][j]), age_min=int(du_age_min[i][j]),
+                                  age_max=int(du_age_max[i][j]), qual_min=du_qual_min[i][j], qual_max=du_qual_max[i][j])
+                    mem.save()
+                    dist = DistInfo(group_name=diz_groups[i][j], length=float(diz_length[i][j]),
+                                    dist_class=int(diz_class[i][j]), min_com=int(diz_min_com[i][j]),
+                                    max_com=int(diz_max_com[i][j]), mem_info=mem)
+                    dist.save()
+
 
 
             # statistic tab

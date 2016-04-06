@@ -16,10 +16,10 @@ class MemInfo(db.Model):
 class DistInfo(db.Model):
     group_name = db.StringProperty(default=u'МЖЭ')
     length = db.FloatProperty(default=0)
-    distClass = db.IntegerProperty(default=1)
+    dist_class = db.IntegerProperty(default=1)
     min_com = db.IntegerProperty(default=1)
     max_com = db.IntegerProperty(default=1)
-    memInfo = db.ReferenceProperty(MemInfo)
+    mem_info = db.ReferenceProperty(MemInfo)
 
 
 class Competition(db.Model):

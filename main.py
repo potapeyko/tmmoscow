@@ -35,9 +35,9 @@ class Test(webapp2.RequestHandler):
         cur_user = users.get_current_user()
         cur_lead = db.Query(Leader).filter('user =', cur_user).get()
         user_members = db.Query(Member).filter('leader =', cur_lead)
-        usrs = cur_user.nickname() + '  ALL::: '
-        for m in user_members:
-            usrs = usrs + m.nickname + ' - ' + m.leader.nickname + ' | '
+        memInfos = MemInfo.all()
+        usrs = "MemInfo: " + str(db.Query(MemInfo).count())
+        usrs += " DistInfo: " + str(db.Query(DistInfo).count())
         temp_values = {'test_data': usrs}
         self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/tmp.html').render(temp_values))
 
