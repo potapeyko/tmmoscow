@@ -25,5 +25,4 @@ class Member(db.Model):
     command = db.StringProperty(multiline=False, default=u'Отсутствует')
     territory = db.StringProperty(multiline=False, default=u'Отсутствует')
     birthdate = db.IntegerProperty(required=True)
-    qualification = db.StringProperty(choices=[u'Б/Р', u'IIIю', u'IIю', u'Iю', 'III', 'II', 'I',
-                                                              u'КМС', u'МС', u'МСМК', u'ЗМС'], default=u'Б/Р')
+    qualification = db.StringProperty(multiline=False, required=True, default=u"б/р")
