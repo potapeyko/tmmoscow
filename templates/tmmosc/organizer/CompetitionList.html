@@ -47,6 +47,7 @@
         <!--  Content  -->
         <div class="page-content">
               <div style="height: 20px;"></div>
+                <h1 style="color: #00acc1">{{ test }}</h1>
                   {% for comp in comps %}
                       {% if loop.index0 % 2 == 0 %}
                           <div class="mdl-grid" style="margin-top:15px;">
@@ -60,11 +61,11 @@
                                           </div>
                                       </div>
                                       <div class="mdl-card__actions mdl-card--border" style="height: 42px; border-top: 1px solid rgba(255, 255, 255, .5); position: absolute; bottom: 0px;"/>
-                                      {% if is_open[loop.index0] %}
-                                          <img src="../../../static/img/good.png" style="margin-left: 10%;"> Заявка открыта</i>
-                                      {% else %}
-                                          <img src="../../../static/img/bad.png" style="margin-left: 10%;"> Заявка закрыта</i>
-                                      {% endif %}
+                                          {% if is_open_pz[loop.index0] %}
+                                              <img src="../../../static/img/good.png" style="margin-left: 10%;"> Заявка открыта</i>
+                                          {% else %}
+                                              <img src="../../../static/img/bad.png" style="margin-left: 10%;"> Заявка закрыта</i>
+                                          {% endif %}
                                       </div>
                                     </div>
                               </div>
@@ -78,11 +79,12 @@
                                           </div>
                                       </div>
                                       <div class="mdl-card__actions mdl-card--border" style="height: 42px; border-top: 1px solid rgba(255, 255, 255, .5); position: absolute; bottom: 0px;">
-                                        {% if is_open[loop.index0] %}
-                                            <img src="../../../static/img/good.png" style="margin-left: 10%;"> Заявка открыта</i>
-                                        {% else %}
-                                            <img src="../../../static/img/bad.png" style="margin-left: 10%;"> Заявка закрыта</i>
-                                        {% endif %}                                      </div>
+                                          {% if is_open_pz[loop.index0] %}
+                                              <img src="../../../static/img/good.png" style="margin-left: 10%;"> Заявка открыта</i>
+                                          {% else %}
+                                              <img src="../../../static/img/bad.png" style="margin-left: 10%;"> Заявка закрыта</i>
+                                          {% endif %}
+                                      </div>
                                   </div>
                               </div>
                               <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-phone"></div>

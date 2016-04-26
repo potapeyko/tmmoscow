@@ -43,13 +43,19 @@ class DefaultHandler(webapp2.RequestHandler):
         else:
             email = user.email()
             role = user.nickname()
+
             comps = Competition.all().order('d_start')
-            d_start = []; d_finish = []; pzs = []; pzs_add_end = []; is_open = []
+            d_start = []; d_finish = []; pzs = []; pzs_add_end = []; pz_open = []
+            is_open_pz = []
             for c in comps:
                 d_start.append(str(c.d_start))
                 d_finish.append(str(c.d_finish))
-                infos_of_comp = c.info_set.get()        # Returns one or several Info objects (instance or list)
-                is_open.append(infos_of_comp.pz_is_open)
+                infos_of_comp = c.info_set.run(batch_size=1000)       # Returns one or several Info objects (instance or list)
+                is_open = True
+                for info_of_day in infos_of_comp:
+                    is_open = is_open and info_of_day.pz_is_open
+                    #is_open = infos_of_comp.pz_is_open and not (infos_of_comp.pz_add_end < datetime.today())
+                is_open_pz.append(is_open)
 
 
 
@@ -58,6 +64,6 @@ class DefaultHandler(webapp2.RequestHandler):
             d_start = formatDateList(d_start)
             d_finish = formatDateList(d_finish)
         temp_values = {'user_email': email, 'user_role': role, 'logout': users.create_logout_url('/login'), 'comps': comps,
-                       'd_start': d_start, 'd_finish': d_finish, 'pzs': pzs, 'test': infos_of_comp, 'is_open': is_open}
+                       'd_start': d_start, 'd_finish': d_finish, 'pzs': pzs, 'is_open_pz':is_open_pz}
         template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/organizer/CompetitionList.html')
         self.response.write(template.render(temp_values))
