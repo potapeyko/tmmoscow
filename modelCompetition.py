@@ -18,7 +18,7 @@ class Competition(db.Model):
     d_start = db.DateProperty(required=True)
     d_finish = db.DateProperty(required=True)
     days_count = db.IntegerProperty(default=1)
-    places = db.ListProperty(str)
+    #places = db.ListProperty(str)
     statistic = db.ListProperty(bool, default=[True, True, True])
 
 

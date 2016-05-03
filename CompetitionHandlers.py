@@ -2,7 +2,7 @@
 __author__ = 'Daria'
 
 from google.appengine.api import users
-from datetime import date
+from datetime import date, datetime
 from google.appengine.api import images
 from modelCompetition import MemInfo, DistInfo, Competition, Distance, Info
 import os
@@ -15,6 +15,33 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
+class Organizer:
+
+    def __init__(self):
+        self.name = 'def org name'
+        self.dol = 'def dolzhnost'
+        self.contact = '999 999 999'
+
+    def __init__(self, name, dol, contact):
+        self.name = name
+        self.dol = dol
+        self.contact = contact
+
+    def __init__(self, str_organizer):
+        str_organizer = str_organizer[0:len(str_organizer)-1]
+        if (str_organizer.find('_') == -1):      # string is from __str__ method
+            pass
+        else:   # string is from parseToStr method
+            ndc = str_organizer.split('_')
+            self.name = ndc[0]
+            self.dol = ndc[1]
+            self.contact = ndc[2]
+
+    def __str__(self):
+        return (self.name + ' ' + self.dol + ' ' + self.contact)
+
+    def parseToStr(self):
+        return (self.name + '_' + self.dol + '_' + self.contact + ';')
 
 class NewCompetitionInfo(webapp2.RequestHandler):
     def get(self):  # shows empty form for adding new competition's common info
@@ -78,7 +105,7 @@ class NewCompetition(webapp2.RequestHandler):
             stat_qual = readCheckboxPost(self, 'statistic2')
 
             competition = Competition(name=comp_name, d_start=dateToPython(start_date),
-                                      d_finish=dateToPython(finish_date), days_count=d_count, places=["place1"],
+                                      d_finish=dateToPython(finish_date), days_count=d_count,
                                       statistic=[stat_day, stat_sex, stat_qual])
             competition.save()
 
@@ -100,10 +127,11 @@ class NewCompetition(webapp2.RequestHandler):
             for i in range(d_count):
                 one_day_orgs = zip(org_fios[i], org_dols[i], org_conts[i])
                 orgs.append(one_day_orgs)
+                org = Organizer(u'Анна', u'Секретарь', '001 110 111')
                 info = Info(competition=competition, day_numb=i, place_addr=places[i],
                             pz_is_open=onToBoolean(pzs[i]), pz_add_end=dateToPython(pz_end_add[i]),
                             pz_change_end=dateToPython(pz_end_change[i]), tz_is_on=onToBoolean(tzs[i]),
-                            link=links[i], orgs=['orgs'])
+                            link=links[i], orgs=[org.parseToStr()])
                 info.save()
             pzs = onToChecked(pzs)
             tzs = onToChecked(tzs)
@@ -179,8 +207,20 @@ class CertainCompetition(webapp2.RequestHandler):
             key = self.request.GET['dbKey']
             comp = Competition.get(key)
             infos = comp.info_set.run(batch_size=1000)
+            pz_end_add = []; pz_end_change = []
+            pzs = []; tzs = []
+            places = []; links = []
+            for info in infos:
+                pz_end_add.append(formatDate(str(info.pz_add_end)))
+                pz_end_change.append(formatDate(str(info.pz_change_end)))
+                pzs.append(boolToChecked(info.pz_is_open and (datetime.today().date() < info.pz_add_end)))
+                tzs.append(boolToChecked(info.tz_is_on))
+                places.append(info.place_addr)
+                links.append(info.link)
         temp_values = {'user_email': email, 'logout': users.create_logout_url('/login'), 'start': formatDate(str(comp.d_start)),
-                       'finish': formatDate(str(comp.d_finish)), 'name': comp.name,
+                       'finish': formatDate(str(comp.d_finish)), 'name': comp.name, 'days_count': range(1, comp.days_count+1),
+                       'pz_end_add': pz_end_add, 'pz_end_change': pz_end_change, 'places': places, 'pzs': pzs, 'tzs': tzs,
+                       'links': links
                        }
 
         #temp_values = {'user_email': email, 'logout': users.create_logout_url('/login'), 'start': start_date,
@@ -193,7 +233,7 @@ class CertainCompetition(webapp2.RequestHandler):
 
 
 
-        template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/Competition.html')
+        template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/test.html')
         self.response.write(template.render(temp_values))
 
     def post(self):
@@ -247,6 +287,12 @@ def onToBoolean(on_off):
         return True
     else:
         return False
+
+def boolToChecked(bool_value):
+    if bool_value:
+        return 'checked'
+    else:
+        return ''
 
 def readCheckboxPost(request, post_name):
     try:

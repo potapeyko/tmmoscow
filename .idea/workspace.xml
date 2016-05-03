@@ -4,8 +4,8 @@
     <list default="true" id="1a4ee0a1-5209-4064-a7af-a6fd0b434d59" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CompetitionHandlers.py" afterPath="$PROJECT_DIR$/CompetitionHandlers.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modelCompetition.py" afterPath="$PROJECT_DIR$/modelCompetition.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/tmmosc/organizer/Competition.html" afterPath="$PROJECT_DIR$/templates/tmmosc/organizer/Competition.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/tmmosc/organizer/CompetitionList.html" afterPath="$PROJECT_DIR$/templates/tmmosc/organizer/CompetitionList.html" />
     </list>
     <ignored path="tmmosc.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,42 +36,99 @@
     <favorites_list name="tmmosc" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CompetitionHandlers.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/CompetitionHandlers.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="182" column="62" selection-start-line="182" selection-start-column="62" selection-end-line="182" selection-end-column="62" />
-              <folding>
-                <element signature="e#46#84#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OtherHandlers.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OtherHandlers.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="498">
-              <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-              <folding>
-                <element signature="e#22#60#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Competition.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/tmmosc/organizer/Competition.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="88" column="53" selection-start-line="88" selection-start-column="53" selection-end-line="88" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.39902082">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="modelCompetition.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/modelCompetition.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="782">
+                  <caret line="55" column="25" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
+                  <folding>
+                    <element signature="e#24#64#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Competition.html" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/templates/tmmosc/organizer/Competition.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="238">
+                  <caret line="265" column="58" selection-start-line="248" selection-start-column="52" selection-end-line="265" selection-end-column="58" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="test.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/templates/tmmosc/organizer/test.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="472">
+                  <caret line="266" column="0" selection-start-line="266" selection-start-column="0" selection-end-line="266" selection-end-column="0" />
+                  <folding>
+                    <element signature="n#style#0;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#span#0;n#h3#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#0;n#h3#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#span#1;n#h3#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#1;n#h3#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#h2#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#span#0;n#h2#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#0;n#h2#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#a#0;n#span#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#a#1;n#span#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#a#2;n#span#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#a#3;n#span#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#span#1;n#label#0;n#div#1;n#div#2;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#span#3;n#label#0;n#div#1;n#div#2;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#p#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="CompetitionHandlers.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/CompetitionHandlers.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="469">
+                  <caret line="222" column="37" selection-start-line="222" selection-start-column="37" selection-end-line="222" selection-end-column="37" />
+                  <folding>
+                    <element signature="e#46#84#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="OtherHandlers.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/OtherHandlers.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="656">
+                  <caret line="55" column="119" selection-start-line="55" selection-start-column="65" selection-end-line="55" selection-end-column="119" />
+                  <folding>
+                    <element signature="e#22#60#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -80,6 +137,7 @@
         <option value="CSS File" />
         <option value="Html5" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -126,10 +184,13 @@
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/templates/tmmosc/organizer/AddCompetition.html" />
         <option value="$PROJECT_DIR$/modelVisitor.py" />
-        <option value="$PROJECT_DIR$/modelCompetition.py" />
         <option value="$PROJECT_DIR$/OtherHandlers.py" />
         <option value="$PROJECT_DIR$/templates/tmmosc/organizer/CompetitionList.html" />
+        <option value="$PROJECT_DIR$/modelCompetition.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/templates/tmmosc/organizer/tets.html" />
         <option value="$PROJECT_DIR$/templates/tmmosc/organizer/Competition.html" />
+        <option value="$PROJECT_DIR$/templates/tmmosc/organizer/test.html" />
         <option value="$PROJECT_DIR$/CompetitionHandlers.py" />
       </list>
     </option>
@@ -171,64 +232,7 @@
     <panes>
       <pane id="Scratches" />
       <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tmmosc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tmmosc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tmmosc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tmmosc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tmmosc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tmmosc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tmmosc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tmmosc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tmmosc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="organizer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
+        <subPane />
       </pane>
       <pane id="Scope" />
     </panes>
@@ -239,7 +243,7 @@
     <property name="last_opened_file_path" value="/opt/google_appengine" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="DefaultHtmlFileTemplate" value="Html5" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
@@ -531,27 +535,27 @@
     <frame x="0" y="-4" width="1680" height="1054" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19033048" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.11138311" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32740587" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34718102" sideWeight="0.50734395" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287879" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3451883" sideWeight="0.49265605" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32845187" sideWeight="0.49632803" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38389122" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20292887" sideWeight="0.490232" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.75313807" sideWeight="0.490232" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3451883" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952183" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38389122" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="CSS Styles" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19977678" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32412326" sideWeight="0.497558" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3451883" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32740587" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -559,15 +563,15 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952183" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3451883" sideWeight="0.50734395" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34718102" sideWeight="0.50734395" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3451883" sideWeight="0.49265605" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32845187" sideWeight="0.49632803" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38389122" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37343097" sideWeight="0.490232" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.75313807" sideWeight="0.490232" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="CSS Styles" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19977678" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18849449" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11138311" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287879" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32412326" sideWeight="0.497558" order="1" side_tool="false" content_ui="tabs" />
@@ -576,6 +580,9 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3451883" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.gitignore" />
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -594,25 +601,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="11" />
+      <option name="time" value="12" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/tmmosc/organizer/AddCompetition.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="89" column="53" selection-start-line="89" selection-start-column="53" selection-end-line="89" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CompetitionHandlers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="67" column="2" selection-start-line="67" selection-start-column="2" selection-end-line="67" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -918,23 +911,22 @@
         <state relative-caret-position="612">
           <caret line="88" column="105" selection-start-line="88" selection-start-column="100" selection-end-line="88" selection-end-column="105" />
           <folding>
-            <element signature="n#style#0;n#div#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h3#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h2#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#div#0;n#div#1;n#div#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#1;n#div#0;n#div#1;n#div#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h3#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h2#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#2;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#div#1;n#div#0;n#div#2;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#1;n#div#1;n#div#0;n#div#2;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#h3#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#h2#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#1;n#div#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#img#1;n#div#0;n#div#1;n#div#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#h3#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#h2#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#2;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#img#0;n#div#1;n#div#0;n#div#2;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#img#1;n#div#1;n#div#0;n#div#2;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -947,48 +939,91 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modelCompetition.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
-          <folding>
-            <element signature="e#24#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ListHandlers.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="233">
           <caret line="27" column="21" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="21" />
           <folding>
-            <element signature="e#46#84#0" expanded="true" />
+            <element signature="e#46#84#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="6" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/OtherHandlers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
-          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+        <state relative-caret-position="656">
+          <caret line="55" column="119" selection-start-line="55" selection-start-column="65" selection-end-line="55" selection-end-column="119" />
           <folding>
             <element signature="e#22#60#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/tmmosc/organizer/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="472">
+          <caret line="266" column="0" selection-start-line="266" selection-start-column="0" selection-end-line="266" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#h3#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#h3#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#1;n#h3#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#1;n#h3#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h2#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#h2#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#h2#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#span#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#1;n#span#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#2;n#span#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#3;n#span#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#1;n#label#0;n#div#1;n#div#2;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#3;n#label#0;n#div#1;n#div#2;n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modelCompetition.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="55" column="25" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
+          <folding>
+            <element signature="e#24#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/tmmosc/organizer/Competition.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="88" column="53" selection-start-line="88" selection-start-column="53" selection-end-line="88" selection-end-column="53" />
+        <state relative-caret-position="238">
+          <caret line="265" column="58" selection-start-line="248" selection-start-column="52" selection-end-line="265" selection-end-column="58" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CompetitionHandlers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="182" column="62" selection-start-line="182" selection-start-column="62" selection-end-line="182" selection-end-column="62" />
+        <state relative-caret-position="469">
+          <caret line="222" column="37" selection-start-line="222" selection-start-column="37" selection-end-line="222" selection-end-column="37" />
           <folding>
             <element signature="e#46#84#0" expanded="true" />
           </folding>

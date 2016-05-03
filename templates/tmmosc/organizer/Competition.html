@@ -87,6 +87,7 @@
           <div class="mdl-grid" style="margin-top:15px;">
               <div class="mdl-cell mdl-cell--1-col"></div>  
               <div class="mdl-cell mdl-cell--10-col">
+              <h1>{{ test }}</h1>
                    <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; min-height: 150px; margin-top: 35px;">
                      <div class="mdl-grid mdl-card__title" style="height: 150px; width: 100%; text-align: center; border: none;">
                           <div class="mdl-cell--2-col"><h2>Comp</h2></div>
@@ -306,13 +307,13 @@
                                     <form action="#" id="formDiz" name="formDiz">
                                         {% for day_numb in days_count %}
                                             <div class="tab-content" style="margin-bottom: 10px;{% if day_numb != 1 %}margin-top: 0;{% endif %}">
-                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%;">
-                                                        <!--  row1  -->
-                                                        <div class="mdl-cell--1-col"><p class="myP" style="padding-top: 10px;">День {{ day_numb }} </p></div>
-                                                        <div class="mdl-cell--10-col">
-                                                            <img src="../../../static/img/line.png" style="width: 100%; margin-top: 20px;">
-                                                        </div>
-                                                        <div class="mdl-cell--1-col">
+                                                <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%;">
+                                                    <!--  row1  -->
+                                                    <div class="mdl-cell--1-col"><p class="myP" style="padding-top: 10px;">День {{ day_numb }} </p></div>
+                                                    <div class="mdl-cell--10-col">
+                                                        <img src="../../../static/img/line.png" style="width: 100%; margin-top: 20px;">
+                                                    </div>
+                                                    <div class="mdl-cell--1-col">
                                                       <button type="button" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect swapVisDiz" style="padding: 0 0 0 0; min-height: 46px; height: 46px; min-width: 46px; width: 46px;" value="{{ day_numb }}">
                                                         <img id="swapImgDizUp{{ day_numb }}" src="../../../static/img/chevron-up.png">
                                                         <img id="swapImgDizDown{{ day_numb }}" src="../../../static/img/chevron-down.png" style="display: none;">
