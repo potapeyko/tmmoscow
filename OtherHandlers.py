@@ -45,21 +45,16 @@ class DefaultHandler(webapp2.RequestHandler):
             role = user.nickname()
 
             comps = Competition.all().order('d_start')
-            d_start = []; d_finish = []; pzs = []; pzs_add_end = []; pz_open = []
+            d_start = []; d_finish = []; pzs = [];
             is_open_pz = []
             for c in comps:
                 d_start.append(str(c.d_start))
                 d_finish.append(str(c.d_finish))
                 infos_of_comp = c.info_set.run(batch_size=1000)       # Returns one or several Info objects (instance or list)
-                is_open = True
+                is_open = False
                 for info_of_day in infos_of_comp:
-                    is_open = is_open and info_of_day.pz_is_open
-                    #is_open = infos_of_comp.pz_is_open and not (infos_of_comp.pz_add_end < datetime.today())
+                    is_open = is_open or (info_of_day.pz_is_open and (datetime.today().date() < info_of_day.pz_add_end))
                 is_open_pz.append(is_open)
-
-
-
-
 
             d_start = formatDateList(d_start)
             d_finish = formatDateList(d_finish)
