@@ -168,7 +168,7 @@ class NewCompetition(webapp2.RequestHandler):
 
 
 class CertainCompetition(webapp2.RequestHandler):
-    def get(self):
+    def get(self):  # shows info about competition that is stored in databasee
         user = users.get_current_user()
         if not user:
             email = 'Anonymous'
@@ -176,7 +176,23 @@ class CertainCompetition(webapp2.RequestHandler):
         else:
             email = user.email()
             role = user.nickname()
-        temp_values = {'user_email': email, 'logout': users.create_logout_url('/login')}
+            key = self.request.GET['dbKey']
+            comp = Competition.get(key)
+            infos = comp.info_set.run(batch_size=1000)
+        temp_values = {'user_email': email, 'logout': users.create_logout_url('/login'), 'start': formatDate(str(comp.d_start)),
+                       'finish': formatDate(str(comp.d_finish)), 'name': comp.name,
+                       }
+
+        #temp_values = {'user_email': email, 'logout': users.create_logout_url('/login'), 'start': start_date,
+        #               'finish': finish_date, 'name': comp_name, 'show_places': show_places, 'show_map': show_map,
+        #               'days_count': range(1, int(d_count) + 1), 'pz_end_add': pz_end_add, 'pz_end_change':
+        #                   pz_end_change, 'links': links, 'places': places, 'pzs': pzs, 'tzs': tzs, 'org_infos': orgs,
+        #               'discs': disciplines, 'lens': lengths, 'dizs': dizs, 'dus': dus, 'stat_day': stat_day,
+        #               'stat_sex': stat_sex,
+        #               'stat_qual': stat_qual}
+
+
+
         template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/Competition.html')
         self.response.write(template.render(temp_values))
 
