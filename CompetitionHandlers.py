@@ -15,33 +15,6 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
-class Organizer:
-
-    def __init__(self):
-        self.name = 'def org name'
-        self.dol = 'def dolzhnost'
-        self.contact = '999 999 999'
-
-    def __init__(self, name, dol, contact):
-        self.name = name
-        self.dol = dol
-        self.contact = contact
-
-    def __init__(self, str_organizer):
-        str_organizer = str_organizer[0:len(str_organizer)-1]
-        if (str_organizer.find('_') == -1):      # string is from __str__ method
-            pass
-        else:   # string is from parseToStr method
-            ndc = str_organizer.split('_')
-            self.name = ndc[0]
-            self.dol = ndc[1]
-            self.contact = ndc[2]
-
-    def __str__(self):
-        return (self.name + ' ' + self.dol + ' ' + self.contact)
-
-    def parseToStr(self):
-        return (self.name + '_' + self.dol + '_' + self.contact + ';')
 
 class NewCompetitionInfo(webapp2.RequestHandler):
     def get(self):  # shows empty form for adding new competition's common info
@@ -127,11 +100,11 @@ class NewCompetition(webapp2.RequestHandler):
             for i in range(d_count):
                 one_day_orgs = zip(org_fios[i], org_dols[i], org_conts[i])
                 orgs.append(one_day_orgs)
-                org = Organizer(u'Анна', u'Секретарь', '001 110 111')
+                one_day_orgs = parseOrgsToStr(one_day_orgs)
                 info = Info(competition=competition, day_numb=i, place_addr=places[i],
                             pz_is_open=onToBoolean(pzs[i]), pz_add_end=dateToPython(pz_end_add[i]),
                             pz_change_end=dateToPython(pz_end_change[i]), tz_is_on=onToBoolean(tzs[i]),
-                            link=links[i], orgs=[org.parseToStr()])
+                            link=links[i], orgs=one_day_orgs)
                 info.save()
             pzs = onToChecked(pzs)
             tzs = onToChecked(tzs)
@@ -309,3 +282,9 @@ def readCheckboxGet(request, get_name):
     except:
         bool_value = False
     return bool_value
+
+def parseOrgsToStr(zip_tuple):
+    str_orgs = []
+    for one_org in zip_tuple:
+        str_orgs.append(str(one_org))# + '_' + str(one_org[1]) + '_' + str(one_org[2]))
+    return str_orgs

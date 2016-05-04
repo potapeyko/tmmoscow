@@ -264,20 +264,20 @@
                                                             <p class="myP" style="margin-bottom: 0px; top: 6px;"><b>Контакты организаторов:</b></p>
                                                         </div>
                                                     </div>
-                                                    {% for orgs_in_day in org_infos[loop.index0] %}
+                                                    {% for org_in_day in org_infos[loop.index0] %}
                                                         <div class="mdl-grid" style="margin: 10px 0 20px 70px; padding: 0 0 0 0; vertical-align:middle; height: 30px; width: 90%;">
                                                             <!--  row10  -->
                                                             <div class="mdl-cell--1-col"></div>
                                                             <div class="mdl-cell--3-col">
-                                                                <p class="myP" style="margin-bottom: 0px; top: 6px;">{{ orgs_in_day[0] }}</p>
+                                                                <p class="myP" style="margin-bottom: 0px; top: 6px;">{{ org_in_day[0] }}</p>
                                                             </div>
                                                             <div class="mdl-cell--1-col" style="width: 20px;"></div>
                                                             <div class="mdl-cell--3-col" style="text-align: center;">
-                                                                <p class="myP">{{ orgs_in_day[1] }}</p>
+                                                                <p class="myP">{{ org_in_day[1] }}</p>
                                                             </div>
                                                             <div class="mdl-cell--1-col"></div>
                                                             <div class="mdl-cell--3-col" style="text-align: center;">
-                                                                <p class="myP">{{ orgs_in_day[2] }}</p>
+                                                                <p class="myP">{{ org_in_day[2] }}</p>
                                                             </div>
                                                         </div>
                                                     {% endfor %}
