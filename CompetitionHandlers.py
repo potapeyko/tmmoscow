@@ -4,7 +4,7 @@ __author__ = 'Daria'
 from google.appengine.api import users
 from datetime import date, datetime
 from google.appengine.api import images
-from modelCompetition import MemInfo, DistInfo, Competition, Distance, Info
+from modelCompetition import MemInfo, DistInfo, Competition, Distance, Info, Org
 import os
 import jinja2
 import webapp2
@@ -179,10 +179,13 @@ class CertainCompetition(webapp2.RequestHandler):
             role = user.nickname()
             key = self.request.GET['dbKey']
             comp = Competition.get(key)
+
+            # info tab
             infos = comp.info_set.run(batch_size=1000)
             pz_end_add = []; pz_end_change = []
             pzs = []; tzs = []
             places = []; links = []
+            orgs = []
             for info in infos:
                 pz_end_add.append(formatDate(str(info.pz_add_end)))
                 pz_end_change.append(formatDate(str(info.pz_change_end)))
@@ -190,10 +193,14 @@ class CertainCompetition(webapp2.RequestHandler):
                 tzs.append(boolToChecked(info.tz_is_on))
                 places.append(info.place_addr)
                 links.append(info.link)
+                orgs.append(parseStrToOrgs(info.orgs))
+
+            # diz tab
+
         temp_values = {'user_email': email, 'logout': users.create_logout_url('/login'), 'start': formatDate(str(comp.d_start)),
                        'finish': formatDate(str(comp.d_finish)), 'name': comp.name, 'days_count': range(1, comp.days_count+1),
                        'pz_end_add': pz_end_add, 'pz_end_change': pz_end_change, 'places': places, 'pzs': pzs, 'tzs': tzs,
-                       'links': links
+                       'links': links, 'org_infos': orgs
                        }
 
         #temp_values = {'user_email': email, 'logout': users.create_logout_url('/login'), 'start': start_date,
@@ -286,5 +293,13 @@ def readCheckboxGet(request, get_name):
 def parseOrgsToStr(zip_tuple):
     str_orgs = []
     for one_org in zip_tuple:
-        str_orgs.append(str(one_org))# + '_' + str(one_org[1]) + '_' + str(one_org[2]))
+        str_orgs.append(str(one_org))
     return str_orgs
+
+def parseStrToOrgs(list_of_strings):
+    list_of_elements = []
+    for str_org in list_of_strings:
+        short_str = str_org[1:len(str_org)-1]
+        splitted = short_str.split(', ')
+        list_of_elements.append([splitted[0], splitted[1], splitted[2]])
+    return list_of_elements

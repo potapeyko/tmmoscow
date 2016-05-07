@@ -5,6 +5,17 @@ from modelVisitor import Member, Organizer
 __author__ = 'Daria'
 
 
+class Org:
+    fio = 'fio'
+    dol = 'dol'
+    contact = 'cont'
+
+    def __init__(self, f, d, c):
+        self.fio = f
+        self.dol = d
+        self.contact = c
+
+
 class MemInfo(db.Model):
     salary = db.FloatProperty(default=0)
     age_min = db.IntegerProperty(default=6)
@@ -55,3 +66,5 @@ class Info(db.Model):
     tz_is_on = db.BooleanProperty(default=False)
     link = db.StringProperty()
     orgs = db.ListProperty(str)
+
+
