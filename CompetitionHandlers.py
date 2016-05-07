@@ -196,11 +196,29 @@ class CertainCompetition(webapp2.RequestHandler):
                 orgs.append(parseStrToOrgs(info.orgs))
 
             # diz tab
+            distances_of_comp = comp.distance_set.run(batch_size=1000)
+            disciplines = []
+            lengths = []
+            dizs = []
+            dizs
+            for distance in distances_of_comp:
+                day_numb_of_distance = distance.day_numb
+                disciplines.insert(day_numb_of_distance, distance.type)
+                lengths.insert(day_numb_of_distance, distance.lent)
+                dists_info = distance.distinfo_set.run(batch_size=1000)
+                dizs_of_day = []
+                for dist in dists_info:
+                    dizs_of_day.append(dist)
+                dizs.insert(day_numb_of_distance, dizs_of_day)
+
+
+
+
 
         temp_values = {'user_email': email, 'logout': users.create_logout_url('/login'), 'start': formatDate(str(comp.d_start)),
                        'finish': formatDate(str(comp.d_finish)), 'name': comp.name, 'days_count': range(1, comp.days_count+1),
                        'pz_end_add': pz_end_add, 'pz_end_change': pz_end_change, 'places': places, 'pzs': pzs, 'tzs': tzs,
-                       'links': links, 'org_infos': orgs
+                       'links': links, 'org_infos': orgs, 'discs':disciplines, 'lens':lengths, 'dizs':dizs
                        }
 
         #temp_values = {'user_email': email, 'logout': users.create_logout_url('/login'), 'start': start_date,
