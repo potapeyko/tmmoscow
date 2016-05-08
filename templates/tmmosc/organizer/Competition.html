@@ -3,27 +3,28 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>{{ name }}</title>
-       
-   <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
-   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+   <link rel="stylesheet" href="../../../static/css/material.indigo-pink.min.css">
+   <link rel="stylesheet" href="../../../static/css/materialIcons.css">
    <link rel="stylesheet" href="../../../static/css/material.min.css">
    <link rel="stylesheet" href="../../../static/css/BaseStyle.css">
-    
-   
-   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-   <script type = "text/javascript" src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
-   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+
+   <script src="../../../static/js/jquery.min.js"></script>
+   <script type = "text/javascript" src="../../../static/js/material.min.js"></script>
+   <script type="text/javascript" src="../../../static/js/jsapi.js"></script>
    <script type="text/javascript" src="../../../static/js/drawStatisticCharts.js"></script>
    <script type="text/javascript" src="../../../static/js/loader.js"></script>
+
    <script type="text/javascript"></script>
    <style>
        body, .mdl-card__title{
            color: #ffffff;
-       } 
+       }
 
         .tabs ul {list-style:none;margin:0;width:100%;overflow:hidden;padding:0;margin-left:16px;}
         .tabs ul li {float:left;width:100px}
-        .tabs a {position:relative;color:white;text-decoration:none;display:block;width:100px;height:50px;text-align:center;line-height:52px;font-weight:700;font-size:14px;color:rgba(255,255,255,0.6);overflow:hidden;}   
+        .tabs a {position:relative;color:white;text-decoration:none;display:block;width:100px;height:50px;text-align:center;line-height:52px;font-weight:700;font-size:14px;color:rgba(255,255,255,0.6);overflow:hidden;}
 
        .mdl-tabs.is-upgraded .mdl-tabs__tab.is-active {
             color: rgba(255, 255, 255, 1);
@@ -42,7 +43,7 @@
        .myP{
 
        }
-       th, .mdl-data-table__cell--non-numeric.mdl-data-table__cell--non-numeric, 
+       th, .mdl-data-table__cell--non-numeric.mdl-data-table__cell--non-numeric,
 .mdl-data-table th{
            text-align: center;
        }
@@ -53,10 +54,10 @@
            background: #fff;
            vertical-align: middle;
        }
-   </style>      
-    
+   </style>
+
 </head>
-<body> 
+<body>
 
     <!--  Header and Menu   -->
     <div class="mdl-layout mdl-js-layout">
@@ -81,11 +82,11 @@
         </nav>
       </div>
       <main class="mdl-layout__content">
-          
+
         <!--  Content  -->
-        <div class="page-content">  
+        <div class="page-content">
           <div class="mdl-grid" style="margin-top:15px;">
-              <div class="mdl-cell mdl-cell--1-col"></div>  
+              <div class="mdl-cell mdl-cell--1-col"></div>
               <div class="mdl-cell mdl-cell--10-col">
               <h1>{{ test }}</h1>
                    <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; min-height: 150px; margin-top: 35px;">
@@ -113,9 +114,9 @@
 
                       </div>   <!--   .mdl-card__title  -->
 
-                       
+
                       <div class="mdl-card__actions mdl-card--border" style="border: none; background: #fff; padding: 0px;">
-                          <div style="width: 100%;">    
+                          <div style="width: 100%;">
                               <div class="mdl-tabs mdl-js-tabs tabs mdl-js-ripple-effect">
                                   <div class="mdl-tabs__tab-bar" style="background: #42A5F5;; color: #fff;">
                                       <span style="text-lign: center; padding-left: 15%; ">
@@ -123,15 +124,15 @@
                                           <a href="#diz-panel" class="mdl-tabs__tab" style="width: 15%;">Дистанции</a>
                                           <a href="#member-panel" class="mdl-tabs__tab" style="width: 15%;">Участники</a>
                                           <a href="#statistic-panel" class="mdl-tabs__tab" style="width: 15%;">Статистика</a>
-                                      </span>      
+                                      </span>
                                       <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" id="SaveAll" name="SaveAll" style="top: 20px;">
                                         <i class="material-icons">save</i>
-                                      </button> 
+                                      </button>
                                       <div class="mdl-tooltip mdl-tooltip--large" for="SaveAll">
                                         Нажмите, чтобы сохранить всё
                                       </div>
-                                  </div>     
-                                  
+                                  </div>
+
                                   <div class="mdl-tabs__panel is-active" id="info-panel" style="background: #fff; color: #42A5F5;">
                                     <!--   ИНФОРМАЦИЯ  -->
                                     <form action="#" id="formInfo" name="formInfo">
@@ -290,9 +291,7 @@
                                               </div>  <!--   .tab-content   -->
                                         {% endfor %}
                                     </form>  <!--  formInfo  -->
-                                  </div>   <!--   #info-panel    --> 
-                                  
-                                  
+                                  </div>   <!--   #info-panel    -->
 
 
 
@@ -301,7 +300,9 @@
 
 
 
-                                  
+
+
+
                                   <div class="mdl-tabs__panel" id="diz-panel" style="background: #fff; color: #42A5F5;">
                                     <!--  ДИСТАНЦИИ И ЗАЧЕТЫ  -->
                                     <form action="#" id="formDiz" name="formDiz">
@@ -515,7 +516,7 @@
                                                         <div class="mdl-cell--10-col"><p class="myP mdl-button mdl-js-button mdl-js-ripple-effect mdl-js-accent" style="height: 40px; width: 120px; color: #42A5F5; font-size: 16px; font-weight: normal; text-transform: lowercase;" id="addMemDiz" value="1"> + еще одна</p></div>
                                                     </div>
                                                 </div>  <!--   #toSwapDiz1  -->
-                                            </div>  <!--  tab-content  --> 
+                                            </div>  <!--  tab-content  -->
                                         {% endfor %}
                                     </form>
                                   </div>    <!--  #diz-panel  -->
@@ -623,7 +624,7 @@
                                         <div class="mdl-card mdl-shadow--8dp excel" id="excelPanel" style="z-index: 5; height: 250px; position: fixed; top: 30%; left: 35%; width: 400px; background: #fff; display:none;" >
                                            <div class="mdl-card__actions">
                                                <h5 style="color: #42a5f5;; text-align: center; height: 24px; margin-top: 30px;">Выберите списки для экспорта</h5>
-                                               <div style="margin-left: 15%;"> 
+                                               <div style="margin-left: 15%;">
                                                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="allM" style="height: 32px;">
                                                       <input type="checkbox" id="allM" name="listToExcel" class="mdl-checkbox__input" checked>
                                                       <span class="mdl-checkbox__label">Все классы, мужчины</span>
@@ -636,7 +637,7 @@
                                                       <input type="checkbox" id="selectedItem" name="listToExcel" class="mdl-checkbox__input" checked>
                                                       <span class="mdl-checkbox__label">Выбранный список</span>
                                                    </label>
-                                               </div>      
+                                               </div>
                                             </div>
                                             <div class="mdl-card__actions" style="text-align: right;">
                                                 <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="width: 25%; height: 40px; min-height: 40px;" type="button" onclick="$('#excelPanel').hide();">
@@ -646,10 +647,10 @@
                                                     Экспортировать
                                                 </button>
                                             </div>
-                                        </div>  <!--  .excel  -->  
+                                        </div>  <!--  .excel  -->
                                       </div>  <!--  .tab-content  -->
                                     </form>  <!--  formMember  -->
-                                  </div>    <!--  #member-panel  -->  
+                                  </div>    <!--  #member-panel  -->
 
 
 
@@ -708,17 +709,17 @@
                                             </div>
                                             <div class="mdl-cell--1-col"></div>
                                         </div>
-                                    </div>    <!--  .tab-content  -->                    
+                                    </div>    <!--  .tab-content  -->
                                   </div>    <!--  #statistic-panel  -->
-                                  
+
                               </div>   <!--  mdl-tabs  -->
-                          </div>          
+                          </div>
                       </div>    <!--  mdl-cerds__actions  -->
-                   </div> 
-                   
+                   </div>
+
               </div>    <!--  вся карточка  -->
-              <div class="mdl-cell mdl-cell--1-col"></div>  
-          </div>  <!-- mdl-grid -->     
+              <div class="mdl-cell mdl-cell--1-col"></div>
+          </div>  <!-- mdl-grid -->
         </div>  <!-- page-content -->
       </main>
     </div>
@@ -726,7 +727,7 @@
       <div class="mdl-card__actions">
           <p class="myP" style="color: #fff; text-align: center;">Это подсказка</p>
       </div>
-   </div>   
-</body>   
+   </div>
+</body>
     <script type="application/javascript" src="../../../static/js/toCompetition.js"></script>
 </html>
