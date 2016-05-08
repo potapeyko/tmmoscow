@@ -5,6 +5,7 @@ from google.appengine.api import users
 from datetime import date, datetime
 from google.appengine.api import images
 from modelCompetition import MemInfo, DistInfo, Competition, Distance, Info, Org
+from modelVisitor import Organizer, Leader, Member
 import os
 import jinja2
 import webapp2
@@ -171,64 +172,59 @@ class NewCompetition(webapp2.RequestHandler):
 class CertainCompetition(webapp2.RequestHandler):
     def get(self):  # shows info about competition that is stored in databasee
         user = users.get_current_user()
-        if not user:
+        # Проверять, к какому типу относится пользователь, и:
+        #  если он относится к нескольким типам, запросить под кем н заходит
+        #  иначе - показать соответствующую страницу
+        user = checkUserGroup(user)
+        if not user or user == 'ano':
             email = 'Anonymous'
             role = 'Anonim'
         else:
-            email = user.email()
+            # Проверять к какому классу относится user и передавать в шаблон
+            # соответствующие поля
+            email = user.nickname()
             role = user.nickname()
-            key = self.request.GET['dbKey']
-            comp = Competition.get(key)
 
-            # info tab
-            infos = comp.info_set.run(batch_size=1000)
-            pz_end_add = []; pz_end_change = []
-            pzs = []; tzs = []
-            places = []; links = []
-            orgs = []
-            for info in infos:
-                pz_end_add.append(formatDate(str(info.pz_add_end)))
-                pz_end_change.append(formatDate(str(info.pz_change_end)))
-                pzs.append(boolToChecked(info.pz_is_open and (datetime.today().date() < info.pz_add_end)))
-                tzs.append(boolToChecked(info.tz_is_on))
-                places.append(info.place_addr)
-                links.append(info.link)
-                orgs.append(parseStrToOrgs(info.orgs))
+        key = self.request.GET['dbKey']
+        comp = Competition.get(key)
 
-            # diz tab
-            distances_of_comp = comp.distance_set.run(batch_size=1000)
-            disciplines = []; lengths = []
-            dizs = []; dus = []
-            for distance in distances_of_comp:
-                day_numb_of_distance = distance.day_numb
-                disciplines.insert(day_numb_of_distance, distance.type)
-                lengths.insert(day_numb_of_distance, distance.lent)
-                dists_info = distance.distinfo_set.run(batch_size=1000)
-                dizs_of_day = []; dus_of_day = []
-                for dist in dists_info:
-                    dizs_of_day.append(dist)
-                    dus_of_day.append(dist.mem_info)
-                dizs.insert(day_numb_of_distance, dizs_of_day)
-                dus.insert(day_numb_of_distance, dus_of_day)
+        # info tab
+        infos = comp.info_set.run(batch_size=1000)
+        pz_end_add = []; pz_end_change = []
+        pzs = []; tzs = []
+        places = []; links = []
+        orgs = []
+        for info in infos:
+            pz_end_add.append(formatDate(str(info.pz_add_end)))
+            pz_end_change.append(formatDate(str(info.pz_change_end)))
+            pzs.append(boolToChecked(info.pz_is_open and (datetime.today().date() < info.pz_add_end)))
+            tzs.append(boolToChecked(info.tz_is_on))
+            places.append(info.place_addr)
+            links.append(info.link)
+            orgs.append(parseStrToOrgs(info.orgs))
 
-
-
+        # diz tab
+        distances_of_comp = comp.distance_set.run(batch_size=1000)
+        disciplines = []; lengths = []
+        dizs = []; dus = []
+        for distance in distances_of_comp:
+            day_numb_of_distance = distance.day_numb
+            disciplines.insert(day_numb_of_distance, distance.type)
+            lengths.insert(day_numb_of_distance, distance.lent)
+            dists_info = distance.distinfo_set.run(batch_size=1000)
+            dizs_of_day = []; dus_of_day = []
+            for dist in dists_info:
+                dizs_of_day.append(dist)
+                dus_of_day.append(dist.mem_info)
+            dizs.insert(day_numb_of_distance, dizs_of_day)
+            dus.insert(day_numb_of_distance, dus_of_day)
 
 
-        temp_values = {'user_email': email, 'logout': users.create_logout_url('/login'), 'start': formatDate(str(comp.d_start)),
+        temp_values = {'role':role, 'user_email': email, 'logout': users.create_logout_url('/login'), 'start': formatDate(str(comp.d_start)),
                        'finish': formatDate(str(comp.d_finish)), 'name': comp.name, 'days_count': range(1, comp.days_count+1),
                        'pz_end_add': pz_end_add, 'pz_end_change': pz_end_change, 'places': places, 'pzs': pzs, 'tzs': tzs,
                        'links': links, 'org_infos': orgs, 'discs': disciplines, 'lens': lengths, 'dizs': dizs, 'dus': dus
                        }
-
-        #temp_values = {'user_email': email, 'logout': users.create_logout_url('/login'), 'start': start_date,
-        #               'finish': finish_date, 'name': comp_name, 'show_places': show_places, 'show_map': show_map,
-        #               'days_count': range(1, int(d_count) + 1), 'pz_end_add': pz_end_add, 'pz_end_change':
-        #                   pz_end_change, 'links': links, 'places': places, 'pzs': pzs, 'tzs': tzs, 'org_infos': orgs,
-        #               'discs': disciplines, 'lens': lengths, 'dizs': dizs, 'dus': dus, 'stat_day': stat_day,
-        #               'stat_sex': stat_sex,
-        #               'stat_qual': stat_qual}
-
 
 
         template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/test.html')
@@ -321,3 +317,27 @@ def parseStrToOrgs(list_of_strings):
         splitted = short_str.split(', ')
         list_of_elements.append([splitted[0], splitted[1], splitted[2]])
     return list_of_elements
+
+def checkUserGroup(user):
+    is_org = is_leader = is_member = True
+    try:
+        org_user = Organizer.get(user=user)
+    except:
+        is_org = False
+    try:
+        leader_user = Leader.get(user=user)
+    except:
+        is_leader = False
+    try:
+        memb_user = Member.get(nickname=user.nickname())
+    except:
+        is_member = False
+    if is_org:
+        return org_user
+    elif is_leader:
+        return leader_user
+    elif is_member:
+        return memb_user
+    else:
+        return 'ano'         # User is anonim
+
