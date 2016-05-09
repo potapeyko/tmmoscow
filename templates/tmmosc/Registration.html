@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация в системе</title>
+</head>
+<body>
+    <div class="mdl-layout mdl-js-layout">
+      <header class="mdl-layout__header mdl-layout__header--scroll">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">Организатор</span> <!-- Здесь заменить Организатор на переменную шаблона -->
+          <div class="mdl-layout-spacer"></div>
+          <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="">{{ user_email }}</a>
+            <a class="mdl-navigation__link" href="{{ logout }}">Выход</a>
+          </nav>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title"></span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="/static">Список соревнований</a>
+          <a class="mdl-navigation__link" href="/reg/newCompetition">Новое соревнование</a>
+          <a class="mdl-navigation__link" href="/reg/memberList">Список участников</a>
+          <a class="mdl-navigation__link" href="/reg/leaderList">Список руководителей</a>
+          <a class="mdl-navigation__link" href="/reg/organizerList">Список организаторов</a>
+        </nav>
+      </div>
+      <main class="mdl-layout__content">
+        <!--  Content  -->
+        <div class="page-content">
+          <div class="mdl-grid" style="margin-top:15px;">
+            <div class="mdl-cell mdl-cell--1-col"></div>
+            <div class="mdl-cell mdl-cell--10-col">
+                <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; min-height: 80px; margin-top: 35px;">
+                        Карточка
+                </div>
+            </div>
+            <div class="mdl-cell mdl-cell--1-col"></div>
+          </div>
+
+        </div>  <!--  .page-content  -->
+      </main>
+    </div>      <!--   .mdl-layout  -->
+</body>
+</html>

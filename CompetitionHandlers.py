@@ -6,6 +6,7 @@ from datetime import date, datetime
 from google.appengine.api import images
 from modelCompetition import MemInfo, DistInfo, Competition, Distance, Info, Org
 from modelVisitor import Organizer, Leader, Member
+from google.appengine.ext import db
 import os
 import jinja2
 import webapp2
@@ -22,7 +23,8 @@ class NewCompetitionInfo(webapp2.RequestHandler):
         user = users.get_current_user()
         if user:
             email = user.email()
-            temp_values = {'user_email': email, 'logout': users.create_logout_url('/login')}
+            role = user.nickname()
+            temp_values = {'role': user, 'user_email': email, 'logout': users.create_logout_url('/login')}
             template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/NewCompetitionInfo.html')
             self.response.write(template.render(temp_values))
         else:
@@ -63,8 +65,12 @@ class NewCompetition(webapp2.RequestHandler):
 
     def post(self):  # save filled form about new competition
         user = users.get_current_user()
+
+        #user = checkUserGroup(user)
+
         if user:
-            email = user.email()
+            email = user.nickname()
+            role = user.nickname()
             # common info about competition
             start_date = self.request.POST['dateStartNew']
             finish_date = self.request.POST['dateFinishNew']
@@ -145,7 +151,7 @@ class NewCompetition(webapp2.RequestHandler):
                                     max_com=int(diz_max_com[i][j]), mem_info=mem, distance=distance)
                     dist.save()
 
-            temp_values = {'user_email': email, 'logout': users.create_logout_url('/login'), 'start': start_date,
+            temp_values = {'role': role, 'user_email': email, 'logout': users.create_logout_url('/login'), 'start': start_date,
                            'finish': finish_date, 'name': comp_name, 'show_places': show_places, 'show_map': show_map,
                            'days_count': range(1, int(d_count) + 1), 'pz_end_add': pz_end_add, 'pz_end_change':
                                pz_end_change, 'links': links, 'places': places, 'pzs': pzs, 'tzs': tzs, 'org_infos': orgs,
@@ -175,8 +181,11 @@ class CertainCompetition(webapp2.RequestHandler):
         # Проверять, к какому типу относится пользователь, и:
         #  если он относится к нескольким типам, запросить под кем н заходит
         #  иначе - показать соответствующую страницу
-        user = checkUserGroup(user)
-        if not user or user == 'ano':
+        test = user.email()
+        #test = db.Query(Organizer).count()
+        Organizer.get_by_key_name('contact', 'd@p.c')
+
+        if not user:# or user == 'ano':
             email = 'Anonymous'
             role = 'Anonim'
         else:
@@ -195,13 +204,14 @@ class CertainCompetition(webapp2.RequestHandler):
         places = []; links = []
         orgs = []
         for info in infos:
-            pz_end_add.append(formatDate(str(info.pz_add_end)))
-            pz_end_change.append(formatDate(str(info.pz_change_end)))
-            pzs.append(boolToChecked(info.pz_is_open and (datetime.today().date() < info.pz_add_end)))
-            tzs.append(boolToChecked(info.tz_is_on))
-            places.append(info.place_addr)
-            links.append(info.link)
-            orgs.append(parseStrToOrgs(info.orgs))
+            day_numb_of_info = info.day_numb
+            pz_end_add.insert(day_numb_of_info, formatDate(str(info.pz_add_end)))
+            pz_end_change.insert(day_numb_of_info, formatDate(str(info.pz_change_end)))
+            pzs.insert(day_numb_of_info, boolToChecked(info.pz_is_open and (datetime.today().date() < info.pz_add_end)))
+            tzs.insert(day_numb_of_info, boolToChecked(info.tz_is_on))
+            places.insert(day_numb_of_info, info.place_addr)
+            links.insert(day_numb_of_info, info.link)
+            orgs.insert(day_numb_of_info, parseStrToOrgs(info.orgs))
 
         # diz tab
         distances_of_comp = comp.distance_set.run(batch_size=1000)
@@ -219,8 +229,7 @@ class CertainCompetition(webapp2.RequestHandler):
             dizs.insert(day_numb_of_distance, dizs_of_day)
             dus.insert(day_numb_of_distance, dus_of_day)
 
-
-        temp_values = {'role':role, 'user_email': email, 'logout': users.create_logout_url('/login'), 'start': formatDate(str(comp.d_start)),
+        temp_values = {'role':user.email()+' | '+test, 'user_email': email, 'logout': users.create_logout_url('/login'), 'start': formatDate(str(comp.d_start)),
                        'finish': formatDate(str(comp.d_finish)), 'name': comp.name, 'days_count': range(1, comp.days_count+1),
                        'pz_end_add': pz_end_add, 'pz_end_change': pz_end_change, 'places': places, 'pzs': pzs, 'tzs': tzs,
                        'links': links, 'org_infos': orgs, 'discs': disciplines, 'lens': lengths, 'dizs': dizs, 'dus': dus
@@ -319,18 +328,22 @@ def parseStrToOrgs(list_of_strings):
     return list_of_elements
 
 def checkUserGroup(user):
-    is_org = is_leader = is_member = True
+    is_org = True; is_leader = True; is_member = True
+    nickname = user.nickname()
+    #try:
+    org_user = db.Query(Organizer).get(nickname=user.email())
+    if not org_user:
+        return 'NotOrg'
+        #org_user = Organizer.get(contact=user.email())
+    #except Exception:
+    #    is_org = False
     try:
-        org_user = Organizer.get(user=user)
-    except:
-        is_org = False
-    try:
-        leader_user = Leader.get(user=user)
-    except:
+        leader_user = Leader.get(nickname=user.email())
+    except Exception:
         is_leader = False
     try:
-        memb_user = Member.get(nickname=user.nickname())
-    except:
+        memb_user = Member.get(nickname=nickname)
+    except Exception:
         is_member = False
     if is_org:
         return org_user

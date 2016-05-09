@@ -4,17 +4,17 @@ __author__ = 'Daria'
 
 
 class Organizer(db.Model):
-    user = db.UserProperty(auto_current_user_add=True)
-    nickname = db.StringProperty(required=False, multiline=False)
+    nickname = db.StringProperty(required=True, multiline=False)       # email, unique in whole datastore. Used to reference to Google account
+    fullname = db.StringProperty(required=False)
     contact = db.StringProperty(required=False)
 
 
 class Leader(db.Model):
-    user = db.UserProperty(auto_current_user_add=True)
+    nickname = db.StringProperty(multiline=False)                      # email, unique in whole datastore. Used to reference to Google account
+    fullname = db.StringProperty(required=False)
     command = db.StringProperty(multiline=False, default=u'Отсутствует')
     territory = db.StringProperty(multiline=False, default=u'Отсутствует')
-    nickname = db.StringProperty(multiline=False)
-    contact = db.EmailProperty(required=True)
+    contact = db.StringProperty(required=True)
 
 class Member(db.Model):
     passToEdit = db.StringProperty(multiline=False)
