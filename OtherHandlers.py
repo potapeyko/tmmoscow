@@ -35,9 +35,8 @@ class LoginHandler(webapp2.RequestHandler):
 # Registration page
 class RegistrationHandler(webapp2.RequestHandler):
     def get(self):      # shows form for registration
-        temp_values = {'user_email':''}
         template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/Registration.html')
-        self.response.write(template.render(temp_values))
+        self.response.write(template.render())
 
     def post(self):     # add new user to database
         self.response.write('POST Registration of user from RegistrationHandler')

@@ -3,29 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Регистрация в системе</title>
+
+    <link rel="stylesheet" href="../../../static/css/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="../../../static/css/materialIcons.css">
+    <link rel="stylesheet" href="../../../static/css/material.min.css">
+    <link rel="stylesheet" href="../../../static/css/BaseStyle.css">
+
+
+    <script src="../../../static/js/jquery.min.js"></script>
+    <script type = "text/javascript" src="../../../static/js/material.min.js"></script>
+
+    <style>
+    body, .mdl-card__title{
+       color: #ffffff;
+    }
+    .myP, th.myP, td.myP{
+       font-size: 16px;
+       color: #42a5f5;
+    }
+    </style>
+
 </head>
 <body>
     <div class="mdl-layout mdl-js-layout">
       <header class="mdl-layout__header mdl-layout__header--scroll">
         <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">Организатор</span> <!-- Здесь заменить Организатор на переменную шаблона -->
-          <div class="mdl-layout-spacer"></div>
-          <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="">{{ user_email }}</a>
-            <a class="mdl-navigation__link" href="{{ logout }}">Выход</a>
-          </nav>
+            Название системы
         </div>
       </header>
-      <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title"></span>
-        <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" href="/static">Список соревнований</a>
-          <a class="mdl-navigation__link" href="/reg/newCompetition">Новое соревнование</a>
-          <a class="mdl-navigation__link" href="/reg/memberList">Список участников</a>
-          <a class="mdl-navigation__link" href="/reg/leaderList">Список руководителей</a>
-          <a class="mdl-navigation__link" href="/reg/organizerList">Список организаторов</a>
-        </nav>
-      </div>
+
       <main class="mdl-layout__content">
         <!--  Content  -->
         <div class="page-content">
@@ -33,7 +39,82 @@
             <div class="mdl-cell mdl-cell--1-col"></div>
             <div class="mdl-cell mdl-cell--10-col">
                 <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; min-height: 80px; margin-top: 35px;">
-                        Карточка
+                    <div class="mdl-grid mdl-card__title" style="height: 120px; width: 100%; text-align: center; border: none;">
+                        <div class="mdl-cell mdl-cell--1-col"></div>
+                        <div style="text-align: center; margin-top: 24px;" class="mdl-cell mdl-cell--11-col">
+                            <h2 class="mdl-card__title-text">
+                                Добро пожаловать в Название системы!
+                            </h2>
+                            <p class="myP mdl-card__title-text" style="margin-top: 12px; color: #ffffff;">Здесь вы можете зарегистрировать свою команду для участия в соревнованиях по спортивному туризму</p>
+                        </div>
+                    </div>   <!--   .mdl-card__title  -->
+                    <div class="mdl-card__actions mdl-card--border" style="border: none; background: #fff; padding: 0px; margin-bottom: 0px;">
+                        <div class="mdl-grid">
+                            <div class="mdl-cell--2-col"></div>
+                            <div class="mdl-cell--8-col" style="text-align: center;">
+                                <p class="myP" style="margin-bottom: 0px; margin-top: 24px;">Пройдите несложную процедуру регистрации. Это займет всего 1 минуту 29 секунд :-)</p>
+                            </div>
+                            <div class="mdl-cell--2-col"></div>
+                        </div>
+                        <form action="/registration" id="formRegist" method="post" name="formRegist">
+                            <div class="mdl-grid" style="padding-top: 0px; padding-bottom: 0px;">
+                                <div class="mdl-cell--2-col"></div>
+                                <div class="mdl-cell--8-col">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin-right: 24px; margin-left: 24px;">
+                                            <input class="mdl-textfield__input" type="text" id="emailReg" name="emailReg">
+                                            <label class="mdl-textfield__label" for="emailReg">Введите ваш e-mail</label>
+                                        </div>
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin-left: 30px;">
+                                            <input class="mdl-textfield__input" type="text" id="fioReg" name="fioReg">
+                                            <label class="mdl-textfield__label" for="fioReg">Введите фамилию и имя</label>
+                                        </div>
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin-right: 24px; margin-left: 24px;">
+                                            <input class="mdl-textfield__input" type="text" id="passReg" name="passReg">
+                                            <label class="mdl-textfield__label" for="passReg">Введите пароль</label>
+                                        </div>
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin-left: 30px;">
+                                            <input class="mdl-textfield__input" type="text" id="pass2Reg" name="pass2Reg">
+                                            <label class="mdl-textfield__label" for="pass2Reg">И еще разок пароль</label>
+                                        </div>
+                                </div>
+                                <div class="mdl-cell--2-col"></div>
+                            </div>
+                            <div class="mdl-grid" style="padding-top: 0px;">
+                                <div class="mdl-cell--4-col"></div>
+                                <div class="mdl-cell--7-col">
+                                  <div>
+                                    <p class="myP" style="margin-top: 12px;">Кем вы будете в нашей системе?</p>
+                                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="leaderReg" style="margin-bottom: 6px;">
+                                        <input type="checkbox" id="leaderReg" name="roleReg" class="mdl-checkbox__input">
+                                        <span class="mdl-checkbox__label" style="color: #42a5f5;">Руководитель команды</span>
+                                    </label>
+                                    <div class="mdl-textfield mdl-js-textfield" style="">
+                                        <input class="mdl-textfield__input" type="text" id="passLeaderReg" name="passLeaderReg">
+                                        <label class="mdl-textfield__label" for="passLeaderReg">Введите пароль подтверждения</label>
+                                    </div>
+                                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="orgReg">
+                                        <input type="checkbox" id="orgReg" name="roleReg" class="mdl-checkbox__input">
+                                        <span class="mdl-checkbox__label" style="color: #42a5f5;">Организатором соревнований</span>
+                                    </label>
+                                    <div class="mdl-textfield mdl-js-textfield" style="">
+                                        <input class="mdl-textfield__input" type="text" id="passOrgReg" name="passOrgReg">
+                                        <label class="mdl-textfield__label" for="passOrgReg">Введите пароль подтверждения</label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mdl-cell--1-col"></div>
+                            </div>
+                            <div class="mdl-grid" style="padding-top: 0px;">
+                                <div class="mdl-cell--4-col"></div>
+                                <div class="mdl-cell--4-col">
+                                    <button class="mdl-button mdl-button--colored mdl-js-button" style="width: 80%; height: 56px;" id="reg">Зарегистрироваться</button>
+                                </div>
+                                <div class="mdl-cell--4-col"></div>
+                            </div>
+
+                        </form>
+
+                    </div>   <!--   .mdl-card__action  -->
                 </div>
             </div>
             <div class="mdl-cell mdl-cell--1-col"></div>
