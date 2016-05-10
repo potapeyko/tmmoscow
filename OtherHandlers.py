@@ -39,6 +39,11 @@ class RegistrationHandler(webapp2.RequestHandler):
         self.response.write(template.render())
 
     def post(self):     # add new user to database
+        email = self.request.POST.get('emailReg')
+        fullname = self.request.POST.get('fioReg')
+        password = self.request.POST.get('passReg')
+        roles = self.request.POST.getall('roleReg')
+
         self.response.write('POST Registration of user from RegistrationHandler')
 
 

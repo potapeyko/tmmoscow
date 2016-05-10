@@ -13,6 +13,25 @@
     <script src="../../../static/js/jquery.min.js"></script>
     <script type = "text/javascript" src="../../../static/js/material.min.js"></script>
 
+    <script type="text/javascript">
+        function togglePassInput(idToToggle) {
+            //var inputId = $(this).attr('for');
+            var inputToToggle = document.getElementById(idToToggle);
+            if (inputToToggle.style.display == 'none')
+                inputToToggle.style.display = 'block'
+            else
+                inputToToggle.style.display = 'none'
+        }
+
+        function showLeaderSector() {
+            var leaderSect = document.getElementById("leader-sector");
+            if (leaderSect.style.display == 'none')
+                leaderSect.style.display = 'block';
+            else
+                leaderSect.style.display = 'none';
+        }
+    </script>
+
     <style>
     body, .mdl-card__title{
        color: #ffffff;
@@ -20,6 +39,9 @@
     .myP, th.myP, td.myP{
        font-size: 16px;
        color: #42a5f5;
+    }
+    .hidden {
+        display: none;
     }
     </style>
 
@@ -57,46 +79,24 @@
                             <div class="mdl-cell--2-col"></div>
                         </div>
                         <form action="/registration" id="formRegist" method="post" name="formRegist">
-                            <div class="mdl-grid" style="padding-top: 0px; padding-bottom: 0px;">
-                                <div class="mdl-cell--2-col"></div>
-                                <div class="mdl-cell--8-col">
-                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin-right: 24px; margin-left: 24px;">
-                                            <input class="mdl-textfield__input" type="text" id="emailReg" name="emailReg">
-                                            <label class="mdl-textfield__label" for="emailReg">Введите ваш e-mail</label>
-                                        </div>
-                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin-left: 30px;">
-                                            <input class="mdl-textfield__input" type="text" id="fioReg" name="fioReg">
-                                            <label class="mdl-textfield__label" for="fioReg">Введите фамилию и имя</label>
-                                        </div>
-                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin-right: 24px; margin-left: 24px;">
-                                            <input class="mdl-textfield__input" type="text" id="passReg" name="passReg">
-                                            <label class="mdl-textfield__label" for="passReg">Введите пароль</label>
-                                        </div>
-                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin-left: 30px;">
-                                            <input class="mdl-textfield__input" type="text" id="pass2Reg" name="pass2Reg">
-                                            <label class="mdl-textfield__label" for="pass2Reg">И еще разок пароль</label>
-                                        </div>
-                                </div>
-                                <div class="mdl-cell--2-col"></div>
-                            </div>
                             <div class="mdl-grid" style="padding-top: 0px;">
                                 <div class="mdl-cell--4-col"></div>
                                 <div class="mdl-cell--7-col">
-                                  <div>
+                                  <div style="margin-left: 12px;">
                                     <p class="myP" style="margin-top: 12px;">Кем вы будете в нашей системе?</p>
-                                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="leaderReg" style="margin-bottom: 6px;">
+                                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect role" for="leaderReg" style="margin-bottom: 6px;" onchange="togglePassInput('leadSect'); showLeaderSector();">
                                         <input type="checkbox" id="leaderReg" name="roleReg" class="mdl-checkbox__input">
-                                        <span class="mdl-checkbox__label" style="color: #42a5f5;">Руководитель команды</span>
+                                        <span class="mdl-checkbox__label" style="color: #42a5f5;">Руководителем команды</span>
                                     </label>
-                                    <div class="mdl-textfield mdl-js-textfield" style="">
+                                    <div class="mdl-textfield mdl-js-textfield" style="color:#42a5f5; display: none;" id="leadSect">
                                         <input class="mdl-textfield__input" type="text" id="passLeaderReg" name="passLeaderReg">
                                         <label class="mdl-textfield__label" for="passLeaderReg">Введите пароль подтверждения</label>
                                     </div>
-                                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="orgReg">
+                                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect role" for="orgReg" id="orgLbl" onchange="togglePassInput('orgSect');">
                                         <input type="checkbox" id="orgReg" name="roleReg" class="mdl-checkbox__input">
                                         <span class="mdl-checkbox__label" style="color: #42a5f5;">Организатором соревнований</span>
                                     </label>
-                                    <div class="mdl-textfield mdl-js-textfield" style="">
+                                    <div class="mdl-textfield mdl-js-textfield" style="color:#42a5f5; display: none;" id="orgSect">
                                         <input class="mdl-textfield__input" type="text" id="passOrgReg" name="passOrgReg">
                                         <label class="mdl-textfield__label" for="passOrgReg">Введите пароль подтверждения</label>
                                     </div>
@@ -104,14 +104,46 @@
                                 </div>
                                 <div class="mdl-cell--1-col"></div>
                             </div>
-                            <div class="mdl-grid" style="padding-top: 0px;">
+                            <div class="mdl-grid" style="padding-top: 0px; padding-bottom: 0px;">
+                                <div class="mdl-cell--2-col"></div>
+                                <div class="mdl-cell--8-col">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="color:#42a5f5; margin-right: 24px; margin-left: 24px;">
+                                        <input class="mdl-textfield__input" type="email" id="emailReg" name="emailReg">
+                                        <label class="mdl-textfield__label" for="emailReg">Введите ваш e-mail</label>
+                                    </div>
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="color:#42a5f5; margin-left: 30px;">
+                                        <input class="mdl-textfield__input" type="text" id="fioReg" name="fioReg">
+                                        <label class="mdl-textfield__label" for="fioReg">Введите фамилию и имя</label>
+                                    </div>
+                                    <span id="leader-sector" style="display: none;">
+                                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="color:#42a5f5; margin-right: 24px; margin-left: 24px;">
+                                        <input class="mdl-textfield__input" type="text" id="territoryReg" name="territoryReg">
+                                        <label class="mdl-textfield__label" for="territoryReg">Введите территорию</label>
+                                      </div>
+                                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="color:#42a5f5; margin-left: 30px;">
+                                        <input class="mdl-textfield__input" type="text" id="commandReg" name="commandReg">
+                                        <label class="mdl-textfield__label" for="commandReg">Введите название команды</label>
+                                      </div>
+                                    </span>
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="color:#42a5f5; margin-right: 24px; margin-left: 24px;">
+                                        <input class="mdl-textfield__input" type="password" id="passReg" name="passReg">
+                                        <label class="mdl-textfield__label" for="passReg">Введите пароль</label>
+                                    </div>
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="color:#42a5f5; margin-left: 30px;">
+                                        <input class="mdl-textfield__input" type="password" id="pass2Reg" name="pass2Reg">
+                                        <label class="mdl-textfield__label" for="pass2Reg">И еще разок пароль</label>
+                                    </div>
+                                </div>
+                                <div class="mdl-cell--2-col"></div>
+                            </div>
+
+                            <div class="mdl-grid" style="padding-top: 0px; margin-bottom: 24px;">
                                 <div class="mdl-cell--4-col"></div>
                                 <div class="mdl-cell--4-col">
                                     <button class="mdl-button mdl-button--colored mdl-js-button" style="width: 80%; height: 56px;" id="reg">Зарегистрироваться</button>
                                 </div>
                                 <div class="mdl-cell--4-col"></div>
                             </div>
-
                         </form>
 
                     </div>   <!--   .mdl-card__action  -->
