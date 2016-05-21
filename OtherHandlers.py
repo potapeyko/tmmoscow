@@ -7,6 +7,7 @@ import jinja2
 import webapp2
 from google.appengine.ext import db
 from modelCompetition import Competition, Info, MemInfo, DistInfo, Distance
+from modelVisitor import Organizer, Leader
 from CompetitionHandlers import formatDateList
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -14,7 +15,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
-# LogIn / Registration page
+# LogIn page
 class LoginHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
@@ -30,7 +31,6 @@ class LoginHandler(webapp2.RequestHandler):
       #  self.response.write(template.render(temp_values))
     def post(self):
         self.response.write('POST Registration of user')
-
 
 
 # Competition list
