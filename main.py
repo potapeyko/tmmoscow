@@ -20,6 +20,7 @@ from CompetitionHandlers import *
 from OtherHandlers import *
 from modelVisitor import *
 from modelCompetition import *
+from LeaderHandlers import Team, AddMemberToTeam
 
 import os
 import jinja2
@@ -52,6 +53,9 @@ class Test(webapp2.RequestHandler):
 
 
 app = webapp2.WSGIApplication([
+    # common routes
+    ('/postSignIn', AfterSignIn),
+    # organizer routes
     ('/', DefaultHandler),
     ('/login', LoginHandler),
     ('/competition', CertainCompetition),
@@ -68,6 +72,9 @@ app = webapp2.WSGIApplication([
     ('/reg/deleteOrganizer', DeleteOrganizer),
     ('/reg/searchOrganizer', OrganizersHandler),
     ('/test', Test),
+    # leaders routes
+    ('/reg/leaderTeam', Team),
+    ('/reg/leaderAddMember', AddMemberToTeam)
 
 ], debug=True)
 

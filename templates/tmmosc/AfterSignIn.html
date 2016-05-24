@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Выбор роли</title>
+
+   <link rel="stylesheet" href="../../../static/css/material.indigo-pink.min.css">
+   <link rel="stylesheet" href="../../../static/css/materialIcons.css">
+   <link rel="stylesheet" href="../../../static/css/material.min.css">
+   <link rel="stylesheet" href="../../../static/css/BaseStyle.css">
+
+   <script src="../../../static/js/jquery.min.js"></script>
+   <script type = "text/javascript" src="../../../static/js/material.min.js"></script>
+
+   <style>
+       body, .mdl-card__title{
+           color: #ffffff;
+       }
+       .competition-card:hover{
+           background: #64B5F6;
+       }
+       .mdl-button {
+           height: 56px;
+           width: 56px;
+        }
+       .mdl-button--fab.mdl-button--colored {
+            background: rgb(178,255,89);
+            color: rgb(255,255,255);
+        }
+   </style>
+
+
+</head>
+<body>
+
+    <!--  Header and Menu   -->
+    <div class="mdl-layout mdl-js-layout">
+      <header class="mdl-layout__header mdl-layout__header--scroll">
+        <div class="mdl-layout__header-row">
+          <div class="mdl-layout-spacer"></div>
+          <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="">{{ user_email }}</a>
+            <a class="mdl-navigation__link" href="{{ logout }}">Выход</a>
+          </nav>
+        </div>
+      </header>
+      <main class="mdl-layout__content">
+
+        <!--  Content  -->
+        <div class="page-content">
+            <div class="mdl-grid" style="margin-top:15px;">
+              <div class="mdl-cell mdl-cell--1-col"></div>
+              <div class="mdl-cell mdl-cell--10-col">
+                  <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; min-height: 80px; margin-top: 35px;">
+                      <div class="mdl-grid mdl-card__title" style="height: 120px; width: 100%; text-align: center; border: none;">
+                          <div class="mdl-cell mdl-cell--1-col"></div>
+                          <div style="text-align: center; margin-top: 24px;" class="mdl-cell mdl-cell--6-col">
+                              <h2 class="mdl-card__title-text">Текущая роль в системе</h2>
+                          </div>
+                          <div class="mdl-cell mdl-cell--7-col"></div>
+                          <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" id="enterCurRole" type="submit" style="top: 20px;" form="formCurRole">
+                            <i class="material-icons">save</i>
+                          </button>
+                      </div>    <!--   .mdl-card__title  -->
+                      <div class="mdl-card__actions mdl-card--border" style="border: none; background: #fff; padding: 0px; color: #42a5f5; display:block;">
+                        <div class="mdl-grid" style="margin-top: 20px; margin-bottom: 40px;">
+                          <div class="mdl-cell--1-col"></div>
+                          <div class="mdl-cell--10-col"><p class="myP" style="text-align: center;">Выберите текущую роль в системе. Вы всегда сможете ее поменять.</p></div>
+                          <div class="mdl-cell--1-col"></div>
+                          <div class="mdl-cell--5-col"></div>
+                          <div class="mdl-cell--4-col">
+                            <form id="formCurRole" action="/" method="get" name="formCurRole">
+                              <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="memb">
+                                  <input type="radio" id="memb" class="mdl-radio__button" name="curRole" value="m">
+                                  <span class="mdl-radio__label">Участник соревнований</span>
+                              </label>
+                              <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="lead">
+                                  <input type="radio" id="lead" class="mdl-radio__button" name="curRole" value="l">
+                                  <span class="mdl-radio__label">Руководитель команды</span>
+                              </label>
+                              <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="org">
+                                  <input type="radio" id="org" class="mdl-radio__button" name="curRole" value="o" checked>
+                                  <span class="mdl-radio__label">Организатор соревнований</span>
+                              </label>
+                            </form>
+                          </div>
+                          <div class="mdl-cell--4-col"></div>
+                        </div>
+                      </div>    <!--  mdl-cards__actions  -->
+                  </div>
+              </div>
+              <div class="mdl-cell mdl-cell--1-col"></div>
+            </div>
+        </div>  <!-- page-content -->
+      </main>
+    </div>
+    <div class="mdl-card mdl-shadow--8dp" style="z-index: 5; height: 44px; min-height: 44px; opacity: 0.85; position: fixed; bottom: 30px; left: 20%; right: 20%; width: 60%; display: none;">
+      <div class="mdl-card__actions">
+          <p class="myP" style="color: #fff; text-align: center;">Это подсказка</p>
+      </div>
+   </div>
+</body>
+
+</html>
