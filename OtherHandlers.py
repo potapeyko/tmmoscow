@@ -58,8 +58,8 @@ class DefaultHandler(webapp2.RequestHandler):
             email = 'Anonymous'
             role = 'Anonim'
             login = users.create_login_url(dest_url='/postSignIn')
-            temp_values = {'login': login, 'comps': comps, 'd_start': d_start, 'd_finish': d_finish, 'pzs': pzs,
-                           'is_open_pz': is_open_pz}
+            temp_values = {'login': login, 'comps': comps, 'c_count': comps_count, 'd_start': d_start,
+                           'd_finish': d_finish, 'pzs': pzs, 'is_open_pz': is_open_pz}
             template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/member/CompetitionList.html')
         else:
             email = user.email()
