@@ -8,7 +8,6 @@ var clicked_day = 1;
 function trPzClick(day_n){
     $('#PzState1'+day_n.toString()).toggle();
     $('#PzState2'+day_n.toString()).toggle();
-
 };
 
 function trTzClick(day_n){
@@ -186,6 +185,7 @@ $(".addGroupDizNew").click(function(){
     blockInsert.insertBefore(grid, addButtonDiv);
     componentHandler.upgradeAllRegistered();
     distCount = distCount + 1;
+    if (distCount != duCount) {$('#addMemDizNew'+dayNum).click();}
 });
 
 $(".addMemDizNew").click(function(){
@@ -311,6 +311,7 @@ $(".addMemDizNew").click(function(){
     blockInsert.insertBefore(grid, addButtonDiv);
     componentHandler.upgradeAllRegistered();
     duCount = duCount + 1;
+    if (duCount != distCount) {$('#addGroupDizNew'+dayNum).click();}
 });
 
 
@@ -360,3 +361,11 @@ $('#logoNew').change(function () {
     $('#logoImg').src = $(this).val();
     alert('out');
 });
+
+function addGroupToMembers(groupNumb){
+    var membInput = document.getElementById("duGroupNew"+groupNumb.toString());
+    alert(membInput);
+    var text = document.getElementById("dizGroupNew"+groupNumb.toString()).textContent;
+    alert(text);
+    membInput.setAttribute("value", text);
+}

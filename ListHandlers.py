@@ -17,6 +17,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 tooltip_message = ''
 tooltip_show = 'none'
 
+
 class OrganizersHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
@@ -34,6 +35,7 @@ class OrganizersHandler(webapp2.RequestHandler):
         else:
             temp_values = {'img_src':'../static/img/er401.png', 'er_name':'401', 'login_redir':users.create_login_url('reg/organizerList')}
             self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
+
     def post(self):
         user = users.get_current_user()
         if user:
@@ -51,6 +53,7 @@ class OrganizersHandler(webapp2.RequestHandler):
         else:
             temp_values = {'img_src':'../static/img/er401.png', 'er_name':'401', 'login_redir':users.create_login_url('reg/organizerList')}
             self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
+
 
 class AddOrganizer(webapp2.RequestHandler):
     def post(self):
@@ -75,6 +78,7 @@ class AddOrganizer(webapp2.RequestHandler):
         time.sleep(0.1)
         self.redirect('/reg/organizerList')
 
+
 class DeleteOrganizer(webapp2.RequestHandler):
     def post(self):
         org_id = self.request.POST['idToDeleteChange']
@@ -86,6 +90,7 @@ class DeleteOrganizer(webapp2.RequestHandler):
         tooltip_message = u'Организатор %s удален из базы' % fio
         tooltip_show = 'block'
         self.redirect('/reg/organizerList')
+
 
 class LeadersHandler(webapp2.RequestHandler):
     def get(self):
@@ -106,6 +111,7 @@ class LeadersHandler(webapp2.RequestHandler):
         else:
             temp_values = {'img_src':'../static/img/er401.png', 'er_name':'401', 'login_redir':users.create_login_url('reg/leaderList')}
             self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
+
     def post(self):
         user = users.get_current_user()
         if user:
@@ -123,6 +129,7 @@ class LeadersHandler(webapp2.RequestHandler):
         else:
             temp_values = {'img_src':'../static/img/er401.png', 'er_name':'401', 'login_redir':users.create_login_url('reg/organizerList')}
             self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
+
 
 class AddLeader(webapp2.RequestHandler):
     def post(self):
@@ -153,6 +160,7 @@ class AddLeader(webapp2.RequestHandler):
         time.sleep(0.1)
         self.redirect('/reg/leaderList')
 
+
 class DeleteLeader(webapp2.RequestHandler):
     def post(self):
         lead_id = self.request.POST['idToDeleteChange']
@@ -164,6 +172,7 @@ class DeleteLeader(webapp2.RequestHandler):
         tooltip_message = u'Руководитель %s удален из базы' % fio
         tooltip_show = 'block'
         self.redirect('/reg/leaderList')
+
 
 class MembersHandler(webapp2.RequestHandler):   # shows list of all members from datastore
     def get(self):
@@ -184,6 +193,7 @@ class MembersHandler(webapp2.RequestHandler):   # shows list of all members from
         else:
             temp_values = {'img_src':'../static/img/er401.png', 'er_name':'401', 'login_redir':users.create_login_url('reg/memberList')}
             self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
+
     def post(self):
         user = users.get_current_user()
         if user:
@@ -201,6 +211,7 @@ class MembersHandler(webapp2.RequestHandler):   # shows list of all members from
         else:
             temp_values = {'img_src':'../static/img/er401.png', 'er_name':'401', 'login_redir':users.create_login_url('reg/organizerList')}
             self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
+
 
 class AddMember(webapp2.RequestHandler):
     def post(self):
@@ -235,6 +246,7 @@ class AddMember(webapp2.RequestHandler):
         tooltip_show = 'block'
         time.sleep(0.1)
         self.redirect('/reg/memberList')
+
 
 class DeleteMember(webapp2.RequestHandler):
     def post(self):

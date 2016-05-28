@@ -3,16 +3,17 @@ var dayCount = 1;
 var distCount = 1;
 var duCount = 1;
 
-$('#trPz').click(function(){
-    $('#PzState1').toggle();
-    $('#PzState2').toggle();
-});
-$('#trTz').click(function(){
-    $('#TzState1').toggle();
-    $('#TzState2').toggle();
-});
+function trPzClick(day_n){
+    $('#PzState1'+day_n.toString()).toggle();
+    $('#PzState2'+day_n.toString()).toggle();
+};
 
-$('#swapVisInfo1').click(function(){
+function trTzClick(day_n){
+    $('#TzState1'+day_n.toString()).toggle();
+    $('#TzState2'+day_n.toString()).toggle();
+};
+
+$('.swapVisInfo').click(function(){
     var dayToSwap = $(this).val();
     var blockName = "#toSwapInfo" + dayToSwap.toString();
     var butImgUp = "#swapImgInfoUp" + dayToSwap.toString();
@@ -22,7 +23,7 @@ $('#swapVisInfo1').click(function(){
     $(blockName).slideToggle(400);
     componentHandler.upgradeAllRegistered();
 });
-$('#swapVisDiz1').click(function(){
+$('.swapVisDiz').click(function(){
     var dayToSwap = $(this).val();
     var blockName = "#toSwapDiz" + dayToSwap.toString();
     var butImgUp = "#swapImgDizUp" + dayToSwap.toString();
@@ -32,7 +33,7 @@ $('#swapVisDiz1').click(function(){
     $(blockName).slideToggle(400);
     componentHandler.upgradeAllRegistered();
 });
-$('#swapVisMem1').click(function(){
+$('.swapVisMem').click(function(){
     var dayToSwap = $(this).val();
     var blockName = "#toSwapMem" + dayToSwap.toString();
     var butImgUp = "#swapImgMemUp" + dayToSwap.toString();
@@ -44,7 +45,8 @@ $('#swapVisMem1').click(function(){
 });
 
 
-$('#addOrg').click(function(){
+$('.addOrg').click(function(){
+     var dayNum= $(this).siblings()[0].innerHTML;
      var grid = document.createElement('div');
      grid.className = 'mdl-grid';
      grid.style.margin = "-20px 0 20px 70px";
@@ -113,7 +115,7 @@ $('#addOrg').click(function(){
      grid.appendChild(col4);
      grid.appendChild(col5);
      grid.appendChild(col6);
-     var addButtonDiv = document.getElementById('addOrgInsert');
+     var addButtonDiv = document.getElementById('addOrgInsert'+dayNum.toString());
      var blockInsert = addButtonDiv.parentNode;
      blockInsert.insertBefore(grid, addButtonDiv);
      orgCount = orgCount+1;

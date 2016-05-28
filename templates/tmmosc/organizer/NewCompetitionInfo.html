@@ -4,13 +4,13 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Новое соревнование</title>
        
-   <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
-   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+   <link rel="stylesheet" href="../../../static/css/material.indigo-pink.min.css">
+   <link rel="stylesheet" href="../../../static/css/materialIcons.css">
    <link rel="stylesheet" href="../../../static/css/material.min.css">
    <link rel="stylesheet" href="../../../static/css/BaseStyle.css">
 
-   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-   <script type = "text/javascript" src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
+   <script src="../../../static/js/jquery.min.js"></script>
+   <script type = "text/javascript" src="../../../static/js/material.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
    <script>
        $("input").on("change", function() {
@@ -61,7 +61,7 @@
     <div class="mdl-layout mdl-js-layout">
       <header class="mdl-layout__header mdl-layout__header--scroll">
         <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">Организатор</span> <!-- Здесь заменить Организатор на переменную шаблона -->
+          <span class="mdl-layout-title">{{ role }}</span> <!-- Здесь заменить Организатор на переменную шаблона -->
           <div class="mdl-layout-spacer"></div>
           <nav class="mdl-navigation">
             <a class="mdl-navigation__link" href="">{{ user_email }}</a>
