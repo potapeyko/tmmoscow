@@ -8,6 +8,8 @@ import webapp2
 import time
 
 from modelVisitor import *
+from OtherHandlers import cur_role
+
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),

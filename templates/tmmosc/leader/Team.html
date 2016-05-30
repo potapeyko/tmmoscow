@@ -20,6 +20,14 @@
                background: #64B5F6;
 
            }
+           .mdl-button {
+               height: 56px;
+               width: 56px;
+            }
+           .mdl-button--fab.mdl-button--colored {
+                background: rgb(178,255,89);
+                color: rgb(255,255,255);
+            }
        </style>
 </head>
 <body>
@@ -50,28 +58,119 @@
         </nav>
       </div>
       <main class="mdl-layout__content">
+        <form action="/reg/addCompetition" id="formNewComp" method="get" name="formNewComp">
+          <!--  Content  -->
+          <div class="page-content">
 
-        <!--  Content  -->
-        <div class="page-content">
-          <div class="mdl-grid" style="margin-top:15px;">
-              <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-phone"></div>
-              <div class="mdl-cell mdl-cell--4-col mdl-cell--10-col-phone">
-                  <div class="demo-card-wide mdl-card mdl-shadow--2dp competition-card" style="width: 95%; position: relative;" onclick="$('#keyForm{{ loop.index0 }}').submit();">
-                      <div class="mdl-grid mdl-card__title" style="margin: 0 0 0 0;">
-                          <div>
-                            <h3 class="mdl-card__title-text" style="margin: 12px 0 12px 24px">{{ d_start[loop.index0] }} - {{ d_finish[loop.index0] }} </h3>
-                            <h2 class="mdl-card__title-text" style="margin: 12px 0 12px 24px">{{ comp.name }}</h2>
-                            <form method="get" action="/competition" id="keyForm{{ loop.index0 }}">
-                                <input type="password" style="display: none;" name="dbKey" value="{{ comp.key() }}"/>
-                            </form>
+            <div class="mdl-grid" style="margin-top:15px;">
+              <div class="mdl-cell mdl-cell--1-col"></div>
+              <div class="mdl-cell mdl-cell--10-col">
+                   <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; min-height: 150px; margin-top: 35px;">
+
+                      <div class="mdl-grid mdl-card__title" style="height: 120px; width: 100%; text-align: center; border: none;">
+                        <div class="mdl-cell mdl-cell--1-col"></div>
+                          <div style="text-align: center; margin-top: 24px;" class="mdl-cell mdl-cell--4-col">
+                              <h2 class="mdl-card__title-text">Моя команда</h2>
                           </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-phone"></div>
-          </div>
-        </div>  <!-- page-content -->
+                          <div class="mdl-cell mdl-cell--7-col"></div>
+                          <div class="mdl-cell mdl-cell--7-col"></div>
+                          <div class="mdl-cell mdl-cell--5-col">
+                              <button id="saveInfo" type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="top: 14px; left:10px;" form="formNewComp">
+                                  <i class="material-icons">save</i>
+                              </button>
+                          </div>
+                      </div>   <!--   .mdl-card__title  -->
+                      <div class="mdl-card__actions mdl-card--border" style="border: none; background: #fff; padding: 30px 0 0 0;">
+                          <div class="mdl-grid" style="padding-bottom: 0px;">
+                              <div class="mdl-cell--1-col"></div>
+                              <div class="mdl-cell--2-col">
+                                  <p class="myP" style="color: #42A5F5; margin: 25px 0 0 30px;"><b>Название</b></p>
+                              </div>
+                              <div class="mdl-cell--7-col">
+                                  <div class="mdl-textfield mdl-js-textfield" style="width: 100%; color: #42A5F5;">
+                                    <input class="mdl-textfield__input" type="text" id="nameCompNew" name="nameCompNew">
+                                    <label class="mdl-textfield__label" for="sample1">Введите название команды</label>
+                                  </div>
+                              </div>
+                              <div class="mdl-cell--3-col"></div>
+                          </div>
+                          <div class="mdl-grid" style="padding-bottom: 0px;">
+                              <div class="mdl-cell--1-col"></div>
+                              <div class="mdl-cell--2-col">
+                                  <p class="myP" style="color: #42A5F5; margin: 25px 0 0 30px;"><b>Территория</b></p>
+                              </div>
+                              <div class="mdl-cell--7-col">
+                                  <div class="mdl-textfield mdl-js-textfield" style="width: 100%; color: #42A5F5;">
+                                    <input class="mdl-textfield__input" type="text" id="nameCompNew" name="nameCompNew">
+                                    <label class="mdl-textfield__label" for="sample1">Введите территорию (город и, возможно, район)</label>
+                                  </div>
+                              </div>
+                              <div class="mdl-cell--3-col"></div>
+                          </div>
+                          <div class="mdl-grid" style="padding-bottom: 0px;">
+                              <div class="mdl-cell--1-col"></div>
+                              <div class="mdl-cell--11-col">
+                                  <p class="myP" style="color: #42A5F5; margin: 25px 0 0 30px;"><b>Список участников команды</b></p>
+                              </div>
+                          </div>
+                          <div class="mdl-grid" style="padding-top: 30px;">
+                              <!--  row3  -->
+                              <div class="mdl-cell mdl-cell--1-col"></div>
+                              <div class="mdl-cell mdl-cell--10-col">
+                                  <div style="width: 100%;">
+                                  {% if members != '' %}
+                                    <table class="mdl-data-table mdl-js-data-table">
+                                      <thead>
+                                          <tr>
+                                            <th class="myP" style="width: 35%; color: #42a5f5;">ФИО</th>
+                                            <th class="myP" style="width: 10%; color: #42a5f5;">Год рождения</th>
+                                            <th class="myP" style="width: 8%; color: #42a5f5;">Разряд</th>
+                                            <th class="myP" style="width: 20%; color: #42a5f5;">Команда</th>
+                                            <th class="myP" style="width: 20%; color: #42a5f5;">Территория</th>
+                                            <th style="width: 2%; color: #42a5f5;"></th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          {% for memb in members %}
+                                              <tr style="color: #42a5f5;">
+                                                <td class="myP" style="width: 35%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.nickname }}</td>
+                                                <td class="myP" style="width: 10%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.birthdate }}</td>
+                                                <td class="myP" style="width: 10%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.qualification }}</td>
+                                                <td class="myP" style="width: 20%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.command }}</td>
+                                                <td class="myP" style="width: 20%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.territory }}</td>
+                                                <td style="width: 1%; text-align: center; bottom: 4px;">
+                                                  <form action="/reg/deleteMember" method="post">
+                                                    <button class="mdl-button mdl-js-button mdl-button--icon changeMemb" type="button" style="width: 32px; height: 32px;">
+                                                      <i class="material-icons">mode_edit</i>
+                                                    </button>
+                                                    <input type="text" style="display: none;" value="{{ memb.nickname }}" name="membFio">
+                                                    <input type="text" style="display: none;" value="{{ keys[loop.index0] }}" name="idToDeleteChange">
+                                                    <button class="mdl-button mdl-js-button mdl-button--icon" type="submit" style="width: 32px; height: 32px;">
+                                                      <i class="material-icons" id="deleteMemb">delete</i>
+                                                    </button>
+                                                  </form>
+                                                </td>
+                                              </tr>
+                                          {% endfor %}
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                  {% else %}
+                                    <p class="myP">В вашей команде пока нет участников</p>
+                                  {% endif %}
+                              </div>
+                              <div class="mdl-cell mdl-cell--1-col"></div>
+                          </div>
 
+                      </div>    <!--  mdl-cards__actions  -->
+                   </div>
+
+              </div>    <!--  вся карточка  -->
+              <div class="mdl-cell mdl-cell--1-col"></div>
+            </div>  <!-- mdl-grid -->
+
+          </div>  <!-- page-content -->
+        </form>  <!--  formNewComp  -->
       </main>
     </div>
     <div class="mdl-card mdl-shadow--8dp" style="z-index: 5; height: 44px; min-height: 44px; opacity: 0.85; position: fixed; bottom: 30px; left: 20%; right: 20%; width: 60%; display: none;">

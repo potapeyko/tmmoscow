@@ -11,6 +11,7 @@
 
    <script src="../../../static/js/jquery.min.js"></script>
    <script type = "text/javascript" src="../../../static/js/material.min.js"></script>
+   <script type = "text/javascript" src="../../../static/js/ajax.js"></script>
 
    <style>
        body, .mdl-card__title{
@@ -33,15 +34,19 @@
           <span class="mdl-layout-title">
               <nav class="mdl-navigation">
                 {% for role in roles %}
-                  <a class="mdl-navigation__link" href="">{{ role }}</a>
+                  <a class="mdl-navigation__link" href="">{{ role|safe }}</a>
                 {%  endfor %}
               </nav>
           </span>
           <div class="mdl-layout-spacer"></div>
-          <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="{{ login }}">Вход</a>
-          </nav>
-        </div>
+            <nav class="mdl-navigation">
+                {% if is_user %}
+                    <a class="mdl-navigation__link" href="{{ login }}">Вход</a>
+                {% else %}
+                  <a class="mdl-navigation__link" href="{{ logout }}" onclick="nullToCurRole();">Выход</a>
+                {% endif %}
+            </nav>
+          </div>
       </header>
       <main class="mdl-layout__content">
 

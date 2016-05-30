@@ -11,6 +11,7 @@ import os
 import jinja2
 import webapp2
 from CompetitionHandlers import formatDateList
+from OtherHandlers import cur_role
 
 
 JINJA_ENVIRONMENT = jinja2.Environment(

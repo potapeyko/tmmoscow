@@ -69,19 +69,25 @@
                           <div class="mdl-cell--1-col"></div>
                           <div class="mdl-cell--5-col"></div>
                           <div class="mdl-cell--4-col">
-                            <form id="formCurRole" action="/" method="get" name="formCurRole">
-                              <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="memb">
-                                  <input type="radio" id="memb" class="mdl-radio__button" name="curRole" value="m">
-                                  <span class="mdl-radio__label">Участник соревнований</span>
-                              </label>
-                              <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="lead">
-                                  <input type="radio" id="lead" class="mdl-radio__button" name="curRole" value="l">
-                                  <span class="mdl-radio__label">Руководитель команды</span>
-                              </label>
-                              <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="org">
-                                  <input type="radio" id="org" class="mdl-radio__button" name="curRole" value="o" checked>
-                                  <span class="mdl-radio__label">Организатор соревнований</span>
-                              </label>
+                            <form id="formCurRole" action="/reg/acceptRole" method="post" name="formCurRole">
+                              {% if 'Участник соревнований' in roles %}
+                                  <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="memb">
+                                      <input type="radio" id="memb" class="mdl-radio__button" name="curRole" value="member">
+                                      <span class="mdl-radio__label">Участник соревнований</span>
+                                  </label>
+                              {% endif %}
+                              {% if 'Руководитель команды' in roles %}
+                                  <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="lead">
+                                      <input type="radio" id="lead" class="mdl-radio__button" name="curRole" value="leader">
+                                      <span class="mdl-radio__label">Руководитель команды</span>
+                                  </label>
+                              {% endif %}
+                              {% if 'Организатор соревнований' in roles %}
+                                  <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="org">
+                                      <input type="radio" id="org" class="mdl-radio__button" name="curRole" value="organizer" checked>
+                                      <span class="mdl-radio__label">Организатор соревнований</span>
+                                  </label>
+                              {% endif %}
                             </form>
                           </div>
                           <div class="mdl-cell--4-col"></div>

@@ -55,6 +55,8 @@ class Test(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     # common routes
     ('/postSignIn', AfterSignIn),
+    ('/reg/acceptRole', AfterSignIn),
+    ('/reg/nullToRole', beforeSignOut),
     # organizer routes
     ('/', DefaultHandler),
     ('/login', LoginHandler),

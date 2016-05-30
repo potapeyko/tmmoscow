@@ -10,6 +10,7 @@ from google.appengine.ext import db
 import os
 import jinja2
 import webapp2
+import OtherHandlers
 
 
 JINJA_ENVIRONMENT = jinja2.Environment(
