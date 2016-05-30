@@ -32,6 +32,7 @@ class LoginHandler(webapp2.RequestHandler):
       #  temp_values = {}
       #  template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/LogIn.html')
       #  self.response.write(template.render(temp_values))
+
     def post(self):
         self.response.write('POST Registration of user')
 

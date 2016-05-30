@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       <title>Участник {{ memb_fullname }}</title>
+
+       <link rel="stylesheet" href="../../../static/css/material.indigo-pink.min.css">
+       <link rel="stylesheet" href="../../../static/css/materialIcons.css">
+       <link rel="stylesheet" href="../../../static/css/material.min.css">
+       <link rel="stylesheet" href="../../../static/css/BaseStyle.css">
+
+       <script src="../../../static/js/jquery.min.js"></script>
+       <script type = "text/javascript" src="../../../static/js/material.min.js"></script>
+
+       <style>
+           body, .mdl-card__title{
+               color: #ffffff;
+           }
+           .competition-card:hover{
+               background: #64B5F6;
+
+           }
+           .mdl-button {
+               height: 56px;
+               width: 56px;
+            }
+           .mdl-button--fab.mdl-button--colored {
+                background: rgb(178,255,89);
+                color: rgb(255,255,255);
+            }
+       </style>
+</head>
+<body>
+    <!--  Header and Menu   -->
+    <div class="mdl-layout mdl-js-layout">
+      <header class="mdl-layout__header mdl-layout__header--scroll">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">
+            <nav class="mdl-navigation">
+                {% for role in '' %}
+                  <a class="mdl-navigation__link" href="">{{ role }}</a>
+                {%  endfor %}
+            </nav>
+          </span>
+          <div class="mdl-layout-spacer"></div>
+          <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="{{ login }}">Вход</a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="mdl-layout__content">
+        <form action="/memberInfo" id="formChangeMember" method="post" name="formChangeMember">
+          <!--  Content  -->
+          <div class="page-content">
+
+            <div class="mdl-grid" style="margin-top:15px;">
+              <div class="mdl-cell mdl-cell--1-col"></div>
+              <div class="mdl-cell mdl-cell--10-col">
+                   <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; min-height: 150px; margin-top: 35px;">
+
+                      <div class="mdl-grid mdl-card__title" style="height: 120px; width: 100%; text-align: center; border: none;">
+                        <div class="mdl-cell mdl-cell--1-col"></div>
+                          <div style="text-align: center; margin-top: 24px;" class="mdl-cell mdl-cell--4-col">
+                              <h2 class="mdl-card__title-text">Редактирование участника</h2>
+                          </div>
+                          <div class="mdl-cell mdl-cell--7-col"></div>
+                          <div class="mdl-cell mdl-cell--7-col"></div>
+                          <div class="mdl-cell mdl-cell--5-col">
+                              <button id="saveInfo" type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="top: 14px; left:10px;" form="formChangeMember">
+                                  <i class="material-icons">save</i>
+                              </button>
+                          </div>
+                      </div>   <!--   .mdl-card__title  -->
+
+                      <div class="mdl-card__actions mdl-card--border" style="border: none; background: #fff; padding: 30px 0 0 0;">
+                          <div class="mdl-grid" style="padding-bottom: 0px;">
+                              <div class="mdl-cell--1-col"></div>
+                              <div class="mdl-cell--2-col">
+                                  <p class="myP" style="color: #42A5F5; margin: 25px 0 0 30px;"><b>Фамилия</b></p>
+                              </div>
+                              <div class="mdl-cell--3-col">
+                                  <div class="mdl-textfield mdl-js-textfield" style="width: 100%; color: #42A5F5;">
+                                      <input class="mdl-textfield__input" type="text" id="surnameMemb" name="surnameMemb" value="{{ memb_surname }}">
+                                      <label class="mdl-textfield__label" for="surnameMemb">Введите вашу фамилию</label>
+                                  </div>
+                              </div>
+                              <div class="mdl-cell--1-col"></div>
+                              <div class="mdl-cell--1-col">
+                                  <p class="myP" style="color: #42A5F5; margin: 25px 0 0 30px;"><b>Имя</b></p>
+                              </div>
+                              <div class="mdl-cell--3-col">
+                                  <div class="mdl-textfield mdl-js-textfield" style="width: 100%; color: #42A5F5; left: 30px;">
+                                      <input class="mdl-textfield__input" type="text" id="nameMemb" name="nameMemb" value="{{ memb_name }}">
+                                      <label class="mdl-textfield__label" for="nameMemb">Введите ваше имя</label>
+                                  </div>
+                              </div>
+                              <div class="mdl-cell--1-col"></div>
+                          </div>
+                          <div class="mdl-grid" style="padding-bottom: 0px;">
+                              <div class="mdl-cell--1-col"></div>
+                              <div class="mdl-cell--2-col">
+                                  <p class="myP" style="color: #42A5F5; margin: 25px 0 0 30px;"><b>Год рождения</b></p>
+                              </div>
+                              <div class="mdl-cell--3-col">
+                                  <div class="mdl-textfield mdl-js-textfield" style="width: 100%; color: #42A5F5;">
+                                      <input class="mdl-textfield__input" type="number" id="ageMemb" name="ageMemb" value="{{ memb_age }}">
+                                      <label class="mdl-textfield__label" for="ageMemb">Введите год рождения</label>
+                                  </div>
+                              </div>
+                              <div class="mdl-cell--1-col"></div>
+                              <div class="mdl-cell--1-col">
+                                  <p class="myP" style="color: #42A5F5; margin: 25px 0 0 30px;"><b>Разряд</b></p>
+                              </div>
+                              <div class="mdl-cell--3-col">
+                                  <div class="mdl-textfield mdl-js-textfield" style="width: 100%; color: #42A5F5; left: 30px;">
+                                      <input class="mdl-textfield__input" type="" id="qualMemb" name="qualMemb" value="{{ memb_qual }}">
+                                      <label class="mdl-textfield__label" for="qualMemb">Введите ваш разряд</label>
+                                  </div>
+                              </div>
+                              <div class="mdl-cell--1-col"></div>
+                          </div>
+                          <div class="mdl-grid" style="padding-bottom: 0px;">
+                              <div class="mdl-cell--1-col"></div>
+                              <div class="mdl-cell--2-col">
+                                  <p class="myP" style="color: #42A5F5; margin: 20px 0 0 30px;"><b>Команда</b><sup>*</sup></p>
+                              </div>
+                              <div class="mdl-cell--3-col">
+                                  <p class="myP" style="color: #42A5F5; margin: 25px 0 0 0;">Название команды</p>
+                              </div>
+                              <div class="mdl-cell--1-col"></div>
+                              <div class="mdl-cell--1-col">
+                                  <p class="myP" style="color: #42A5F5; margin: 20px 0 0 30px;"><b>Территория</b><sup>*</sup></p>
+                              </div>
+                              <div class="mdl-cell--3-col">
+                                  <p class="myP" style="color: #42A5F5; margin: 25px 0 0 48px;">Территория команды</p>
+                              </div>
+                              <div class="mdl-cell--1-col"></div>
+                          </div>
+                          <div class="mdl-grid" style="padding-bottom: 0px;">
+                              <div class="mdl-cell--1-col"></div>
+                              <div class="mdl-cell--4-col">
+                                  <p class="myP" style="color: #42A5F5; margin: 20px 0 0 30px;"><b>Пароль подтверждения изменений</b><sup>**</sup></p>
+                              </div>
+                              <div class="mdl-cell--6-col">
+                                  <div class="mdl-textfield mdl-js-textfield" style="width: 100%; color: #42A5F5;">
+                                      <input class="mdl-textfield__input" type="password" id="changePass" name="changePass">
+                                      <label class="mdl-textfield__label" for="changePass">Введите шестизначный пароль</label>
+                                  </div>
+                              </div>
+                              <div class="mdl-cell--1-col"></div>
+                          </div>
+                          <div class="mdl-grid" style="padding-bottom: 0px; text-align: center;">
+                              <div class="mdl-cell--1-col"></div>
+                              <div class="mdl-cell--10-col">
+                                  <p class="myP" style="color: #42A5F5; margin: 0 0 0 0;"><sup>*</sup> Для изменения команды и территории обратитесь к вашему руководителю</p>
+                                  <p class="myP" style="color: #42A5F5; margin: 0 0 30px 0;"><sup>**</sup> Для получения пароля обратитесь к вашему руководителю</p>
+                              </div>
+                              <div class="mdl-cell--1-col"></div>
+                          </div>
+
+                      </div>    <!--  mdl-cards__actions  -->
+                   </div>
+              </div>    <!--  вся карточка  -->
+              <div class="mdl-cell mdl-cell--1-col"></div>
+            </div>  <!-- mdl-grid -->
+
+          </div>  <!-- page-content -->
+        </form>  <!--  formNewComp  -->
+      </main>
+    </div>
+    <div class="mdl-card mdl-shadow--8dp" style="z-index: 5; height: 44px; min-height: 44px; opacity: 0.85; position: fixed; bottom: 30px; left: 20%; right: 20%; width: 60%; display: none;">
+      <div class="mdl-card__actions">
+          <p class="myP" style="color: #fff; text-align: center;">Это подсказка</p>
+      </div>
+   </div>
+</body>
+</html>

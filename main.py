@@ -21,6 +21,7 @@ from OtherHandlers import *
 from modelVisitor import *
 from modelCompetition import *
 from LeaderHandlers import Team, AddMemberToTeam
+from memberHandlers import memberInfo
 
 import os
 import jinja2
@@ -76,8 +77,9 @@ app = webapp2.WSGIApplication([
     ('/test', Test),
     # leaders routes
     ('/reg/leaderTeam', Team),
-    ('/reg/leaderAddMember', AddMemberToTeam)
-
+    ('/reg/leaderAddMember', AddMemberToTeam),
+    # member routes
+    ('/memberInfo', memberInfo)
 ], debug=True)
 
 def handle_401(request, response, exception):
