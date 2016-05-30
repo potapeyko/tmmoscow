@@ -72,7 +72,7 @@ class DefaultHandler(webapp2.RequestHandler):
             roles = createRolesHead(is_org, is_lead, is_memb)
             temp_values = {'user_email': email, 'roles': roles, 'logout': users.create_logout_url('/login'), 'comps': comps,
                            'c_count': comps_count, 'd_start': d_start, 'd_finish': d_finish, 'pzs': pzs, 'is_open_pz': is_open_pz,
-                           'cur_role': cur_role}
+                           'cur_role': cur_role, 'is_user': True}
             try:
                 template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/'+cur_role+'/CompetitionList.html')
             except:
@@ -85,17 +85,23 @@ class DefaultHandler(webapp2.RequestHandler):
 class AfterSignIn(webapp2.RequestHandler):
     def get(self):      # displays form for choosing current user role
         user = users.get_current_user()
-        email = user.email()
-        [is_org, is_lead, is_memb] = findUser(email)
-        [roles, cur_role_local] = createRoles(is_org, is_lead, is_memb)
-        if len(roles) > 1:   # If user has several roles, he should choose one
-            temp_values = {'roles': roles, 'logout': users.create_logout_url('/login') }
-            template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/AfterSignIn.html')
-            self.response.write(template.render(temp_values))
-        else:                   # If user has only one role
-            global cur_role
-            cur_role = cur_role_local
-            return webapp2.redirect('/')
+        if not user:
+            email = 'Anonymous'
+            role = 'Anonim'
+            login = users.create_login_url(dest_url='/postSignIn')
+            self.response.write('not user')
+        else:
+            email = user.email()
+            [is_org, is_lead, is_memb] = findUser(email)
+            [roles, cur_role_local] = createRoles(is_org, is_lead, is_memb)
+            if len(roles) > 1:   # If user has several roles, he should choose one
+                temp_values = {'roles': roles, 'logout': users.create_logout_url('/login') }
+                template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/AfterSignIn.html')
+                self.response.write(template.render(temp_values))
+            else:                   # If user has only one role
+                global cur_role
+                cur_role = cur_role_local
+                return webapp2.redirect('/')
 
     def post(self):     # changes current role to user's choice
         cur_role_local = self.request.POST.get('curRole')
@@ -109,6 +115,34 @@ class beforeSignOut(webapp2.RequestHandler):
     def get(self):
         global cur_role
         cur_role = 'member'
+
+
+# Development class for add initial data in DB
+class addDb(webapp2.RequestHandler):
+    def get(self):
+
+        org1 = Organizer(nickname=u'Провилкова Анна', contact='pro@m.c')
+        org2 = Organizer(nickname=u'Тест Тестович', contact='test@example.com')
+        lead1 = Leader(nickname=u'Провилкова Анна', contact='pro@m.c', command=u'Фортуна', territory=u'Москва')
+        lead2 = Leader(nickname=u'Орлов Олег', contact='o@o.p', command=u'Фортуна', territory=u'Ангарск')
+        lead3 = Leader(nickname=u'Тест Тестович', contact='test@example.com', command=u'Командочка', territory=u'Иркутск')
+        memb1 = Member(passToEdit='123456', nickname='plo@m.r', surname=u'Плотникова Дарья', command=u'Фортуна',
+                       territory=u'Ангарск', birthdate=1994, qualification='I')
+        memb2 = Member(passToEdit='654321', nickname='mar@h.n', surname=u'Хайруллин Марат', command=u'Фортуна',
+                       territory=u'Ангарск', birthdate=1994, qualification='I')
+        memb3 = Member(passToEdit='654321', nickname='pot@d.a', surname=u'Потапейко Дмитрий', command=u'ЮС47',
+                       territory=u'Иркутск', birthdate=1995, qualification='I')
+        org1.put()
+        org2.put()
+        lead1.put()
+        lead2.put()
+        lead3.put()
+        memb1.put()
+        memb2.put()
+        memb3.put()
+        self.response.write('This guys added to DB: orgs (' + org1.contact + ', ' + org2.contact + '); ----- ' +
+                            ' leads('+lead1.contact +', '+lead2.contact+', '+lead3.contact + '); ----- ' +
+                            'membs(' + memb1.nickname + ', '+ memb2.nickname + ', '+memb3.nickname+').')
 
 
 # Finds user in database

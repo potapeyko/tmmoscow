@@ -5,6 +5,9 @@
 function nullToCurRole() {
    $.ajax({
        url: '/reg/nullToRole',
-       type: 'GET'
+       type: 'GET',
+       success: function () {
+           alert("Cool!");
+       }
    });
 }

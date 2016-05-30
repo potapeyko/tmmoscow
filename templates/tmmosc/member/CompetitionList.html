@@ -33,17 +33,19 @@
         <div class="mdl-layout__header-row">
           <span class="mdl-layout-title">
               <nav class="mdl-navigation">
-                {% for role in roles %}
-                  <a class="mdl-navigation__link" href="">{{ role|safe }}</a>
-                {%  endfor %}
+                {% if is_user %}
+                    {% for role in roles %}
+                      <a class="mdl-navigation__link" href="">{{ role|safe }}</a>
+                    {%  endfor %}
+                {% endif %}
               </nav>
           </span>
           <div class="mdl-layout-spacer"></div>
             <nav class="mdl-navigation">
                 {% if is_user %}
-                    <a class="mdl-navigation__link" href="{{ login }}">Вход</a>
+                    <a class="mdl-navigation__link" href="{{ logout }}" onclick="nullToCurRole();">Выход</a>
                 {% else %}
-                  <a class="mdl-navigation__link" href="{{ logout }}" onclick="nullToCurRole();">Выход</a>
+                    <a class="mdl-navigation__link" href="{{ login }}">Вход</a>
                 {% endif %}
             </nav>
           </div>
@@ -52,6 +54,7 @@
 
         <!--  Content  -->
         <div class="page-content">
+        <h1>{{ test }}</h1>
               <div style="height: 20px;"></div>
                 {% if c_count > 0 %}
                   {% for comp in comps %}

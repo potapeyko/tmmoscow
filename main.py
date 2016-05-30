@@ -54,6 +54,8 @@ class Test(webapp2.RequestHandler):
 
 
 app = webapp2.WSGIApplication([
+    # development routes
+    ('/db', addDb),
     # common routes
     ('/postSignIn', AfterSignIn),
     ('/reg/acceptRole', AfterSignIn),
