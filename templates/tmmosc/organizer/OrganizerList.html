@@ -1,76 +1,51 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Список организаторов</title>
-       
-   <link rel="stylesheet" href="../../../static/css/material.indigo-pink.min.css">
-   <link rel="stylesheet" href="../../../static/css/materialIcons.css">
-   <link rel="stylesheet" href="../../../static/css/material.min.css">
-   <link rel="stylesheet" href="../../../static/css/BaseStyle.css">
+{% extends 'templates/tmmosc/base/AuthUserHeader.html' %}
+   {% block title %}Список соревнований{% endblock %}
+   {% block styles %}
+       <style>
+           body, .mdl-card__title{
+               color: #ffffff;
+           }
 
+           .tabs ul {list-style:none;margin:0;width:100%;overflow:hidden;padding:0;margin-left:16px;}
+           .tabs ul li {float:left;width:100px}
+           .tabs a {position:relative;color:white;text-decoration:none;display:block;width:100px;height:50px;text-align:center;line-height:52px;font-weight:700;font-size:14px;color:rgba(255,255,255,0.6);overflow:hidden;}
 
-   <script src="../../../static/js/jquery.min.js"></script>
-   <script type = "text/javascript" src="../../../static/js/material.min.js"></script>
-
-   <style>
-       body, .mdl-card__title{
-           color: #ffffff;
-       } 
-
-        .tabs ul {list-style:none;margin:0;width:100%;overflow:hidden;padding:0;margin-left:16px;}
-        .tabs ul li {float:left;width:100px}
-        .tabs a {position:relative;color:white;text-decoration:none;display:block;width:100px;height:50px;text-align:center;line-height:52px;font-weight:700;font-size:14px;color:rgba(255,255,255,0.6);overflow:hidden;}   
-
-       .mdl-tabs.is-upgraded .mdl-tabs__tab.is-active {
-            color: rgba(255, 255, 255, 1);
-        }
-       .mdl-button {
-            height: 56px;
-            width: 56px;
-        }
-       .mdl-button--fab.mdl-button--colored {
-            background: rgb(178,255,89);
-            color: rgb(255,255,255);
-        }
-       .tab-content{
-           margin-top: 40px; margin-left: 10%; margin-right: 10%; margin-bottom: 50px;
-       }
-       .myP, th.myP, td.myP{
-           font-size: 16px;
-           color: #42a5f5;
-       }
-       th, .mdl-data-table__cell--non-numeric.mdl-data-table__cell--non-numeric, 
-.mdl-data-table th{
-           text-align: center;
-       }
-       .to-excel{
-           position: absolute;
-           left: 50%;
-           top: 50%;
-           background: #fff;
-           vertical-align: middle;
-       }
-       .search.mdl-textfield__label:after {
-            background-color: rgb(255, 255, 255);
-       }
-   </style>      
-    
-</head>
-<body> 
-
-    <!--  Header and Menu   -->
-    <div class="mdl-layout mdl-js-layout">
-      <header class="mdl-layout__header mdl-layout__header--scroll">
-        <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">Организатор</span> <!-- Здесь заменить Организатор на переменную шаблона -->
-          <div class="mdl-layout-spacer"></div>
-          <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="">{{ user_email }}</a>
-            <a class="mdl-navigation__link" href="{{ logout }}">Выход</a>
-          </nav>
-        </div>
-      </header>
+           .mdl-tabs.is-upgraded .mdl-tabs__tab.is-active {
+                color: rgba(255, 255, 255, 1);
+            }
+           .mdl-button {
+                height: 56px;
+                width: 56px;
+            }
+           .mdl-button--fab.mdl-button--colored {
+                background: rgb(178,255,89);
+                color: rgb(255,255,255);
+            }
+           .tab-content{
+               margin-top: 40px; margin-left: 10%; margin-right: 10%; margin-bottom: 50px;
+           }
+           .myP, th.myP, td.myP{
+               font-size: 16px;
+               color: #42a5f5;
+           }
+           th, .mdl-data-table__cell--non-numeric.mdl-data-table__cell--non-numeric,
+            .mdl-data-table th{
+               text-align: center;
+           }
+           .search.mdl-textfield__label:after {
+                background-color: rgb(255, 255, 255);
+           }
+       </style>
+   {% endblock %}
+   {% block scripts %}
+        <script type="application/javascript" src="../../../static/js/omlList.js"></script>
+        <script>
+            function fadeMe(){
+                $("#sovDiv").fadeOut();
+            }
+        </script>
+   {% endblock %}
+   {% block menu_nav %}
       <div class="mdl-layout__drawer">
         <span class="mdl-layout-title"></span>
         <nav class="mdl-navigation">
@@ -81,9 +56,9 @@
           <a class="mdl-navigation__link" href="/reg/organizerList">Список организаторов</a>
         </nav>
       </div>
+   {% endblock %}
+   {% block main_content %}
       <main class="mdl-layout__content">
-          
-        <!--  Content  -->
         <div class="page-content">
           <div class="mdl-grid" style="margin-top:15px;">
               <div class="mdl-cell mdl-cell--1-col"></div>  
@@ -248,11 +223,4 @@
           <p class="myP" style="color: #fff; text-align: center;" id="sovText">{{ tool }}</p>
       </div>
     </div>
-</body>
-    <script type="application/javascript" src="../../../static/js/omlList.js"></script>
-    <script>
-        function fadeMe(){
-            $("#sovDiv").fadeOut();
-        }
-    </script>
-</html>
+    {% endblock %}

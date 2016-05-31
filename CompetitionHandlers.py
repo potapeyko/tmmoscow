@@ -159,7 +159,7 @@ class NewCompetition(webapp2.RequestHandler):
                            'discs': disciplines, 'lens': lengths, 'dizs':dizs, 'dus':dus, 'stat_day':stat_day, 'stat_sex':stat_sex,
                            'stat_qual':stat_qual}
 
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/Competition.html')
+            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/CertainCompetition.html')
             self.response.write(template.render(temp_values))
         else:
             temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
