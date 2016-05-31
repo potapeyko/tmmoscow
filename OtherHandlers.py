@@ -60,16 +60,16 @@ class DefaultHandler(webapp2.RequestHandler):
         user = users.get_current_user()
         if not user:        # user is anonim
             login = users.create_login_url(dest_url='/postSignIn')
-            temp_values = {'login': login, 'comps': comps, 'c_count': comps_count, 'd_start': d_start,'d_finish':
+            temp_values = {'login': login, 'comps': comps, 'c_count': comps_count, 'd_start': d_start, 'd_finish':
                             d_finish, 'pzs': pzs, 'is_open_pz': is_open_pz, 'logout': users.create_logout_url('/login')}
             template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/CompetitionList.html')
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = findUser(email)
             roles = createRolesHead(is_org, is_lead, is_memb)
-            temp_values = {'user_email': email, 'roles': roles, 'logout': users.create_logout_url('/login'), 'comps': comps,
-                           'c_count': comps_count, 'd_start': d_start, 'd_finish': d_finish, 'pzs': pzs, 'is_open_pz': is_open_pz,
-                           'cur_role': cur_role, 'is_user': True}
+            temp_values = {'user_email': email, 'roles': roles, 'logout': users.create_logout_url('/login'), 'comps':
+                            comps, 'c_count': comps_count, 'd_start': d_start, 'd_finish': d_finish, 'pzs': pzs,
+                           'is_open_pz': is_open_pz, 'is_user': True}
             try:            # show compList corresponding to user's role
                 template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/'+cur_role+'/CompetitionList.html')
                 #template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/AuthUserHeader.html')
@@ -159,16 +159,19 @@ def findUser(keyword):
 def createRolesHead(is_org, is_lead, is_memb):
     roles = []
     if is_org:
+        global cur_role
         if cur_role == 'organizer':
             roles.append(u'<b>Организатор</b>')
         else:
             roles.append(u'Организатор')
     if is_lead:
+        global cur_role
         if cur_role == 'leader':
             roles.append(u'<b>Руководитель</b>')
         else:
             roles.append(u'Руководитель')
     if is_memb:
+        global cur_role
         if cur_role == 'member':
             roles.append(u'<b>Участник</b>')
         else:

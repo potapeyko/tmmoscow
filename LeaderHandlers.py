@@ -11,7 +11,7 @@ import os
 import jinja2
 import webapp2
 from CompetitionHandlers import formatDateList
-from OtherHandlers import cur_role
+import OtherHandlers
 
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -22,17 +22,56 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 class Team(webapp2.RequestHandler):
     def get(self):      # displays info about team for that leader and all members
-        self.response.write('GET from Team')
-
-        #Add this to LOGIN link: users.create_login_url(dest_url='/postSignIn')
+        user = users.get_current_user()
+        if not user:
+            self.response.write('Error 401: you are unauthorized! (Team:get)')
+        else:
+            email = user.email()
+            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
+            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            if is_lead and OtherHandlers.cur_role == 'leader':
+                self.response.write('Team Info for Leader')
+            else:
+                self.response.write('You can\'t look Team Info because you are not a leader')
 
     def post(self):     # changes team info
-        self.response.write('POST from Team')
+        user = users.get_current_user()
+        if not user:
+            self.response.write('Error 401: you are unauthorized! (Team:post)')
+        else:
+            email = user.email()
+            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
+            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            if is_lead and OtherHandlers.cur_role == 'leader':
+                self.response.write('Save changes of Team Info for Leader')
+            else:
+                self.response.write('You can\'t change Team Info because you are not a leader')
 
 
 class AddMemberToTeam(webapp2.RequestHandler):
     def get(self):      # displays empty form for adding new member to command
-        self.response.write('GET from AddMemberToTeam')
+        user = users.get_current_user()
+        if not user:
+            self.response.write('Error 401: you are unauthorized! (AddMemberTeam:get)')
+        else:
+            email = user.email()
+            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
+            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            if is_lead and OtherHandlers.cur_role == 'leader':
+                self.response.write('Fill in form to add new member to your team, Leader')
+            else:
+                self.response.write('You can\'t add new Member to Team because you are not a leader')
+
 
     def post(self):     # saves new member to db
-        self.response.write('POST from AddMemberToTeam')
+        user = users.get_current_user()
+        if not user:
+            self.response.write('Error 401: you are unauthorized! (AddMemberTeam:post)')
+        else:
+            email = user.email()
+            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
+            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            if is_lead and OtherHandlers.cur_role == 'leader':
+                self.response.write('Saving new member to your team, Leader')
+            else:
+                self.response.write('You can\'t save new Member to Team because you are not a leader')

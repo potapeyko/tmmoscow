@@ -8,7 +8,7 @@ import webapp2
 import time
 
 from modelVisitor import *
-from OtherHandlers import cur_role
+import OtherHandlers
 
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -21,45 +21,64 @@ tooltip_show = 'none'
 
 
 class OrganizersHandler(webapp2.RequestHandler):
-    def get(self):
+    def get(self):      # displays whole list of organizer
         user = users.get_current_user()
         if user:
             email = user.email()
-            orgs = db.Query(Organizer).order('nickname')
-            keys = []
-            for org in orgs:
-                keys.append(org.key())
-            global tooltip_message
-            global tooltip_show
-            temp_values = {'user_email':email, 'logout':users.create_logout_url('/login'), 'disp_tool':tooltip_show, 'tool':tooltip_message, 'organizers':orgs, 'keys':keys}
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/OrganizerList.html')
+            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
+            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            if is_org and OtherHandlers.cur_role == 'organizer':
+                orgs = db.Query(Organizer).order('nickname')
+                keys = []
+                for org in orgs:
+                    keys.append(org.key())
+                global tooltip_message
+                global tooltip_show
+                temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
+                           'disp_tool': tooltip_show, 'tool': tooltip_message, 'organizers': orgs, 'keys': keys}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/OrganizerList.html')
+            else:
+                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
+                               'login_redir': users.create_login_url('/reg/newCompetition')}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
             self.response.write(template.render(temp_values))
         else:
-            temp_values = {'img_src':'../static/img/er401.png', 'er_name':'401', 'login_redir':users.create_login_url('reg/organizerList')}
+            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401', 'login_redir':
+                           users.create_login_url('reg/organizerList')}
             self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
 
-    def post(self):
+    def post(self):     # finds organizer by keyword
         user = users.get_current_user()
         if user:
             email = user.email()
-            search_fio = self.request.POST['findOrganizer']
-            orgs = db.Query(Organizer).filter('nickname >=', search_fio).filter('nickname <=', search_fio+'1').order('nickname')
-            keys = []
-            for org in orgs:
-                keys.append(org.key())
-            global tooltip_message
-            global tooltip_show
-            temp_values = {'user_email':email, 'logout':users.create_logout_url('/login'), 'disp_tool':tooltip_show, 'tool':tooltip_message, 'organizers':orgs, 'keys':keys}
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/OrganizerList.html')
+            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
+            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            if is_org and OtherHandlers.cur_role == 'organizer':
+                search_fio = self.request.POST['findOrganizer']
+                orgs = db.Query(Organizer).filter('nickname >=', search_fio).filter('nickname <=', search_fio+'1').order('nickname')
+                keys = []
+                for org in orgs:
+                    keys.append(org.key())
+                global tooltip_message
+                global tooltip_show
+                temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
+                               'disp_tool': tooltip_show, 'tool': tooltip_message, 'organizers': orgs, 'keys': keys}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/OrganizerList.html')
+            else:
+                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
+                               'login_redir': users.create_login_url('/reg/newCompetition')}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
             self.response.write(template.render(temp_values))
         else:
-            temp_values = {'img_src':'../static/img/er401.png', 'er_name':'401', 'login_redir':users.create_login_url('reg/organizerList')}
+            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401', 'login_redir':
+                           users.create_login_url('reg/organizerList')}
             self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
 
 
+# Performs ajax request
 class AddOrganizer(webapp2.RequestHandler):
     def post(self):
-        if self.request.POST['olKey']:  #changing existing organizer
+        if self.request.POST['olKey']:              # changing existing organizer
             new_fio = self.request.POST['olFio']
             new_contact = self.request.POST['olContact']
             org_key = self.request.POST['olKey']
@@ -68,7 +87,7 @@ class AddOrganizer(webapp2.RequestHandler):
             organizer.contact = new_contact
             organizer.put()
             tooltip_message = u'Организатор %s изменен' % new_fio
-        else:   #add new organizer
+        else:                                       # add new organizer
             fio = self.request.POST['olFio']
             contact = self.request.POST['olContact']
             newOrg = Organizer(nickname=fio, contact=contact)
@@ -81,6 +100,7 @@ class AddOrganizer(webapp2.RequestHandler):
         self.redirect('/reg/organizerList')
 
 
+# Performs ajax request
 class DeleteOrganizer(webapp2.RequestHandler):
     def post(self):
         org_id = self.request.POST['idToDeleteChange']
@@ -95,47 +115,66 @@ class DeleteOrganizer(webapp2.RequestHandler):
 
 
 class LeadersHandler(webapp2.RequestHandler):
-    def get(self):
+    def get(self):      # displays whole list of leaders
         user = users.get_current_user()
         if user:
             email = user.email()
-            leads = db.Query(Leader).order('nickname')
-            keys = []
-            for lead in leads:
-                keys.append(lead.key())
-            global tooltip_message
-            global tooltip_show
-            temp_values = {'user_email':email, 'logout':users.create_logout_url('/login'), 'disp_tool':tooltip_show, 'tool':tooltip_message, 'leads':leads, 'keys':keys}
-            tooltip_message = ''
-            tooltip_show = 'none'
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/LeaderList.html')
+            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
+            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            if is_org and OtherHandlers.cur_role == 'organizer':
+                leads = db.Query(Leader).order('nickname')
+                keys = []
+                for lead in leads:
+                    keys.append(lead.key())
+                global tooltip_message
+                global tooltip_show
+                tooltip_message = ''
+                tooltip_show = 'none'
+                temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
+                               'disp_tool': tooltip_show, 'tool': tooltip_message, 'leads': leads, 'keys': keys}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/LeaderList.html')
+            else:
+                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401', 'login_redir':
+                               users.create_login_url('/reg/newCompetition')}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
             self.response.write(template.render(temp_values))
         else:
-            temp_values = {'img_src':'../static/img/er401.png', 'er_name':'401', 'login_redir':users.create_login_url('reg/leaderList')}
+            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401', 'login_redir':
+                           users.create_login_url('reg/leaderList')}
             self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
 
-    def post(self):
+    def post(self):     # finds leaders  by keyword
         user = users.get_current_user()
         if user:
             email = user.email()
-            search_fio = self.request.POST['findLeader']
-            leads = db.Query(Leader).filter('nickname >=', search_fio).filter('nickname <=', search_fio+'1').order('nickname')
-            keys = []
-            for org in leads:
-                keys.append(org.key())
-            global tooltip_message
-            global tooltip_show
-            temp_values = {'user_email':email, 'logout':users.create_logout_url('/login'), 'disp_tool':tooltip_show, 'tool':tooltip_message, 'leads':leads, 'keys':keys}
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/LeaderList.html')
+            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
+            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            if is_org and OtherHandlers.cur_role == 'organizer':
+                search_fio = self.request.POST['findLeader']
+                leads = db.Query(Leader).filter('nickname >=', search_fio).filter('nickname <=', search_fio+'1').order('nickname')
+                keys = []
+                for org in leads:
+                    keys.append(org.key())
+                global tooltip_message
+                global tooltip_show
+                temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
+                               'disp_tool': tooltip_show, 'tool': tooltip_message, 'leads': leads, 'keys': keys}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/LeaderList.html')
+            else:
+                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401', 'login_redir':
+                               users.create_login_url('/reg/newCompetition')}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
             self.response.write(template.render(temp_values))
         else:
-            temp_values = {'img_src':'../static/img/er401.png', 'er_name':'401', 'login_redir':users.create_login_url('reg/organizerList')}
+            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401', 'login_redir':
+                           users.create_login_url('reg/organizerList')}
             self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
 
 
+# Performs ajax request
 class AddLeader(webapp2.RequestHandler):
     def post(self):
-        if self.request.POST['llKey']:  #changing existing leader
+        if self.request.POST['llKey']:      # changing existing leader
             new_fio = self.request.POST['llFio']
             new_command = self.request.POST['llComand']
             new_terry = self.request.POST['llTerritory']
@@ -148,7 +187,7 @@ class AddLeader(webapp2.RequestHandler):
             leader.contact = new_contact
             leader.put()
             tooltip_message = u'Руководитель %s изменен' % new_fio
-        else:   #add new leader
+        else:                               # add new leader
             fio = self.request.POST['llFio']
             command = self.request.POST['llComand']
             terry = self.request.POST['llTerritory']
@@ -163,6 +202,7 @@ class AddLeader(webapp2.RequestHandler):
         self.redirect('/reg/leaderList')
 
 
+# Performs ajax request
 class DeleteLeader(webapp2.RequestHandler):
     def post(self):
         lead_id = self.request.POST['idToDeleteChange']
@@ -176,45 +216,63 @@ class DeleteLeader(webapp2.RequestHandler):
         self.redirect('/reg/leaderList')
 
 
-class MembersHandler(webapp2.RequestHandler):   # shows list of all members from datastore
-    def get(self):
+class MembersHandler(webapp2.RequestHandler):
+    def get(self):      # diplays whole list of members
         user = users.get_current_user()
         if user:
             email = user.email()
-            members = db.Query(Member).order('nickname')
-            keys = []
-            for memb in members:
-                keys.append(memb.key())
-            global tooltip_message
-            global tooltip_show
-            temp_values = {'user_email':email, 'logout':users.create_logout_url('/login'), 'disp_tool':tooltip_show, 'tool':tooltip_message, 'members':members, 'keys':keys}
-            tooltip_message = ''
-            tooltip_show = 'none'
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/MemberList.html')
+            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
+            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            if is_org and OtherHandlers.cur_role == 'organizer':
+                members = db.Query(Member).order('nickname')
+                keys = []
+                for memb in members:
+                    keys.append(memb.key())
+                global tooltip_message
+                global tooltip_show
+                tooltip_message = ''
+                tooltip_show = 'none'
+                temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
+                               'disp_tool': tooltip_show, 'tool': tooltip_message, 'members': members, 'keys': keys}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/MemberList.html')
+            else:
+                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401', 'login_redir':
+                               users.create_login_url('/reg/newCompetition')}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
             self.response.write(template.render(temp_values))
         else:
-            temp_values = {'img_src':'../static/img/er401.png', 'er_name':'401', 'login_redir':users.create_login_url('reg/memberList')}
+            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401', 'login_redir':
+                           users.create_login_url('reg/memberList')}
             self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
 
-    def post(self):
+    def post(self):     # finds member by keyword
         user = users.get_current_user()
         if user:
             email = user.email()
-            search_fio = self.request.POST['findMember']
-            membs = db.Query(Member).filter('nickname >=', search_fio).filter('nickname <=', search_fio+'1').order('nickname')
-            keys = []
-            for org in membs:
-                keys.append(org.key())
-            global tooltip_message
-            global tooltip_show
-            temp_values = {'user_email':email, 'logout':users.create_logout_url('/login'), 'disp_tool':tooltip_show, 'tool':tooltip_message, 'members':membs, 'keys':keys}
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/MemberList.html')
+            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
+            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            if is_org and OtherHandlers.cur_role == 'organizer':
+                search_fio = self.request.POST['findMember']
+                membs = db.Query(Member).filter('nickname >=', search_fio).filter('nickname <=', search_fio+'1').order('nickname')
+                keys = []
+                for org in membs:
+                    keys.append(org.key())
+                global tooltip_message
+                global tooltip_show
+                temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
+                               'disp_tool': tooltip_show, 'tool': tooltip_message, 'members': membs, 'keys': keys}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/MemberList.html')
+            else:
+                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401', 'login_redir':
+                               users.create_login_url('/reg/newCompetition')}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
             self.response.write(template.render(temp_values))
         else:
             temp_values = {'img_src':'../static/img/er401.png', 'er_name':'401', 'login_redir':users.create_login_url('reg/organizerList')}
             self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
 
 
+# Performs ajax request
 class AddMember(webapp2.RequestHandler):
     def post(self):
         cur_user = users.get_current_user()
@@ -250,6 +308,7 @@ class AddMember(webapp2.RequestHandler):
         self.redirect('/reg/memberList')
 
 
+# Performs ajax request
 class DeleteMember(webapp2.RequestHandler):
     def post(self):
         memb_id = self.request.POST['idToDeleteChange']
