@@ -16,7 +16,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
-cur_role = 'member'
+cur_role = 'anonim'
 
 # LogIn page
 class LoginHandler(webapp2.RequestHandler):
@@ -62,10 +62,9 @@ class DefaultHandler(webapp2.RequestHandler):
             email = 'Anonymous'
             role = 'Anonim'
             login = users.create_login_url(dest_url='/postSignIn')
-            temp_values = {'login': login, 'comps': comps, 'c_count': comps_count, 'd_start': d_start,
-                           'd_finish': d_finish, 'pzs': pzs, 'is_open_pz': is_open_pz, 'is_user': False,
-                           'logout': users.create_logout_url('/login')}
-            template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/member/CompetitionList.html')
+            temp_values = {'login': login, 'comps': comps, 'c_count': comps_count, 'd_start': d_start,'d_finish':
+                            d_finish, 'pzs': pzs, 'is_open_pz': is_open_pz, 'logout': users.create_logout_url('/login')}
+            template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/CompetitionList.html')
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = findUser(email)
@@ -73,12 +72,13 @@ class DefaultHandler(webapp2.RequestHandler):
             temp_values = {'user_email': email, 'roles': roles, 'logout': users.create_logout_url('/login'), 'comps': comps,
                            'c_count': comps_count, 'd_start': d_start, 'd_finish': d_finish, 'pzs': pzs, 'is_open_pz': is_open_pz,
                            'cur_role': cur_role, 'is_user': True}
-            try:
+            try:            # show compList corresponding to user's role
                 template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/'+cur_role+'/CompetitionList.html')
-            except:
-                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
-                               'login_redir': users.create_login_url('/reg/newCompetition')}
-                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
+            except:         # user is anonim
+                login = users.create_login_url(dest_url='/postSignIn')
+                temp_values = {'login': login, 'comps': comps, 'c_count': comps_count, 'd_start': d_start, 'd_finish':
+                            d_finish, 'pzs': pzs, 'is_open_pz': is_open_pz, 'logout': users.create_logout_url('/login')}
+                template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/CompetitionList.html')
         self.response.write(template.render(temp_values))
 
 
@@ -86,22 +86,29 @@ class AfterSignIn(webapp2.RequestHandler):
     def get(self):      # displays form for choosing current user role
         user = users.get_current_user()
         if not user:
-            email = 'Anonymous'
-            role = 'Anonim'
-            login = users.create_login_url(dest_url='/postSignIn')
-            self.response.write('not user')
+            global cur_role
+            cur_role = 'anonim'
+            return webapp2.redirect('/')
         else:
-            email = user.email()
-            [is_org, is_lead, is_memb] = findUser(email)
-            [roles, cur_role_local] = createRoles(is_org, is_lead, is_memb)
-            if len(roles) > 1:   # If user has several roles, he should choose one
-                temp_values = {'roles': roles, 'logout': users.create_logout_url('/login') }
-                template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/AfterSignIn.html')
-                self.response.write(template.render(temp_values))
-            else:                   # If user has only one role
+            try:
+                self.response.write('this is user')
+
+                email = user.email()
+                [is_org, is_lead, is_memb] = findUser(email)
+                [roles, cur_role_local] = createRoles(is_org, is_lead, is_memb)
+                if len(roles) > 1:                      # If user has several roles, he should choose one
+                    temp_values = {'roles': roles, 'logout': users.create_logout_url('/login') }
+                    template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/AfterSignIn.html')
+                    self.response.write(template.render(temp_values))
+                else:                   # If user has only one role
+                    global cur_role
+                    cur_role = cur_role_local
+                    return webapp2.redirect('/')
+            except:                                   # If user hasn't roles in system (anonim)
                 global cur_role
-                cur_role = cur_role_local
+                cur_role = 'anonim'
                 return webapp2.redirect('/')
+
 
     def post(self):     # changes current role to user's choice
         cur_role_local = self.request.POST.get('curRole')
