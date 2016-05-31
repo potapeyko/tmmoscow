@@ -1,10 +1,424 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% block styles %}
+   <style>
+       body, .mdl-card__title{
+           color: #ffffff;
+       }
+       .tabs ul {list-style:none;margin:0;width:100%;overflow:hidden;padding:0;margin-left:16px;}
+       .tabs ul li {float:left;width:100px}
+       .tabs a {position:relative;color:white;text-decoration:none;display:block;width:100px;height:50px;text-align:center;line-height:52px;font-weight:700;font-size:14px;color:rgba(255,255,255,0.6);overflow:hidden;}
 
-</body>
-</html>
+       .mdl-tabs.is-upgraded .mdl-tabs__tab.is-active {
+            color: rgba(255, 255, 255, 1);
+        }
+       .mdl-button {
+            height: 56px;
+           width: 56px;
+        }
+       .mdl-button--fab.mdl-button--colored {
+            background: rgb(178,255,89);
+            color: rgb(255,255,255);
+        }
+       .tab-content{
+           margin-top: 40px; margin-left: 10%; margin-right: 10%; margin-bottom: 50px;
+       }
+       .myP{
+
+       }
+       th, .mdl-data-table__cell--non-numeric.mdl-data-table__cell--non-numeric,
+       .mdl-data-table th{
+           text-align: center;
+       }
+   </style>
+{% endblock %}
+{%  block scripts %}
+   <script type="application/javascript" src="../../../static/js/toCompetition.js"></script>
+   <script type="text/javascript" src="../../../static/js/jsapi.js"></script>
+   <script type="text/javascript" src="../../../static/js/drawStatisticCharts.js"></script>
+   <script type="text/javascript" src="../../../static/js/loader.js"></script>
+{% endblock %}
+{% block main_content %}
+    <main class="mdl-layout__content">
+        <!--  Content  -->
+        <div class="page-content">
+          <div class="mdl-grid" style="margin-top:15px;">
+              <div class="mdl-cell mdl-cell--1-col"></div>
+              <div class="mdl-cell mdl-cell--10-col">
+                   <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; min-height: 150px; margin-top: 35px;">
+                     <div class="mdl-grid mdl-card__title" style="height: 150px; width: 100%; text-align: center; border: none;">
+                          <div class="mdl-cell--2-col"><h2>Comp</h2></div>
+                          <div class="mdl-cell--10-col">
+                            <div style="margin-top: 40px;">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="display: inline;">
+                                    <h3 class="mdl-card__title-text">
+                                        <span style="margin-top: 5px; margin-right: 5px; padding-bottom: 10px;"> {{ start }} - </span>
+                                        <span style="margin-top: 5px; margin-right: 10px; padding-bottom: 10px;"> {{ finish }}  </span>
+                                    </h3>
+                                </div>
+                                <div>
+                                    <h2 class="mdl-card__title-text" style="vert-align: middle;">
+                                        <span style="margin-right: 10px; font-size: 28px;">{{ name }} </span>
+                                    </h2>
+                                </div>
+                            </div>
+                          </div>
+                      </div>   <!--   .mdl-card__title  -->
+                      <div class="mdl-card__actions mdl-card--border" style="border: none; background: #fff; padding: 0px;">
+                          <div style="width: 100%;">
+                              <div class="mdl-tabs mdl-js-tabs tabs mdl-js-ripple-effect">
+                                  <div class="mdl-tabs__tab-bar" style="background: #42A5F5;; color: #fff;">
+                                      <span style="text-align: center; padding-left: 15%;">
+                                          <a href="#info-panel" class="mdl-tabs__tab is-active" style="width: 15%;">Информация</a>
+                                          <a href="#diz-panel" class="mdl-tabs__tab" style="width: 15%;">Дистанции</a>
+                                          <a href="#member-panel" class="mdl-tabs__tab" style="width: 15%;">Участники</a>
+                                          <a href="#statistic-panel" class="mdl-tabs__tab" style="width: 15%;">Статистика</a>
+                                      </span>
+                                      <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" id="SaveAll" name="SaveAll" style="top: 20px;">
+                                        <i class="material-icons">input</i>
+                                      </button>
+                                      <div class="mdl-tooltip mdl-tooltip--large" for="SaveAll">
+                                        Заявить участников
+                                      </div>
+                                  </div>
+                                  <div class="mdl-tabs__panel is-active" id="info-panel" style="background: #fff; color: #42A5F5;">
+                                    <!--   ИНФОРМАЦИЯ  -->
+                                        {% for day_numb in days_count %}
+                                              <div class="tab-content" style="margin-bottom: 10px;{% if day_numb != 1 %}margin-top: 0;{% endif %}">
+                                                <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%;">
+                                                    <!--  row1  -->
+                                                    <div class="mdl-cell--1-col"><p class="myP" style="padding-top: 10px;">День {{ day_numb }} </p></div>
+                                                    <div class="mdl-cell--10-col">
+                                                        <img src="../../../static/img/line.png" style="width: 100%; margin-top: 20px;">
+                                                    </div>
+                                                    <div class="mdl-cell--1-col">
+                                                      <button type="button" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect swapVisInfo" style="padding: 0 0 0 0; min-height: 46px; height: 46px; min-width: 46px; width: 46px;" value="{{ day_numb }}">
+                                                        <img id="swapImgInfoUp{{ day_numb }}" src="../../../static/img/chevron-up.png">
+                                                        <img id="swapImgInfoDown{{ day_numb }}" src="../../../static/img/chevron-down.png" style="display: none;">
+                                                      </button>
+                                                    </div>
+                                                </div>
+                                                <div id="toSwapInfo{{ day_numb }}">
+                                                    {% if places[loop.index0] != '' %}
+                                                        <div class="mdl-grid" style="padding: 0 0 0 0; margin: 0 0 24px 0;">
+                                                            <!--  row2  -->
+                                                            <div class="mdl-cell--1-col"></div>
+                                                            <div class="mdl-cell--10-col">
+                                                                <div class="mdl-textfield mdl-js-textfield mdl-cell--12-col" style="padding: 0 0 0 0;">
+                                                                    <p class="myP" style="margin-bottom: 0px;"><b>Место проведения:</b> {{ places[loop.index0] }}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mdl-cell--10-col"></div>
+                                                        </div>
+                                                    {% endif %}
+                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 30px;">
+                                                        <!--  row4  -->
+                                                        <div class="mdl-cell--1-col"></div>
+                                                        <div class="mdl-cell--11-col">
+                                                            <p class="myP" style="margin-bottom: 0px; top: 6px;"><b>Предварительная заявка:</b></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 30px;">
+                                                        <!--  row5  -->
+                                                        <div class="mdl-cell--2-col" style="width: 85px;"></div>
+                                                        <div class="mdl-cell--5-col" style="padding-top: 6px;">
+                                                            <p class="myP">Текущее состояние: {% if pzs[loop.index0] != ''%}Открыта {% else %}Закрыта {% endif %}</p>
+                                                        </div>
+                                                        <div class="mdl-cell--1-col" style="width: 20px;"></div>
+                                                        <div class="mdl-cell--5-col">
+                                                            <p class="myP" style="margin: 6px 0 0 0;">Окончание добавления заявок: {{ pz_end_add[loop.index0] }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mdl-grid" style="margin: 10px 0 0 0; padding: 0 0 0 0; height: 30px;">
+                                                        <!-- row6  -->
+                                                        <div class="mdl-cell--2-col" style="width: 85px;"></div>
+                                                        <div class="mdl-cell--5-col"></div>
+                                                        <div class="mdl-cell--1-col" style="width: 20px;"></div>
+                                                        <div class="mdl-cell--5-col">
+                                                            <p class="myP" style="margin: 6px 0 0 0; bottom: 20px;">Окончание изменения заявок: {{ pz_end_change[loop.index0] }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mdl-grid" style="margin: 20px 0 0 0; padding: 0 0 0 0; height: 30px;">
+                                                        <!--  row7  -->
+                                                        <div class="mdl-cell--1-col"></div>
+                                                        <div class="mdl-cell--5-col">
+                                                            <p class="myP" style="margin-bottom: 0px; top: 6px;"><b>Техническая заявка:</b></p>
+                                                        </div>
+                                                        <div class="mdl-cell--1-col" style="width: 20px;"></div>
+                                                        <div class="mdl-cell--5-col">
+                                                            <p class="myP" style="margin-bottom: 0px; top: 6px;"><b>Ссылка на официальный сайт:</b></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 50px;">
+                                                        <!--  row8  -->
+                                                        <div class="mdl-cell--2-col" style="width: 85px;"></div>
+                                                        <div class="mdl-cell--5-col" style="padding-top: 6px;">
+                                                            <p class="myP">Текущее состояние: {% if tzs[loop.index0] != ''%}Включена {% else %}Отключена {% endif %}</p>
+                                                        </div>
+                                                        <div class="mdl-cell--1-col" style="width: 20px;"></div>
+                                                        <div class="mdl-cell--4-col" id="old3">
+                                                            <p class="myP" style="margin: 6px 0 0 0;">{{ links[loop.index0] }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mdl-grid" style="margin: 20px 0 0 0; padding: 0 0 0 0; height: 30px;">
+                                                        <!--  row9  -->
+                                                        <div class="mdl-cell--1-col"></div>
+                                                        <div class="mdl-cell--11-col">
+                                                            <p class="myP" style="margin-bottom: 0px; top: 6px;"><b>Контакты организаторов:</b></p>
+                                                        </div>
+                                                    </div>
+                                                    {% for org_in_day in org_infos[loop.index0] %}
+                                                        <div class="mdl-grid" style="margin: 10px 0 20px 70px; padding: 0 0 0 0; vertical-align:middle; height: 30px; width: 90%;">
+                                                            <!--  row10  -->
+                                                            <div class="mdl-cell--1-col"></div>
+                                                            <div class="mdl-cell--3-col">
+                                                                <p class="myP" style="margin-bottom: 0px; top: 6px;">{{ org_in_day[0] }}</p>
+                                                            </div>
+                                                            <div class="mdl-cell--1-col" style="width: 20px;"></div>
+                                                            <div class="mdl-cell--3-col" style="text-align: center;">
+                                                                <p class="myP">{{ org_in_day[1] }}</p>
+                                                            </div>
+                                                            <div class="mdl-cell--1-col"></div>
+                                                            <div class="mdl-cell--3-col" style="text-align: center;">
+                                                                <p class="myP">{{ org_in_day[2] }}</p>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 30px; display: none;" id="addOrgInsert{{ day_numb }}">
+                                                        <!--  row12  -->
+                                                        <div class="mdl-cell--2-col"></div>
+                                                        <div class="mdl-cell--10-col" style="margin-left: 10px;"><span style="display: none;">{{ day_numb }}</span><p class="myP mdl-button mdl-js-button mdl-js-ripple-effect mdl-js-accent addOrg" style="height: 40px; width: 120px; color: #42A5F5; font-size: 16px; font-weight: normal; text-transform: lowercase;">+ еще один</p></div>
+                                                    </div>
+                                                  </div>      <!--   #toSwapInfo1  -->
+                                              </div>  <!--   .tab-content   -->
+                                        {% endfor %}
+                                  </div>   <!--   #info-panel    -->
+
+                                  <div class="mdl-tabs__panel" id="diz-panel" style="background: #fff; color: #42A5F5;">
+                                    <!--  ДИСТАНЦИИ И ЗАЧЕТЫ  -->
+                                        {% for day_numb in days_count %}
+                                            <div class="tab-content" style="margin-bottom: 10px;{% if day_numb != 1 %}margin-top: 0;{% endif %}">
+                                                <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%;">
+                                                    <!--  row1  -->
+                                                    <div class="mdl-cell--1-col"><p class="myP" style="padding-top: 10px;">День {{ day_numb }} </p></div>
+                                                    <div class="mdl-cell--10-col">
+                                                        <img src="../../../static/img/line.png" style="width: 100%; margin-top: 20px;">
+                                                    </div>
+                                                    <div class="mdl-cell--1-col">
+                                                      <button type="button" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect swapVisDiz" style="padding: 0 0 0 0; min-height: 46px; height: 46px; min-width: 46px; width: 46px;" value="{{ day_numb }}">
+                                                        <img id="swapImgDizUp{{ day_numb }}" src="../../../static/img/chevron-up.png">
+                                                        <img id="swapImgDizDown{{ day_numb }}" src="../../../static/img/chevron-down.png" style="display: none;">
+                                                      </button>
+                                                    </div>
+                                                </div>
+                                                <div id="toSwapDiz{{ day_numb }}">
+                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0;">
+                                                        <!--  row2  -->
+                                                        <div class="mdl-cell--1-col"></div>
+                                                        <div class="mdl-cell--2-col"><p class="myP"><b>Дистанция:</b></p></div>
+                                                        <div class="mdl-cell--1-col"></div>
+                                                        <div class="mdl-cell--3-col" id="old4">
+                                                            <p class="myP">{{ discs[loop.index0] }}</p>
+                                                        </div>
+                                                        <div class="mdl-cell--1-col"></div>
+                                                        <div class="mdl-cell--3-col" id="old5">
+                                                            <p class="">{{ lens[loop.index0] }}</p>
+                                                        </div>
+                                                        <div class="mdl-cell--1-col"></div>
+                                                    </div>
+                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; text-align: center; height: 30px;">
+                                                        <!--  row3  -->
+                                                        <div class="mdl-cell--2-col"></div>
+                                                        <div class="mdl-cell--1-col"><p class="myP">Группа</p></div>
+                                                        <div class="mdl-cell--1-col"></div>
+                                                        <div class="mdl-cell--1-col"><p class="myP">Длина</p></div>
+                                                        <div class="mdl-cell--1-col"><p class="myP" style="margin-left: 40px;">Класс</p></div>
+                                                        <div class="mdl-cell--5-col" ><p class="myP">Число команд от делегации</p></div>
+                                                        <div class="mdl-cell--1-col"></div>
+                                                    </div>
+                                                  <!--  Этот кусок будет множиться на все записи  -->
+                                                    {%  for group_in_day in dizs[loop.index0] %}
+                                                        <div class="mdl-grid" style="margin: 10px 0 0 0; padding: 0 0 0 0; text-align: center;">
+                                                            <!--  row4  -->
+                                                            <div class="mdl-cell--2-col"></div>
+                                                            <div class="mdl-cell--1-col"><p class="myP">{{ group_in_day[0] }}</p></div>
+                                                            <div class="mdl-cell--1-col"></div>
+                                                            <div class="mdl-cell--1-col"><p class="myP">{{ group_in_day[1] }}</p></div>
+                                                            <div class="mdl-cell--1-col"><p class="myP" style="margin-left: 55px;">{{ group_in_day[2] }}</p></div>
+                                                            <div class="mdl-cell--5-col" style="height: 30px;"><p class="myP">{{ group_in_day[3] }} - {{ group_in_day[4] }}</p></div>
+                                                            <div class="mdl-cell--1-col"></div>
+                                                        </div>
+                                                    {% endfor %}
+                                                    <div class="mdl-grid" style="margin: 20px 0 0 0; padding: 0 0 0 0; height: 40px;">
+                                                        <!--  row6  -->
+                                                        <div class="mdl-cell--1-col"></div>
+                                                        <div class="mdl-cell--11-col"><p class="myP"><b>Участники:</b></p></div>
+                                                    </div>
+                                                    <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; height: 30px; text-align: center;">
+                                                        <!--  row7  -->
+                                                        <div class="mdl-cell--2-col"></div>
+                                                        <div class="mdl-cell--1-col"><p class="myP">Группа</p></div>
+                                                        <div class="mdl-cell--1-col"></div>
+                                                        <div class="mdl-cell--1-col"><p class="myP">Стартовый</p></div>
+                                                        <div class="mdl-cell--1-col"></div>
+                                                        <div class="mdl-cell--2-col"><p class="myP">Возраст</p></div>
+                                                        <div class="mdl-cell--1-col"></div>
+                                                        <div class="mdl-cell--2-col"><p class="myP">Разряд</p></div>
+                                                        <div class="mdl-cell--1-col"></div>
+                                                    </div>
+                                                  <!--  Этот кусок будет множиться на все записи  -->
+                                                    {%  for membs_in_day in dus[loop.index0] %}
+                                                        <div class="mdl-grid" style="margin: 10px 0 0 0; padding: 0 0 0 0;text-align: center;">
+                                                            <!--  row8  -->
+                                                            <div class="mdl-cell--2-col"></div>
+                                                            <div class="mdl-cell--1-col"><p id="old71" class="myP">{{ membs_in_day[0] }}</p></div>
+                                                            <div class="mdl-cell--1-col"></div>
+                                                            <div class="mdl-cell--1-col"><p class="myP">{{ membs_in_day[1] }}</p></div>
+                                                            <div class="mdl-cell--1-col"></div>
+                                                            <div class="mdl-cell--2-col"><p class="myP">{{ membs_in_day[2] }} - {{ membs_in_day[3] }}</p></div>
+                                                            <div class="mdl-cell--1-col"></div>
+                                                            <div class="mdl-cell--2-col"><p class="myP">{{ membs_in_day[4] }} - {{ membs_in_day[5] }}</p></div>
+                                                            <div class="mdl-cell--1-col"></div>
+                                                        </div>
+                                                    {% endfor %}
+
+                                                </div>  <!--   #toSwapDiz1  -->
+                                            </div>  <!--  tab-content  -->
+                                        {% endfor %}
+                                  </div>    <!--  #diz-panel  -->
+
+                                  <div class="mdl-tabs__panel" id="member-panel" style="background: #fff; color: #42A5F5;">
+                                    <!--  УЧАСТНИКИ  -->
+                                      <div class="tab-content">
+                                        {% for day_numb in days_count %}
+                                            <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%;">
+                                                <!--  row1  -->
+                                                <div class="mdl-cell--1-col"><p class="myP" style="padding-top: 10px;">День {{ day_numb }} </p></div>
+                                                <div class="mdl-cell--10-col">
+                                                    <img src="../../../static/img/line.png" style="width: 100%; margin-top: 20px;">
+                                                </div>
+                                                <div class="mdl-cell--1-col">
+                                                  <button type="button" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect swapVisMem" style="padding: 0 0 0 0; min-height: 46px; height: 46px; min-width: 46px; width: 46px;" value="{{ day_numb }}">
+                                                    <img id="swapImgMemUp{{ day_numb }}" src="../../../static/img/chevron-up.png">
+                                                    <img id="swapImgMemDown{{ day_numb }}" src="../../../static/img/chevron-down.png" style="display: none;">
+                                                  </button>
+                                                </div>
+                                            </div>
+                                            <div id="toSwapMem{{ day_numb }}">
+                                                <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%;">
+                                                    <!--  row2  -->
+                                                    <div class="mdl-cell--1-col"></div>
+                                                    <div class="mdl-cell--10-col">
+                                                        <p class="myP" style="display: inline; float: left;"><b>Дистанция:</b> {{ discs[loop.index0] }} | {{ lens[loop.index0] }}</p>
+                                                        <p class="myP" style="display: inline; float: right;"><b>Пол:</b> M</p>
+                                                        <table class="mdl-data-table mdl-js-data-table">
+                                                          <thead>
+                                                              <tr>
+                                                                <th style="width: 5%; color: #42a5f5; ">№</th>
+                                                                <th style="width: 35%; color: #42a5f5; ">ФИО</th>
+                                                                <th style="width: 5%; color: #42a5f5; ">Класс</th>
+                                                                <th style="width: 5%; color: #42a5f5; ">Год рождения</th>
+                                                                <th style="width: 10%; color: #42a5f5; ">Разряд</th>
+                                                                <th style="width: 20%; color: #42a5f5; ">Команда</th>
+                                                                <th style="width: 20%; color: #42a5f5; ">Территория</th>
+                                                              </tr>
+                                                          </thead>
+                                                          <tbody>
+                                                              <tr>
+                                                                <td class="mdl-data-table__cell--non-numeric">**№**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**ФИО**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**Класс**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**Год рождения**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**Разряд**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**Команда**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**Территория**</td>
+                                                              </tr>
+                                                          </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="mdl-cell--1-col"></div>
+                                                </div>
+                                                <div class="mdl-grid" style="margin: 26px 0 24px 0; padding: 0 0 0 0; width: 100%;">
+                                                    <!--  row3  -->
+                                                    <div class="mdl-cell--1-col"></div>
+                                                    <div class="mdl-cell--10-col">
+                                                        <p class="myP" style="display: inline; float: left;"><b>Дистанция:</b> {{ discs[loop.index0] }} | {{ lens[loop.index0] }}</p>
+                                                        <p class="myP" style="display: inline; float: right;"><b>Пол:</b> Ж</p>
+                                                        <table class="mdl-data-table mdl-js-data-table">
+                                                          <thead>
+                                                              <tr>
+                                                                <th style="width: 5%; color: #42a5f5; ">№</th>
+                                                                <th style="width: 35%; color: #42a5f5; ">ФИО</th>
+                                                                <th style="width: 5%; color: #42a5f5; ">Класс</th>
+                                                                <th style="width: 5%; color: #42a5f5; ">Год рождения</th>
+                                                                <th style="width: 10%; color: #42a5f5; ">Разряд</th>
+                                                                <th style="width: 20%; color: #42a5f5; ">Команда</th>
+                                                                <th style="width: 20%; color: #42a5f5; ">Территория</th>
+                                                              </tr>
+                                                          </thead>
+                                                          <tbody>
+                                                              <tr>
+                                                                <td class="mdl-data-table__cell--non-numeric">**№**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**ФИО**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**Класс**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**Год рождения**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**Разряд**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**Команда**</td>
+                                                                <td class="mdl-data-table__cell--non-numeric">**Территория**</td>
+                                                              </tr>
+                                                          </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="mdl-cell--1-col"></div>
+                                                </div>
+                                            </div>  <!--   #toSwapMem1  -->
+                                        {% endfor %}
+                                      </div>  <!--  .tab-content  -->
+                                  </div>    <!--  #member-panel  -->
+                                  <div class="mdl-tabs__panel" id="statistic-panel" style="background: #fff; color: #42A5F5;">
+                                    <!--  СТАТИСТИКА  -->
+                                    <div class="tab-content">
+                                       {%  if not stat_day and not stat_sex and not stat_qual%}
+                                           <div class="mdl-grid" style="margin: 60px 0 0 0; padding: 0 0 0 0; width: 100%; text-align: center;">
+                                                <div class="mdl-cell--1-col"></div>
+                                                <div class="mdl-cell--10-col"><p class="myP">Организаторы не запрашивали статистику по участникам</p></div>
+                                                <div class="mdl-cell--1-col"></div>
+                                            </div>
+                                       {% endif %}
+                                       <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%; {% if not stat_day %}display: none;{% endif %}">
+                                            <!--  row1  -->
+                                            <div class="mdl-cell--1-col"></div>
+                                            <div class="mdl-cell--10-col">
+                                                <p class="myP" style="margin-bottom: 10px; margin-top: 26px;"><b>Количество участников по дням соревнований</b></p>
+                                                <div id="chart_onDay" class="myP" style="width: 100%;"></div>
+                                            </div>
+                                            <div class="mdl-cell--1-col"></div>
+                                        </div>
+                                        <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%; {% if not stat_sex %}display: none;{% endif %}">
+                                            <!--  row1  -->
+                                            <div class="mdl-cell--1-col"></div>
+                                            <div class="mdl-cell--10-col">
+                                                <p class="myP" style="margin-bottom: 10px; margin-top: 26px;"><b>Количество участников по полу</b></p>
+                                                <div id="chart_onSex" class="myP" style="width: 100%;"></div>
+                                            </div>
+                                            <div class="mdl-cell--1-col"></div>
+                                        </div>
+                                        <div class="mdl-grid" style="margin: 0 0 0 0; padding: 0 0 0 0; width: 100%; {% if not stat_qual %}display: none;{% endif %}">
+                                            <!--  row1  -->
+                                            <div class="mdl-cell--1-col"></div>
+                                            <div class="mdl-cell--10-col">
+                                                <p class="myP" style="margin-bottom: 10px; margin-top: 26px;"><b>Количество участников по званиям и разрядам</b></p>
+                                                <div id="chart_onQual" class="myP" style="width: 100%;"></div>
+                                            </div>
+                                            <div class="mdl-cell--1-col"></div>
+                                        </div>
+                                    </div>    <!--  .tab-content  -->
+                                  </div>    <!--  #statistic-panel  -->
+                              </div>   <!--  mdl-tabs  -->
+                          </div>
+                      </div>    <!--  mdl-cards__actions  -->
+                   </div>
+              </div>    <!--  вся карточка  -->
+              <div class="mdl-cell mdl-cell--1-col"></div>
+          </div>  <!-- mdl-grid -->
+        </div>  <!-- page-content -->
+      </main>
+{% endblock %}

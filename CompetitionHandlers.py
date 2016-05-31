@@ -233,6 +233,10 @@ class CertainCompetition(webapp2.RequestHandler):
                        'membs': members}
             if is_org and OtherHandlers.cur_role == 'organizer':
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/CertainCompetition.html')
+            elif is_lead and OtherHandlers.cur_role == 'leader':
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/leader/CertainCompetition.html')
+            elif is_memb and OtherHandlers.cur_role == 'member':
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/member/CertainCompetition.html')
             else:
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/CertainCompetition.html')
         self.response.write(template.render(temp_values))

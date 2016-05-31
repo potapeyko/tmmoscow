@@ -11,12 +11,12 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 
 class memberInfo(webapp2.RequestHandler):
-    def get(self):
+    def get(self):      # displays info about certain member or empty form for adding new member
         login = users.create_login_url(dest_url='/postSignIn')
         temp_values = {'login': login, 'logout': users.create_logout_url('/login')}
         template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/member/MemberView.html')
         self.response.write(template.render(temp_values))
 
-    def post(self):
+    def post(self):     # saves new member or changes
         self.response.write('POST from memberInfo')
 
