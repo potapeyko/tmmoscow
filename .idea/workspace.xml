@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1a4ee0a1-5209-4064-a7af-a6fd0b434d59" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/tmmosc/CompetitionList.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/tmmosc/base/AuthUserHeader.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OtherHandlers.py" afterPath="$PROJECT_DIR$/OtherHandlers.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/tmmosc/leader/CompetitionList.html" afterPath="$PROJECT_DIR$/templates/tmmosc/leader/CompetitionList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/tmmosc/member/CompetitionList.html" afterPath="$PROJECT_DIR$/templates/tmmosc/member/CompetitionList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/tmmosc/organizer/CompetitionList.html" afterPath="$PROJECT_DIR$/templates/tmmosc/organizer/CompetitionList.html" />
     </list>
     <ignored path="tmmosc.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,27 +36,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="OtherHandlers.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="OtherHandlers.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OtherHandlers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
+            <state relative-caret-position="662">
+              <caret line="48" column="23" selection-start-line="48" selection-start-column="23" selection-end-line="48" selection-end-column="23" />
               <folding>
                 <element signature="e#46#84#0" expanded="true" />
-                <element signature="e#5459#5528#0" expanded="false" />
-                <element signature="e#7239#7479#0" expanded="false" />
-                <element signature="e#7616#8097#0" expanded="false" />
+                <element signature="e#5471#5540#0" expanded="false" />
+                <element signature="e#7251#7491#0" expanded="false" />
+                <element signature="e#7628#8109#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CompetitionList.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/tmmosc/CompetitionList.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="35" column="64" selection-start-line="35" selection-start-column="64" selection-end-line="35" selection-end-column="64" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -61,53 +54,39 @@
       <file leaf-file-name="CompetitionList.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/tmmosc/member/CompetitionList.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="574">
-              <caret line="57" column="47" selection-start-line="0" selection-start-column="0" selection-end-line="131" selection-end-column="7" />
+            <state relative-caret-position="360">
+              <caret line="20" column="17" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AfterSignIn.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/tmmosc/AfterSignIn.html">
+      <file leaf-file-name="CompetitionList.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/tmmosc/leader/CompetitionList.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1584">
-              <caret line="88" column="42" selection-start-line="85" selection-start-column="34" selection-end-line="88" selection-end-column="42" />
+            <state relative-caret-position="144">
+              <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MemberView.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/tmmosc/member/MemberView.html">
+      <file leaf-file-name="CompetitionList.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/tmmosc/organizer/CompetitionList.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2610">
-              <caret line="145" column="95" selection-start-line="145" selection-start-column="95" selection-end-line="145" selection-end-column="95" />
+            <state relative-caret-position="468">
+              <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.py">
+      <file leaf-file-name="AuthUserHeader.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/tmmosc/base/AuthUserHeader.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="59" column="31" selection-start-line="59" selection-start-column="20" selection-end-line="59" selection-end-column="31" />
-              <folding>
-                <element signature="e#602#628#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="memberHandlers.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/memberHandlers.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="17" column="57" selection-start-line="17" selection-start-column="57" selection-end-line="17" selection-end-column="57" />
-              <folding>
-                <element signature="e#0#38#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="756">
+              <caret line="74" column="42" selection-start-line="74" selection-start-column="42" selection-end-line="74" selection-end-column="42" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -137,9 +116,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/controllers/OtherHandlers.py" />
-        <option value="$PROJECT_DIR$/Visitor.py" />
-        <option value="$PROJECT_DIR$/templates/tmmosc/LogIn.html" />
         <option value="$PROJECT_DIR$/templates/tmmosc/er404.html" />
         <option value="$PROJECT_DIR$/models/Visitor.py" />
         <option value="$PROJECT_DIR$/models/Competition.py" />
@@ -178,16 +154,19 @@
         <option value="$PROJECT_DIR$/LeaderHandlers.py" />
         <option value="$PROJECT_DIR$/CompetitionHandlers.py" />
         <option value="$PROJECT_DIR$/templates/tmmosc/AfterSignIn.html" />
-        <option value="$PROJECT_DIR$/templates/tmmosc/leader/CompetitionList.html" />
-        <option value="$PROJECT_DIR$/templates/tmmosc/organizer/CompetitionList.html" />
         <option value="$PROJECT_DIR$/memberHandlers.py" />
         <option value="$PROJECT_DIR$/templates/tmmosc/member/MemberView.html" />
         <option value="$PROJECT_DIR$/static/js/ajax.js" />
-        <option value="$PROJECT_DIR$/templates/tmmosc/member/CompetitionList.html" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/modelVisitor.py" />
         <option value="$PROJECT_DIR$/templates/tmmosc/CompetitionList.html" />
+        <option value="$PROJECT_DIR$/templates/tmmosc/AuthUser.html" />
         <option value="$PROJECT_DIR$/OtherHandlers.py" />
+        <option value="$PROJECT_DIR$/templates/tmmosc/base/compListContent.html" />
+        <option value="$PROJECT_DIR$/templates/tmmosc/base/AuthUserHeader.html" />
+        <option value="$PROJECT_DIR$/templates/tmmosc/member/CompetitionList.html" />
+        <option value="$PROJECT_DIR$/templates/tmmosc/organizer/CompetitionList.html" />
+        <option value="$PROJECT_DIR$/templates/tmmosc/leader/CompetitionList.html" />
       </list>
     </option>
   </component>
@@ -328,6 +307,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tmmosc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tmmosc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tmmosc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="base" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -344,19 +345,19 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/models" />
-      <recent name="$PROJECT_DIR$/handlers" />
-      <recent name="$PROJECT_DIR$/templates/tmmosc" />
-      <recent name="J:\tmmosc" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/models" />
       <recent name="$PROJECT_DIR$/handlers" />
       <recent name="$PROJECT_DIR$/templates/tmmosc/leader" />
       <recent name="$PROJECT_DIR$/templates/tmmosc/organizer" />
       <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/tmmosc/base" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/models" />
+      <recent name="$PROJECT_DIR$/handlers" />
+      <recent name="$PROJECT_DIR$/templates/tmmosc" />
     </key>
   </component>
   <component name="RunManager" selected="Python.CompetitionHandlers">
@@ -664,10 +665,11 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32824427" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3226141" sideWeight="0.502442" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904148" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32322174" sideWeight="0.497558" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328125" sideWeight="0.4952381" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32848233" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19456068" sideWeight="0.490232" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2583682" sideWeight="0.490232" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952183" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
@@ -678,7 +680,6 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977098" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="CSS Styles" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19977678" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32412326" sideWeight="0.497558" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -694,9 +695,9 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328125" sideWeight="0.4952381" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32848233" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977098" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3694362" sideWeight="0.490232" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2583682" sideWeight="0.490232" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="CSS Styles" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19977678" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19621213" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1988984" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904148" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32412326" sideWeight="0.497558" order="1" side_tool="false" content_ui="tabs" />
@@ -726,21 +727,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="15" />
+      <option name="time" value="16" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/img/er404.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/img/er403.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/img/er401.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -932,20 +923,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/tmmosc/organizer/CompetitionList.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="574">
-          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/tmmosc/leader/CompetitionList.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="53" column="12" selection-start-line="46" selection-start-column="6" selection-end-line="53" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/tmmosc/leader/Team.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -981,7 +958,7 @@
         <state relative-caret-position="234">
           <caret line="17" column="57" selection-start-line="17" selection-start-column="57" selection-end-line="17" selection-end-column="57" />
           <folding>
-            <element signature="e#0#38#0" expanded="true" />
+            <element signature="e#0#38#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1002,20 +979,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/tmmosc/member/CompetitionList.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="574">
-          <caret line="57" column="47" selection-start-line="0" selection-start-column="0" selection-end-line="131" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="104">
           <caret line="59" column="31" selection-start-line="59" selection-start-column="20" selection-end-line="59" selection-end-column="31" />
           <folding>
-            <element signature="e#602#628#0" expanded="true" />
+            <element signature="e#602#628#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1028,16 +997,56 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/tmmosc/base/compListContent.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/OtherHandlers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
+        <state relative-caret-position="662">
+          <caret line="48" column="23" selection-start-line="48" selection-start-column="23" selection-end-line="48" selection-end-column="23" />
           <folding>
             <element signature="e#46#84#0" expanded="true" />
-            <element signature="e#5459#5528#0" expanded="false" />
-            <element signature="e#7239#7479#0" expanded="false" />
-            <element signature="e#7616#8097#0" expanded="false" />
+            <element signature="e#5471#5540#0" expanded="false" />
+            <element signature="e#7251#7491#0" expanded="false" />
+            <element signature="e#7628#8109#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/tmmosc/leader/CompetitionList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/tmmosc/member/CompetitionList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="20" column="17" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/tmmosc/organizer/CompetitionList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/tmmosc/base/AuthUserHeader.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="756">
+          <caret line="74" column="42" selection-start-line="74" selection-start-column="42" selection-end-line="74" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>

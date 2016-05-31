@@ -58,9 +58,7 @@ class DefaultHandler(webapp2.RequestHandler):
         d_start = formatDateList(d_start)
         d_finish = formatDateList(d_finish)
         user = users.get_current_user()
-        if not user:
-            email = 'Anonymous'
-            role = 'Anonim'
+        if not user:        # user is anonim
             login = users.create_login_url(dest_url='/postSignIn')
             temp_values = {'login': login, 'comps': comps, 'c_count': comps_count, 'd_start': d_start,'d_finish':
                             d_finish, 'pzs': pzs, 'is_open_pz': is_open_pz, 'logout': users.create_logout_url('/login')}
@@ -74,6 +72,7 @@ class DefaultHandler(webapp2.RequestHandler):
                            'cur_role': cur_role, 'is_user': True}
             try:            # show compList corresponding to user's role
                 template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/'+cur_role+'/CompetitionList.html')
+                #template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/AuthUserHeader.html')
             except:         # user is anonim
                 login = users.create_login_url(dest_url='/postSignIn')
                 temp_values = {'login': login, 'comps': comps, 'c_count': comps_count, 'd_start': d_start, 'd_finish':
@@ -91,8 +90,6 @@ class AfterSignIn(webapp2.RequestHandler):
             return webapp2.redirect('/')
         else:
             try:
-                self.response.write('this is user')
-
                 email = user.email()
                 [is_org, is_lead, is_memb] = findUser(email)
                 [roles, cur_role_local] = createRoles(is_org, is_lead, is_memb)
@@ -104,11 +101,10 @@ class AfterSignIn(webapp2.RequestHandler):
                     global cur_role
                     cur_role = cur_role_local
                     return webapp2.redirect('/')
-            except:                                   # If user hasn't roles in system (anonim)
+            except:                                     # If user hasn't roles in system (anonim)
                 global cur_role
                 cur_role = 'anonim'
                 return webapp2.redirect('/')
-
 
     def post(self):     # changes current role to user's choice
         cur_role_local = self.request.POST.get('curRole')
