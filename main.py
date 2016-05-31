@@ -21,7 +21,7 @@ from OtherHandlers import *
 from modelVisitor import *
 from modelCompetition import *
 from LeaderHandlers import Team, AddMemberToTeam
-from memberHandlers import memberInfo
+from MemberHandlers import memberInfo
 
 import os
 import jinja2

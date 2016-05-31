@@ -2,17 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1a4ee0a1-5209-4064-a7af-a6fd0b434d59" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/tmmosc/organizer/Competition.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/tmmosc/organizer/Pattern.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CompetitionHandlers.py" afterPath="$PROJECT_DIR$/CompetitionHandlers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/tmmosc/base/AuthUserHeader.html" afterPath="$PROJECT_DIR$/templates/tmmosc/base/AuthUserHeader.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/tmmosc/organizer/AddCompetition.html" afterPath="$PROJECT_DIR$/templates/tmmosc/organizer/AddCompetition.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/tmmosc/organizer/CompetitionList.html" afterPath="$PROJECT_DIR$/templates/tmmosc/organizer/CompetitionList.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/tmmosc/organizer/LeaderList.html" afterPath="$PROJECT_DIR$/templates/tmmosc/organizer/LeaderList.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/tmmosc/organizer/MemberList.html" afterPath="$PROJECT_DIR$/templates/tmmosc/organizer/MemberList.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/tmmosc/organizer/NewCompetitionInfo.html" afterPath="$PROJECT_DIR$/templates/tmmosc/organizer/NewCompetitionInfo.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/tmmosc/organizer/OrganizerList.html" afterPath="$PROJECT_DIR$/templates/tmmosc/organizer/OrganizerList.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/memberHandlers.py" afterPath="$PROJECT_DIR$/MemberHandlers.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/tmmosc/leader/Team.html" afterPath="$PROJECT_DIR$/templates/tmmosc/leader/Team.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/tmmosc/member/MemberView.html" afterPath="$PROJECT_DIR$/templates/tmmosc/member/MemberView.html" />
     </list>
     <ignored path="tmmosc.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,54 +33,38 @@
     <favorites_list name="tmmosc" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="OtherHandlers.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OtherHandlers.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="22" column="18" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
-              <folding>
-                <element signature="e#46#84#0" expanded="true" />
-                <element signature="e#5471#5540#0" expanded="false" />
-                <element signature="e#5628#7199#0" expanded="false" />
-                <element signature="e#7251#7491#0" expanded="false" />
-                <element signature="e#7628#8109#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MemberList.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/tmmosc/organizer/MemberList.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="50" column="17" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="omlList.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/js/omlList.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1250">
-              <caret line="93" column="25" selection-start-line="93" selection-start-column="20" selection-end-line="93" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AuthUserHeader.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/tmmosc/base/AuthUserHeader.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="791">
-              <caret line="125" column="23" selection-start-line="125" selection-start-column="23" selection-end-line="125" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.52998775">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="MemberView.html" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/templates/tmmosc/member/MemberView.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="198">
+                  <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
+                  <folding>
+                    <element signature="e#7912#7948#0#HTML" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="CompetitionList.html" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/templates/tmmosc/member/CompetitionList.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="360">
+                  <caret line="20" column="17" selection-start-line="12" selection-start-column="3" selection-end-line="20" selection-end-column="17" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -138,12 +115,10 @@
         <option value="$PROJECT_DIR$/templates/tmmosc/Registration.html" />
         <option value="$PROJECT_DIR$/templates/tmmosc/organizer/test.html" />
         <option value="$PROJECT_DIR$/templates/tmmosc/member/CompetitionList.py" />
-        <option value="$PROJECT_DIR$/templates/tmmosc/leader/Team.html" />
         <option value="$PROJECT_DIR$/ListHandlers.py" />
         <option value="$PROJECT_DIR$/LeaderHandlers.py" />
         <option value="$PROJECT_DIR$/templates/tmmosc/AfterSignIn.html" />
         <option value="$PROJECT_DIR$/memberHandlers.py" />
-        <option value="$PROJECT_DIR$/templates/tmmosc/member/MemberView.html" />
         <option value="$PROJECT_DIR$/static/js/ajax.js" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/modelVisitor.py" />
@@ -163,6 +138,8 @@
         <option value="$PROJECT_DIR$/templates/tmmosc/organizer/LeaderList.html" />
         <option value="$PROJECT_DIR$/templates/tmmosc/organizer/MemberList.html" />
         <option value="$PROJECT_DIR$/templates/tmmosc/base/AuthUserHeader.html" />
+        <option value="$PROJECT_DIR$/templates/tmmosc/leader/Team.html" />
+        <option value="$PROJECT_DIR$/templates/tmmosc/member/MemberView.html" />
       </list>
     </option>
   </component>
@@ -256,6 +233,50 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="organizer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tmmosc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tmmosc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tmmosc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="member" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tmmosc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tmmosc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tmmosc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="leader" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -838,20 +859,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LeaderHandlers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/tmmosc/leader/Team.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/js/ajax.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -864,24 +871,6 @@
         <state relative-caret-position="-2196">
           <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/tmmosc/member/MemberView.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2610">
-          <caret line="145" column="95" selection-start-line="145" selection-start-column="95" selection-end-line="145" selection-end-column="95" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/memberHandlers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="17" column="57" selection-start-line="17" selection-start-column="57" selection-end-line="17" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#38#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -901,16 +890,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="59" column="31" selection-start-line="59" selection-start-column="20" selection-end-line="59" selection-end-column="31" />
-          <folding>
-            <element signature="e#602#628#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/tmmosc/CompetitionList.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -923,22 +902,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/tmmosc/leader/CompetitionList.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/tmmosc/member/CompetitionList.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="20" column="17" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -977,204 +940,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/tmmosc/organizer/CertainCompetition.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
-          <folding>
-            <element signature="e#2519#2543#0#HTML" expanded="true" />
-            <element signature="e#2764#2821#0#HTML" expanded="true" />
-            <element signature="e#2882#2951#0#HTML" expanded="true" />
-            <element signature="e#3118#3143#0#HTML" expanded="true" />
-            <element signature="e#3251#3275#0#HTML" expanded="true" />
-            <element signature="e#3393#3458#0#HTML" expanded="true" />
-            <element signature="e#3627#3747#0#HTML" expanded="true" />
-            <element signature="e#3847#3913#0#HTML" expanded="true" />
-            <element signature="e#4082#4202#0#HTML" expanded="true" />
-            <element signature="e#4447#4474#0#HTML" expanded="true" />
-            <element signature="e#4522#4566#0#HTML" expanded="true" />
-            <element signature="e#4674#4785#0#HTML" expanded="true" />
-            <element signature="e#5115#5168#0#HTML" expanded="true" />
-            <element signature="e#5201#5221#0#HTML" expanded="true" />
-            <element signature="e#5379#5421#0#HTML" expanded="true" />
-            <element signature="e#5467#5513#0#HTML" expanded="true" />
-            <element signature="e#5611#5630#0#HTML" expanded="true" />
-            <element signature="e#5731#5750#0#HTML" expanded="true" />
-            <element signature="e#5853#5872#0#HTML" expanded="true" />
-            <element signature="e#5978#5997#0#HTML" expanded="true" />
-            <element signature="e#6202#6220#0#HTML" expanded="true" />
-            <element signature="e#6687#6728#0#HTML" expanded="true" />
-            <element signature="e#7017#7092#0#HTML" expanded="true" />
-            <element signature="e#7164#7219#0#HTML" expanded="true" />
-            <element signature="e#7385#7411#0#HTML" expanded="true" />
-            <element signature="e#7622#7660#0#HTML" expanded="true" />
-            <element signature="e#7965#8052#0#HTML" expanded="true" />
-            <element signature="e#8352#8374#0#HTML" expanded="true" />
-            <element signature="e#8714#8759#0#HTML" expanded="true" />
-            <element signature="e#9133#9158#0#HTML" expanded="true" />
-            <element signature="e#9239#9266#0#HTML" expanded="true" />
-            <element signature="e#9679#9735#0#HTML" expanded="true" />
-            <element signature="e#10063#10100#0#HTML" expanded="true" />
-            <element signature="e#10332#10388#0#HTML" expanded="true" />
-            <element signature="e#10547#10567#0#HTML" expanded="true" />
-            <element signature="e#10660#10685#0#HTML" expanded="true" />
-            <element signature="e#11131#11171#0#HTML" expanded="true" />
-            <element signature="e#11471#11511#0#HTML" expanded="true" />
-            <element signature="e#12034#12054#0#HTML" expanded="true" />
-            <element signature="e#12223#12249#0#HTML" expanded="true" />
-            <element signature="e#12545#12619#0#HTML" expanded="true" />
-            <element signature="e#12717#12737#0#HTML" expanded="true" />
-            <element signature="e#12922#12948#0#HTML" expanded="true" />
-            <element signature="e#13054#13093#0#HTML" expanded="true" />
-            <element signature="e#13485#13544#0#HTML" expanded="true" />
-            <element signature="e#13702#13722#0#HTML" expanded="true" />
-            <element signature="e#13907#13927#0#HTML" expanded="true" />
-            <element signature="e#14106#14146#0#HTML" expanded="true" />
-            <element signature="e#14444#14518#0#HTML" expanded="true" />
-            <element signature="e#14616#14636#0#HTML" expanded="true" />
-            <element signature="e#14821#14847#0#HTML" expanded="true" />
-            <element signature="e#14953#14992#0#HTML" expanded="true" />
-            <element signature="e#15387#15446#0#HTML" expanded="true" />
-            <element signature="e#15773#15810#0#HTML" expanded="true" />
-            <element signature="e#15990#16010#0#HTML" expanded="true" />
-            <element signature="e#16179#16216#0#HTML" expanded="true" />
-            <element signature="e#16452#16508#0#HTML" expanded="true" />
-            <element signature="e#16667#16687#0#HTML" expanded="true" />
-            <element signature="e#16780#16805#0#HTML" expanded="true" />
-            <element signature="e#17245#17267#0#HTML" expanded="true" />
-            <element signature="e#17564#17586#0#HTML" expanded="true" />
-            <element signature="e#18109#18129#0#HTML" expanded="true" />
-            <element signature="e#18308#18334#0#HTML" expanded="true" />
-            <element signature="e#18595#18666#0#HTML" expanded="true" />
-            <element signature="e#18763#18783#0#HTML" expanded="true" />
-            <element signature="e#18876#18901#0#HTML" expanded="true" />
-            <element signature="e#18994#19014#0#HTML" expanded="true" />
-            <element signature="e#19117#19143#0#HTML" expanded="true" />
-            <element signature="e#19249#19274#0#HTML" expanded="true" />
-            <element signature="e#19422#19447#0#HTML" expanded="true" />
-            <element signature="e#19566#19583#0#HTML" expanded="true" />
-            <element signature="e#19876#19935#0#HTML" expanded="true" />
-            <element signature="e#20263#20300#0#HTML" expanded="true" />
-            <element signature="e#20635#20735#0#HTML" expanded="true" />
-            <element signature="e#21079#21116#0#HTML" expanded="true" />
-            <element signature="e#21297#21317#0#HTML" expanded="true" />
-            <element signature="e#21414#21441#0#HTML" expanded="true" />
-            <element signature="e#21798#21825#0#HTML" expanded="true" />
-            <element signature="e#22199#22270#0#HTML" expanded="true" />
-            <element signature="e#22555#22581#0#HTML" expanded="true" />
-            <element signature="e#22588#22610#0#HTML" expanded="true" />
-            <element signature="e#22714#22830#0#HTML" expanded="true" />
-            <element signature="e#23354#23395#0#HTML" expanded="true" />
-            <element signature="e#23687#23762#0#HTML" expanded="true" />
-            <element signature="e#23834#23889#0#HTML" expanded="true" />
-            <element signature="e#24055#24081#0#HTML" expanded="true" />
-            <element signature="e#24292#24330#0#HTML" expanded="true" />
-            <element signature="e#24634#24721#0#HTML" expanded="true" />
-            <element signature="e#25019#25041#0#HTML" expanded="true" />
-            <element signature="e#25378#25420#0#HTML" expanded="true" />
-            <element signature="e#26723#26783#0#HTML" expanded="true" />
-            <element signature="e#30095#30171#0#HTML" expanded="true" />
-            <element signature="e#30762#30788#0#HTML" expanded="true" />
-            <element signature="e#31370#31435#0#HTML" expanded="true" />
-            <element signature="e#32081#32107#0#HTML" expanded="true" />
-            <element signature="e#32229#32250#0#HTML" expanded="true" />
-            <element signature="e#32620#32697#0#HTML" expanded="true" />
-            <element signature="e#33046#33071#0#HTML" expanded="true" />
-            <element signature="e#33177#33202#0#HTML" expanded="true" />
-            <element signature="e#33350#33375#0#HTML" expanded="true" />
-            <element signature="e#33494#33511#0#HTML" expanded="true" />
-            <element signature="e#33838#33863#0#HTML" expanded="true" />
-            <element signature="e#33969#33994#0#HTML" expanded="true" />
-            <element signature="e#34144#34169#0#HTML" expanded="true" />
-            <element signature="e#34289#34306#0#HTML" expanded="true" />
-            <element signature="e#34645#34689#0#HTML" expanded="true" />
-            <element signature="e#34837#34862#0#HTML" expanded="true" />
-            <element signature="e#34981#34998#0#HTML" expanded="true" />
-            <element signature="e#35232#35271#0#HTML" expanded="true" />
-            <element signature="e#35377#35415#0#HTML" expanded="true" />
-            <element signature="e#35563#35588#0#HTML" expanded="true" />
-            <element signature="e#35707#35724#0#HTML" expanded="true" />
-            <element signature="e#36001#36039#0#HTML" expanded="true" />
-            <element signature="e#36187#36212#0#HTML" expanded="true" />
-            <element signature="e#36331#36348#0#HTML" expanded="true" />
-            <element signature="e#36720#36791#0#HTML" expanded="true" />
-            <element signature="e#37138#37254#0#HTML" expanded="true" />
-            <element signature="e#37437#37496#0#HTML" expanded="true" />
-            <element signature="e#37905#37981#0#HTML" expanded="true" />
-            <element signature="e#39246#39310#0#HTML" expanded="true" />
-            <element signature="e#40673#40750#0#HTML" expanded="true" />
-            <element signature="e#41138#41163#0#HTML" expanded="true" />
-            <element signature="e#41307#41332#0#HTML" expanded="true" />
-            <element signature="e#41449#41466#0#HTML" expanded="true" />
-            <element signature="e#41898#41936#0#HTML" expanded="true" />
-            <element signature="e#42082#42107#0#HTML" expanded="true" />
-            <element signature="e#42225#42242#0#HTML" expanded="true" />
-            <element signature="e#42677#42715#0#HTML" expanded="true" />
-            <element signature="e#42861#42886#0#HTML" expanded="true" />
-            <element signature="e#43004#43021#0#HTML" expanded="true" />
-            <element signature="e#43298#43336#0#HTML" expanded="true" />
-            <element signature="e#43482#43507#0#HTML" expanded="true" />
-            <element signature="e#43625#43642#0#HTML" expanded="true" />
-            <element signature="e#44071#44109#0#HTML" expanded="true" />
-            <element signature="e#44257#44282#0#HTML" expanded="true" />
-            <element signature="e#44401#44418#0#HTML" expanded="true" />
-            <element signature="e#44695#44733#0#HTML" expanded="true" />
-            <element signature="e#44881#44906#0#HTML" expanded="true" />
-            <element signature="e#45025#45042#0#HTML" expanded="true" />
-            <element signature="e#45415#45486#0#HTML" expanded="true" />
-            <element signature="e#45834#45950#0#HTML" expanded="true" />
-            <element signature="e#46461#46502#0#HTML" expanded="true" />
-            <element signature="e#46852#46907#0#HTML" expanded="true" />
-            <element signature="e#47065#47091#0#HTML" expanded="true" />
-            <element signature="e#47294#47332#0#HTML" expanded="true" />
-            <element signature="e#47624#47711#0#HTML" expanded="true" />
-            <element signature="e#48001#48023#0#HTML" expanded="true" />
-            <element signature="e#48340#48395#0#HTML" expanded="true" />
-            <element signature="e#48707#48744#0#HTML" expanded="true" />
-            <element signature="e#48889#48927#0#HTML" expanded="true" />
-            <element signature="e#49252#49287#0#HTML" expanded="true" />
-            <element signature="e#49363#49399#0#HTML" expanded="true" />
-            <element signature="e#49477#49512#0#HTML" expanded="true" />
-            <element signature="e#49592#49627#0#HTML" expanded="true" />
-            <element signature="e#49714#49750#0#HTML" expanded="true" />
-            <element signature="e#49831#49867#0#HTML" expanded="true" />
-            <element signature="e#49949#49985#0#HTML" expanded="true" />
-            <element signature="e#51626#51684#0#HTML" expanded="true" />
-            <element signature="e#51996#52033#0#HTML" expanded="true" />
-            <element signature="e#52178#52216#0#HTML" expanded="true" />
-            <element signature="e#52541#52576#0#HTML" expanded="true" />
-            <element signature="e#52652#52688#0#HTML" expanded="true" />
-            <element signature="e#52766#52801#0#HTML" expanded="true" />
-            <element signature="e#52881#52916#0#HTML" expanded="true" />
-            <element signature="e#53003#53039#0#HTML" expanded="true" />
-            <element signature="e#53120#53156#0#HTML" expanded="true" />
-            <element signature="e#53238#53274#0#HTML" expanded="true" />
-            <element signature="e#54915#54973#0#HTML" expanded="true" />
-            <element signature="e#55379#55399#0#HTML" expanded="true" />
-            <element signature="e#55915#56033#0#HTML" expanded="true" />
-            <element signature="e#56162#56238#0#HTML" expanded="true" />
-            <element signature="e#56325#56350#0#HTML" expanded="true" />
-            <element signature="e#56479#56500#0#HTML" expanded="true" />
-            <element signature="e#56947#56968#0#HTML" expanded="true" />
-            <element signature="e#57423#57444#0#HTML" expanded="true" />
-            <element signature="e#57949#57975#0#HTML" expanded="true" />
-            <element signature="e#58107#58158#0#HTML" expanded="true" />
-            <element signature="e#58470#58541#0#HTML" expanded="true" />
-            <element signature="e#59104#59145#0#HTML" expanded="true" />
-            <element signature="e#59428#59506#0#HTML" expanded="true" />
-            <element signature="e#59995#60097#0#HTML" expanded="true" />
-            <element signature="e#60377#60423#0#HTML" expanded="true" />
-            <element signature="e#60560#60580#0#HTML" expanded="true" />
-            <element signature="e#60828#60930#0#HTML" expanded="true" />
-            <element signature="e#61210#61256#0#HTML" expanded="true" />
-            <element signature="e#61380#61400#0#HTML" expanded="true" />
-            <element signature="e#61648#61751#0#HTML" expanded="true" />
-            <element signature="e#62031#62077#0#HTML" expanded="true" />
-            <element signature="e#62216#62236#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/tmmosc/organizer/NewCompetitionInfo.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="594">
@@ -1202,20 +967,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OtherHandlers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="22" column="18" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
-          <folding>
-            <element signature="e#46#84#0" expanded="true" />
-            <element signature="e#5471#5540#0" expanded="false" />
-            <element signature="e#5628#7199#0" expanded="false" />
-            <element signature="e#7251#7491#0" expanded="false" />
-            <element signature="e#7628#8109#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/js/omlList.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1250">
@@ -1232,11 +983,91 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/OtherHandlers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="22" column="18" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
+          <folding>
+            <element signature="e#46#84#0" expanded="true" />
+            <element signature="e#5471#5540#0" expanded="false" />
+            <element signature="e#5628#7199#0" expanded="false" />
+            <element signature="e#7251#7491#0" expanded="false" />
+            <element signature="e#7628#8109#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/tmmosc/organizer/CertainCompetition.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-540">
+          <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/tmmosc/base/AuthUserHeader.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="791">
-          <caret line="125" column="23" selection-start-line="125" selection-start-column="23" selection-end-line="125" selection-end-column="23" />
+        <state relative-caret-position="1754">
+          <caret line="119" column="28" selection-start-line="119" selection-start-column="28" selection-end-line="119" selection-end-column="28" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LeaderHandlers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="24" column="44" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/tmmosc/leader/Team.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="28" column="14" selection-start-line="28" selection-start-column="14" selection-end-line="28" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/tmmosc/leader/CompetitionList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="4" selection-start-line="12" selection-start-column="3" selection-end-line="21" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/tmmosc/member/CompetitionList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="20" column="17" selection-start-line="12" selection-start-column="3" selection-end-line="20" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="59" column="31" selection-start-line="59" selection-start-column="20" selection-end-line="59" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MemberHandlers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="17" column="57" selection-start-line="17" selection-start-column="57" selection-end-line="17" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/tmmosc/member/MemberView.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
+          <folding>
+            <element signature="e#7912#7948#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
