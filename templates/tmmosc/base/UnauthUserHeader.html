@@ -24,17 +24,10 @@
     {% block header %}
         <header class="mdl-layout__header mdl-layout__header--scroll">
         <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">
-              <nav class="mdl-navigation">
-                {% for role in roles %}
-                  <a class="mdl-navigation__link" href="/postSignIn">{{ role|safe }}</a>
-                {%  endfor %}
-              </nav>
-          </span>
           <div class="mdl-layout-spacer"></div>
           <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="">{{ user_email }}</a>
-            <a class="mdl-navigation__link" href="{{ logout }}" onclick="nullToCurRole();">Выход</a>
+              <a class="mdl-navigation__link" href="#">Регистрация</a>
+              <a class="mdl-navigation__link" href="{{ login }}">Вход</a>
           </nav>
         </div>
       </header>
@@ -45,7 +38,6 @@
     {% block main_content %}            {# Default content is competition list #}
         <main class="mdl-layout__content">
             <div class="page-content">
-            <h1>{{ test }}</h1>
               <div style="height: 20px;"></div>
                 {% if c_count > 0 %}
                   {% for comp in comps %}
