@@ -12,6 +12,10 @@ import jinja2
 import webapp2
 from CompetitionHandlers import formatDateList
 import OtherHandlers
+import random
+import string
+import hashlib
+import time
 
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -65,7 +69,7 @@ class Team(webapp2.RequestHandler):
                 newTerry = self.request.POST.get('terryTeam')
                 lead = db.Query(Leader).filter('user =', user).get()
                 team = lead.command
-                team.command = newName
+                team.name = newName
                 team.territory = newTerry
                 team.put()
                 membs = db.Query(Member).filter('command =', team)
@@ -88,26 +92,65 @@ class AddMemberToTeam(webapp2.RequestHandler):
     def get(self):      # displays empty form for adding new member to command
         user = users.get_current_user()
         if not user:
-            self.response.write('Error 401: you are unauthorized! (AddMemberTeam:get)')
+            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
+                           'login_redir': users.create_login_url('/postSignIn')}
+            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
             roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
             if is_lead and OtherHandlers.cur_role == 'leader':
-                self.response.write('Fill in form to add new member to your team, Leader')
+                pass_to_edit = generatePass()
+                temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
+                               'edit_pass': pass_to_edit}
+                template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/leader/NewMember.html')
             else:
-                self.response.write('You can\'t add new Member to Team because you are not a leader')
+                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
+                               'login_redir': users.create_login_url('/postSignIn')}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
+        self.response.write(template.render(temp_values))
 
 
     def post(self):     # saves new member to db
         user = users.get_current_user()
         if not user:
-            self.response.write('Error 401: you are unauthorized! (AddMemberTeam:post)')
+            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
+                           'login_redir': users.create_login_url('/postSignIn')}
+            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
+            self.response.write(template.render(temp_values))
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
-            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
             if is_lead and OtherHandlers.cur_role == 'leader':
-                self.response.write('Saving new member to your team, Leader')
+                surname = self.request.POST.get('surnameMemb')
+                birthdate = int(self.request.POST.get('birthdate'))
+                qual = self.request.POST.get('qualMemb')
+                sex = self.request.POST.get('sexMemb')
+                pass_to_edit = saltPass(self.request.POST.get('passToEdit'))
+                team = db.Query(Leader).filter('user =', user).get().command
+                member = Member(pass_to_edit=pass_to_edit, sex=sex, surname=surname, birthdate=birthdate,
+                                qualification=qual, command=team)
+                member.put()
+                time.sleep(0.1)
+                self.redirect('/reg/leaderTeam')
             else:
-                self.response.write('You can\'t save new Member to Team because you are not a leader')
+                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
+                               'login_redir': users.create_login_url('/postSignIn')}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
+                self.response.write(template.render(temp_values))
+
+
+# Generates random 8-symbol password
+def generatePass():
+    rid = ''
+    for x in range(8):
+        rid += random.choice(string.ascii_letters + string.digits)
+    return rid
+
+def saltPass(paswd):
+    md = hashlib.md5()
+    md.update(paswd)
+    md.update('dado')       # This is salt
+    return md.hexdigest()
+
+

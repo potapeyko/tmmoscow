@@ -1,13 +1,9 @@
 {% extends 'templates/tmmosc/base/AuthUserHeader.html' %}
-   {% block title %}Команда {{ team_name }}{% endblock %}
+   {% block title %}{{ team_name }}{% endblock %}
    {% block styles %}
        <style>
            body, .mdl-card__title{
                color: #ffffff;
-           }
-           .competition-card:hover{
-               background: #64B5F6;
-
            }
            .mdl-button {
                height: 56px;

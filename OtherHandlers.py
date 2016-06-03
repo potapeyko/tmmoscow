@@ -6,6 +6,7 @@ from datetime import datetime
 import os
 import jinja2
 import webapp2
+import hashlib
 from google.appengine.ext import db
 from modelCompetition import Competition, Info, MemInfo, DistInfo, Distance
 from modelVisitor import Organizer, Leader, Member, Command
@@ -129,17 +130,19 @@ class addDb(webapp2.RequestHandler):
         com2 = Command(name=u'Командочка', territory=u'Москва')
         com1.put()
         com2.put()
-
+        md = hashlib.md5()
+        md.update('12345678')
+        paswd = md.hexdigest()
         org1 = Organizer(user=users.User('pro@m.c'), nickname=u'Провилкова Анна', contact='pro@m.c')
         org2 = Organizer(user=users.User('test@example.com'), nickname=u'Тест Тестович', contact='test@example.com')
         lead1 = Leader(user=users.User('pro@m.c'), nickname=u'Провилкова Анна', contact='pro@m.c', command=com1)
         lead2 = Leader(user=users.User('o@o.p'), nickname=u'Орлов Олег', contact='o@o.p', command=com1)
         lead3 = Leader(user=users.User('test@example.com'), nickname=u'Тест Тестович', contact='test@example.com', command=com2)
-        memb1 = Member(passToEdit='123456', sex=u'Ж', nickname='plo@m.r', surname=u'Плотникова Дарья', command=com1,
+        memb1 = Member(pass_to_edit=paswd, sex=u'Женский', nickname='plo@m.r', surname=u'Плотникова Дарья', command=com1,
                        birthdate=1994, qualification='I')
-        memb2 = Member(passToEdit='654321', sex=u'М', nickname='mar@h.n', surname=u'Хайруллин Марат', command=com1,
+        memb2 = Member(pass_to_edit=paswd, sex=u'Мужской', nickname='mar@h.n', surname=u'Хайруллин Марат', command=com1,
                        birthdate=1994, qualification='I')
-        memb3 = Member(passToEdit='654321', sex=u'М', nickname='pot@d.a', surname=u'Потапейко Дмитрий', command=com2,
+        memb3 = Member(pass_to_edit=paswd, sex=u'Мужской', nickname='pot@d.a', surname=u'Потапейко Дмитрий', command=com2,
                        birthdate=1995, qualification='I')
         memb1.put()
         memb2.put()

@@ -1,0 +1,133 @@
+{% extends 'templates/tmmosc/base/AuthUserHeader.html' %}
+   {% block title %}Добавление участника{% endblock %}
+   {% block styles %}
+       <style>
+           body, .mdl-card__title{
+               color: #ffffff;
+           }
+           .mdl-button {
+               height: 56px;
+               width: 56px;
+            }
+           .mdl-button--fab.mdl-button--colored {
+                background: rgb(178,255,89);
+                color: rgb(255,255,255);
+            }
+       </style>
+   {% endblock %}
+    {% block menu_nav %}
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title"></span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="/">Список соревнований</a>
+          <a class="mdl-navigation__link" href="/reg/leaderTeam">Моя команда</a>
+          <a class="mdl-navigation__link" href="/reg/leaderAddMember">Добавить участника</a>
+        </nav>
+      </div>
+   {% endblock %}
+   {% block main_content %}
+      <main class="mdl-layout__content">
+          <!--  Content  -->
+          <div class="page-content">
+            <div class="mdl-grid" style="margin-top:15px;">
+              <div class="mdl-cell mdl-cell--1-col"></div>
+              <div class="mdl-cell mdl-cell--10-col">
+                   <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; min-height: 150px; margin-top: 35px;">
+                      <div class="mdl-grid mdl-card__title" style="height: 120px; width: 100%; text-align: center; border: none;">
+                        <div class="mdl-cell mdl-cell--1-col"></div>
+                          <div style="text-align: center; margin-top: 24px;" class="mdl-cell mdl-cell--4-col">
+                              <h2 class="mdl-card__title-text">Новый участник команды</h2>
+                          </div>
+                          <div class="mdl-cell mdl-cell--7-col"></div>
+                          <div class="mdl-cell mdl-cell--7-col"></div>
+                          <div class="mdl-cell mdl-cell--5-col">
+                              <button id="saveInfo" type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="top: 14px; left:10px;" form="formSaveMember">
+                                  <i class="material-icons">save</i>
+                              </button>
+                          </div>
+                      </div>   <!--   .mdl-card__title  -->
+                      <div class="mdl-card__actions mdl-card--border" style="border: none; background: #fff; padding: 30px 0 0 0;">
+                          <form id="formSaveMember" name="formSaveMember" action="/reg/leaderAddMember" method="post">
+                              <div class="mdl-grid" style="padding-bottom: 0px;">
+                                  <div class="mdl-cell--1-col"></div>
+                                  <div class="mdl-cell--2-col">
+                                      <p class="myP" style="color: #42A5F5; margin: 25px 0 0 30px;"><b>Фамилия и имя</b></p>
+                                  </div>
+                                  <div class="mdl-cell--7-col">
+                                      <div class="mdl-textfield mdl-js-textfield" style="width: 100%; color: #42A5F5;">
+                                        <input class="mdl-textfield__input" type="text" id="surnameMemb" name="surnameMemb">
+                                        <label class="mdl-textfield__label" for="surnameMemb">Введите фамилию и имя нового участника</label>
+                                      </div>
+                                  </div>
+                                  <div class="mdl-cell--2-col"></div>
+                              </div>
+                              <div class="mdl-grid" style="padding-bottom: 0px;">
+                                  <div class="mdl-cell--1-col"></div>
+                                  <div class="mdl-cell--2-col">
+                                      <p class="myP" style="color: #42A5F5; margin: 25px 0 0 30px;"><b>Год рождения</b></p>
+                                  </div>
+                                  <div class="mdl-cell--2-col">
+                                      <div class="mdl-textfield mdl-js-textfield" style="width: 100%; color: #42A5F5;">
+                                        <input class="mdl-textfield__input" type="text" id="birthdate" name="birthdate">
+                                        <label class="mdl-textfield__label" for="birthdate">Введите год</label>
+                                      </div>
+                                  </div>
+                                  <div class="mdl-cell--1-col"></div>
+                                  <div class="mdl-cell--2-col">
+                                      <p class="myP" style="color: #42A5F5; margin: 25px 0 0 30px;"><b>Разряд</b></p>
+                                  </div>
+                                  <div class="mdl-cell--2-col">
+                                      <div class="mdl-textfield mdl-js-textfield" style="width: 100%; color: #42A5F5;">
+                                        <input class="mdl-textfield__input" type="text" id="qualMemb" name="qualMemb">
+                                        <label class="mdl-textfield__label" for="qualMemb">Введите разряд</label>
+                                      </div>
+                                  </div>
+                                  <div class="mdl-cell--2-col"></div>
+                              </div>
+                              <div class="mdl-grid" style="padding-bottom: 0px; margin: 24px 0 0 30px;">
+                                  <div class="mdl-cell--1-col"></div>
+                                  <div class="mdl-cell--2-col">
+                                      <p class="myP" style="color: #42A5F5;"><b>Пол участника</b></p>
+                                  </div>
+                                  <div class="mdl-cell--2-col">
+                                      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="sexM">
+                                          <input type="radio" id="sexM" class="mdl-radio__button" name="sexMemb" value="Мужской" checked>
+                                          <span class="mdl-radio__label" style="color: #42a5f5;">Мужской</span>
+                                      </label>
+                                  </div>
+                                  <div class="mdl-cell--2-col">
+                                      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="sexW">
+                                          <input type="radio" id="sexW" class="mdl-radio__button" name="sexMemb" value="Женский">
+                                          <span class="mdl-radio__label" style="color: #42a5f5;">Женский</span>
+                                      </label>
+                                  </div>
+                                  <div class="mdl-cell--4-col"></div>
+                              </div>
+                              <input style="display: none;" name="passToEdit" value="{{ edit_pass }}">
+                          </form>
+                          <div class="mdl-grid" style="margin: 18px 0 0 30px; padding-bottom: 0px;">
+                              <div class="mdl-cell--1-col"></div>
+                              <div class="mdl-cell--4-col">
+                                  <p class="myP" style="color: #42A5F5;"><b>Пароль редактирования участника</b><sup>*</sup></p>
+                              </div>
+                              <div class="mdl-cell--7-col" style="color: #42a5f5; margin-top: 8px;">{{ edit_pass }}</div>
+                          </div>
+                          <div class="mdl-grid" style="padding: 0 0 30px 0; text-align: center;">
+                              <div class="mdl-cell--1-col"></div>
+                              <div class="mdl-cell--10-col">
+                                  <p class="myP" style="color: #42A5F5; margin: 0 0 0 0;"><sup>*</sup>Передайте этот пароль участнику. С его помощью он сможет редактировать личные данные и </br>самостоятельно заявляться на соревнования.</p>
+                              </div>
+                              <div class="mdl-cell--1-col"></div>
+                          </div>
+
+                      </div>    <!--  mdl-cards__actions  -->
+                   </div>
+
+              </div>    <!--  вся карточка  -->
+              <div class="mdl-cell mdl-cell--1-col"></div>
+            </div>  <!-- mdl-grid -->
+
+          </div>  <!-- page-content -->
+      </main>
+    </div>
+    {% endblock %}

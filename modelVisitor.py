@@ -21,7 +21,7 @@ class Leader(db.Model):
 
 
 class Member(db.Model):
-    passToEdit = db.StringProperty(multiline=False)
+    pass_to_edit = db.StringProperty(multiline=False)
     sex = db.StringProperty(multiline=False)
     nickname = db.StringProperty(multiline=False)
     surname = db.StringProperty(required=False, multiline=False)
