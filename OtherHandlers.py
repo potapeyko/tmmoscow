@@ -8,7 +8,7 @@ import jinja2
 import webapp2
 from google.appengine.ext import db
 from modelCompetition import Competition, Info, MemInfo, DistInfo, Distance
-from modelVisitor import Organizer, Leader, Member
+from modelVisitor import Organizer, Leader, Member, Command
 from CompetitionHandlers import formatDateList
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -123,26 +123,32 @@ class beforeSignOut(webapp2.RequestHandler):
 # Development class for add initial data in DB
 class addDb(webapp2.RequestHandler):
     def get(self):
+        user = users.get_current_user()
 
-        org1 = Organizer(nickname=u'Провилкова Анна', contact='pro@m.c')
-        org2 = Organizer(nickname=u'Тест Тестович', contact='test@example.com')
-        lead1 = Leader(nickname=u'Провилкова Анна', contact='pro@m.c', command=u'Фортуна', territory=u'Москва')
-        lead2 = Leader(nickname=u'Орлов Олег', contact='o@o.p', command=u'Фортуна', territory=u'Ангарск')
-        lead3 = Leader(nickname=u'Тест Тестович', contact='test@example.com', command=u'Командочка', territory=u'Иркутск')
-        memb1 = Member(passToEdit='123456', nickname='plo@m.r', surname=u'Плотникова Дарья', command=u'Фортуна',
-                       territory=u'Ангарск', birthdate=1994, qualification='I')
-        memb2 = Member(passToEdit='654321', nickname='mar@h.n', surname=u'Хайруллин Марат', command=u'Фортуна',
-                       territory=u'Ангарск', birthdate=1994, qualification='I')
-        memb3 = Member(passToEdit='654321', nickname='pot@d.a', surname=u'Потапейко Дмитрий', command=u'ЮС47',
-                       territory=u'Иркутск', birthdate=1995, qualification='I')
+        com1 = Command(name=u'Фортуна', territory=u'Ангарск')
+        com2 = Command(name=u'Командочка', territory=u'Москва')
+        com1.put()
+        com2.put()
+
+        org1 = Organizer(user=users.User('pro@m.c'), nickname=u'Провилкова Анна', contact='pro@m.c')
+        org2 = Organizer(user=users.User('test@example.com'), nickname=u'Тест Тестович', contact='test@example.com')
+        lead1 = Leader(user=users.User('pro@m.c'), nickname=u'Провилкова Анна', contact='pro@m.c', command=com1)
+        lead2 = Leader(user=users.User('o@o.p'), nickname=u'Орлов Олег', contact='o@o.p', command=com1)
+        lead3 = Leader(user=users.User('test@example.com'), nickname=u'Тест Тестович', contact='test@example.com', command=com2)
+        memb1 = Member(passToEdit='123456', sex=u'Ж', nickname='plo@m.r', surname=u'Плотникова Дарья', command=com1,
+                       birthdate=1994, qualification='I')
+        memb2 = Member(passToEdit='654321', sex=u'М', nickname='mar@h.n', surname=u'Хайруллин Марат', command=com1,
+                       birthdate=1994, qualification='I')
+        memb3 = Member(passToEdit='654321', sex=u'М', nickname='pot@d.a', surname=u'Потапейко Дмитрий', command=com2,
+                       birthdate=1995, qualification='I')
+        memb1.put()
+        memb2.put()
+        memb3.put()
         org1.put()
         org2.put()
         lead1.put()
         lead2.put()
         lead3.put()
-        memb1.put()
-        memb2.put()
-        memb3.put()
         self.response.write('This guys added to DB: orgs (' + org1.contact + ', ' + org2.contact + '); ----- ' +
                             ' leads('+lead1.contact +', '+lead2.contact+', '+lead3.contact + '); ----- ' +
                             'membs(' + memb1.nickname + ', '+ memb2.nickname + ', '+memb3.nickname+').')

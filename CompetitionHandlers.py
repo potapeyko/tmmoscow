@@ -175,7 +175,6 @@ class NewCompetition(webapp2.RequestHandler):
 class CertainCompetition(webapp2.RequestHandler):
     def get(self):  # shows info about competition that is stored in database
         user = users.get_current_user()
-
         # Проверять, к какому типу относится пользователь, и:
         #  если он относится к нескольким типам, запросить под кем он заходит
         #  и показать соответствующую страницу

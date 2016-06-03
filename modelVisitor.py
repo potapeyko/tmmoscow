@@ -4,29 +4,28 @@ __author__ = 'Daria'
 
 
 class Organizer(db.Model):
-    user = db.UserProperty(auto_current_user_add=True)
+    user = db.UserProperty(auto_current_user_add=False)
     nickname = db.StringProperty(required=False, multiline=False)
     contact = db.StringProperty(required=False)
 
 
+class Command(db.Model):
+    name = db.StringProperty()
+    territory = db.StringProperty(multiline=False)
+
 class Leader(db.Model):
     user = db.UserProperty(auto_current_user_add=True)
-    command = db.StringProperty(multiline=False, default=u'Отсутствует')
-    territory = db.StringProperty(multiline=False, default=u'Отсутствует')
+    command = db.ReferenceProperty(Command)
     nickname = db.StringProperty(multiline=False)
     contact = db.EmailProperty(required=True)
 
 
 class Member(db.Model):
     passToEdit = db.StringProperty(multiline=False)
+    sex = db.StringProperty(multiline=False)
     nickname = db.StringProperty(multiline=False)
     surname = db.StringProperty(required=False, multiline=False)
-    command = db.StringProperty(multiline=False, default=u'Отсутствует')
-    territory = db.StringProperty(multiline=False, default=u'Отсутствует')
+    command = db.ReferenceProperty(Command, required=False)
     birthdate = db.IntegerProperty(required=True)
     qualification = db.StringProperty(choices=[u'Б/Р', u'IIIю', u'IIю', u'Iю', 'III', 'II', 'I',
                                                               u'КМС', u'МС', u'МСМК', u'ЗМС'], default=u'Б/Р')
-
-class LeadMemb(db.Model):
-    leader = db.ReferenceProperty(Leader)
-    member = db.ReferenceProperty(Member)
