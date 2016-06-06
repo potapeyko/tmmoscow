@@ -36,7 +36,7 @@
                       <div class="mdl-grid mdl-card__title" style="height: 120px; width: 100%; text-align: center; border: none;">
                         <div class="mdl-cell mdl-cell--1-col"></div>
                           <div style="text-align: center; margin-top: 24px;" class="mdl-cell mdl-cell--4-col">
-                              <h2 class="mdl-card__title-text">Новый участник команды</h2>
+                              <h2 class="mdl-card__title-text">{{ card_title }}</h2>
                           </div>
                           <div class="mdl-cell mdl-cell--7-col"></div>
                           <div class="mdl-cell mdl-cell--7-col"></div>
@@ -47,7 +47,8 @@
                           </div>
                       </div>   <!--   .mdl-card__title  -->
                       <div class="mdl-card__actions mdl-card--border" style="border: none; background: #fff; padding: 30px 0 0 0;">
-                          <form id="formSaveMember" name="formSaveMember" action="/reg/leaderAddMember" method="post">
+                          <form id="formSaveMember" name="formSaveMember" {% if new_memb %} action="/reg/leaderAddMember" {% else %} action="/reg/lead/changeMember" {% endif %} method="post">
+                              <input type="text" style="display: none;" value="{{ change }}" name="change">
                               <div class="mdl-grid" style="padding-bottom: 0px;">
                                   <div class="mdl-cell--1-col"></div>
                                   <div class="mdl-cell--2-col">
@@ -55,8 +56,8 @@
                                   </div>
                                   <div class="mdl-cell--7-col">
                                       <div class="mdl-textfield mdl-js-textfield" style="width: 100%; color: #42A5F5;">
-                                        <input class="mdl-textfield__input" type="text" id="surnameMemb" name="surnameMemb">
-                                        <label class="mdl-textfield__label" for="surnameMemb">Введите фамилию и имя нового участника</label>
+                                        <input class="mdl-textfield__input" type="text" id="surnameMemb" name="surnameMemb" value="{{ memb_name }}">
+                                        <label class="mdl-textfield__label" for="surnameMemb">Введите фамилию и имя участника</label>
                                       </div>
                                   </div>
                                   <div class="mdl-cell--2-col"></div>
@@ -68,7 +69,7 @@
                                   </div>
                                   <div class="mdl-cell--2-col">
                                       <div class="mdl-textfield mdl-js-textfield" style="width: 100%; color: #42A5F5;">
-                                        <input class="mdl-textfield__input" type="text" id="birthdate" name="birthdate">
+                                        <input class="mdl-textfield__input" type="text" id="birthdate" name="birthdate" value="{{ birthdate }}">
                                         <label class="mdl-textfield__label" for="birthdate">Введите год</label>
                                       </div>
                                   </div>
@@ -78,26 +79,26 @@
                                   </div>
                                   <div class="mdl-cell--2-col">
                                       <div class="mdl-textfield mdl-js-textfield" style="width: 100%; color: #42A5F5;">
-                                        <input class="mdl-textfield__input" type="text" id="qualMemb" name="qualMemb">
+                                        <input class="mdl-textfield__input" type="text" id="qualMemb" name="qualMemb" value="{{ qual }}">
                                         <label class="mdl-textfield__label" for="qualMemb">Введите разряд</label>
                                       </div>
                                   </div>
                                   <div class="mdl-cell--2-col"></div>
                               </div>
-                              <div class="mdl-grid" style="padding-bottom: 0px; margin: 24px 0 0 30px;">
+                              <div class="mdl-grid" style="padding-bottom: 0px; margin: 24px 0 20px 30px;">
                                   <div class="mdl-cell--1-col"></div>
                                   <div class="mdl-cell--2-col">
                                       <p class="myP" style="color: #42A5F5;"><b>Пол участника</b></p>
                                   </div>
                                   <div class="mdl-cell--2-col">
                                       <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="sexM">
-                                          <input type="radio" id="sexM" class="mdl-radio__button" name="sexMemb" value="Мужской" checked>
+                                          <input type="radio" id="sexM" class="mdl-radio__button" name="sexMemb" value="Мужской" {{ sex_m }} checked>
                                           <span class="mdl-radio__label" style="color: #42a5f5;">Мужской</span>
                                       </label>
                                   </div>
                                   <div class="mdl-cell--2-col">
                                       <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="sexW">
-                                          <input type="radio" id="sexW" class="mdl-radio__button" name="sexMemb" value="Женский">
+                                          <input type="radio" id="sexW" class="mdl-radio__button" name="sexMemb" value="Женский" {{ sex_w }}>
                                           <span class="mdl-radio__label" style="color: #42a5f5;">Женский</span>
                                       </label>
                                   </div>
@@ -105,21 +106,22 @@
                               </div>
                               <input style="display: none;" name="passToEdit" value="{{ edit_pass }}">
                           </form>
-                          <div class="mdl-grid" style="margin: 18px 0 0 30px; padding-bottom: 0px;">
-                              <div class="mdl-cell--1-col"></div>
-                              <div class="mdl-cell--4-col">
-                                  <p class="myP" style="color: #42A5F5;"><b>Пароль редактирования участника</b><sup>*</sup></p>
+                          {% if new_memb %}
+                              <div class="mdl-grid" style="margin: 0 0 0 30px; padding-bottom: 0px;">
+                                  <div class="mdl-cell--1-col"></div>
+                                  <div class="mdl-cell--4-col">
+                                      <p class="myP" style="color: #42A5F5;"><b>Пароль редактирования участника</b><sup>*</sup></p>
+                                  </div>
+                                  <div class="mdl-cell--7-col" style="color: #42a5f5; margin-top: 8px;">{{ edit_pass }}</div>
                               </div>
-                              <div class="mdl-cell--7-col" style="color: #42a5f5; margin-top: 8px;">{{ edit_pass }}</div>
-                          </div>
-                          <div class="mdl-grid" style="padding: 0 0 30px 0; text-align: center;">
-                              <div class="mdl-cell--1-col"></div>
-                              <div class="mdl-cell--10-col">
-                                  <p class="myP" style="color: #42A5F5; margin: 0 0 0 0;"><sup>*</sup>Передайте этот пароль участнику. С его помощью он сможет редактировать личные данные и </br>самостоятельно заявляться на соревнования.</p>
+                              <div class="mdl-grid" style="padding: 0 0 30px 0; text-align: center;">
+                                  <div class="mdl-cell--1-col"></div>
+                                  <div class="mdl-cell--10-col">
+                                      <p class="myP" style="color: #42A5F5; margin: 0 0 0 0;"><sup>*</sup>Передайте этот пароль участнику. С его помощью он сможет редактировать личные данные и </br>самостоятельно заявляться на соревнования.</p>
+                                  </div>
+                                  <div class="mdl-cell--1-col"></div>
                               </div>
-                              <div class="mdl-cell--1-col"></div>
-                          </div>
-
+                          {% endif %}
                       </div>    <!--  mdl-cards__actions  -->
                    </div>
 

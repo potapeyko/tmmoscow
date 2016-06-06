@@ -105,12 +105,14 @@
                                                 <td class="myP" style="width: 10%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.qualification }}</td>
                                                 <td class="myP" style="width: 20%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.sex }}</td>
                                                 <td style="width: 1%; text-align: center; bottom: 4px;">
-                                                  <form action="/reg/deleteMember" method="post">
-                                                    <button class="mdl-button mdl-js-button mdl-button--icon changeMemb" type="button" style="width: 32px; height: 32px;">
+                                                  <form action="/reg/lead/changeMember" method="get" style="display: inline;">
+                                                    <button class="mdl-button mdl-js-button mdl-button--icon " type="submit" style="width: 32px; height: 32px;">
                                                       <i class="material-icons">mode_edit</i>
                                                     </button>
-                                                    <input type="text" style="display: none;" value="{{ memb.nickname }}" name="membFio">
-                                                    <input type="text" style="display: none;" value="{{ keys[loop.index0] }}" name="idToDeleteChange">
+                                                    <input type="text" style="display: none;" value="{{ keys[loop.index0] }}" name="change">
+                                                  </form>
+                                                  <form action="/reg/lead/deleteMember" method="post" style="display: inline;">
+                                                    <input type="text" style="display: none;" value="{{ keys[loop.index0] }}" name="delete">
                                                     <button class="mdl-button mdl-js-button mdl-button--icon" type="submit" style="width: 32px; height: 32px;">
                                                       <i class="material-icons" id="deleteMemb">delete</i>
                                                     </button>

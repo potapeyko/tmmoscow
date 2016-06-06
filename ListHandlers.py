@@ -75,7 +75,6 @@ class OrganizersHandler(webapp2.RequestHandler):
             self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
 
 
-# Performs ajax request
 class AddOrganizer(webapp2.RequestHandler):
     def post(self):
         if self.request.POST['olKey']:              # changing existing organizer
@@ -100,7 +99,6 @@ class AddOrganizer(webapp2.RequestHandler):
         self.redirect('/reg/organizerList')
 
 
-# Performs ajax request
 class DeleteOrganizer(webapp2.RequestHandler):
     def post(self):
         org_id = self.request.POST['idToDeleteChange']
@@ -171,7 +169,6 @@ class LeadersHandler(webapp2.RequestHandler):
             self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
 
 
-# Performs ajax request
 class AddLeader(webapp2.RequestHandler):
     def post(self):
         if self.request.POST['llKey']:      # changing existing leader
@@ -202,7 +199,6 @@ class AddLeader(webapp2.RequestHandler):
         self.redirect('/reg/leaderList')
 
 
-# Performs ajax request
 class DeleteLeader(webapp2.RequestHandler):
     def post(self):
         lead_id = self.request.POST['idToDeleteChange']
@@ -272,7 +268,6 @@ class MembersHandler(webapp2.RequestHandler):
             self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
 
 
-# Performs ajax request
 class AddMember(webapp2.RequestHandler):
     def post(self):
         cur_user = users.get_current_user()
@@ -308,7 +303,6 @@ class AddMember(webapp2.RequestHandler):
         self.redirect('/reg/memberList')
 
 
-# Performs ajax request
 class DeleteMember(webapp2.RequestHandler):
     def post(self):
         memb_id = self.request.POST['idToDeleteChange']

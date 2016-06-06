@@ -102,8 +102,8 @@ class AddMemberToTeam(webapp2.RequestHandler):
             if is_lead and OtherHandlers.cur_role == 'leader':
                 pass_to_edit = generatePass()
                 temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
-                               'edit_pass': pass_to_edit}
-                template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/leader/NewMember.html')
+                               'edit_pass': pass_to_edit, 'card_title': u'Новый участник команды', 'new_memb': True}
+                template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/leader/Member.html')
             else:
                 temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
                                'login_redir': users.create_login_url('/postSignIn')}
@@ -131,6 +131,87 @@ class AddMemberToTeam(webapp2.RequestHandler):
                 member = Member(pass_to_edit=pass_to_edit, sex=sex, surname=surname, birthdate=birthdate,
                                 qualification=qual, command=team)
                 member.put()
+                time.sleep(0.1)
+                self.redirect('/reg/leaderTeam')
+            else:
+                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
+                               'login_redir': users.create_login_url('/postSignIn')}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
+                self.response.write(template.render(temp_values))
+
+
+class ChangeMember(webapp2.RequestHandler):
+    def get(self):      # displays form with old member's data
+        user = users.get_current_user()
+        if not user:
+            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
+                           'login_redir': users.create_login_url('/postSignIn')}
+            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
+        else:
+            email = user.email()
+            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
+            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            if is_lead and OtherHandlers.cur_role == 'leader':
+                memb_key = self.request.get('change')
+                member = db.get(memb_key)
+                sex_m = ''
+                sex_w = ''
+                if member.sex == u'Мужской':
+                    sex_m = 'checked'
+                else:
+                    sex_w = 'checked'
+                temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
+                               'card_title': u'Изменение участника', 'memb_name':
+                               member.surname, 'birthdate': member.birthdate, 'qual': member.qualification, 'sex_m':
+                               sex_m, 'sex_w': sex_w, 'new_memb': False, 'memb_key': memb_key, 'change': memb_key}
+                template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/leader/Member.html')
+            else:
+                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
+                               'login_redir': users.create_login_url('/postSignIn')}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
+        self.response.write(template.render(temp_values))
+
+    def post(self):     # saves member's changes to db and redirects to team page
+        user = users.get_current_user()
+        if not user:
+            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
+                           'login_redir': users.create_login_url('/postSignIn')}
+            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
+            self.response.write(template.render(temp_values))
+        else:
+            email = user.email()
+            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
+            if is_lead and OtherHandlers.cur_role == 'leader':
+                memb_key = self.request.POST.get('change')
+                member = db.get(memb_key)
+                member.surname = self.request.POST.get('surnameMemb')
+                member.birthdate = int(self.request.POST.get('birthdate'))
+                member.qualification = self.request.POST.get('qualMemb')
+                member.sex = self.request.POST.get('sexMemb')
+                member.put()
+                time.sleep(0.1)
+                self.redirect('/reg/leaderTeam')
+            else:
+                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
+                               'login_redir': users.create_login_url('/postSignIn')}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
+                self.response.write(template.render(temp_values))
+
+
+class DeleteMember(webapp2.RequestHandler):
+    def post(self):
+        user = users.get_current_user()
+        if not user:
+            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
+                           'login_redir': users.create_login_url('/postSignIn')}
+            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
+            self.response.write(template.render(temp_values))
+        else:
+            email = user.email()
+            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
+            if is_lead and OtherHandlers.cur_role == 'leader':
+                memb_key = self.request.POST.get('delete')
+                member = db.delete(memb_key)
                 time.sleep(0.1)
                 self.redirect('/reg/leaderTeam')
             else:

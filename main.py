@@ -20,7 +20,7 @@ from CompetitionHandlers import *
 from OtherHandlers import *
 from modelVisitor import *
 from modelCompetition import *
-from LeaderHandlers import Team, AddMemberToTeam
+from LeaderHandlers import Team, AddMemberToTeam, ChangeMember, DeleteMember
 from MemberHandlers import memberInfo
 
 import os
@@ -80,6 +80,8 @@ app = webapp2.WSGIApplication([
     # leaders routes
     ('/reg/leaderTeam', Team),
     ('/reg/leaderAddMember', AddMemberToTeam),
+    ('/reg/lead/changeMember', ChangeMember),
+    ('/reg/lead/deleteMember', DeleteMember),
     # member routes
     ('/memberInfo', memberInfo)
 ], debug=True)
