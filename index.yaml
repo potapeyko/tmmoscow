@@ -23,3 +23,8 @@ indexes:
   - name: command
   - name: contact
   - name: territory
+
+- kind: Member
+  properties:
+  - name: command
+  - name: surname

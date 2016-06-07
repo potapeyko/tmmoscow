@@ -20,7 +20,7 @@ from CompetitionHandlers import *
 from OtherHandlers import *
 from modelVisitor import *
 from modelCompetition import *
-from LeaderHandlers import Team, AddMemberToTeam, ChangeMember, DeleteMember
+from LeaderHandlers import Team, AddMemberToTeam, ChangeMember, DeleteMember, EntryMembers
 from MemberHandlers import memberInfo
 
 import os
@@ -60,6 +60,7 @@ app = webapp2.WSGIApplication([
     ('/postSignIn', AfterSignIn),
     ('/reg/acceptRole', AfterSignIn),
     ('/reg/nullToRole', beforeSignOut),
+    ('/entryMembs', EntryMembers),
     # organizer routes
     ('/', DefaultHandler),
     ('/login', LoginHandler),

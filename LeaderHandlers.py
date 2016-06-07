@@ -4,7 +4,7 @@ __author__ = 'Daria'
 from google.appengine.api import users
 from datetime import date, datetime
 from google.appengine.api import images
-from modelCompetition import MemInfo, DistInfo, Competition, Distance, Info, Org
+from modelCompetition import MemInfo, DistInfo, Competition, Distance, Info, Org, CompMemb
 from modelVisitor import Organizer, Leader, Member, Command
 from google.appengine.ext import db
 import os
@@ -211,7 +211,7 @@ class DeleteMember(webapp2.RequestHandler):
             [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
             if is_lead and OtherHandlers.cur_role == 'leader':
                 memb_key = self.request.POST.get('delete')
-                member = db.delete(memb_key)
+                db.delete(memb_key)
                 time.sleep(0.1)
                 self.redirect('/reg/leaderTeam')
             else:
@@ -219,6 +219,44 @@ class DeleteMember(webapp2.RequestHandler):
                                'login_redir': users.create_login_url('/postSignIn')}
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
                 self.response.write(template.render(temp_values))
+
+
+class EntryMembers(webapp2.RequestHandler):
+    def post(self):
+        user = users.get_current_user()
+        if not user:
+            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
+                           'login_redir': users.create_login_url('/postSignIn')}
+            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
+        else:
+            email = user.email()
+            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
+            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            if is_lead and OtherHandlers.cur_role == 'leader':
+                comp_key = self.request.POST.get('competition')
+                competition = Competition.get(comp_key)
+                leader = db.Query(Leader).filter('user =', user).get()
+                team = leader.command
+                membs_team = db.Query(Member).filter('command =', team).order('surname')
+                membs_comp = db.Query(CompMemb).filter('competition =', competition).run()
+                membs_count = membs_team.count()
+                entry_membs = []
+                no_entry_membs = []
+                for memb in membs_team:
+                    memb_key = memb.key()
+                    if memb in membs_comp:
+                        entry_membs.append(memb)
+                    else:
+                        no_entry_membs.append(memb)
+                temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
+                               'team_name': team.name, 'membs_count': membs_count, 'entry_membs': entry_membs,
+                               'no_entry_membs': no_entry_membs, 'comp_name': competition.name}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/leader/MembersToCompetition.html')
+            else:
+                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
+                               'login_redir': users.create_login_url('/postSignIn')}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
+        self.response.write(template.render(temp_values))
 
 
 # Generates random 8-symbol password

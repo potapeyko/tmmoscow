@@ -175,9 +175,6 @@ class NewCompetition(webapp2.RequestHandler):
 class CertainCompetition(webapp2.RequestHandler):
     def get(self):  # shows info about competition that is stored in database
         user = users.get_current_user()
-        # Проверять, к какому типу относится пользователь, и:
-        #  если он относится к нескольким типам, запросить под кем он заходит
-        #  и показать соответствующую страницу
         key = self.request.GET['dbKey']
         comp = Competition.get(key)
         # info tab
@@ -229,7 +226,7 @@ class CertainCompetition(webapp2.RequestHandler):
                        'finish': formatDate(str(comp.d_finish)), 'name': comp.name, 'days_count': range(1, comp.days_count+1),
                        'pz_end_add': pz_end_add, 'pz_end_change': pz_end_change, 'places': places, 'pzs': pzs, 'tzs': tzs,
                        'links': links, 'org_infos': orgs, 'discs': disciplines, 'lens': lengths, 'dizs': dizs, 'dus': dus,
-                       'membs': members}
+                       'membs': members, 'comp_id': comp.key()}
             if is_org and OtherHandlers.cur_role == 'organizer':
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/CertainCompetition.html')
             elif is_lead and OtherHandlers.cur_role == 'leader':
