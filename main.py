@@ -20,7 +20,7 @@ from CompetitionHandlers import *
 from OtherHandlers import *
 from modelVisitor import *
 from modelCompetition import *
-from LeaderHandlers import Team, AddMemberToTeam, ChangeMember, DeleteMember, EntryMembers
+from LeaderHandlers import Team, AddMemberToTeam, ChangeMember, DeleteMember, EntryMembers, EntryMembersByDay, AcceptMembers
 from MemberHandlers import memberInfo
 
 import os
@@ -61,6 +61,7 @@ app = webapp2.WSGIApplication([
     ('/reg/acceptRole', AfterSignIn),
     ('/reg/nullToRole', beforeSignOut),
     ('/entryMembs', EntryMembers),
+    ('/entryMembsByDay', EntryMembersByDay),
     # organizer routes
     ('/', DefaultHandler),
     ('/login', LoginHandler),
@@ -81,6 +82,7 @@ app = webapp2.WSGIApplication([
     # leaders routes
     ('/reg/leaderTeam', Team),
     ('/reg/leaderAddMember', AddMemberToTeam),
+    ('/reg/leaderAcceptMembs', AcceptMembers),
     ('/reg/lead/changeMember', ChangeMember),
     ('/reg/lead/deleteMember', DeleteMember),
     # member routes

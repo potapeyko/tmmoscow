@@ -5,7 +5,12 @@
     <title>Тестирование</title>
 </head>
 <body>
-    <p>{{ test_data }}</p>
-    {{ orgs }}
+    {%  for t in test %}
+
+        {% for k in t %}
+            <p>{{ k }}</p>
+        {% endfor %}
+
+    {% endfor %}
 </body>
 </html>

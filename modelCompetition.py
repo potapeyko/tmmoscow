@@ -50,8 +50,9 @@ class DistInfo(db.Model):
     distance = db.ReferenceProperty(Distance)
 
 
-class CompMemb(db.Model):
-    competition = db.ReferenceProperty(Competition)
+class DistMemb(db.Model):
+    group = db.ReferenceProperty(DistInfo)
+    distance = db.ReferenceProperty(Distance)
     member = db.ReferenceProperty(Member)
 
 

@@ -4,7 +4,7 @@ __author__ = 'Daria'
 from google.appengine.api import users
 from datetime import date, datetime
 from google.appengine.api import images
-from modelCompetition import MemInfo, DistInfo, Competition, Distance, Info, Org, CompMemb
+from modelCompetition import MemInfo, DistInfo, Competition, Distance, Info, Org, DistMemb
 from modelVisitor import Organizer, Leader, Member, Command
 from google.appengine.ext import db
 import os
@@ -222,7 +222,7 @@ class DeleteMember(webapp2.RequestHandler):
 
 
 class EntryMembers(webapp2.RequestHandler):
-    def post(self):
+    def post(self):     # displays all members of team to check who will take a part in competition
         user = users.get_current_user()
         if not user:
             temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
@@ -235,28 +235,126 @@ class EntryMembers(webapp2.RequestHandler):
             if is_lead and OtherHandlers.cur_role == 'leader':
                 comp_key = self.request.POST.get('competition')
                 competition = Competition.get(comp_key)
+                distances = db.Query(Distance).filter('competition =', competition).run()
                 leader = db.Query(Leader).filter('user =', user).get()
                 team = leader.command
                 membs_team = db.Query(Member).filter('command =', team).order('surname')
-                membs_comp = db.Query(CompMemb).filter('competition =', competition).run()
+                membs_comp = []
+                for dist in distances:
+                    for memb in db.Query(DistMemb).filter('distance =', dist).run():
+                        membs_comp.append(memb)
                 membs_count = membs_team.count()
                 entry_membs = []
                 no_entry_membs = []
                 for memb in membs_team:
-                    memb_key = memb.key()
                     if memb in membs_comp:
                         entry_membs.append(memb)
                     else:
                         no_entry_membs.append(memb)
                 temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
                                'team_name': team.name, 'membs_count': membs_count, 'entry_membs': entry_membs,
-                               'no_entry_membs': no_entry_membs, 'comp_name': competition.name}
+                               'no_entry_membs': no_entry_membs, 'comp_name': competition.name, 'days_count':
+                                range(1, int(competition.days_count) + 1), 'comp_key': comp_key}
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/leader/MembersToCompetition.html')
             else:
                 temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
                                'login_redir': users.create_login_url('/postSignIn')}
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
         self.response.write(template.render(temp_values))
+
+
+class EntryMembersByDay(webapp2.RequestHandler):
+    def post(self):     # displays members who are going to take a part in competition to choose their distances and classes
+        user = users.get_current_user()
+        if not user:
+            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
+                           'login_redir': users.create_login_url('/postSignIn')}
+            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
+            self.response.write(template.render(temp_values))
+        else:
+            email = user.email()
+            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
+            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            if is_lead and OtherHandlers.cur_role == 'leader':
+                comp_key = self.request.POST.get('competition')
+                competition = Competition.get(comp_key)
+                days_count = competition.days_count
+                distances = db.Query(Distance).filter('competition =', competition).run()
+                type_lent = []
+                groups_on_day = []
+                for dist in distances:
+                    type_lent.append(dist.type + ' ' + dist.lent)
+                    dist_infos = dist.distinfo_set.run()
+                    groups_i_day = []
+                    for info in dist_infos:
+                        groups_i_day.append(info.group_name)
+                    groups_on_day.append(groups_i_day)
+                membs_by_day = []
+                for i in range(days_count):     # add members (keys) for each day
+                    membs_key_day = self.request.POST.getall('checkMemb'+str(i))
+                    membs_i_day = []
+                    for memb_key in membs_key_day:
+                        member = Member.get(memb_key)
+                        membs_i_day.append(member)
+                    membs_by_day.append(membs_i_day)
+                temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
+                               'membs_by_day': membs_by_day, 'dists': type_lent, 'groups': groups_on_day, 'comp_key':
+                               comp_key}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/leader/MembersToDays.html')
+            else:
+                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
+                               'login_redir': users.create_login_url('/postSignIn')}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
+        self.response.write(template.render(temp_values))
+
+
+class AcceptMembers(webapp2.RequestHandler):
+    def post(self):
+        user = users.get_current_user()
+        if not user:
+            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
+                           'login_redir': users.create_login_url('/postSignIn')}
+            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
+            self.response.write(template.render(temp_values))
+        else:
+            email = user.email()
+            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
+            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            if is_lead and OtherHandlers.cur_role == 'leader':
+                days_checked_count = int(self.request.POST.get('daysCheckedCount'))
+                comp_key = self.request.POST.get('competition')
+                competition = Competition.get(comp_key)
+                dist_query = db.Query(Distance).filter('competition =', competition)
+                distances = dist_query.run(batch_size=1000)
+                distinfos = []                                  # all groups of all days
+                for dist in distances:
+                    distinfo = db.Query(DistInfo).filter('distance =', dist).run()          # all groups for that day (=distance)
+                    distinfos.append(distinfo)
+                dist_count = dist_query.count()
+                membs_by_day = []
+                for i_day in range(days_checked_count):         # runs through all days one by one
+                    memb_count_i_day = int(self.request.POST.get('membsInDay'+str(i_day)))
+                    for j_memb in range(memb_count_i_day):       # runs through all member of i- day
+                        memb_group = self.request.POST.get('checkMembGroup'+str(i_day)+'_'+str(j_memb))
+                        keys = memb_group.split('_')
+                        member = Member.get(keys[0])
+                        group_code = keys[1]
+                        self.response.write(len(distinfos))
+                        for group in distinfos[i_day]:
+                            if group.group_name == group_code:
+                                memb_group = DistMemb(group=group, distance=group.distance, member=member)
+                                self.response.write('OKI')
+                                memb_group.save()
+                            #    self.response.write(distinfos[i_day]+' --- '+member.surname)
+
+                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
+                               'login_redir': users.create_login_url('/postSignIn'), 'test': distinfos}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/tmp.html')
+            else:
+                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
+                               'login_redir': users.create_login_url('/postSignIn')}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
+            self.response.write(template.render(temp_values))
 
 
 # Generates random 8-symbol password
