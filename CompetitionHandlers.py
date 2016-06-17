@@ -4,7 +4,7 @@ __author__ = 'Daria'
 from google.appengine.api import users
 from datetime import date, datetime
 from google.appengine.api import images
-from modelCompetition import MemInfo, DistInfo, Competition, Distance, Info, Org
+from modelCompetition import MemInfo, DistInfo, Competition, Distance, Info, Org, CompMemb
 from modelVisitor import Organizer, Leader, Member
 from google.appengine.ext import db
 import os
@@ -208,25 +208,30 @@ class CertainCompetition(webapp2.RequestHandler):
             dizs.insert(day_numb_of_distance, dizs_of_day)
             dus.insert(day_numb_of_distance, dus_of_day)
         # member tab
-        members = 0
+        members_by_day = []
+        for day in range(1, comp.days_count+1):
+            membs_of_day = db.Query(CompMemb).filter('competition =', comp).filter('day_numb =', day).order('group').run(batch_size=1000)
+            members_by_day.append(membs_of_day)
+
+
         #TODO: SHOW THE WHOLE LIST OF COMPETITORS AND THE DETAILED INFO
         if not user:  # user is anonim
             login = users.create_login_url(dest_url='/postSignIn')
             temp_values = {'login': login, 'start': formatDate(str(comp.d_start)),
-                       'finish': formatDate(str(comp.d_finish)), 'name': comp.name, 'days_count': range(1, comp.days_count+1),
-                       'pz_end_add': pz_end_add, 'pz_end_change': pz_end_change, 'places': places, 'pzs': pzs, 'tzs': tzs,
-                       'links': links, 'org_infos': orgs, 'discs': disciplines, 'lens': lengths, 'dizs': dizs, 'dus': dus,
-                       'membs': members}
+                           'finish': formatDate(str(comp.d_finish)), 'name': comp.name, 'days_count': range(1, comp.days_count+1),
+                           'pz_end_add': pz_end_add, 'pz_end_change': pz_end_change, 'places': places, 'pzs': pzs, 'tzs': tzs,
+                           'links': links, 'org_infos': orgs, 'discs': disciplines, 'lens': lengths, 'dizs': dizs, 'dus': dus,
+                           'membs_by_days': members_by_day}
             template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/CertainCompetition.html')
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
             roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
             temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'), 'start': formatDate(str(comp.d_start)),
-                       'finish': formatDate(str(comp.d_finish)), 'name': comp.name, 'days_count': range(1, comp.days_count+1),
-                       'pz_end_add': pz_end_add, 'pz_end_change': pz_end_change, 'places': places, 'pzs': pzs, 'tzs': tzs,
-                       'links': links, 'org_infos': orgs, 'discs': disciplines, 'lens': lengths, 'dizs': dizs, 'dus': dus,
-                       'membs': members, 'comp_id': comp.key()}
+                           'finish': formatDate(str(comp.d_finish)), 'name': comp.name, 'days_count': range(1, comp.days_count+1),
+                           'pz_end_add': pz_end_add, 'pz_end_change': pz_end_change, 'places': places, 'pzs': pzs, 'tzs': tzs,
+                           'links': links, 'org_infos': orgs, 'discs': disciplines, 'lens': lengths, 'dizs': dizs, 'dus': dus,
+                           'membs': members_by_day, 'comp_id': comp.key()}
             if is_org and OtherHandlers.cur_role == 'organizer':
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/CertainCompetition.html')
             elif is_lead and OtherHandlers.cur_role == 'leader':
