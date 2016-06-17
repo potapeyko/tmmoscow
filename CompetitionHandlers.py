@@ -208,7 +208,7 @@ class CertainCompetition(webapp2.RequestHandler):
             dizs.insert(day_numb_of_distance, dizs_of_day)
             dus.insert(day_numb_of_distance, dus_of_day)
         # member tab
-        #members = comp.distmemb_set.count()
+        members = 0
         #TODO: SHOW THE WHOLE LIST OF COMPETITORS AND THE DETAILED INFO
         if not user:  # user is anonim
             login = users.create_login_url(dest_url='/postSignIn')
@@ -216,7 +216,7 @@ class CertainCompetition(webapp2.RequestHandler):
                        'finish': formatDate(str(comp.d_finish)), 'name': comp.name, 'days_count': range(1, comp.days_count+1),
                        'pz_end_add': pz_end_add, 'pz_end_change': pz_end_change, 'places': places, 'pzs': pzs, 'tzs': tzs,
                        'links': links, 'org_infos': orgs, 'discs': disciplines, 'lens': lengths, 'dizs': dizs, 'dus': dus,
-                       'membs': 0}
+                       'membs': members}
             template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/CertainCompetition.html')
         else:
             email = user.email()
@@ -226,7 +226,7 @@ class CertainCompetition(webapp2.RequestHandler):
                        'finish': formatDate(str(comp.d_finish)), 'name': comp.name, 'days_count': range(1, comp.days_count+1),
                        'pz_end_add': pz_end_add, 'pz_end_change': pz_end_change, 'places': places, 'pzs': pzs, 'tzs': tzs,
                        'links': links, 'org_infos': orgs, 'discs': disciplines, 'lens': lengths, 'dizs': dizs, 'dus': dus,
-                       'membs': 0, 'comp_id': comp.key()}
+                       'membs': members, 'comp_id': comp.key()}
             if is_org and OtherHandlers.cur_role == 'organizer':
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/CertainCompetition.html')
             elif is_lead and OtherHandlers.cur_role == 'leader':

@@ -62,6 +62,7 @@ app = webapp2.WSGIApplication([
     ('/reg/nullToRole', beforeSignOut),
     ('/entryMembs', EntryMembers),
     ('/entryMembsByDay', EntryMembersByDay),
+    ('/reg/leaderAcceptMembs', AcceptMembers),
     # organizer routes
     ('/', DefaultHandler),
     ('/login', LoginHandler),
@@ -82,7 +83,6 @@ app = webapp2.WSGIApplication([
     # leaders routes
     ('/reg/leaderTeam', Team),
     ('/reg/leaderAddMember', AddMemberToTeam),
-    ('/reg/leaderAcceptMembs', AcceptMembers),
     ('/reg/lead/changeMember', ChangeMember),
     ('/reg/lead/deleteMember', DeleteMember),
     # member routes

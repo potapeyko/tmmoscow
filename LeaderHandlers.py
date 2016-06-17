@@ -4,7 +4,7 @@ __author__ = 'Daria'
 from google.appengine.api import users
 from datetime import date, datetime
 from google.appengine.api import images
-from modelCompetition import MemInfo, DistInfo, Competition, Distance, Info, Org, DistMemb
+from modelCompetition import MemInfo, DistInfo, Competition, Distance, Info, Org, CompMemb
 from modelVisitor import Organizer, Leader, Member, Command
 from google.appengine.ext import db
 import os
@@ -235,26 +235,29 @@ class EntryMembers(webapp2.RequestHandler):
             if is_lead and OtherHandlers.cur_role == 'leader':
                 comp_key = self.request.POST.get('competition')
                 competition = Competition.get(comp_key)
-                distances = db.Query(Distance).filter('competition =', competition).run()
+                distances = db.Query(Distance).filter('competition =', competition).order('day_numb').run()
                 leader = db.Query(Leader).filter('user =', user).get()
                 team = leader.command
-                membs_team = db.Query(Member).filter('command =', team).order('surname')
-                membs_comp = []
-                for dist in distances:
-                    for memb in db.Query(DistMemb).filter('distance =', dist).run():
-                        membs_comp.append(memb)
-                membs_count = membs_team.count()
+                memb_comp_q = db.Query(CompMemb).filter('competition =', competition)
+                memb_comp = []
+                for m in memb_comp_q.run(batch_size=1000):
+                    memb_comp.append(m.member.key())
+                team_q = db.Query(Member).filter('command =', team).order('surname')
+                memb_team = team_q.run(batch_size=1000)
                 entry_membs = []
                 no_entry_membs = []
-                for memb in membs_team:
-                    if memb in membs_comp:
+                days = []
+                for memb in memb_team:
+                    if memb.key() in memb_comp:
                         entry_membs.append(memb)
+                        days_of_memb = memb_comp_q.filter('member=', memb).run()            # ADD PROJECTION
+                        days.append(days_of_memb)
                     else:
                         no_entry_membs.append(memb)
                 temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
-                               'team_name': team.name, 'membs_count': membs_count, 'entry_membs': entry_membs,
+                               'team_name': team.name, 'membs_count': team_q.count(), 'entry_membs': entry_membs,
                                'no_entry_membs': no_entry_membs, 'comp_name': competition.name, 'days_count':
-                                range(1, int(competition.days_count) + 1), 'comp_key': comp_key}
+                                   range(1, int(competition.days_count) + 1), 'comp_key': comp_key}
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/leader/MembersToCompetition.html')
             else:
                 temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
@@ -279,12 +282,14 @@ class EntryMembersByDay(webapp2.RequestHandler):
                 comp_key = self.request.POST.get('competition')
                 competition = Competition.get(comp_key)
                 days_count = competition.days_count
-                distances = db.Query(Distance).filter('competition =', competition).run()
+                dist_query = db.Query(Distance).filter('competition =', competition)
+                distances = dist_query.run()
+                dist_count = dist_query.count()
                 type_lent = []
                 groups_on_day = []
                 for dist in distances:
                     type_lent.append(dist.type + ' ' + dist.lent)
-                    dist_infos = dist.distinfo_set.run()
+                    dist_infos = dist.distinfo_set.run(batch_size=1000)
                     groups_i_day = []
                     for info in dist_infos:
                         groups_i_day.append(info.group_name)
@@ -299,7 +304,7 @@ class EntryMembersByDay(webapp2.RequestHandler):
                     membs_by_day.append(membs_i_day)
                 temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
                                'membs_by_day': membs_by_day, 'dists': type_lent, 'groups': groups_on_day, 'comp_key':
-                               comp_key}
+                                   comp_key}
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/leader/MembersToDays.html')
             else:
                 temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
@@ -330,8 +335,6 @@ class AcceptMembers(webapp2.RequestHandler):
                 for dist in distances:
                     distinfo = db.Query(DistInfo).filter('distance =', dist).run()          # all groups for that day (=distance)
                     distinfos.append(distinfo)
-                dist_count = dist_query.count()
-                membs_by_day = []
                 for i_day in range(days_checked_count):         # runs through all days one by one
                     memb_count_i_day = int(self.request.POST.get('membsInDay'+str(i_day)))
                     for j_memb in range(memb_count_i_day):       # runs through all member of i- day
@@ -339,13 +342,8 @@ class AcceptMembers(webapp2.RequestHandler):
                         keys = memb_group.split('_')
                         member = Member.get(keys[0])
                         group_code = keys[1]
-                        self.response.write(len(distinfos))
-                        for group in distinfos[i_day]:
-                            if group.group_name == group_code:
-                                memb_group = DistMemb(group=group, distance=group.distance, member=member)
-                                self.response.write('OKI')
-                                memb_group.save()
-                            #    self.response.write(distinfos[i_day]+' --- '+member.surname)
+                        cm = CompMemb(competition=competition, member=member, group=group_code, day_numb=i_day).put()
+
 
                 temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
                                'login_redir': users.create_login_url('/postSignIn'), 'test': distinfos}

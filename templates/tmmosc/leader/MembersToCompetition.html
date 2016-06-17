@@ -71,18 +71,18 @@
                                                 <th class="myP" style="width: 2%; color: #42a5f5; text-align: center;" colspan="{{ days_count|length }}">Дни соревнований</th>
                                               </tr>
                                           </thead>
-                                          <tbody>
+                                          <tbody>0
                                               {% for memb in entry_membs %}
                                                   <tr style="color: #42a5f5; background: #E1F5FE;">
                                                     <td class="myP" style="width: 35%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.surname }}</td>
                                                     <td class="myP" style="width: 10%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.birthdate }}</td>
                                                     <td class="myP" style="width: 10%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.qualification }}</td>
                                                     <td class="myP" style="width: 15%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.sex }}</td>
-                                                    {% set outer_indx = loop.index0 %}
+                                                    {% set memb_indx = loop.index0 %}
                                                     {% for day in days_count %}
                                                       <td style="bottom: 4px; padding: 12px 6px 6px 6px;">
-                                                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkMemb1{{ loop.index0 }}{{ outer_indx }}">
-                                                          <input type="checkbox" id="checkMemb1{{ loop.index0 }}{{ outer_indx }}" name="checkMemb{{ loop.index0 }}" class="mdl-checkbox__input" value="{{ memb.key() }}" checked>
+                                                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkMemb1{{ loop.index0 }}{{ memb_indx }}">
+                                                          <input type="checkbox" id="checkMemb1{{ loop.index0 }}{{ memb_indx }}" name="checkMemb{{ loop.index0 }}" class="mdl-checkbox__input" value="{{ memb.key() }}" checked>
                                                           <span class="mdl-checkbox__label"></span>
                                                         </label>
                                                       </td>
@@ -95,11 +95,11 @@
                                                     <td class="myP" style="width: 10%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.birthdate }}</td>
                                                     <td class="myP" style="width: 10%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.qualification }}</td>
                                                     <td class="myP" style="width: 15%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.sex }}</td>
-                                                    {% set outer_indx = loop.index0 %}
+                                                    {% set memb_indx = loop.index0 %}
                                                     {% for day in days_count %}
                                                       <td style="bottom: 4px; padding: 12px 6px 6px 6px;">
-                                                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkMemb2{{ loop.index0 }}{{ outer_indx }}">
-                                                          <input type="checkbox" id="checkMemb2{{ loop.index0 }}{{ outer_indx }}" name="checkMemb{{ loop.index0 }}" class="mdl-checkbox__input" value="{{ memb.key() }}">
+                                                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkMemb2{{ loop.index0 }}{{ memb_indx }}">
+                                                          <input type="checkbox" id="checkMemb2{{ loop.index0 }}{{ memb_indx }}" name="checkMemb{{ loop.index0 }}" class="mdl-checkbox__input" value="{{ memb.key() }}">
                                                           <span class="mdl-checkbox__label"></span>
                                                         </label>
                                                       </td>

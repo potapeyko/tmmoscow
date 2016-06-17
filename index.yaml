@@ -10,6 +10,11 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
+- kind: Distance
+  properties:
+  - name: competition
+  - name: day_numb
+
 - kind: Leader
   properties:
   - name: command
@@ -27,4 +32,9 @@ indexes:
 - kind: Member
   properties:
   - name: command
+  - name: surname
+
+- kind: Member
+  properties:
+  - name: command=
   - name: surname
