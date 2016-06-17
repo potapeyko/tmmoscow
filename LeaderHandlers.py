@@ -235,7 +235,6 @@ class EntryMembers(webapp2.RequestHandler):
             if is_lead and OtherHandlers.cur_role == 'leader':
                 comp_key = self.request.POST.get('competition')
                 competition = Competition.get(comp_key)
-
                 leader = db.Query(Leader).filter('user =', user).get()
                 team = leader.command
                 team_q = db.Query(Member).filter('command =', team).order('surname')
@@ -243,7 +242,6 @@ class EntryMembers(webapp2.RequestHandler):
                 entry_membs = []
                 no_entry_membs = []
                 days = []
-
                 for memb in memb_team:
                     m = db.Query(CompMemb).filter('competition =', competition).filter('member =', memb)
                     membs = m.run()
@@ -283,9 +281,19 @@ class EntryMembersByDay(webapp2.RequestHandler):
                 comp_key = self.request.POST.get('competition')
                 competition = Competition.get(comp_key)
                 days_count = competition.days_count
+                membs_by_day = []
+                show_tables = False
+                for i in range(days_count):  # add members (keys) for each day
+                    membs_key_day = self.request.POST.getall('checkMemb' + str(i))
+                    membs_i_day = []
+                    for memb_key in membs_key_day:
+                        member = Member.get(memb_key)
+                        membs_i_day.append(member)
+                        if show_tables == False: show_tables = True
+                    membs_by_day.append(membs_i_day)
+
                 dist_query = db.Query(Distance).filter('competition =', competition)
                 distances = dist_query.run()
-                dist_count = dist_query.count()
                 type_lent = []
                 groups_on_day = []
                 for dist in distances:
@@ -295,17 +303,11 @@ class EntryMembersByDay(webapp2.RequestHandler):
                     for info in dist_infos:
                         groups_i_day.append(info.group_name)
                     groups_on_day.append(groups_i_day)
-                membs_by_day = []
-                for i in range(days_count):     # add members (keys) for each day
-                    membs_key_day = self.request.POST.getall('checkMemb'+str(i))
-                    membs_i_day = []
-                    for memb_key in membs_key_day:
-                        member = Member.get(memb_key)
-                        membs_i_day.append(member)
-                    membs_by_day.append(membs_i_day)
+
+
                 temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
                                'membs_by_day': membs_by_day, 'dists': type_lent, 'groups': groups_on_day, 'comp_key':
-                                   comp_key}
+                               comp_key, 'show_tables': show_tables}
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/leader/MembersToDays.html')
             else:
                 temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',

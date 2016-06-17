@@ -47,7 +47,7 @@
                           </div>
                       </div>   <!--   .mdl-card__title  -->
                       <div class="mdl-card__actions mdl-card--border" style="border: none; background: #fff; padding: 30px 0 0 0;">
-                      {% if True %}
+                      {% if show_tables %}
                           <div class="mdl-grid" style="padding-bottom: 0px; margin-bottom: 0px; text-align: center;">
                               <div class="mdl-cell--12-col">
                                   <p class="myP" style="color: #42A5F5; margin: 12px 0 0 0;">Распределите участников команды по возрастным группам</p>
@@ -55,53 +55,58 @@
                           </div>
                           <form id="formSaveMembs" name="formSaveMembs" action="/reg/leaderAcceptMembs" method="post">
                               <input type="text" style="display: none;" name="competition" value="{{ comp_key }}">
+
                               <div class="mdl-grid" style="padding-top: 0px; margin-bottom: 24px;">
                                   <!--  row3  -->
                                   <div class="mdl-cell mdl-cell--1-col"></div>
                                   <div class="mdl-cell mdl-cell--10-col" >
 
                                           {% for membs_i_day in membs_by_day %}
-                                                <p class="myP" style="color: #42a5f5; text-align: left; margin: 18px 0 6px 6px;">День {{ loop.index }} | {{ dists[loop.index0] }}</p>
-                                                {% set day_numb_indx = loop.index0 %}
-                                                <input type="text" style="display: none;" name="daysCheckedCount" value="{{ membs_by_day|length }}">
-                                                <input type="text" style="display: none;" name="membsInDay{{ day_numb_indx }}" value="{{ membs_i_day|length }}">
-                                                <div style="width: 100%; text-align: center;">
-                                                <table class="mdl-data-table mdl-js-data-table" style="width: 100%;">
-                                                  <thead>
-                                                      <tr>
-                                                        <th class="myP" style="width: 25%; color: #42a5f5; text-align: center;">ФИО</th>
-                                                        <th class="myP" style="width: 15%; color: #42a5f5; text-align: center;">Год рождения</th>
-                                                        <th class="myP" style="width: 10%; color: #42a5f5; text-align: center;">Разряд</th>
-                                                        <th class="myP" style="width: 50%; color: #42a5f5; text-align: center;" colspan="{{ groups[day_numb_indx]|length }}">Группы</th>
-                                                      </tr>
-                                                  </thead>
-                                                  <tbody>
-                                                    {% for memb in membs_i_day %}
-                                                      <tr style="color: #42a5f5;">
-                                                        <td class="myP" style="width: 25%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.surname }}</td>
-                                                        <td class="myP" style="width: 15%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.birthdate }}</td>
-                                                        <td class="myP" style="width: 10%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.qualification }}</td>
-                                                        {% set memb_in_day_indx = loop.index0 %}
-                                                        {% for group in groups[day_numb_indx] %}
-                                                          <td style="bottom: 4px; padding: 12px 6px 6px 6px;">
-                                                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="checkGroup{{ day_numb_indx }}{{ memb_in_day_indx }}{{ loop.index0 }}">
-                                                              <input type="radio" id="checkGroup{{ day_numb_indx }}{{ memb_in_day_indx }}{{ loop.index0 }}" name="checkMembGroup{{ day_numb_indx }}_{{ memb_in_day_indx }}" class="mdl-radio__button" value="{{ memb.key() }}_{{ group }}">
-                                                              <span class="mdl-radio__label">{{ group }}</span>
-                                                            </label>
-                                                          </td>
-                                                        {% endfor %}
-                                                      </tr>
-                                                    {% endfor %}
-                                                  </tbody>
-                                                </table>
-                                                </div>
+
+                                                  {% if membs_i_day|length == 0 %}<div style="display: none;">{% endif %}
+                                                    <p class="myP" style="color: #42a5f5; text-align: left; margin: 18px 0 6px 6px;">День {{ loop.index }} | {{ dists[loop.index0] }}</p>
+                                                    {% set day_numb_indx = loop.index0 %}
+                                                    <input type="text" style="display: none;" name="daysCheckedCount" value="{{ membs_by_day|length }}">
+                                                    <input type="text" style="display: none;" name="membsInDay{{ day_numb_indx }}" value="{{ membs_i_day|length }}">
+                                                    <div style="width: 100%; text-align: center;">
+                                                        <table class="mdl-data-table mdl-js-data-table" style="width: 100%;">
+                                                          <thead>
+                                                              <tr>
+                                                                <th class="myP" style="width: 25%; color: #42a5f5; text-align: center;">ФИО</th>
+                                                                <th class="myP" style="width: 15%; color: #42a5f5; text-align: center;">Год рождения</th>
+                                                                <th class="myP" style="width: 10%; color: #42a5f5; text-align: center;">Разряд</th>
+                                                                <th class="myP" style="width: 50%; color: #42a5f5; text-align: center;" colspan="{{ groups[day_numb_indx]|length }}">Группы</th>
+                                                              </tr>
+                                                          </thead>
+                                                          <tbody>
+                                                            {% for memb in membs_i_day %}
+                                                              <tr style="color: #42a5f5;">
+                                                                <td class="myP" style="width: 25%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.surname }}</td>
+                                                                <td class="myP" style="width: 15%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.birthdate }}</td>
+                                                                <td class="myP" style="width: 10%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.qualification }}</td>
+                                                                {% set memb_in_day_indx = loop.index0 %}
+                                                                {% for group in groups[day_numb_indx] %}
+                                                                  <td style="bottom: 4px; padding: 12px 6px 6px 6px;">
+                                                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="checkGroup{{ day_numb_indx }}{{ memb_in_day_indx }}{{ loop.index0 }}">
+                                                                      <input type="radio" id="checkGroup{{ day_numb_indx }}{{ memb_in_day_indx }}{{ loop.index0 }}" name="checkMembGroup{{ day_numb_indx }}_{{ memb_in_day_indx }}" class="mdl-radio__button" value="{{ memb.key() }}_{{ group }}">
+                                                                      <span class="mdl-radio__label">{{ group }}</span>
+                                                                    </label>
+                                                                  </td>
+                                                                {% endfor %}
+                                                              </tr>
+                                                            {% endfor %}
+                                                          </tbody>
+                                                        </table>
+                                                    </div>
+                                                  {% if membs_i_day|length == 0 %}</div> {% endif %}
+
                                           {% endfor %}
                                   </div>
                                   <div class="mdl-cell mdl-cell--1-col"></div>
                               </div>
                           </form>
                       {% else %}
-                          <p class="myP" style="color: #42a5f5; margin: 0 38px 32px 0; text-align: center;">В вашей команде пока нет участников. Сначала добавьте их в постоянный список.</p>
+                          <p class="myP" style="color: #42a5f5; margin: 0 38px 32px 0; text-align: center;">Вы не отметили участников для заявки. Вернитесь на предыдущую страницу для выбора.</p>
                       {% endif %}
                       </div>    <!--  mdl-cards__actions  -->
                    </div>
