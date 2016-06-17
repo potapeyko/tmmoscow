@@ -235,29 +235,30 @@ class EntryMembers(webapp2.RequestHandler):
             if is_lead and OtherHandlers.cur_role == 'leader':
                 comp_key = self.request.POST.get('competition')
                 competition = Competition.get(comp_key)
-                distances = db.Query(Distance).filter('competition =', competition).order('day_numb').run()
+
                 leader = db.Query(Leader).filter('user =', user).get()
                 team = leader.command
-                memb_comp_q = db.Query(CompMemb).filter('competition =', competition)
-                memb_comp = []
-                for m in memb_comp_q.run(batch_size=1000):
-                    memb_comp.append(m.member.key())
                 team_q = db.Query(Member).filter('command =', team).order('surname')
                 memb_team = team_q.run(batch_size=1000)
                 entry_membs = []
                 no_entry_membs = []
                 days = []
+
                 for memb in memb_team:
-                    if memb.key() in memb_comp:
+                    m = db.Query(CompMemb).filter('competition =', competition).filter('member =', memb)
+                    membs = m.run()
+                    if m.count():
                         entry_membs.append(memb)
-                        days_of_memb = memb_comp_q.filter('member=', memb).run()            # ADD PROJECTION
-                        days.append(days_of_memb)
+                        m_d = []
+                        for mem in membs:
+                            m_d.append(mem.day_numb)
+                        days.append(m_d)
                     else:
                         no_entry_membs.append(memb)
                 temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
                                'team_name': team.name, 'membs_count': team_q.count(), 'entry_membs': entry_membs,
                                'no_entry_membs': no_entry_membs, 'comp_name': competition.name, 'days_count':
-                                   range(1, int(competition.days_count) + 1), 'comp_key': comp_key}
+                                   range(1, int(competition.days_count) + 1), 'comp_key': comp_key, 'days': days}
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/leader/MembersToCompetition.html')
             else:
                 temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
@@ -342,7 +343,7 @@ class AcceptMembers(webapp2.RequestHandler):
                         keys = memb_group.split('_')
                         member = Member.get(keys[0])
                         group_code = keys[1]
-                        cm = CompMemb(competition=competition, member=member, group=group_code, day_numb=i_day).put()
+                        CompMemb(competition=competition, member=member, group=group_code, day_numb=i_day+1).put()
 
 
                 temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',

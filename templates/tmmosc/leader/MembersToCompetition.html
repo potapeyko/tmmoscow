@@ -80,15 +80,20 @@
                                                     <td class="myP" style="width: 15%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.sex }}</td>
                                                     {% set memb_indx = loop.index0 %}
                                                     {% for day in days_count %}
+                                                             <p style="color:#000;">{{ memb.surname }}---{{ day }}---{{ days[memb_indx] }}</p>
                                                       <td style="bottom: 4px; padding: 12px 6px 6px 6px;">
                                                         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkMemb1{{ loop.index0 }}{{ memb_indx }}">
-                                                          <input type="checkbox" id="checkMemb1{{ loop.index0 }}{{ memb_indx }}" name="checkMemb{{ loop.index0 }}" class="mdl-checkbox__input" value="{{ memb.key() }}" checked>
+                                                          <input type="checkbox" id="checkMemb1{{ loop.index0 }}{{ memb_indx }}" name="checkMemb{{ loop.index0 }}" class="mdl-checkbox__input" value="{{ memb.key() }}"
+                                                                 {% if day in days[memb_indx] %}checked{% endif %}>
                                                           <span class="mdl-checkbox__label"></span>
                                                         </label>
                                                       </td>
                                                     {% endfor %}
                                                   </tr>
                                               {% endfor %}
+
+
+
                                               {% for memb in no_entry_membs %}
                                                   <tr style="color: #42a5f5;">
                                                     <td class="myP" style="width: 35%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.surname }}</td>
