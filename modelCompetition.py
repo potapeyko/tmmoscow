@@ -67,6 +67,8 @@ class Info(db.Model):
     pz_change_end = db.DateProperty(default=datetime.today()+timedelta(weeks=4))
     tz_is_on = db.BooleanProperty(default=False)
     link = db.StringProperty()
-    orgs = db.ListProperty(str)
+    orgs_fio = db.ListProperty(str)
+    orgs_dol = db.ListProperty(str)
+    orgs_cont = db.ListProperty(str)
 
 

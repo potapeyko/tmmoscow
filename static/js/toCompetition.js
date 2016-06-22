@@ -14,6 +14,7 @@ function trTzClick(day_n){
 };
 
 $('.swapVisInfo').click(function(){
+    alert('AOSKAOSK');
     var dayToSwap = $(this).val();
     var blockName = "#toSwapInfo" + dayToSwap.toString();
     var butImgUp = "#swapImgInfoUp" + dayToSwap.toString();
@@ -21,6 +22,7 @@ $('.swapVisInfo').click(function(){
     $(butImgDown).toggle();
     $(butImgUp).toggle();
     $(blockName).slideToggle(400);
+    alert('OD');
     componentHandler.upgradeAllRegistered();
 });
 $('.swapVisDiz').click(function(){

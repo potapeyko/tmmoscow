@@ -95,8 +95,7 @@ class NewCompetition(webapp2.RequestHandler):
             places = self.request.POST.getall('placeNew')
             pzs = []
             tzs = []
-            orgs = []
-            org_fios = []; org_dols = []; org_conts=[];
+            org_fios = []; org_dols = []; org_conts=[]
             for i in range(1, d_count+1):
                 pzs.append(self.request.POST.getall('trPzNew'+str(i)))
                 tzs.append(self.request.POST.getall('trTzNew'+str(i)))
@@ -104,14 +103,12 @@ class NewCompetition(webapp2.RequestHandler):
                 org_dols.append(self.request.POST.getall('orgDolNew'+str(i)))
                 org_conts.append(self.request.POST.getall('orgContNew'+str(i)))
             for i in range(d_count):
-                one_day_orgs = zip(org_fios[i], org_dols[i], org_conts[i])
-                orgs.append(one_day_orgs)
-                one_day_orgs = parseOrgsToStr(one_day_orgs)
                 info = Info(competition=competition, day_numb=i, place_addr=places[i],
                             pz_is_open=onToBoolean(pzs[i]), pz_add_end=dateToPython(pz_end_add[i]),
                             pz_change_end=dateToPython(pz_end_change[i]), tz_is_on=onToBoolean(tzs[i]),
-                            link=links[i], orgs=one_day_orgs)
+                            link=links[i], orgs_fio=org_fios[i], orgs_dol=org_dols[i], orgs_cont=org_conts[i])
                 info.save()
+
             pzs = onToChecked(pzs)
             tzs = onToChecked(tzs)
             # diz tab
@@ -152,8 +149,9 @@ class NewCompetition(webapp2.RequestHandler):
                            'start': start_date, 'finish': finish_date, 'name': comp_name, 'show_places': show_places,
                            'show_map': show_map, 'days_count': range(1, int(d_count) + 1), 'pz_end_add': pz_end_add,
                            'pz_end_change': pz_end_change, 'links': links, 'places': places, 'pzs': pzs, 'tzs': tzs,
-                           'org_infos': orgs, 'discs': disciplines, 'lens': lengths, 'dizs': dizs, 'dus': dus,
-                           'stat_day': stat_day, 'stat_sex': stat_sex, 'stat_qual': stat_qual}
+                           'org_fios': org_fios, 'org_dols': org_dols, 'org_conts': org_conts, 'discs': disciplines,
+                           'lens': lengths, 'dizs': dizs, 'dus': dus, 'stat_day': stat_day, 'stat_sex': stat_sex,
+                           'stat_qual': stat_qual, 'membs_count': 0}
             # TODO: ADD REDIRECTION TO CERTAINCOMPETITION CLASS INSTEAD OF /ORGANIZER/CERTAINCOMPETITION.HTML
             template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/CertainCompetition.html')
             self.response.write(template.render(temp_values))
@@ -182,7 +180,7 @@ class CertainCompetition(webapp2.RequestHandler):
         pz_end_add = []; pz_end_change = []
         pzs = []; tzs = []
         places = []; links = []
-        orgs = []
+        orgs_fio = []; orgs_dol = []; orgs_cont = []
         for info in infos:
             day_numb_of_info = info.day_numb
             pz_end_add.insert(day_numb_of_info, formatDate(str(info.pz_add_end)))
@@ -191,7 +189,9 @@ class CertainCompetition(webapp2.RequestHandler):
             tzs.insert(day_numb_of_info, boolToChecked(info.tz_is_on))
             places.insert(day_numb_of_info, info.place_addr)
             links.insert(day_numb_of_info, info.link)
-            orgs.insert(day_numb_of_info, parseStrToOrgs(info.orgs))
+            orgs_fio.insert(day_numb_of_info, info.orgs_fio)
+            orgs_dol.insert(day_numb_of_info, info.orgs_dol)
+            orgs_cont.insert(day_numb_of_info, info.orgs_cont)
         # diz tab
         distances_of_comp = comp.distance_set.run(batch_size=1000)
         disciplines = []; lengths = []
@@ -209,19 +209,24 @@ class CertainCompetition(webapp2.RequestHandler):
             dus.insert(day_numb_of_distance, dus_of_day)
         # member tab
         members_by_day = []
+        membs_count = 0
         for day in range(1, comp.days_count+1):
-            membs_of_day = db.Query(CompMemb).filter('competition =', comp).filter('day_numb =', day).order('group').run(batch_size=1000)
+            membs_of_day_q = db.Query(CompMemb).filter('competition =', comp).filter('day_numb =', day).order('group')
+            membs_of_day = membs_of_day_q.run(batch_size=1000)
+            if membs_of_day_q.count() > 0:
+                membs_count = 1
             members_by_day.append(membs_of_day)
 
 
-        #TODO: SHOW THE WHOLE LIST OF COMPETITORS AND THE DETAILED INFO
+        #TODO: SHOW DETAILED INFO
         if not user:  # user is anonim
             login = users.create_login_url(dest_url='/postSignIn')
             temp_values = {'login': login, 'start': formatDate(str(comp.d_start)),
                            'finish': formatDate(str(comp.d_finish)), 'name': comp.name, 'days_count': range(1, comp.days_count+1),
                            'pz_end_add': pz_end_add, 'pz_end_change': pz_end_change, 'places': places, 'pzs': pzs, 'tzs': tzs,
-                           'links': links, 'org_infos': orgs, 'discs': disciplines, 'lens': lengths, 'dizs': dizs, 'dus': dus,
-                           'membs_by_days': members_by_day}
+                           'links': links, 'org_fios': orgs_fio, 'org_dols': orgs_dol, 'org_conts': orgs_cont,
+                           'discs': disciplines, 'lens': lengths, 'dizs': dizs, 'dus': dus,
+                           'membs_by_days': members_by_day, 'membs_count': membs_count}
             template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/CertainCompetition.html')
         else:
             email = user.email()
@@ -230,8 +235,9 @@ class CertainCompetition(webapp2.RequestHandler):
             temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'), 'start': formatDate(str(comp.d_start)),
                            'finish': formatDate(str(comp.d_finish)), 'name': comp.name, 'days_count': range(1, comp.days_count+1),
                            'pz_end_add': pz_end_add, 'pz_end_change': pz_end_change, 'places': places, 'pzs': pzs, 'tzs': tzs,
-                           'links': links, 'org_infos': orgs, 'discs': disciplines, 'lens': lengths, 'dizs': dizs, 'dus': dus,
-                           'membs': members_by_day, 'comp_id': comp.key()}
+                           'links': links, 'org_fios': orgs_fio, 'org_dols': orgs_dol, 'org_conts': orgs_cont,
+                           'discs': disciplines, 'lens': lengths, 'dizs': dizs, 'dus': dus,
+                           'membs_by_days': members_by_day, 'comp_id': comp.key(), 'membs_count': membs_count}
             if is_org and OtherHandlers.cur_role == 'organizer':
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/CertainCompetition.html')
             elif is_lead and OtherHandlers.cur_role == 'leader':
