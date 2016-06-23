@@ -38,7 +38,7 @@
                               <div class="mdl-grid" style="padding-bottom: 0px; margin-bottom: 0px;">
                                   <div class="mdl-cell--1-col"></div>
                                   <div class="mdl-cell--11-col">
-                                      <p class="myP" style="color: #42A5F5; margin: 28px 0 12px 0; text-align: center;">Выберите участника для заявки на соревнования</p>
+                                      <p class="myP" style="color: #42A5F5; margin: 28px 0 12px 0; text-align: center;">Выберите участника для заявки на соревнования. Синим выделены уже заявленные спортсмены</p>
                                   </div>
                               </div>
                               <div class="mdl-grid" style="padding-top: 0px; margin-bottom: 24px;">
@@ -60,7 +60,31 @@
                                               </tr>
                                           </thead>
                                           <tbody>
-                                              {% for memb in membs %}
+                                              {% for memb in membs_in %}
+                                                  <tr style="color: #42a5f5; background: #E1F5FE;" class="selectable">
+                                                    <td class="myP" style="width: 35%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.surname }}</td>
+                                                    <td class="myP" style="width: 10%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.birthdate }}</td>
+                                                    <td class="myP" style="width: 10%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.qualification }}</td>
+                                                    <td class="myP" style="width: 20%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.sex }}</td>
+                                                    <td class="myP" style="width: 20%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.command.name }}</td>
+                                                    <td class="myP" style="width: 20%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.command.territory }}</td>
+                                                    <td style="width: 3%; text-align: center; bottom: 4px;">
+                                                      <form action="/memberInfo" method="get" style="display: inline;" id="changeMembIn">
+                                                        <button class="mdl-button mdl-js-button mdl-button--icon " type="submit" form="changeMembIn" style="width: 32px; height: 32px;" name="member" value="{{ keys_in[loop.index0] }}">
+                                                          <i class="material-icons">mode_edit</i>
+                                                        </button>
+                                                        <input type="text" style="display: none;" name="competition" value="{{ competition }}">
+                                                      </form>
+                                                      <form action="/deleteFromComp" method="get" style="display: inline;" id="selectDaysIn">
+                                                        <button class="mdl-button mdl-js-button mdl-button--icon " type="submit" form="selectDaysIn" style="width: 32px; height: 32px;" name="member" value="{{ keys_in[loop.index0] }}">
+                                                          <i class="material-icons">clear</i>
+                                                        </button>
+                                                        <input type="text" style="display: none;" name="competition" value="{{ competition }}">
+                                                      </form>
+                                                    </td>
+                                                  </tr>
+                                              {% endfor %}
+                                              {% for memb in membs_not %}
                                                   <tr style="color: #42a5f5;" class="selectable">
                                                     <td class="myP" style="width: 35%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.surname }}</td>
                                                     <td class="myP" style="width: 10%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.birthdate }}</td>
@@ -70,13 +94,13 @@
                                                     <td class="myP" style="width: 20%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.command.territory }}</td>
                                                     <td style="width: 3%; text-align: center; bottom: 4px;">
                                                       <form action="/memberInfo" method="get" style="display: inline;" id="changeMemb">
-                                                        <button class="mdl-button mdl-js-button mdl-button--icon " type="submit" form="changeMemb" style="width: 32px; height: 32px;" name="member" value="{{ keys[loop.index0] }}">
+                                                        <button class="mdl-button mdl-js-button mdl-button--icon " type="submit" form="changeMemb" style="width: 32px; height: 32px;" name="member" value="{{ keys_not[loop.index0] }}">
                                                           <i class="material-icons">mode_edit</i>
                                                         </button>
                                                         <input type="text" style="display: none;" name="competition" value="{{ competition }}">
                                                       </form>
                                                       <form action="/addToGroup" method="post" style="display: inline;" id="selectDays">
-                                                        <button class="mdl-button mdl-js-button mdl-button--icon " type="submit" form="selectDays" style="width: 32px; height: 32px;" name="member" value="{{ keys[loop.index0] }}">
+                                                        <button class="mdl-button mdl-js-button mdl-button--icon " type="submit" form="selectDays" style="width: 32px; height: 32px;" name="member" value="{{ keys_not[loop.index0] }}">
                                                           <i class="material-icons">done</i>
                                                         </button>
                                                         <input type="text" style="display: none;" name="competition" value="{{ competition }}">

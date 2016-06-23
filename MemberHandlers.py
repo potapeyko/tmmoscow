@@ -7,7 +7,7 @@ import webapp2
 import time
 from google.appengine.ext import db
 from modelVisitor import Member
-from modelCompetition import Competition
+from modelCompetition import Competition, CompMemb
 from LeaderHandlers import saltPass
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -62,11 +62,22 @@ class MemberToComp(webapp2.RequestHandler):
         comp_key = self.request.GET['competition']
         comp = Competition.get(comp_key)
         membs = db.Query(Member).order('surname')
-        keys = []
+        keys_in_comp = []
+        keys_not_in = []
+        memb_not_in = []
+        memb_in_comp = []
+        for m in db.Query(CompMemb).filter('competition =', comp).order('member'):
+            memb_in_comp.append(m.member)
+            keys_in_comp.append(m.member.key())
         for m in membs:
-            keys.append(m.key())
+            if m.key() in keys_in_comp:
+                pass
+            else:
+                keys_not_in.append(m.key())
+                memb_not_in.append(m)
         temp_values = {'login': login, 'logout': users.create_logout_url('/login'), 'name': comp.name, 'membs_count':
-                       membs.count(), 'membs': membs, 'keys': keys, 'competition': comp_key}
+                       membs.count(), 'membs_in': memb_in_comp, 'membs_not': memb_not_in, 'keys_in': keys_in_comp,
+                       'keys_not': keys_not_in, 'competition': comp_key}
         template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/member/MemberList.html')
         self.response.write(template.render(temp_values))
 
@@ -84,3 +95,27 @@ class AddMembToGroup(webapp2.RequestHandler):
 class EnterMember(webapp2.RequestHandler):
     def post(self):
         self.response.write('POST from EnterMember (member)')
+
+
+class DeleteMemberFromComp(webapp2.RequestHandler):
+    def get(self):      # displays form to fill in pass_to_edit
+        login = users.create_login_url(dest_url='/postSignIn')
+        comp_key = self.request.GET['competition']
+        memb_key = self.request.GET['member']
+        comp = Competition.get(comp_key)
+        member = Member.get(memb_key)
+        temp_values = {'login': login, 'logout': users.create_logout_url('/login'), 'name': comp.name, 'competition':
+                        comp_key, 'memb_key': memb_key, 'surname': member.surname, 'team': member.command.name,
+                       'card_title': u'Удаление участника из заявки'}
+        template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/member/EnterPass.html')
+        self.response.write(template.render(temp_values))
+
+
+    def post(self):     # deletes member from that competition
+        login = users.create_login_url(dest_url='/postSignIn')
+        comp_key = self.request.GET['competition']
+        memb_key = self.request.GET['member']
+        comp = Competition.get(comp_key)
+        member = Member.get(memb_key)
+        entries = db.Query(CompMemb).filter('member =', member).filter('competition =', comp).delete()
+        self.response.write('member ' + member.surname + 'deleted from ' + comp.name)

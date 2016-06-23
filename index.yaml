@@ -16,6 +16,11 @@ indexes:
   - name: day_numb
   - name: group
 
+- kind: CompMemb
+  properties:
+  - name: competition
+  - name: member
+
 - kind: Distance
   properties:
   - name: competition
