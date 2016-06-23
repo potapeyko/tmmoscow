@@ -110,12 +110,22 @@ class DeleteMemberFromComp(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/member/EnterPass.html')
         self.response.write(template.render(temp_values))
 
-
     def post(self):     # deletes member from that competition
         login = users.create_login_url(dest_url='/postSignIn')
-        comp_key = self.request.GET['competition']
-        memb_key = self.request.GET['member']
-        comp = Competition.get(comp_key)
+        memb_key = self.request.POST.get('member')
         member = Member.get(memb_key)
-        entries = db.Query(CompMemb).filter('member =', member).filter('competition =', comp).delete()
-        self.response.write('member ' + member.surname + 'deleted from ' + comp.name)
+        paswd = self.request.POST.get('changePass')
+        comp_key = self.request.POST.get('competition')
+        comp = Competition.get(comp_key)
+        if saltPass(paswd) == member.pass_to_edit:
+            comp_membs = CompMemb.all().filter('member =', member).filter('competition =', comp)
+            db.delete(comp_membs)
+            time.sleep(0.1)
+            self.redirect('/entryOneMemb?competition=' + comp_key)
+        else:
+            temp_values = {'login': login, 'logout': users.create_logout_url('/login'), 'name': comp.name, 'surname':
+                           member.surname, 'team': member.command.name, 'competition': comp_key, 'memb_key': memb_key,
+                           'tooltip': u'Неверный пароль подтверждения. Попробуйте еще раз', 'card_title':
+                            u'Удаление участника из заявки'}
+            template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/member/EnterPass.html')
+            self.response.write(template.render(temp_values))

@@ -21,7 +21,7 @@
    {% endblock %}
    {% block main_content %}
       <main class="mdl-layout__content">
-        <form action="/memberInfo" id="formChangeMember" method="post" name="formChangeMember">
+        <form action="/deleteFromComp" id="formDeleteMember" method="post" name="formDeleteMember">
           <!--  Content  -->
           <input type="text" style="display: none;" name="member" value="{{ memb_key }}">
           <input type="text" style="display: none;" name="competition" value="{{ competition }}">
@@ -38,7 +38,7 @@
                           <div class="mdl-cell mdl-cell--7-col"></div>
                           <div class="mdl-cell mdl-cell--7-col"></div>
                           <div class="mdl-cell mdl-cell--5-col">
-                              <button id="saveInfo" type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="top: 14px; left:10px;" form="formChangeMember">
+                              <button id="saveInfo" type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="top: 14px; left:10px;" form="formDeleteMember">
                                   <i class="material-icons">save</i>
                               </button>
                           </div>
