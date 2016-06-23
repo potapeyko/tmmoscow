@@ -225,27 +225,31 @@ class CertainCompetition(webapp2.RequestHandler):
                            'finish': formatDate(str(comp.d_finish)), 'name': comp.name, 'days_count': range(1, comp.days_count+1),
                            'pz_end_add': pz_end_add, 'pz_end_change': pz_end_change, 'places': places, 'pzs': pzs, 'tzs': tzs,
                            'links': links, 'org_fios': orgs_fio, 'org_dols': orgs_dol, 'org_conts': orgs_cont,
-                           'discs': disciplines, 'lens': lengths, 'dizs': dizs, 'dus': dus,
-                           'membs_by_days': members_by_day, 'membs_count': membs_count}
+                           'discs': disciplines, 'lens': lengths, 'dizs': dizs, 'dus': dus, 'comp_id': comp.key(),
+                           'membs_by_days': members_by_day, 'membs_count': membs_count, 'action': '/entryOneMemb'}
             template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/CertainCompetition.html')
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
             roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
-            temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'), 'start': formatDate(str(comp.d_start)),
-                           'finish': formatDate(str(comp.d_finish)), 'name': comp.name, 'days_count': range(1, comp.days_count+1),
-                           'pz_end_add': pz_end_add, 'pz_end_change': pz_end_change, 'places': places, 'pzs': pzs, 'tzs': tzs,
-                           'links': links, 'org_fios': orgs_fio, 'org_dols': orgs_dol, 'org_conts': orgs_cont,
-                           'discs': disciplines, 'lens': lengths, 'dizs': dizs, 'dus': dus,
-                           'membs_by_days': members_by_day, 'comp_id': comp.key(), 'membs_count': membs_count}
             if is_org and OtherHandlers.cur_role == 'organizer':
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/CertainCompetition.html')
             elif is_lead and OtherHandlers.cur_role == 'leader':
+                action = '/entryMembs'
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/leader/CertainCompetition.html')
             elif is_memb and OtherHandlers.cur_role == 'member':
+                action = '/entryOneMemb'
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/member/CertainCompetition.html')
             else:
+                action = '/entryOneMemb'
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/CertainCompetition.html')
+            temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
+                           'start': formatDate(str(comp.d_start)), 'finish': formatDate(str(comp.d_finish)), 'name':
+                            comp.name, 'days_count': range(1, comp.days_count + 1), 'pz_end_add': pz_end_add,
+                           'pz_end_change': pz_end_change, 'places': places, 'pzs': pzs, 'tzs': tzs, 'links': links,
+                           'org_fios': orgs_fio, 'org_dols': orgs_dol, 'org_conts': orgs_cont, 'discs': disciplines,
+                           'lens': lengths, 'dizs': dizs, 'dus': dus, 'membs_by_days': members_by_day, 'comp_id':
+                            comp.key(), 'membs_count': membs_count, 'action': action}
         self.response.write(template.render(temp_values))
 
     def post(self):

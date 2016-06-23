@@ -1,0 +1,105 @@
+{% extends 'templates/tmmosc/base/UnauthUserHeader.html' %}
+   {% block title %}{{ name }}{% endblock %}
+   {% block styles %}
+       <style>
+           body, .mdl-card__title{
+               color: #ffffff;
+           }
+           .competition-card:hover{
+               background: #64B5F6;
+
+           }
+           .mdl-button {
+               height: 56px;
+               width: 56px;
+            }
+           .mdl-button--fab.mdl-button--colored {
+                background: rgb(178,255,89);
+                color: rgb(255,255,255);
+            }
+       </style>
+   {% endblock %}
+   {% block main_content %}
+      <main class="mdl-layout__content">
+          <form action="/memberInfo" id="formChangeMember" method="post" name="formChangeMember">
+            <!--  Content  -->
+            <div class="page-content">
+                <div class="mdl-grid" style="margin-top:15px;">
+                  <div class="mdl-cell mdl-cell--1-col"></div>
+                  <div class="mdl-cell mdl-cell--10-col">
+                      <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; min-height: 80px; margin-top: 35px;">
+                          <div class="mdl-grid mdl-card__title" style="height: 120px; width: 100%; text-align: center; border: none;">
+                              <div class="mdl-cell mdl-cell--1-col"></div>
+                              <div style="text-align: center; margin-top: 24px;" class="mdl-cell mdl-cell--11-col">
+                                  <h2 class="mdl-card__title-text">Выбор участника</h2>
+                              </div>
+                          </div>   <!--   .mdl-card__title  -->
+                          <div class="mdl-card__actions mdl-card--border" style="border: none; background: #fff; padding: 0px;" >
+                              <div class="mdl-grid" style="padding-bottom: 0px; margin-bottom: 0px;">
+                                  <div class="mdl-cell--1-col"></div>
+                                  <div class="mdl-cell--11-col">
+                                      <p class="myP" style="color: #42A5F5; margin: 28px 0 12px 0; text-align: center;">Выберите участника для заявки на соревнования</p>
+                                  </div>
+                              </div>
+                              <div class="mdl-grid" style="padding-top: 0px; margin-bottom: 24px;">
+                                  <!--  row3  -->
+                                  <div class="mdl-cell mdl-cell--1-col"></div>
+                                  <div class="mdl-cell mdl-cell--10-col" >
+                                      <div style="width: 100%; text-align: center;">
+                                      {% if membs_count > 0 %}
+                                        <table class="mdl-data-table mdl-js-data-table">
+                                          <thead>
+                                              <tr>
+                                                <th class="myP" style="width: 35%; color: #42a5f5; text-align: center;">ФИО</th>
+                                                <th class="myP" style="width: 10%; color: #42a5f5; text-align: center;">Год рождения</th>
+                                                <th class="myP" style="width: 10%; color: #42a5f5; text-align: center;">Разряд</th>
+                                                <th class="myP" style="width: 20%; color: #42a5f5; text-align: center;">Пол</th>
+                                                <th class="myP" style="width: 20%; color: #42a5f5; text-align: center;">Команда</th>
+                                                <th class="myP" style="width: 20%; color: #42a5f5; text-align: center;">Территория</th>
+                                                <th style="width: 3%; color: #42a5f5;"></th>
+                                              </tr>
+                                          </thead>
+                                          <tbody>
+                                              {% for memb in membs %}
+                                                  <tr style="color: #42a5f5;" class="selectable">
+                                                    <td class="myP" style="width: 35%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.surname }}</td>
+                                                    <td class="myP" style="width: 10%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.birthdate }}</td>
+                                                    <td class="myP" style="width: 10%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.qualification }}</td>
+                                                    <td class="myP" style="width: 20%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.sex }}</td>
+                                                    <td class="myP" style="width: 20%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.command.name }}</td>
+                                                    <td class="myP" style="width: 20%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.command.territory }}</td>
+                                                    <td style="width: 3%; text-align: center; bottom: 4px;">
+                                                      <form action="/memberInfo" method="get" style="display: inline;" id="changeMemb">
+                                                        <button class="mdl-button mdl-js-button mdl-button--icon " type="submit" form="changeMemb" style="width: 32px; height: 32px;" name="member" value="{{ keys[loop.index0] }}">
+                                                          <i class="material-icons">mode_edit</i>
+                                                        </button>
+                                                        <input type="text" style="display: none;" name="competition" value="{{ competition }}">
+                                                      </form>
+                                                      <form action="/addToGroup" method="post" style="display: inline;" id="selectDays">
+                                                        <button class="mdl-button mdl-js-button mdl-button--icon " type="submit" form="selectDays" style="width: 32px; height: 32px;" name="member" value="{{ keys[loop.index0] }}">
+                                                          <i class="material-icons">done</i>
+                                                        </button>
+                                                        <input type="text" style="display: none;" name="competition" value="{{ competition }}">
+                                                      </form>
+                                                    </td>
+                                                  </tr>
+                                              {% endfor %}
+                                          </tbody>
+                                        </table>
+                                      {% else %}
+                                        <p class="myP" style="color: #42a5f5; top: 10px;">В системе пока нет участников</p>
+                                      {% endif %}
+                                      </div>
+                                  </div>
+                                  <div class="mdl-cell mdl-cell--1-col"></div>
+                              </div>
+                          </div>   <!--   .mdl-card__actions   -->
+                      </div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--1-col"></div>
+                </div>      <!--   mdl-grid  -->
+            </div>      <!--  page-content  -->
+          </form>
+      </main>
+   </div>
+   {% endblock %}

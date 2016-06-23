@@ -222,7 +222,7 @@ class DeleteMember(webapp2.RequestHandler):
 
 
 class EntryMembers(webapp2.RequestHandler):
-    def post(self):     # displays all members of team to check who will take a part in competition
+    def get(self):     # displays all members of team to check who will take a part in competition
         user = users.get_current_user()
         if not user:
             temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
@@ -233,7 +233,7 @@ class EntryMembers(webapp2.RequestHandler):
             [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
             roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
             if is_lead and OtherHandlers.cur_role == 'leader':
-                comp_key = self.request.POST.get('competition')
+                comp_key = self.request.GET['competition']
                 competition = Competition.get(comp_key)
                 leader = db.Query(Leader).filter('user =', user).get()
                 team = leader.command
@@ -256,7 +256,7 @@ class EntryMembers(webapp2.RequestHandler):
                 temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
                                'team_name': team.name, 'membs_count': team_q.count(), 'entry_membs': entry_membs,
                                'no_entry_membs': no_entry_membs, 'comp_name': competition.name, 'days_count':
-                                   range(1, int(competition.days_count) + 1), 'comp_key': comp_key, 'days': days}
+                               range(1, int(competition.days_count) + 1), 'comp_key': comp_key, 'days': days}
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/leader/MembersToCompetition.html')
             else:
                 temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',

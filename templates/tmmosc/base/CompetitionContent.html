@@ -67,13 +67,13 @@
                                           <a href="#member-panel" class="mdl-tabs__tab" style="width: 15%;">Участники</a>
                                           <a href="#statistic-panel" class="mdl-tabs__tab" style="width: 15%;">Статистика</a>
                                       </span>
-                                      <form style="display: none;" method="post" action="/entryMembs" id="entryMembsForm">
+                                      <form style="display: none;" method="get" action="{{ action }}" id="entryMembsForm">
                                           <input type="text" name="competition" value="{{ comp_id }}">
                                       </form>
                                       <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" id="entryMembs" name="entryMembs" form="entryMembsForm" type="submit" style="top: 20px;">
                                         <i class="material-icons">input</i>
                                       </button>
-                                      <div class="mdl-tooltip mdl-tooltip--large" for="SaveAll">
+                                      <div class="mdl-tooltip mdl-tooltip--large" for="entryMembs">
                                         Заявить участников
                                       </div>
                                   </div>
