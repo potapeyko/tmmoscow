@@ -7,7 +7,7 @@ import webapp2
 import time
 from google.appengine.ext import db
 from modelVisitor import Member
-from modelCompetition import Competition, CompMemb
+from modelCompetition import Competition, CompMemb, Distance, DistInfo
 from LeaderHandlers import saltPass
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -30,7 +30,7 @@ class MemberInfo(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/member/MemberView.html')
         self.response.write(template.render(temp_values))
 
-    def post(self):     # saves new member or changes
+    def post(self):     # saves member's changes
         comp_key = self.request.POST.get('competition')
         passwd = self.request.POST.get('changePass')
         memb_key = self.request.POST.get('member')
@@ -66,13 +66,13 @@ class MemberToComp(webapp2.RequestHandler):
         keys_not_in = []
         memb_not_in = []
         memb_in_comp = []
-        for m in db.Query(CompMemb).filter('competition =', comp).order('member'):
-            memb_in_comp.append(m.member)
-            keys_in_comp.append(m.member.key())
+        membs_comps = db.Query(CompMemb).filter('competition =', comp).order('member').run(batch_size=10000)
+        for m in membs_comps:
+            if m.member.key() not in keys_in_comp:
+                memb_in_comp.append(m.member)
+                keys_in_comp.append(m.member.key())
         for m in membs:
-            if m.key() in keys_in_comp:
-                pass
-            else:
+            if m.key() not in keys_in_comp:
                 keys_not_in.append(m.key())
                 memb_not_in.append(m)
         temp_values = {'login': login, 'logout': users.create_logout_url('/login'), 'name': comp.name, 'membs_count':
@@ -82,20 +82,53 @@ class MemberToComp(webapp2.RequestHandler):
         self.response.write(template.render(temp_values))
 
 
-class ChangeMember(webapp2.RequestHandler):
+class AddMembToGroup(webapp2.RequestHandler):       # displays competition's groups by days to check member
     def post(self):
-        self.response.write('POST from ChangeMember (member)')
-
-
-class AddMembToGroup(webapp2.RequestHandler):
-    def post(self):
-        self.response.write('POST from AddMembToGroup (member)')
+        login = users.create_login_url(dest_url='/postSignIn')
+        memb_key = self.request.POST.get('member')
+        memb = Member.get(memb_key)
+        comp_key = self.request.POST.get('competition')
+        comp = Competition.get(comp_key)
+        distances = db.Query(Distance).filter('competition =', comp).order('day_numb')
+        groups_by_days = []
+        for dist in distances:
+            groups_by_days.append(dist.distinfo_set.run(batch_size=100))
+        temp_values = {'login': login, 'logout': users.create_logout_url('/login'), 'name': comp.name, 'surname':
+                        memb.surname, 'team': memb.command.name, 'memb_key': memb_key, 'competition': comp_key,
+                       'card_title': u'Заявка участника', 'dists': distances, 'groups_by_day': groups_by_days}
+        template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/member/ToDaysGroups.html')
+        self.response.write(template.render(temp_values))
 
 
 class EnterMember(webapp2.RequestHandler):
     def post(self):
-        self.response.write('POST from EnterMember (member)')
-
+        memb_key = self.request.POST.get('member')
+        memb = Member.get(memb_key)
+        paswd = self.request.POST.get('changePass')
+        comp_key = self.request.POST.get('competition')
+        comp = Competition.get(comp_key)
+        if saltPass(paswd) == memb.pass_to_edit:
+            for i in range(comp.days_count):
+                infos_count = int(self.request.POST.get('infosCount'+str(i)))
+                for group_num in range(infos_count):
+                    checked_group = self.request.POST.get('checkMembGroup'+str(i)+str(group_num))
+                    if checked_group:
+                        entry = CompMemb(competition=comp, member=memb, group=checked_group, day_numb=i+1)
+                        entry.save()
+                        time.sleep(0.1)
+                        self.redirect('/entryOneMemb?competition=' + comp_key)
+        else:
+            login = users.create_login_url(dest_url='/postSignIn')
+            distances = db.Query(Distance).filter('competition =', comp).order('day_numb')
+            groups_by_days = []
+            for dist in distances:
+                groups_by_days.append(dist.distinfo_set.run(batch_size=100))
+            temp_values = {'login': login, 'logout': users.create_logout_url('/login'), 'name': comp.name, 'surname':
+                            memb.surname, 'team': memb.command.name, 'memb_key': memb_key, 'competition': comp_key,
+                           'card_title': u'Заявка участника', 'dists': distances, 'groups_by_day': groups_by_days,
+                           'tooltip': u'Неверный пароль подтверждения. Попробуйте еще раз'}
+            template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/member/ToDaysGroups.html')
+            self.response.write(template.render(temp_values))
 
 class DeleteMemberFromComp(webapp2.RequestHandler):
     def get(self):      # displays form to fill in pass_to_edit

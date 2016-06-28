@@ -1,0 +1,126 @@
+{% extends 'templates/tmmosc/base/UnauthUserHeader.html' %}
+   {% block title %}{{ name }}{% endblock %}
+   {% block styles %}
+       <style>
+           body, .mdl-card__title{
+               color: #ffffff;
+           }
+           .competition-card:hover{
+               background: #64B5F6;
+
+           }
+           .mdl-button {
+               height: 56px;
+               width: 56px;
+            }
+           .mdl-button--fab.mdl-button--colored {
+                background: rgb(178,255,89);
+                color: rgb(255,255,255);
+            }
+       </style>
+   {% endblock %}
+   {% block main_content %}
+      <main class="mdl-layout__content">
+        <form action="/enterMemb" id="formEntryMember" method="post" name="formEntryMember">
+          <!--  Content  -->
+          <input type="text" style="display: none;" name="member" value="{{ memb_key }}">
+          <input type="text" style="display: none;" name="competition" value="{{ competition }}">
+          <div class="page-content">
+            <div class="mdl-grid" style="margin-top:15px;">
+              <div class="mdl-cell mdl-cell--1-col"></div>
+              <div class="mdl-cell mdl-cell--10-col">
+                   <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; min-height: 150px; margin-top: 35px; margin-bottom: 35px;">
+                      <div class="mdl-grid mdl-card__title" style="height: 120px; width: 100%; text-align: center; border: none;">
+                        <div class="mdl-cell mdl-cell--1-col"></div>
+                          <div style="text-align: center; margin-top: 24px;" class="mdl-cell mdl-cell--4-col">
+                              <h2 class="mdl-card__title-text">{{ card_title }}</h2>
+                          </div>
+                          <div class="mdl-cell mdl-cell--7-col"></div>
+                          <div class="mdl-cell mdl-cell--7-col"></div>
+                          <div class="mdl-cell mdl-cell--5-col">
+                              <button id="saveInfo" type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="top: 14px; left:10px;" form="formEntryMember">
+                                  <i class="material-icons">save</i>
+                              </button>
+                          </div>
+                      </div>   <!--   .mdl-card__title  -->
+
+                      <div class="mdl-card__actions mdl-card--border" style="border: none; background: #fff; padding: 30px 0 0 0;">
+                          <div class="mdl-grid" style="padding-bottom: 0px;">
+                              <div class="mdl-cell--1-col"></div>
+                              <div class="mdl-cell--2-col">
+                                  <p class="myP" style="color: #42A5F5; margin: 25px 0 0 30px;"><b>ФИО спортсмена </b></p>
+                              </div>
+                              <div class="mdl-cell--3-col">
+                                  <p class="myP" style="color: #42A5F5; margin: 25px 0 0 30px;">{{ surname }}</p>
+                              </div>
+                              <div class="mdl-cell--1-col"></div>
+                              <div class="mdl-cell--1-col">
+                                  <p class="myP" style="color: #42A5F5; margin: 25px 0 0 30px;"><b>Команда </b></p>
+                              </div>
+                              <div class="mdl-cell--3-col">
+                                  <p class="myP" style="color: #42A5F5; margin: 25px 0 0 30px;">{{ team }}</p>
+                              </div>
+                              <div class="mdl-cell--1-col"></div>
+                          </div>
+
+
+                          {% for dist in dists %}
+                              {% set day_numb_indx = loop.index0%}
+                              <div class="mdl-grid" style="padding-bottom: 0px;">
+                                  <div class="mdl-cell--1-col"></div>
+                                  <div class="mdl-cell--2-col">
+                                      <p class="myP" style="color: #42A5F5; margin: 25px 0 0 30px;"><b>День {{ loop.index }} </b></p>
+                                  </div>
+                                  <div class="mdl-cell--9-col">
+                                      <p class="myP" style="color: #42A5F5; margin: 25px 0 0 30px;">{{ dist.type }} | {{ dist.lent }}</p>
+                                  </div>
+                              </div>
+                              <div class="mdl-grid" style="padding-bottom: 0px;">
+                                  <div class="mdl-cell--2-col"></div>
+                                  <div class="mdl-cell--9-col">
+                                      {% for group in groups_by_day[loop.index0] %}
+                                          <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="checkGroup{{ day_numb_indx }}{{ loop.index0 }}">
+                                              <input type="radio" id="checkGroup{{ day_numb_indx }}{{ loop.index0 }}" name="checkMembGroup{{ day_numb_indx }}{{ loop.index0 }}" class="mdl-radio__button" value="{{ group.group_name }}">
+                                              <span class="mdl-radio__label" style="color: #42a5f5; margin: 24px 24px 12px 0;">{{ group.group_name }}</span>
+                                          </label>
+                                          <input type="text" style="display: none" name="infosCount{{ day_numb_indx }}" value="{{ loop.length }}">
+                                      {% endfor %}
+                                  </div>
+                                  <div class="mdl-cell--1-col"></div>
+                              </div>
+
+                          {% endfor %}
+
+
+
+                          <div class="mdl-grid" style="padding-bottom: 0px;">
+                              <div class="mdl-cell--1-col"></div>
+                              <div class="mdl-cell--5-col">
+                                  <p class="myP" style="color: #42A5F5; margin: 22px 0 0 30px; top: -6px;"><b>Введите пароль подтверждения изменений <sup>*</sup></b></p>
+                              </div>
+                              <div class="mdl-cell--5-col">
+                                  <div class="mdl-textfield mdl-js-textfield" style="width: 100%; color: #42A5F5;">
+                                      <input class="mdl-textfield__input" type="password" id="changePass" name="changePass">
+                                      <label class="mdl-textfield__label" for="changePass">Введите восьмизначный пароль</label>
+                                  </div>
+                              </div>
+                              <div class="mdl-cell--1-col"></div>
+                          </div>
+                          <div class="mdl-grid" style="padding-bottom: 0px; text-align: center;">
+                              <div class="mdl-cell--1-col"></div>
+                              <div class="mdl-cell--10-col">
+                                  <p class="myP" style="color: #42A5F5; margin: 12px 0 42px 0;"><sup>*</sup> Для получения пароля обратитесь к вашему руководителю</p>
+                              </div>
+                              <div class="mdl-cell--1-col"></div>
+                          </div>
+                      </div>    <!--  mdl-cards__actions  -->
+                   </div>
+              </div>    <!--  вся карточка  -->
+              <div class="mdl-cell mdl-cell--1-col"></div>
+            </div>  <!-- mdl-grid -->
+
+          </div>  <!-- page-content -->
+        </form>  <!--  formNewComp  -->
+      </main>
+   </div>
+   {% endblock %}
