@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1a4ee0a1-5209-4064-a7af-a6fd0b434d59" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Common.py" afterPath="$PROJECT_DIR$/Common.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CompetitionHandlers.py" afterPath="$PROJECT_DIR$/CompetitionHandlers.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LeaderHandlers.py" afterPath="$PROJECT_DIR$/LeaderHandlers.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MemberHandlers.py" afterPath="$PROJECT_DIR$/MemberHandlers.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OtherHandlers.py" afterPath="$PROJECT_DIR$/OtherHandlers.py" />
     </list>
     <ignored path="tmmosc.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,10 +38,22 @@
       <file leaf-file-name="LeaderHandlers.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/LeaderHandlers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
+            <state relative-caret-position="504">
+              <caret line="286" column="52" selection-start-line="286" selection-start-column="52" selection-end-line="286" selection-end-column="52" />
               <folding>
                 <element signature="e#24#33#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MemberHandlers.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MemberHandlers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="392">
+              <caret line="156" column="53" selection-start-line="156" selection-start-column="40" selection-end-line="156" selection-end-column="53" />
+              <folding>
+                <element signature="e#25#63#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -48,25 +62,36 @@
       <file leaf-file-name="CompetitionHandlers.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CompetitionHandlers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
+            <state relative-caret-position="-36">
+              <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
               <folding>
-                <element signature="e#5145#5321#0" expanded="false" />
-                <element signature="e#5365#5556#0" expanded="false" />
-                <element signature="e#5596#5958#0" expanded="false" />
-                <element signature="e#5996#6276#0" expanded="false" />
-                <element signature="e#6310#6444#0" expanded="false" />
-                <element signature="e#6484#6610#0" expanded="false" />
-                <element signature="e#6661#6890#0" expanded="false" />
-                <element signature="e#6939#7165#0" expanded="false" />
-                <element signature="e#7199#7888#0" expanded="false" />
-                <element signature="e#7923#8957#0" expanded="false" />
-                <element signature="e#8998#10573#0" expanded="false" />
-                <element signature="e#10613#13276#0" expanded="false" />
-                <element signature="e#13307#14532#0" expanded="false" />
-                <element signature="e#14562#15430#0" expanded="false" />
-                <element signature="e#15462#16019#0" expanded="false" />
+                <element signature="e#24#33#0" expanded="true" />
+                <element signature="e#5143#5319#0" expanded="false" />
+                <element signature="e#5363#5554#0" expanded="false" />
+                <element signature="e#5594#5956#0" expanded="false" />
+                <element signature="e#5994#6274#0" expanded="false" />
+                <element signature="e#6308#6442#0" expanded="false" />
+                <element signature="e#6482#6608#0" expanded="false" />
+                <element signature="e#6659#6888#0" expanded="false" />
+                <element signature="e#6937#7163#0" expanded="false" />
+                <element signature="e#7197#7886#0" expanded="false" />
+                <element signature="e#7921#8955#0" expanded="false" />
+                <element signature="e#8996#10571#0" expanded="false" />
+                <element signature="e#10611#13274#0" expanded="false" />
+                <element signature="e#13305#14530#0" expanded="false" />
+                <element signature="e#14560#15428#0" expanded="false" />
+                <element signature="e#15460#16017#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="284">
+              <caret line="68" column="6" selection-start-line="68" selection-start-column="6" selection-end-line="68" selection-end-column="18" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -137,15 +162,15 @@
         <option value="$PROJECT_DIR$/templates/tmmosc/member/MemberList.html" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/templates/tmmosc/member/ToDaysGroups.html" />
-        <option value="$PROJECT_DIR$/MemberHandlers.py" />
         <option value="$PROJECT_DIR$/templates/tmmosc/AfterSignIn.html" />
         <option value="$PROJECT_DIR$/Decors.py" />
         <option value="$PROJECT_DIR$/ListHandlers.py" />
         <option value="$PROJECT_DIR$/templates/tmmosc/organizer/AddCompetition.html" />
         <option value="$PROJECT_DIR$/templates/tmmosc/organizer/NewCompetitionInfo.html" />
-        <option value="$PROJECT_DIR$/OtherHandlers.py" />
         <option value="$PROJECT_DIR$/Common.py" />
         <option value="$PROJECT_DIR$/CompetitionHandlers.py" />
+        <option value="$PROJECT_DIR$/OtherHandlers.py" />
+        <option value="$PROJECT_DIR$/MemberHandlers.py" />
         <option value="$PROJECT_DIR$/LeaderHandlers.py" />
       </list>
     </option>
@@ -156,9 +181,9 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="24" />
+    <option name="y" value="-4" />
     <option name="width" value="1366" />
-    <option name="height" value="744" />
+    <option name="height" value="772" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -185,8 +210,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -205,8 +228,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tmmosc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tmmosc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tmmosc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -552,30 +595,30 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="24" width="1366" height="744" extended-state="6" />
+    <frame x="0" y="-4" width="1366" height="772" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18712121" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19015151" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32824427" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3033473" sideWeight="0.5085679" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904148" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328125" sideWeight="0.4952381" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32848233" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977098" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3323442" sideWeight="0.49143207" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952183" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977098" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="CSS Styles" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19977678" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32322174" sideWeight="0.497558" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32824427" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -626,13 +669,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/index.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="66" selection-start-line="9" selection-start-column="66" selection-end-line="9" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
@@ -838,21 +874,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1458">
-          <caret line="90" column="6" selection-start-line="90" selection-start-column="6" selection-end-line="90" selection-end-column="17" />
-          <folding>
-            <element signature="e#602#628#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/tmmosc/member/ToDaysGroups.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1512">
           <caret line="84" column="42" selection-start-line="84" selection-start-column="42" selection-end-line="84" selection-end-column="42" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -860,7 +885,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="267">
           <caret line="70" column="78" selection-start-line="70" selection-start-column="67" selection-end-line="70" selection-end-column="78" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -868,7 +892,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="69" column="50" selection-start-line="69" selection-start-column="44" selection-end-line="69" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -876,7 +899,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="356">
           <caret line="84" column="74" selection-start-line="84" selection-start-column="74" selection-end-line="84" selection-end-column="74" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -884,25 +906,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="87">
           <caret line="81" column="63" selection-start-line="81" selection-start-column="63" selection-end-line="81" selection-end-column="63" />
-          <folding>
-            <element signature="e#2832#2952#0#HTML" expanded="true" />
-            <element signature="e#3060#3126#0#HTML" expanded="true" />
-            <element signature="e#3297#3417#0#HTML" expanded="true" />
-            <element signature="e#3670#3697#0#HTML" expanded="true" />
-            <element signature="e#3745#3789#0#HTML" expanded="true" />
-            <element signature="e#3897#4008#0#HTML" expanded="true" />
-            <element signature="e#4344#4397#0#HTML" expanded="true" />
-            <element signature="e#4430#4450#0#HTML" expanded="true" />
-            <element signature="e#4612#4654#0#HTML" expanded="true" />
-            <element signature="e#4700#4747#0#HTML" expanded="true" />
-            <element signature="e#4845#4864#0#HTML" expanded="true" />
-            <element signature="e#4965#4984#0#HTML" expanded="true" />
-            <element signature="e#5087#5106#0#HTML" expanded="true" />
-            <element signature="e#5212#5231#0#HTML" expanded="true" />
-            <element signature="e#5442#5460#0#HTML" expanded="true" />
-            <element signature="e#5932#5973#0#HTML" expanded="true" />
-            <element signature="e#6104#6126#0#HTML" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -910,23 +913,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="139" column="91" selection-start-line="139" selection-start-column="91" selection-end-line="139" selection-end-column="91" />
-          <folding>
-            <element signature="e#7396#7439#0#HTML" expanded="true" />
-            <element signature="e#7649#7676#0#HTML" expanded="true" />
-            <element signature="e#7921#7939#0#HTML" expanded="true" />
-            <element signature="e#8147#8181#0#HTML" expanded="true" />
-            <element signature="e#8605#8640#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MemberHandlers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="23" />
-          <folding>
-            <element signature="e#25#63#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -950,40 +936,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OtherHandlers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2484">
-          <caret line="180" column="16" selection-start-line="180" selection-start-column="16" selection-end-line="180" selection-end-column="16" />
-          <folding>
-            <element signature="e#46#84#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CompetitionHandlers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
-          <folding>
-            <element signature="e#5145#5321#0" expanded="false" />
-            <element signature="e#5365#5556#0" expanded="false" />
-            <element signature="e#5596#5958#0" expanded="false" />
-            <element signature="e#5996#6276#0" expanded="false" />
-            <element signature="e#6310#6444#0" expanded="false" />
-            <element signature="e#6484#6610#0" expanded="false" />
-            <element signature="e#6661#6890#0" expanded="false" />
-            <element signature="e#6939#7165#0" expanded="false" />
-            <element signature="e#7199#7888#0" expanded="false" />
-            <element signature="e#7923#8957#0" expanded="false" />
-            <element signature="e#8998#10573#0" expanded="false" />
-            <element signature="e#10613#13276#0" expanded="false" />
-            <element signature="e#13307#14532#0" expanded="false" />
-            <element signature="e#14562#15430#0" expanded="false" />
-            <element signature="e#15462#16019#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Common.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -994,10 +946,71 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/OtherHandlers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="127" column="24" selection-start-line="127" selection-start-column="24" selection-end-line="127" selection-end-column="24" />
+          <folding>
+            <element signature="e#46#84#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/tmmosc/tmp.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="68" column="6" selection-start-line="68" selection-start-column="6" selection-end-line="68" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MemberHandlers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="156" column="53" selection-start-line="156" selection-start-column="40" selection-end-line="156" selection-end-column="53" />
+          <folding>
+            <element signature="e#25#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CompetitionHandlers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-36">
+          <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+          <folding>
+            <element signature="e#24#33#0" expanded="true" />
+            <element signature="e#5143#5319#0" expanded="false" />
+            <element signature="e#5363#5554#0" expanded="false" />
+            <element signature="e#5594#5956#0" expanded="false" />
+            <element signature="e#5994#6274#0" expanded="false" />
+            <element signature="e#6308#6442#0" expanded="false" />
+            <element signature="e#6482#6608#0" expanded="false" />
+            <element signature="e#6659#6888#0" expanded="false" />
+            <element signature="e#6937#7163#0" expanded="false" />
+            <element signature="e#7197#7886#0" expanded="false" />
+            <element signature="e#7921#8955#0" expanded="false" />
+            <element signature="e#8996#10571#0" expanded="false" />
+            <element signature="e#10611#13274#0" expanded="false" />
+            <element signature="e#13305#14530#0" expanded="false" />
+            <element signature="e#14560#15428#0" expanded="false" />
+            <element signature="e#15460#16017#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/LeaderHandlers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
+        <state relative-caret-position="504">
+          <caret line="286" column="52" selection-start-line="286" selection-start-column="52" selection-end-line="286" selection-end-column="52" />
           <folding>
             <element signature="e#24#33#0" expanded="true" />
           </folding>

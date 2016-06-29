@@ -8,7 +8,7 @@ import time
 from google.appengine.ext import db
 from modelVisitor import Member
 from modelCompetition import Competition, CompMemb, Distance, DistInfo
-from LeaderHandlers import saltPass
+from LeaderHandlers import salt_pass
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -35,7 +35,7 @@ class MemberInfo(webapp2.RequestHandler):
         passwd = self.request.POST.get('changePass')
         memb_key = self.request.POST.get('member')
         member = Member.get(memb_key)
-        if saltPass(passwd) == member.pass_to_edit:
+        if salt_pass(passwd) == member.pass_to_edit:
             surname = self.request.POST.get('surnameMemb') + ' ' + self.request.POST.get('nameMemb')
             age = int(self.request.POST.get('ageMemb'))
             qual = self.request.POST.get('qualMemb')
@@ -107,7 +107,7 @@ class EnterMember(webapp2.RequestHandler):
         paswd = self.request.POST.get('changePass')
         comp_key = self.request.POST.get('competition')
         comp = Competition.get(comp_key)
-        if saltPass(paswd) == memb.pass_to_edit:
+        if salt_pass(paswd) == memb.pass_to_edit:
             for i in range(comp.days_count):
                 infos_count = int(self.request.POST.get('infosCount'+str(i)))
                 for group_num in range(infos_count):
@@ -150,7 +150,7 @@ class DeleteMemberFromComp(webapp2.RequestHandler):
         paswd = self.request.POST.get('changePass')
         comp_key = self.request.POST.get('competition')
         comp = Competition.get(comp_key)
-        if saltPass(paswd) == member.pass_to_edit:
+        if salt_pass(paswd) == member.pass_to_edit:
             comp_membs = CompMemb.all().filter('member =', member).filter('competition =', comp)
             db.delete(comp_membs)
             time.sleep(0.1)

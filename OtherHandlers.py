@@ -11,7 +11,7 @@ from google.appengine.ext import db
 from modelCompetition import Competition, Info, MemInfo, DistInfo, Distance
 from modelVisitor import Organizer, Leader, Member, Command
 from CompetitionHandlers import format_date_list
-from LeaderHandlers import saltPass
+from LeaderHandlers import salt_pass
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -125,7 +125,7 @@ class addDb(webapp2.RequestHandler):
         com1.put()
         com2.put()
         paswd = '123'
-        paswd = saltPass(paswd)
+        paswd = salt_pass(paswd)
         org1 = Organizer(user=users.User('pro@m.c'), nickname=u'Провилкова Анна', contact='pro@m.c')
         org2 = Organizer(user=users.User('test@example.com'), nickname=u'Тест Тестович', contact='test@example.com')
         lead1 = Leader(user=users.User('pro@m.c'), nickname=u'Провилкова Анна', contact='pro@m.c', command=com1)

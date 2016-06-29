@@ -70,7 +70,6 @@ class NewCompetition(webapp2.RequestHandler):
             self.response.write(template.render(temp_values))
 
 
-
 class CertainCompetition(webapp2.RequestHandler):
 
     def get(self):
