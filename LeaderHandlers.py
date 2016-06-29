@@ -1,22 +1,20 @@
 # -*- coding: utf-8 -*-
-__author__ = 'Daria'
-
-from google.appengine.api import users
-from datetime import date, datetime
-from google.appengine.api import images
-from modelCompetition import MemInfo, DistInfo, Competition, Distance, Info, Org, CompMemb
-from modelVisitor import Organizer, Leader, Member, Command
-from google.appengine.ext import db
 import os
 import jinja2
 import webapp2
-from CompetitionHandlers import formatDateList
-import OtherHandlers
 import random
 import string
 import hashlib
 import time
+from google.appengine.api import users
+from google.appengine.ext import db
 
+import OtherHandlers
+from modelCompetition import DistInfo, Competition, Distance, CompMemb
+from modelVisitor import Leader, Member
+from Common import show_unauth_page
+
+__author__ = 'Daria'
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -25,12 +23,11 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 
 class Team(webapp2.RequestHandler):
+
     def get(self):      # displays info about team for that leader and all members
         user = users.get_current_user()
         if not user:
-            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
-                           'login_redir': users.create_login_url('/postSignIn')}
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
+            show_unauth_page(self)
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
@@ -48,18 +45,14 @@ class Team(webapp2.RequestHandler):
                                'team_name': team.name, 'terry': territory, 'membs': membs, 'membs_count': membs_count,
                                'keys': memb_keys}
                 template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/leader/Team.html')
+                self.response.write(template.render(temp_values))
             else:
-                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
-                               'login_redir': users.create_login_url('/postSignIn')}
-                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
-        self.response.write(template.render(temp_values))
+                show_unauth_page(self)
 
     def post(self):     # changes team info
         user = users.get_current_user()
         if not user:
-            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
-                           'login_redir': users.create_login_url('/postSignIn')}
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
+            show_unauth_page(self)
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
@@ -81,20 +74,17 @@ class Team(webapp2.RequestHandler):
                                'team_name': newName, 'terry': newTerry, 'membs': membs, 'membs_count': membs_count,
                                'keys': memb_keys}
                 template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/leader/Team.html')
+                self.response.write(template.render(temp_values))
             else:
-                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
-                               'login_redir': users.create_login_url('/postSignIn')}
-                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
-        self.response.write(template.render(temp_values))
+                show_unauth_page(self)
 
 
 class AddMemberToTeam(webapp2.RequestHandler):
+
     def get(self):      # displays empty form for adding new member to command
         user = users.get_current_user()
         if not user:
-            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
-                           'login_redir': users.create_login_url('/postSignIn')}
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
+            show_unauth_page(self)
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
@@ -104,20 +94,14 @@ class AddMemberToTeam(webapp2.RequestHandler):
                 temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
                                'edit_pass': pass_to_edit, 'card_title': u'Новый участник команды', 'new_memb': True}
                 template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/leader/Member.html')
+                self.response.write(template.render(temp_values))
             else:
-                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
-                               'login_redir': users.create_login_url('/postSignIn')}
-                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
-        self.response.write(template.render(temp_values))
-
+                show_unauth_page(self)
 
     def post(self):     # saves new member to db
         user = users.get_current_user()
         if not user:
-            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
-                           'login_redir': users.create_login_url('/postSignIn')}
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
-            self.response.write(template.render(temp_values))
+            show_unauth_page(self)
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
@@ -134,19 +118,15 @@ class AddMemberToTeam(webapp2.RequestHandler):
                 time.sleep(0.1)
                 self.redirect('/reg/leaderTeam')
             else:
-                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
-                               'login_redir': users.create_login_url('/postSignIn')}
-                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
-                self.response.write(template.render(temp_values))
+                show_unauth_page(self)
 
 
 class ChangeMember(webapp2.RequestHandler):
+
     def get(self):      # displays form with old member's data
         user = users.get_current_user()
         if not user:
-            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
-                           'login_redir': users.create_login_url('/postSignIn')}
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
+            show_unauth_page(self)
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
@@ -162,22 +142,17 @@ class ChangeMember(webapp2.RequestHandler):
                     sex_w = 'checked'
                 temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
                                'card_title': u'Изменение участника', 'memb_name':
-                               member.surname, 'birthdate': member.birthdate, 'qual': member.qualification, 'sex_m':
-                               sex_m, 'sex_w': sex_w, 'new_memb': False, 'memb_key': memb_key, 'change': memb_key}
+                                   member.surname, 'birthdate': member.birthdate, 'qual': member.qualification, 'sex_m':
+                                   sex_m, 'sex_w': sex_w, 'new_memb': False, 'memb_key': memb_key, 'change': memb_key}
                 template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/leader/Member.html')
+                self.response.write(template.render(temp_values))
             else:
-                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
-                               'login_redir': users.create_login_url('/postSignIn')}
-                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
-        self.response.write(template.render(temp_values))
+                show_unauth_page(self)
 
     def post(self):     # saves member's changes to db and redirects to team page
         user = users.get_current_user()
         if not user:
-            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
-                           'login_redir': users.create_login_url('/postSignIn')}
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
-            self.response.write(template.render(temp_values))
+            show_unauth_page(self)
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
@@ -192,20 +167,15 @@ class ChangeMember(webapp2.RequestHandler):
                 time.sleep(0.1)
                 self.redirect('/reg/leaderTeam')
             else:
-                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
-                               'login_redir': users.create_login_url('/postSignIn')}
-                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
-                self.response.write(template.render(temp_values))
+                show_unauth_page(self)
 
 
 class DeleteMember(webapp2.RequestHandler):
+
     def post(self):
         user = users.get_current_user()
         if not user:
-            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
-                           'login_redir': users.create_login_url('/postSignIn')}
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
-            self.response.write(template.render(temp_values))
+            show_unauth_page(self)
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
@@ -215,19 +185,15 @@ class DeleteMember(webapp2.RequestHandler):
                 time.sleep(0.1)
                 self.redirect('/reg/leaderTeam')
             else:
-                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
-                               'login_redir': users.create_login_url('/postSignIn')}
-                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
-                self.response.write(template.render(temp_values))
+                show_unauth_page(self)
 
 
 class EntryMembers(webapp2.RequestHandler):
+
     def get(self):     # displays all members of team to check who will take a part in competition
         user = users.get_current_user()
         if not user:
-            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
-                           'login_redir': users.create_login_url('/postSignIn')}
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
+            show_unauth_page(self)
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
@@ -256,23 +222,19 @@ class EntryMembers(webapp2.RequestHandler):
                 temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
                                'team_name': team.name, 'membs_count': team_q.count(), 'entry_membs': entry_membs,
                                'no_entry_membs': no_entry_membs, 'comp_name': competition.name, 'days_count':
-                               range(1, int(competition.days_count) + 1), 'comp_key': comp_key, 'days': days}
+                                   range(1, int(competition.days_count) + 1), 'comp_key': comp_key, 'days': days}
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/leader/MembersToCompetition.html')
+                self.response.write(template.render(temp_values))
             else:
-                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
-                               'login_redir': users.create_login_url('/postSignIn')}
-                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
-        self.response.write(template.render(temp_values))
+                show_unauth_page(self)
 
 
 class EntryMembersByDay(webapp2.RequestHandler):
+
     def post(self):     # displays members who are going to take a part in competition to choose their distances and classes
         user = users.get_current_user()
         if not user:
-            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
-                           'login_redir': users.create_login_url('/postSignIn')}
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
-            self.response.write(template.render(temp_values))
+            show_unauth_page(self)
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
@@ -307,23 +269,19 @@ class EntryMembersByDay(webapp2.RequestHandler):
 
                 temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
                                'membs_by_day': membs_by_day, 'dists': type_lent, 'groups': groups_on_day, 'comp_key':
-                               comp_key, 'show_tables': show_tables}
+                                   comp_key, 'show_tables': show_tables}
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/leader/MembersToDays.html')
+                self.response.write(template.render(temp_values))
             else:
-                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
-                               'login_redir': users.create_login_url('/postSignIn')}
-                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
-        self.response.write(template.render(temp_values))
+                show_unauth_page(self)
 
 
 class AcceptMembers(webapp2.RequestHandler):
+
     def post(self):
         user = users.get_current_user()
         if not user:
-            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
-                           'login_redir': users.create_login_url('/postSignIn')}
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
-            self.response.write(template.render(temp_values))
+            show_unauth_page(self)
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
@@ -346,16 +304,12 @@ class AcceptMembers(webapp2.RequestHandler):
                         member = Member.get(keys[0])
                         group_code = keys[1]
                         CompMemb(competition=competition, member=member, group=group_code, day_numb=i_day+1).put()
-
-
                 temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
                                'login_redir': users.create_login_url('/postSignIn'), 'test': distinfos}
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/tmp.html')
+                self.response.write(template.render(temp_values))
             else:
-                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
-                               'login_redir': users.create_login_url('/postSignIn')}
-                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
-            self.response.write(template.render(temp_values))
+                show_unauth_page(self)
 
 
 # Generates random 8-symbol password
@@ -364,6 +318,7 @@ def generatePass():
     for x in range(8):
         rid += random.choice(string.ascii_letters + string.digits)
     return rid
+
 
 def saltPass(paswd):
     md = hashlib.md5()

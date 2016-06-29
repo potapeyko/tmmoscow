@@ -9,6 +9,7 @@ import time
 
 from modelVisitor import *
 import OtherHandlers
+from Common import show_unauth_page
 
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -43,9 +44,7 @@ class OrganizersHandler(webapp2.RequestHandler):
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
             self.response.write(template.render(temp_values))
         else:
-            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401', 'login_redir':
-                           users.create_login_url('reg/organizerList')}
-            self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
+            show_unauth_page(self)
 
     def post(self):     # finds organizer by keyword
         user = users.get_current_user()
@@ -64,15 +63,11 @@ class OrganizersHandler(webapp2.RequestHandler):
                 temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
                                'disp_tool': tooltip_show, 'tool': tooltip_message, 'organizers': orgs, 'keys': keys}
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/OrganizerList.html')
+                self.response.write(template.render(temp_values))
             else:
-                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401',
-                               'login_redir': users.create_login_url('/reg/newCompetition')}
-                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
-            self.response.write(template.render(temp_values))
+                show_unauth_page(self)
         else:
-            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401', 'login_redir':
-                           users.create_login_url('reg/organizerList')}
-            self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
+            show_unauth_page(self)
 
 
 class AddOrganizer(webapp2.RequestHandler):
@@ -131,15 +126,11 @@ class LeadersHandler(webapp2.RequestHandler):
                 temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
                                'disp_tool': tooltip_show, 'tool': tooltip_message, 'leads': leads, 'keys': keys}
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/LeaderList.html')
+                self.response.write(template.render(temp_values))
             else:
-                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401', 'login_redir':
-                               users.create_login_url('/reg/newCompetition')}
-                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
-            self.response.write(template.render(temp_values))
+                show_unauth_page(self)
         else:
-            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401', 'login_redir':
-                           users.create_login_url('reg/leaderList')}
-            self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
+            show_unauth_page(self)
 
     def post(self):     # finds leaders  by keyword
         user = users.get_current_user()
@@ -158,15 +149,11 @@ class LeadersHandler(webapp2.RequestHandler):
                 temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
                                'disp_tool': tooltip_show, 'tool': tooltip_message, 'leads': leads, 'keys': keys}
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/LeaderList.html')
+                self.response.write(template.render(temp_values))
             else:
-                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401', 'login_redir':
-                               users.create_login_url('/reg/newCompetition')}
-                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
-            self.response.write(template.render(temp_values))
+                show_unauth_page(self)
         else:
-            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401', 'login_redir':
-                           users.create_login_url('reg/organizerList')}
-            self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
+            show_unauth_page(self)
 
 
 class AddLeader(webapp2.RequestHandler):
@@ -231,15 +218,11 @@ class MembersHandler(webapp2.RequestHandler):
                 temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
                                'disp_tool': tooltip_show, 'tool': tooltip_message, 'members': members, 'keys': keys}
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/MemberList.html')
+                self.response.write(template.render(temp_values))
             else:
-                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401', 'login_redir':
-                               users.create_login_url('/reg/newCompetition')}
-                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
-            self.response.write(template.render(temp_values))
+                show_unauth_page(self)
         else:
-            temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401', 'login_redir':
-                           users.create_login_url('reg/memberList')}
-            self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
+            show_unauth_page(self)
 
     def post(self):     # finds member by keyword
         user = users.get_current_user()
@@ -258,14 +241,11 @@ class MembersHandler(webapp2.RequestHandler):
                 temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
                                'disp_tool': tooltip_show, 'tool': tooltip_message, 'members': membs, 'keys': keys}
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/MemberList.html')
+                self.response.write(template.render(temp_values))
             else:
-                temp_values = {'img_src': '../static/img/er401.png', 'er_name': '401', 'login_redir':
-                               users.create_login_url('/reg/newCompetition')}
-                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html')
-            self.response.write(template.render(temp_values))
+                show_unauth_page(self)
         else:
-            temp_values = {'img_src':'../static/img/er401.png', 'er_name':'401', 'login_redir':users.create_login_url('reg/organizerList')}
-            self.response.write(JINJA_ENVIRONMENT.get_template('templates/tmmosc/ErrorPage.html').render(temp_values))
+            show_unauth_page(self)
 
 
 class AddMember(webapp2.RequestHandler):

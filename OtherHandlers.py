@@ -10,7 +10,7 @@ import hashlib
 from google.appengine.ext import db
 from modelCompetition import Competition, Info, MemInfo, DistInfo, Distance
 from modelVisitor import Organizer, Leader, Member, Command
-from CompetitionHandlers import formatDateList
+from CompetitionHandlers import format_date_list
 from LeaderHandlers import saltPass
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -31,12 +31,6 @@ class LoginHandler(webapp2.RequestHandler):
             self.response.write(template.render(temp_values))
         else:
             self.redirect(users.create_login_url(dest_url='/postSignIn'))
-      #  temp_values = {}
-      #  template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/LogIn.html')
-      #  self.response.write(template.render(temp_values))
-
-    def post(self):
-        self.response.write('POST Registration of user')
 
 
 # Competition list
@@ -57,8 +51,8 @@ class DefaultHandler(webapp2.RequestHandler):
             for info_of_day in infos_of_comp:
                 is_open = is_open or (info_of_day.pz_is_open and (datetime.today().date() < info_of_day.pz_add_end))
             is_open_pz.append(is_open)
-        d_start = formatDateList(d_start)
-        d_finish = formatDateList(d_finish)
+        d_start = format_date_list(d_start)
+        d_finish = format_date_list(d_finish)
         user = users.get_current_user()
         if not user:        # user is anonim
             login = users.create_login_url(dest_url='/postSignIn')
@@ -74,7 +68,6 @@ class DefaultHandler(webapp2.RequestHandler):
                            'is_open_pz': is_open_pz, 'is_user': True}
             try:            # show compList corresponding to user's role
                 template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/'+cur_role+'/CompetitionList.html')
-                #template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/AuthUserHeader.html')
             except:         # user is anonim
                 login = users.create_login_url(dest_url='/postSignIn')
                 temp_values = {'login': login, 'comps': comps, 'c_count': comps_count, 'd_start': d_start, 'd_finish':
