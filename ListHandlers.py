@@ -26,8 +26,8 @@ class OrganizersHandler(webapp2.RequestHandler):
         user = users.get_current_user()
         if user:
             email = user.email()
-            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
-            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
+            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
             if is_org and OtherHandlers.cur_role == 'organizer':
                 orgs = db.Query(Organizer).order('nickname')
                 keys = []
@@ -50,8 +50,8 @@ class OrganizersHandler(webapp2.RequestHandler):
         user = users.get_current_user()
         if user:
             email = user.email()
-            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
-            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
+            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
             if is_org and OtherHandlers.cur_role == 'organizer':
                 search_fio = self.request.POST['findOrganizer']
                 orgs = db.Query(Organizer).filter('nickname >=', search_fio).filter('nickname <=', search_fio+'1').order('nickname')
@@ -112,8 +112,8 @@ class LeadersHandler(webapp2.RequestHandler):
         user = users.get_current_user()
         if user:
             email = user.email()
-            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
-            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
+            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
             if is_org and OtherHandlers.cur_role == 'organizer':
                 leads = db.Query(Leader).order('nickname')
                 keys = []
@@ -136,8 +136,8 @@ class LeadersHandler(webapp2.RequestHandler):
         user = users.get_current_user()
         if user:
             email = user.email()
-            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
-            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
+            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
             if is_org and OtherHandlers.cur_role == 'organizer':
                 search_fio = self.request.POST['findLeader']
                 leads = db.Query(Leader).filter('nickname >=', search_fio).filter('nickname <=', search_fio+'1').order('nickname')
@@ -204,8 +204,8 @@ class MembersHandler(webapp2.RequestHandler):
         user = users.get_current_user()
         if user:
             email = user.email()
-            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
-            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
+            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
             if is_org and OtherHandlers.cur_role == 'organizer':
                 members = db.Query(Member).order('nickname')
                 keys = []
@@ -228,8 +228,8 @@ class MembersHandler(webapp2.RequestHandler):
         user = users.get_current_user()
         if user:
             email = user.email()
-            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
-            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
+            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
             if is_org and OtherHandlers.cur_role == 'organizer':
                 search_fio = self.request.POST['findMember']
                 membs = db.Query(Member).filter('nickname >=', search_fio).filter('nickname <=', search_fio+'1').order('nickname')

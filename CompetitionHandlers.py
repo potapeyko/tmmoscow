@@ -27,8 +27,8 @@ class NewCompetitionInfo(webapp2.RequestHandler):
             show_unauth_page(self)
         else:
             email = user.email()
-            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
-            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
+            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
             temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login')}
             template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/NewCompetitionInfo.html')
             self.response.write(template.render(temp_values))
@@ -43,8 +43,8 @@ class NewCompetition(webapp2.RequestHandler):
             show_unauth_page(self)
         else:
             email = user.email()
-            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
-            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
+            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
             temp_values = {'roles': roles, 'user_email': email}
             temp_values.update(get_common_info(self))
             template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/AddCompetition.html')
@@ -57,8 +57,8 @@ class NewCompetition(webapp2.RequestHandler):
             show_unauth_page(self)
         else:
             email = user.email()
-            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
-            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
+            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
             [competition, comp_values] = post_competition(self)
             info_values = post_info(self, competition)
             diz_values = post_diz(self, competition)
@@ -91,8 +91,8 @@ class CertainCompetition(webapp2.RequestHandler):
             template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/CertainCompetition.html')
         else:
             email = user.email()
-            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
-            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
+            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
             temp_values.update({'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login')})
             if is_org and OtherHandlers.cur_role == 'organizer':
                 action = ''

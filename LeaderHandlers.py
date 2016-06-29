@@ -31,8 +31,8 @@ class Team(webapp2.RequestHandler):
             show_unauth_page(self)
         else:
             email = user.email()
-            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
-            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
+            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
             if is_lead and OtherHandlers.cur_role == 'leader':
                 leader = db.Query(Leader).filter('user =', user).get()
                 team = leader.command
@@ -53,7 +53,7 @@ class Team(webapp2.RequestHandler):
             show_unauth_page(self)
         else:
             email = user.email()
-            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
+            [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
             if is_lead and OtherHandlers.cur_role == 'leader':
                 new_name = self.request.POST.get('nameTeam')
                 new_terry = self.request.POST.get('terryTeam')
@@ -77,8 +77,8 @@ class AddMemberToTeam(webapp2.RequestHandler):
             show_unauth_page(self)
         else:
             email = user.email()
-            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
-            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
+            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
             if is_lead and OtherHandlers.cur_role == 'leader':
                 pass_to_edit = generate_pass()
                 temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
@@ -95,7 +95,7 @@ class AddMemberToTeam(webapp2.RequestHandler):
             show_unauth_page(self)
         else:
             email = user.email()
-            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
+            [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
             if is_lead and OtherHandlers.cur_role == 'leader':
                 member = save_member_from_post(self)
                 member.pass_to_edit = salt_pass(self.request.POST.get('passToEdit'))
@@ -116,8 +116,8 @@ class ChangeMember(webapp2.RequestHandler):
             show_unauth_page(self)
         else:
             email = user.email()
-            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
-            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
+            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
             if is_lead and OtherHandlers.cur_role == 'leader':
                 memb_key = self.request.get('change')
                 member = db.get(memb_key)
@@ -138,7 +138,7 @@ class ChangeMember(webapp2.RequestHandler):
             show_unauth_page(self)
         else:
             email = user.email()
-            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
+            [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
             if is_lead and OtherHandlers.cur_role == 'leader':
                 memb_key = self.request.POST.get('change')
                 member = db.get(memb_key)
@@ -159,7 +159,7 @@ class DeleteMember(webapp2.RequestHandler):
             show_unauth_page(self)
         else:
             email = user.email()
-            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
+            [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
             if is_lead and OtherHandlers.cur_role == 'leader':
                 memb_key = self.request.POST.get('delete')
                 db.delete(memb_key)
@@ -178,8 +178,8 @@ class EntryMembers(webapp2.RequestHandler):
             show_unauth_page(self)
         else:
             email = user.email()
-            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
-            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
+            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
             if is_lead and OtherHandlers.cur_role == 'leader':
                 comp_key = self.request.GET['competition']
                 competition = Competition.get(comp_key)
@@ -220,8 +220,8 @@ class EntryMembersByDay(webapp2.RequestHandler):
             show_unauth_page(self)
         else:
             email = user.email()
-            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
-            roles = OtherHandlers.createRolesHead(is_org, is_lead, is_memb)
+            [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
+            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
             if is_lead and OtherHandlers.cur_role == 'leader':
                 comp_key = self.request.POST.get('competition')
                 competition = Competition.get(comp_key)
@@ -266,7 +266,7 @@ class AcceptMembers(webapp2.RequestHandler):
             show_unauth_page(self)
         else:
             email = user.email()
-            [is_org, is_lead, is_memb] = OtherHandlers.findUser(email)
+            [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
             if is_lead and OtherHandlers.cur_role == 'leader':
                 days_checked_count = int(self.request.POST.get('daysCheckedCount'))
                 comp_key = self.request.POST.get('competition')

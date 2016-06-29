@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1a4ee0a1-5209-4064-a7af-a6fd0b434d59" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MemberHandlers.py" afterPath="$PROJECT_DIR$/MemberHandlers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/tmmosc/base/CompetitionContent.html" afterPath="$PROJECT_DIR$/templates/tmmosc/base/CompetitionContent.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CompetitionHandlers.py" afterPath="$PROJECT_DIR$/CompetitionHandlers.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LeaderHandlers.py" afterPath="$PROJECT_DIR$/LeaderHandlers.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ListHandlers.py" afterPath="$PROJECT_DIR$/ListHandlers.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OtherHandlers.py" afterPath="$PROJECT_DIR$/OtherHandlers.py" />
     </list>
     <ignored path="tmmosc.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,11 +34,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MemberHandlers.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/MemberHandlers.py">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="64" column="63" selection-start-line="64" selection-start-column="63" selection-end-line="64" selection-end-column="63" />
+            <state relative-caret-position="222">
+              <caret line="58" column="19" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
+              <folding>
+                <element signature="e#602#628#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OtherHandlers.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/OtherHandlers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="378">
+              <caret line="120" column="63" selection-start-line="120" selection-start-column="11" selection-end-line="120" selection-end-column="63" />
               <folding>
                 <element signature="e#24#33#0" expanded="true" />
               </folding>
@@ -44,12 +58,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.py">
+      <file leaf-file-name="MemberHandlers.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MemberHandlers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="536">
-              <caret line="91" column="6" selection-start-line="91" selection-start-column="6" selection-end-line="91" selection-end-column="21" />
-              <folding />
+            <state relative-caret-position="235">
+              <caret line="24" column="28" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="28" />
+              <folding>
+                <element signature="e#24#33#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -131,15 +147,15 @@
         <option value="$PROJECT_DIR$/templates/tmmosc/member/ToDaysGroups.html" />
         <option value="$PROJECT_DIR$/templates/tmmosc/AfterSignIn.html" />
         <option value="$PROJECT_DIR$/Decors.py" />
-        <option value="$PROJECT_DIR$/ListHandlers.py" />
         <option value="$PROJECT_DIR$/templates/tmmosc/organizer/AddCompetition.html" />
         <option value="$PROJECT_DIR$/templates/tmmosc/organizer/NewCompetitionInfo.html" />
         <option value="$PROJECT_DIR$/Common.py" />
-        <option value="$PROJECT_DIR$/CompetitionHandlers.py" />
-        <option value="$PROJECT_DIR$/OtherHandlers.py" />
-        <option value="$PROJECT_DIR$/LeaderHandlers.py" />
         <option value="$PROJECT_DIR$/templates/tmmosc/base/CompetitionContent.html" />
         <option value="$PROJECT_DIR$/MemberHandlers.py" />
+        <option value="$PROJECT_DIR$/LeaderHandlers.py" />
+        <option value="$PROJECT_DIR$/CompetitionHandlers.py" />
+        <option value="$PROJECT_DIR$/ListHandlers.py" />
+        <option value="$PROJECT_DIR$/OtherHandlers.py" />
       </list>
     </option>
   </component>
@@ -193,68 +209,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="tmmosc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tmmosc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tmmosc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tmmosc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tmmosc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tmmosc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tmmosc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="member" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tmmosc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tmmosc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tmmosc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="base" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -610,7 +564,7 @@
     <frame x="0" y="-4" width="1366" height="772" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19015151" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19015151" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32824427" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3033473" sideWeight="0.5085679" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904148" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -903,32 +857,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ListHandlers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4446">
-          <caret line="247" column="34" selection-start-line="247" selection-start-column="34" selection-end-line="247" selection-end-column="34" />
-          <folding>
-            <element signature="e#46#84#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Common.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="5" column="13" selection-start-line="5" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding>
             <element signature="e#24#33#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OtherHandlers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="127" column="24" selection-start-line="127" selection-start-column="24" selection-end-line="127" selection-end-column="24" />
-          <folding>
-            <element signature="e#46#84#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -946,30 +880,6 @@
         <state relative-caret-position="216">
           <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CompetitionHandlers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="81" column="41" selection-start-line="81" selection-start-column="41" selection-end-line="81" selection-end-column="41" />
-          <folding>
-            <element signature="e#24#33#0" expanded="true" />
-            <element signature="e#5143#5319#0" expanded="false" />
-            <element signature="e#5363#5554#0" expanded="false" />
-            <element signature="e#5594#5956#0" expanded="false" />
-            <element signature="e#5994#6274#0" expanded="false" />
-            <element signature="e#6308#6442#0" expanded="false" />
-            <element signature="e#6482#6608#0" expanded="false" />
-            <element signature="e#6659#6888#0" expanded="false" />
-            <element signature="e#6937#7163#0" expanded="false" />
-            <element signature="e#7197#7886#0" expanded="false" />
-            <element signature="e#7921#8955#0" expanded="false" />
-            <element signature="e#8996#10571#0" expanded="false" />
-            <element signature="e#10611#13274#0" expanded="false" />
-            <element signature="e#13305#14530#0" expanded="false" />
-            <element signature="e#14560#15428#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1005,26 +915,70 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/LeaderHandlers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="536">
-          <caret line="91" column="6" selection-start-line="91" selection-start-column="6" selection-end-line="91" selection-end-column="21" />
+        <state relative-caret-position="-791">
+          <caret line="268" column="61" selection-start-line="268" selection-start-column="61" selection-end-line="268" selection-end-column="61" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LeaderHandlers.py">
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="310" column="31" selection-start-line="310" selection-start-column="29" selection-end-line="310" selection-end-column="31" />
+        <state relative-caret-position="222">
+          <caret line="58" column="19" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
+          <folding>
+            <element signature="e#602#628#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ListHandlers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3513">
+          <caret line="230" column="64" selection-start-line="230" selection-start-column="64" selection-end-line="230" selection-end-column="64" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CompetitionHandlers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-753">
+          <caret line="93" column="64" selection-start-line="93" selection-start-column="64" selection-end-line="93" selection-end-column="64" />
+          <folding>
+            <element signature="e#24#33#0" expanded="true" />
+            <element signature="e#5155#5331#0" expanded="false" />
+            <element signature="e#5375#5566#0" expanded="false" />
+            <element signature="e#5606#5968#0" expanded="false" />
+            <element signature="e#6006#6286#0" expanded="false" />
+            <element signature="e#6320#6454#0" expanded="false" />
+            <element signature="e#6494#6620#0" expanded="false" />
+            <element signature="e#6671#6900#0" expanded="false" />
+            <element signature="e#6949#7175#0" expanded="false" />
+            <element signature="e#7209#7898#0" expanded="false" />
+            <element signature="e#7933#8967#0" expanded="false" />
+            <element signature="e#9008#10583#0" expanded="false" />
+            <element signature="e#10623#13286#0" expanded="false" />
+            <element signature="e#13317#14542#0" expanded="false" />
+            <element signature="e#14572#15440#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MemberHandlers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="64" column="63" selection-start-line="64" selection-start-column="63" selection-end-line="64" selection-end-column="63" />
+        <state relative-caret-position="235">
+          <caret line="24" column="28" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="28" />
+          <folding>
+            <element signature="e#24#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OtherHandlers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="120" column="63" selection-start-line="120" selection-start-column="11" selection-end-line="120" selection-end-column="63" />
           <folding>
             <element signature="e#24#33#0" expanded="true" />
           </folding>
