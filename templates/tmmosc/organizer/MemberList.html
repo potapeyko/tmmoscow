@@ -192,11 +192,11 @@
                                   <tbody>
                                       {% for memb in members %}
                                           <tr style="color: #42a5f5;">
-                                            <td class="myP" style="width: 35%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.nickname }}</td>
+                                            <td class="myP" style="width: 35%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.surname }}</td>
                                             <td class="myP" style="width: 10%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.birthdate }}</td>
                                             <td class="myP" style="width: 10%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.qualification }}</td>
-                                            <td class="myP" style="width: 20%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.command }}</td>
-                                            <td class="myP" style="width: 20%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.territory }}</td>
+                                            <td class="myP" style="width: 20%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.command.name }}</td>
+                                            <td class="myP" style="width: 20%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ memb.command.territory }}</td>
                                             <td style="width: 1%; text-align: center; bottom: 4px;">
                                               <form action="/reg/deleteMember" method="post">
                                                 <button class="mdl-button mdl-js-button mdl-button--icon changeMemb" type="button" style="width: 32px; height: 32px;">

@@ -196,8 +196,8 @@
                                     {% for lead in leads %}
                                       <tr style="color: #42a5f5;">
                                         <td class="myP" style="width: 33%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ lead.nickname }}</td>
-                                        <td class="myP" style="width: 20%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ lead.command }}</td>
-                                        <td class="myP" style="width: 20%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ lead.territory }}</td>
+                                        <td class="myP" style="width: 20%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ lead.command.name }}</td>
+                                        <td class="myP" style="width: 20%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ lead.command.territory }}</td>
                                         <td class="myP" style="width: 20%; text-align: center; padding-left: 2px; padding-right: 2px;">{{ lead.contact }}</td>
                                         <td style="width: 1%; text-align: center; bottom: 4px;">
                                           <form id="deleteLead" action="/reg/deleteLeader" method="post" style="display: inline;">

@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
-__author__ = 'Daria'
-
-from google.appengine.api import users
 import os
 import jinja2
 import webapp2
 import time
+from google.appengine.ext import db
+from google.appengine.api import users
 
-from modelVisitor import *
 import OtherHandlers
+from modelVisitor import Member, Organizer, Leader, Command
 from Common import show_unauth_page
 
+__author__ = 'Daria'
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -22,7 +22,9 @@ tooltip_show = 'none'
 
 
 class OrganizersHandler(webapp2.RequestHandler):
-    def get(self):      # displays whole list of organizer
+
+    def get(self):
+        """Displays whole list of organizers"""
         user = users.get_current_user()
         if user:
             email = user.email()
@@ -46,7 +48,8 @@ class OrganizersHandler(webapp2.RequestHandler):
         else:
             show_unauth_page(self)
 
-    def post(self):     # finds organizer by keyword
+    def post(self):
+        """Finds organizers by keyword"""
         user = users.get_current_user()
         if user:
             email = user.email()
@@ -54,7 +57,8 @@ class OrganizersHandler(webapp2.RequestHandler):
             roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
             if is_org and OtherHandlers.cur_role == 'organizer':
                 search_fio = self.request.POST['findOrganizer']
-                orgs = db.Query(Organizer).filter('nickname >=', search_fio).filter('nickname <=', search_fio+'1').order('nickname')
+                orgs = db.Query(Organizer).filter('nickname >=', search_fio).filter('nickname <=', search_fio+'1')\
+                            .order('nickname')
                 keys = []
                 for org in orgs:
                     keys.append(org.key())
@@ -71,8 +75,10 @@ class OrganizersHandler(webapp2.RequestHandler):
 
 
 class AddOrganizer(webapp2.RequestHandler):
+
     def post(self):
-        if self.request.POST['olKey']:              # changing existing organizer
+        """Adds new organizer to list or changes existing"""
+        if self.request.POST['olKey']:
             new_fio = self.request.POST['olFio']
             new_contact = self.request.POST['olContact']
             org_key = self.request.POST['olKey']
@@ -81,11 +87,11 @@ class AddOrganizer(webapp2.RequestHandler):
             organizer.contact = new_contact
             organizer.put()
             tooltip_message = u'Организатор %s изменен' % new_fio
-        else:                                       # add new organizer
+        else:
             fio = self.request.POST['olFio']
             contact = self.request.POST['olContact']
-            newOrg = Organizer(nickname=fio, contact=contact)
-            newOrg.put()
+            new_org = Organizer(nickname=fio, contact=contact)
+            new_org.put()
             global tooltip_message
             global tooltip_show
             tooltip_message = u'Организатор %s добавлен базу' % fio
@@ -95,7 +101,9 @@ class AddOrganizer(webapp2.RequestHandler):
 
 
 class DeleteOrganizer(webapp2.RequestHandler):
+
     def post(self):
+        """Deletes organizer from list"""
         org_id = self.request.POST['idToDeleteChange']
         fio = self.request.POST['organFio']
         db.delete(org_id)
@@ -108,7 +116,9 @@ class DeleteOrganizer(webapp2.RequestHandler):
 
 
 class LeadersHandler(webapp2.RequestHandler):
-    def get(self):      # displays whole list of leaders
+
+    def get(self):
+        """Displays whole list of leaders"""
         user = users.get_current_user()
         if user:
             email = user.email()
@@ -132,7 +142,8 @@ class LeadersHandler(webapp2.RequestHandler):
         else:
             show_unauth_page(self)
 
-    def post(self):     # finds leaders  by keyword
+    def post(self):
+        """Finds leaders by keyword"""
         user = users.get_current_user()
         if user:
             email = user.email()
@@ -140,7 +151,8 @@ class LeadersHandler(webapp2.RequestHandler):
             roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
             if is_org and OtherHandlers.cur_role == 'organizer':
                 search_fio = self.request.POST['findLeader']
-                leads = db.Query(Leader).filter('nickname >=', search_fio).filter('nickname <=', search_fio+'1').order('nickname')
+                leads = db.Query(Leader).filter('nickname >=', search_fio).filter('nickname <=', search_fio+'1')\
+                            .order('nickname')
                 keys = []
                 for org in leads:
                     keys.append(org.key())
@@ -157,8 +169,10 @@ class LeadersHandler(webapp2.RequestHandler):
 
 
 class AddLeader(webapp2.RequestHandler):
+
     def post(self):
-        if self.request.POST['llKey']:      # changing existing leader
+        """Adds new leader to list or changes existing"""
+        if self.request.POST['llKey']:
             new_fio = self.request.POST['llFio']
             new_command = self.request.POST['llComand']
             new_terry = self.request.POST['llTerritory']
@@ -166,18 +180,21 @@ class AddLeader(webapp2.RequestHandler):
             lead_key = self.request.POST['llKey']
             leader = Leader.get(lead_key)
             leader.nickname = new_fio
-            leader.command = new_command
-            leader.territory = new_terry
             leader.contact = new_contact
+            team = leader.command
+            team.name = new_command
+            team.territory = new_terry
+            team.put()
             leader.put()
             tooltip_message = u'Руководитель %s изменен' % new_fio
-        else:                               # add new leader
+        else:
             fio = self.request.POST['llFio']
             command = self.request.POST['llComand']
             terry = self.request.POST['llTerritory']
             contact = self.request.POST['llContact']
-            newLead = Leader(nickname=fio, command=command, territory=terry, contact=contact)
-            newLead.put()
+            team = Command(name=command, territory=terry)
+            new_lead = Leader(nickname=fio, command=team, contact=contact)
+            new_lead.put()
             global tooltip_message
             global tooltip_show
             tooltip_message = u'Руководитель %s добавлен базу' % fio
@@ -187,7 +204,9 @@ class AddLeader(webapp2.RequestHandler):
 
 
 class DeleteLeader(webapp2.RequestHandler):
+
     def post(self):
+        """Deletes leader from list"""
         lead_id = self.request.POST['idToDeleteChange']
         fio = self.request.POST['leadFio']
         db.delete(lead_id)
@@ -200,7 +219,9 @@ class DeleteLeader(webapp2.RequestHandler):
 
 
 class MembersHandler(webapp2.RequestHandler):
-    def get(self):      # diplays whole list of members
+
+    def get(self):
+        """Diplays whole list of members"""
         user = users.get_current_user()
         if user:
             email = user.email()
@@ -224,7 +245,8 @@ class MembersHandler(webapp2.RequestHandler):
         else:
             show_unauth_page(self)
 
-    def post(self):     # finds member by keyword
+    def post(self):
+        """Finds members by keyword"""
         user = users.get_current_user()
         if user:
             email = user.email()
@@ -232,7 +254,8 @@ class MembersHandler(webapp2.RequestHandler):
             roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
             if is_org and OtherHandlers.cur_role == 'organizer':
                 search_fio = self.request.POST['findMember']
-                membs = db.Query(Member).filter('nickname >=', search_fio).filter('nickname <=', search_fio+'1').order('nickname')
+                membs = db.Query(Member).filter('nickname >=', search_fio).filter('nickname <=', search_fio+'1')\
+                            .order('nickname')
                 keys = []
                 for org in membs:
                     keys.append(org.key())
@@ -249,10 +272,12 @@ class MembersHandler(webapp2.RequestHandler):
 
 
 class AddMember(webapp2.RequestHandler):
+
     def post(self):
+        """Adds new member to list or changes existing"""
         cur_user = users.get_current_user()
         leader = db.Query(Leader).filter('user =', cur_user).get()
-        if self.request.POST['omKey']:  # change existing member
+        if self.request.POST['omKey']:
             new_fio = self.request.POST['omFio']
             new_birthdate = self.request.POST['omGr']
             new_qual = self.request.POST['omRazr']
@@ -267,13 +292,14 @@ class AddMember(webapp2.RequestHandler):
             member.qualification = new_qual
             member.put()
             tooltip_message = u'Участник %s изменен' % new_fio
-        else:   #add new member
+        else:
             fio = self.request.POST['omFio']
             bdate = int(self.request.POST['omGr'])
             qual = self.request.POST['omRazr']
             comm = self.request.POST['omComand']
             terr = self.request.POST['omTerritory']
-            newMember = Member(nickname=fio, birthdate=bdate, qualification=qual, leader=leader, command=comm, territory=terr)
+            newMember = Member(nickname=fio, birthdate=bdate, qualification=qual, leader=leader, command=comm,
+                               territory=terr)
             newMember.put()
             global tooltip_message
             global tooltip_show
@@ -284,7 +310,9 @@ class AddMember(webapp2.RequestHandler):
 
 
 class DeleteMember(webapp2.RequestHandler):
+
     def post(self):
+        """Deletes member from list"""
         memb_id = self.request.POST['idToDeleteChange']
         fio = self.request.POST['membFio']
         db.delete(memb_id)
