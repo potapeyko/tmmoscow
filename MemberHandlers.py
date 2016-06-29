@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
-
-from google.appengine.api import users
 import os
 import jinja2
 import webapp2
 import time
+from google.appengine.api import users
 from google.appengine.ext import db
+
 from modelVisitor import Member
-from modelCompetition import Competition, CompMemb, Distance, DistInfo
+from modelCompetition import Competition, CompMemb, Distance
 from LeaderHandlers import salt_pass
+
+__author__ = 'Daria'
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -17,20 +19,28 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 
 class MemberInfo(webapp2.RequestHandler):
-    def get(self):      # displays info about certain member or empty form for adding new member
+
+    def get(self):
+        """Displays info about certain member or empty form for adding new once"""
         login = users.create_login_url(dest_url='/postSignIn')
         comp_key = self.request.GET['competition']
         memb_key = self.request.GET['member']
         member = Member.get(memb_key)
         name = member.surname.split(' ')[1]
         surname = member.surname.split(' ')[0]
+        try:
+            self.request.GET['tooltip']
+            tooltip = u'Неверный пароль потверждения. Попробуйте еще раз'
+        except:
+            tooltip = ''
         temp_values = {'login': login, 'logout': users.create_logout_url('/login'), 'surname': surname, 'name': name,
                        'age': member.birthdate, 'qual': member.qualification, 'team': member.command, 'competition':
-                       comp_key, 'memb_key': memb_key}
+                       comp_key, 'memb_key': memb_key, 'tooltip': tooltip}
         template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/member/MemberView.html')
         self.response.write(template.render(temp_values))
 
-    def post(self):     # saves member's changes
+    def post(self):
+        """Saves current member's changes"""
         comp_key = self.request.POST.get('competition')
         passwd = self.request.POST.get('changePass')
         memb_key = self.request.POST.get('member')
@@ -46,18 +56,13 @@ class MemberInfo(webapp2.RequestHandler):
             time.sleep(0.1)
             self.redirect('/entryOneMemb?competition='+comp_key)
         else:
-            login = users.create_login_url(dest_url='/postSignIn')
-            name = member.surname.split(' ')[1]
-            surname = member.surname.split(' ')[0]
-            temp_values = {'login': login, 'logout': users.create_logout_url('/login'), 'surname': surname,
-                           'name': name, 'age': member.birthdate, 'qual': member.qualification, 'team': member.command,
-                           'competition': comp_key, 'memb_key': memb_key, 'tooltip': u'Неверный пароль подтверждения. Попробуйте еще раз'}
-            template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/member/MemberView.html')
-            self.response.write(template.render(temp_values))
+            self.redirect('/memberInfo?competition='+comp_key+'&member='+memb_key+'&tooltip=True')
 
 
 class MemberToComp(webapp2.RequestHandler):
-    def get(self):     # displays list of all members in system to check to competition
+
+    def get(self):
+        """Displays list of all members in system to mark whom will take a part in competition"""
         login = users.create_login_url(dest_url='/postSignIn')
         comp_key = self.request.GET['competition']
         comp = Competition.get(comp_key)
@@ -82,8 +87,10 @@ class MemberToComp(webapp2.RequestHandler):
         self.response.write(template.render(temp_values))
 
 
-class AddMembToGroup(webapp2.RequestHandler):       # displays competition's groups by days to check member
+class AddMembToGroup(webapp2.RequestHandler):
+
     def post(self):
+        """Displays group of current competition to check member"""
         login = users.create_login_url(dest_url='/postSignIn')
         memb_key = self.request.POST.get('member')
         memb = Member.get(memb_key)
@@ -101,7 +108,9 @@ class AddMembToGroup(webapp2.RequestHandler):       # displays competition's gro
 
 
 class EnterMember(webapp2.RequestHandler):
+
     def post(self):
+        """Saves current member to database so that he will take a part in competition"""
         memb_key = self.request.POST.get('member')
         memb = Member.get(memb_key)
         paswd = self.request.POST.get('changePass')
@@ -130,21 +139,29 @@ class EnterMember(webapp2.RequestHandler):
             template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/member/ToDaysGroups.html')
             self.response.write(template.render(temp_values))
 
+
 class DeleteMemberFromComp(webapp2.RequestHandler):
-    def get(self):      # displays form to fill in pass_to_edit
+
+    def get(self):
+        """Displays empty form to enter password of current user"""
         login = users.create_login_url(dest_url='/postSignIn')
         comp_key = self.request.GET['competition']
         memb_key = self.request.GET['member']
         comp = Competition.get(comp_key)
         member = Member.get(memb_key)
+        try:
+            self.request.GET['tooltip']
+            tooltip = u'Неверный пароль подтверждения. Попробуйте еще раз'
+        except:
+            tooltip = ''
         temp_values = {'login': login, 'logout': users.create_logout_url('/login'), 'name': comp.name, 'competition':
                         comp_key, 'memb_key': memb_key, 'surname': member.surname, 'team': member.command.name,
-                       'card_title': u'Удаление участника из заявки'}
+                       'card_title': u'Удаление участника из заявки', 'tooltip': tooltip}
         template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/member/EnterPass.html')
         self.response.write(template.render(temp_values))
 
-    def post(self):     # deletes member from that competition
-        login = users.create_login_url(dest_url='/postSignIn')
+    def post(self):
+        """Deletes certain user from current competition"""
         memb_key = self.request.POST.get('member')
         member = Member.get(memb_key)
         paswd = self.request.POST.get('changePass')
@@ -156,9 +173,4 @@ class DeleteMemberFromComp(webapp2.RequestHandler):
             time.sleep(0.1)
             self.redirect('/entryOneMemb?competition=' + comp_key)
         else:
-            temp_values = {'login': login, 'logout': users.create_logout_url('/login'), 'name': comp.name, 'surname':
-                           member.surname, 'team': member.command.name, 'competition': comp_key, 'memb_key': memb_key,
-                           'tooltip': u'Неверный пароль подтверждения. Попробуйте еще раз', 'card_title':
-                            u'Удаление участника из заявки'}
-            template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/member/EnterPass.html')
-            self.response.write(template.render(temp_values))
+            self.redirect('/deleteFromComp?competition=' + comp_key + '&member=' + memb_key + '&tooltip=True')
