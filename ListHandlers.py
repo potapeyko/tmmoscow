@@ -30,7 +30,7 @@ class OrganizersHandler(BaseHandler):
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
             roles = OtherHandlers.create_roles_head(self, is_org, is_lead, is_memb)
-            if is_org and self.response.get('role') == 'organizer':
+            if is_org and self.session.get('role') == 'organizer':
                 orgs = db.Query(Organizer).order('nickname')
                 keys = []
                 for org in orgs:
@@ -55,7 +55,7 @@ class OrganizersHandler(BaseHandler):
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
             roles = OtherHandlers.create_roles_head(self, is_org, is_lead, is_memb)
-            if is_org and self.response.get('role') == 'organizer':
+            if is_org and self.session.get('role') == 'organizer':
                 search_fio = self.request.POST['findOrganizer']
                 orgs = db.Query(Organizer).filter('nickname >=', search_fio).filter('nickname <=', search_fio+'1')\
                             .order('nickname')
@@ -124,7 +124,7 @@ class LeadersHandler(BaseHandler):
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
             roles = OtherHandlers.create_roles_head(self, is_org, is_lead, is_memb)
-            if is_org and self.response.get('role') == 'organizer':
+            if is_org and self.session.get('role') == 'organizer':
                 leads = db.Query(Leader).order('nickname')
                 keys = []
                 for lead in leads:
@@ -149,7 +149,7 @@ class LeadersHandler(BaseHandler):
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
             roles = OtherHandlers.create_roles_head(self, is_org, is_lead, is_memb)
-            if is_org and self.response.get('role') == 'organizer':
+            if is_org and self.session.get('role') == 'organizer':
                 search_fio = self.request.POST['findLeader']
                 leads = db.Query(Leader).filter('nickname >=', search_fio).filter('nickname <=', search_fio+'1')\
                             .order('nickname')
@@ -193,6 +193,7 @@ class AddLeader(BaseHandler):
             terry = self.request.POST['llTerritory']
             contact = self.request.POST['llContact']
             team = Command(name=command, territory=terry)
+            team.put()
             new_lead = Leader(nickname=fio, command=team, contact=contact)
             new_lead.put()
             global tooltip_message
@@ -227,7 +228,7 @@ class MembersHandler(BaseHandler):
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
             roles = OtherHandlers.create_roles_head(self, is_org, is_lead, is_memb)
-            if is_org and self.response.get('role') == 'organizer':
+            if is_org and self.session.get('role') == 'organizer':
                 members = db.Query(Member).order('nickname')
                 keys = []
                 for memb in members:
@@ -252,7 +253,7 @@ class MembersHandler(BaseHandler):
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
             roles = OtherHandlers.create_roles_head(self, is_org, is_lead, is_memb)
-            if is_org and self.response.get('role') == 'organizer':
+            if is_org and self.session.get('role') == 'organizer':
                 search_fio = self.request.POST['findMember']
                 membs = db.Query(Member).filter('nickname >=', search_fio).filter('nickname <=', search_fio+'1')\
                             .order('nickname')
@@ -274,36 +275,26 @@ class MembersHandler(BaseHandler):
 class AddMember(BaseHandler):
 
     def post(self):
-        """Adds new member to list or changes existing"""
-        cur_user = users.get_current_user()
-        leader = db.Query(Leader).filter('user =', cur_user).get()
-        if self.request.POST['omKey']:
-            new_fio = self.request.POST['omFio']
-            new_birthdate = self.request.POST['omGr']
-            new_qual = self.request.POST['omRazr']
-            new_command = self.request.POST['omComand']
-            new_terry = self.request.POST['omTerritory']
-            memb_key = self.request.POST['omKey']
-            member = Member.get(memb_key)
-            member.nickname = new_fio
-            member.command = new_command
-            member.territory = new_terry
-            member.birthdate = int(new_birthdate)
-            member.qualification = new_qual
-            member.put()
-            tooltip_message = u'Участник %s изменен' % new_fio
-        else:
-            fio = self.request.POST['omFio']
-            bdate = int(self.request.POST['omGr'])
-            qual = self.request.POST['omRazr']
-            comm = self.request.POST['omComand']
-            terr = self.request.POST['omTerritory']
-            newMember = Member(nickname=fio, birthdate=bdate, qualification=qual, leader=leader, command=comm,
-                               territory=terr)
-            newMember.put()
-            global tooltip_message
-            global tooltip_show
-            tooltip_message = u'Участник %s добавлен базу' % fio
+        """Changes existing member"""
+        new_fio = self.request.POST['omFio']
+        new_birthdate = self.request.POST['omGr']
+        new_qual = self.request.POST['omRazr']
+        new_command = self.request.POST['omComand']
+        new_terry = self.request.POST['omTerritory']
+        memb_key = self.request.POST['omKey']
+        member = Member.get(memb_key)
+        team = member.command
+        team.name = new_command
+        team.territory = new_terry
+        team.put()
+        member.nickname = new_fio
+        member.birthdate = int(new_birthdate)
+        member.qualification = new_qual
+        member.command = team
+        member.put()
+        global tooltip_message
+        global tooltip_show
+        tooltip_message = u'Участник %s изменен' % new_fio
         tooltip_show = 'block'
         time.sleep(0.1)
         self.redirect('/reg/memberList')
@@ -313,8 +304,10 @@ class DeleteMember(BaseHandler):
 
     def post(self):
         """Deletes member from list"""
+        self.response.write('1')
         memb_id = self.request.POST['idToDeleteChange']
         fio = self.request.POST['membFio']
+        self.response.write('2')
         db.delete(memb_id)
         time.sleep(0.1)
         global tooltip_message
