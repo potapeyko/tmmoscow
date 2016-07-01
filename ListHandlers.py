@@ -8,7 +8,7 @@ from google.appengine.api import users
 
 import OtherHandlers
 from modelVisitor import Member, Organizer, Leader, Command
-from Common import show_unauth_page
+from Common import show_unauth_page, BaseHandler
 
 __author__ = 'Daria'
 
@@ -21,7 +21,7 @@ tooltip_message = ''
 tooltip_show = 'none'
 
 
-class OrganizersHandler(webapp2.RequestHandler):
+class OrganizersHandler(BaseHandler):
 
     def get(self):
         """Displays whole list of organizers"""
@@ -29,8 +29,8 @@ class OrganizersHandler(webapp2.RequestHandler):
         if user:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
-            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
-            if is_org and OtherHandlers.cur_role == 'organizer':
+            roles = OtherHandlers.create_roles_head(self, is_org, is_lead, is_memb)
+            if is_org and self.response.get('role') == 'organizer':
                 orgs = db.Query(Organizer).order('nickname')
                 keys = []
                 for org in orgs:
@@ -54,8 +54,8 @@ class OrganizersHandler(webapp2.RequestHandler):
         if user:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
-            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
-            if is_org and OtherHandlers.cur_role == 'organizer':
+            roles = OtherHandlers.create_roles_head(self, is_org, is_lead, is_memb)
+            if is_org and self.response.get('role') == 'organizer':
                 search_fio = self.request.POST['findOrganizer']
                 orgs = db.Query(Organizer).filter('nickname >=', search_fio).filter('nickname <=', search_fio+'1')\
                             .order('nickname')
@@ -74,7 +74,7 @@ class OrganizersHandler(webapp2.RequestHandler):
             show_unauth_page(self)
 
 
-class AddOrganizer(webapp2.RequestHandler):
+class AddOrganizer(BaseHandler):
 
     def post(self):
         """Adds new organizer to list or changes existing"""
@@ -100,7 +100,7 @@ class AddOrganizer(webapp2.RequestHandler):
         self.redirect('/reg/organizerList')
 
 
-class DeleteOrganizer(webapp2.RequestHandler):
+class DeleteOrganizer(BaseHandler):
 
     def post(self):
         """Deletes organizer from list"""
@@ -115,7 +115,7 @@ class DeleteOrganizer(webapp2.RequestHandler):
         self.redirect('/reg/organizerList')
 
 
-class LeadersHandler(webapp2.RequestHandler):
+class LeadersHandler(BaseHandler):
 
     def get(self):
         """Displays whole list of leaders"""
@@ -123,8 +123,8 @@ class LeadersHandler(webapp2.RequestHandler):
         if user:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
-            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
-            if is_org and OtherHandlers.cur_role == 'organizer':
+            roles = OtherHandlers.create_roles_head(self, is_org, is_lead, is_memb)
+            if is_org and self.response.get('role') == 'organizer':
                 leads = db.Query(Leader).order('nickname')
                 keys = []
                 for lead in leads:
@@ -148,8 +148,8 @@ class LeadersHandler(webapp2.RequestHandler):
         if user:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
-            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
-            if is_org and OtherHandlers.cur_role == 'organizer':
+            roles = OtherHandlers.create_roles_head(self, is_org, is_lead, is_memb)
+            if is_org and self.response.get('role') == 'organizer':
                 search_fio = self.request.POST['findLeader']
                 leads = db.Query(Leader).filter('nickname >=', search_fio).filter('nickname <=', search_fio+'1')\
                             .order('nickname')
@@ -168,7 +168,7 @@ class LeadersHandler(webapp2.RequestHandler):
             show_unauth_page(self)
 
 
-class AddLeader(webapp2.RequestHandler):
+class AddLeader(BaseHandler):
 
     def post(self):
         """Adds new leader to list or changes existing"""
@@ -203,7 +203,7 @@ class AddLeader(webapp2.RequestHandler):
         self.redirect('/reg/leaderList')
 
 
-class DeleteLeader(webapp2.RequestHandler):
+class DeleteLeader(BaseHandler):
 
     def post(self):
         """Deletes leader from list"""
@@ -218,7 +218,7 @@ class DeleteLeader(webapp2.RequestHandler):
         self.redirect('/reg/leaderList')
 
 
-class MembersHandler(webapp2.RequestHandler):
+class MembersHandler(BaseHandler):
 
     def get(self):
         """Diplays whole list of members"""
@@ -226,8 +226,8 @@ class MembersHandler(webapp2.RequestHandler):
         if user:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
-            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
-            if is_org and OtherHandlers.cur_role == 'organizer':
+            roles = OtherHandlers.create_roles_head(self, is_org, is_lead, is_memb)
+            if is_org and self.response.get('role') == 'organizer':
                 members = db.Query(Member).order('nickname')
                 keys = []
                 for memb in members:
@@ -251,8 +251,8 @@ class MembersHandler(webapp2.RequestHandler):
         if user:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
-            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
-            if is_org and OtherHandlers.cur_role == 'organizer':
+            roles = OtherHandlers.create_roles_head(self, is_org, is_lead, is_memb)
+            if is_org and self.response.get('role') == 'organizer':
                 search_fio = self.request.POST['findMember']
                 membs = db.Query(Member).filter('nickname >=', search_fio).filter('nickname <=', search_fio+'1')\
                             .order('nickname')
@@ -271,7 +271,7 @@ class MembersHandler(webapp2.RequestHandler):
             show_unauth_page(self)
 
 
-class AddMember(webapp2.RequestHandler):
+class AddMember(BaseHandler):
 
     def post(self):
         """Adds new member to list or changes existing"""
@@ -309,7 +309,7 @@ class AddMember(webapp2.RequestHandler):
         self.redirect('/reg/memberList')
 
 
-class DeleteMember(webapp2.RequestHandler):
+class DeleteMember(BaseHandler):
 
     def post(self):
         """Deletes member from list"""

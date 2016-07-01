@@ -14,6 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import os
+import jinja2
+import webapp2
 
 from ListHandlers import *
 from CompetitionHandlers import *
@@ -23,15 +26,16 @@ from modelCompetition import *
 from LeaderHandlers import Team, AddMemberToTeam, ChangeMember, DeleteMember, EntryMembers, EntryMembersByDay, AcceptMembers
 from MemberHandlers import MemberInfo, MemberToComp, AddMembToGroup, DeleteMemberFromComp, EnterMember
 
-import os
-import jinja2
-
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
-import webapp2
+config = {}
+config['webapp2_extras.sessions'] = {
+    'secret_key': 'dadodorototo',
+}
+
 
 class Test(webapp2.RequestHandler):
     def get(self):
@@ -91,7 +95,7 @@ app = webapp2.WSGIApplication([
     ('/addToGroup', AddMembToGroup),
     ('/deleteFromComp', DeleteMemberFromComp),
     ('/enterMemb', EnterMember)
-], debug=True)
+], config=config, debug=True)
 
 def handle_401(request, response, exception):
     response.set_status(401)

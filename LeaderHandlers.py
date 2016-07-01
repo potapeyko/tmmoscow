@@ -12,7 +12,7 @@ from google.appengine.ext import db
 import OtherHandlers
 from modelCompetition import DistInfo, Competition, Distance, CompMemb
 from modelVisitor import Leader, Member
-from Common import show_unauth_page
+from Common import show_unauth_page, BaseHandler
 
 __author__ = 'Daria'
 
@@ -22,7 +22,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     autoescape=True)
 
 
-class Team(webapp2.RequestHandler):
+class Team(BaseHandler):
 
     def get(self):
         """Displays info about team and all members for current leader"""
@@ -32,8 +32,8 @@ class Team(webapp2.RequestHandler):
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
-            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
-            if is_lead and OtherHandlers.cur_role == 'leader':
+            roles = OtherHandlers.create_roles_head(self, is_org, is_lead, is_memb)
+            if is_lead and self.session.get('role') == 'leader':
                 leader = db.Query(Leader).filter('user =', user).get()
                 team = leader.command
                 territory = team.territory
@@ -54,7 +54,7 @@ class Team(webapp2.RequestHandler):
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
-            if is_lead and OtherHandlers.cur_role == 'leader':
+            if is_lead and self.session.get('role') == 'leader':
                 new_name = self.request.POST.get('nameTeam')
                 new_terry = self.request.POST.get('terryTeam')
                 lead = db.Query(Leader).filter('user =', user).get()
@@ -68,7 +68,7 @@ class Team(webapp2.RequestHandler):
                 show_unauth_page(self)
 
 
-class AddMemberToTeam(webapp2.RequestHandler):
+class AddMemberToTeam(BaseHandler):
 
     def get(self):
         """Displays empty form to add info about new member of current leader"""
@@ -78,8 +78,8 @@ class AddMemberToTeam(webapp2.RequestHandler):
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
-            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
-            if is_lead and OtherHandlers.cur_role == 'leader':
+            roles = OtherHandlers.create_roles_head(self, is_org, is_lead, is_memb)
+            if is_lead and self.session.get('role') == 'leader':
                 pass_to_edit = generate_pass()
                 temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
                                'edit_pass': pass_to_edit, 'card_title': u'Новый участник команды', 'new_memb': True}
@@ -96,7 +96,7 @@ class AddMemberToTeam(webapp2.RequestHandler):
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
-            if is_lead and OtherHandlers.cur_role == 'leader':
+            if is_lead and self.session.get('role') == 'leader':
                 member = save_member_from_post(self)
                 member.pass_to_edit = salt_pass(self.request.POST.get('passToEdit'))
                 member.command = db.Query(Leader).filter('user =', user).get().command
@@ -107,7 +107,7 @@ class AddMemberToTeam(webapp2.RequestHandler):
                 show_unauth_page(self)
 
 
-class ChangeMember(webapp2.RequestHandler):
+class ChangeMember(BaseHandler):
 
     def get(self):
         """Displays form to change info about member of current leader"""
@@ -117,8 +117,8 @@ class ChangeMember(webapp2.RequestHandler):
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
-            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
-            if is_lead and OtherHandlers.cur_role == 'leader':
+            roles = OtherHandlers.create_roles_head(self, is_org, is_lead, is_memb)
+            if is_lead and self.session.get('role') == 'leader':
                 memb_key = self.request.get('change')
                 member = db.get(memb_key)
                 [sex_m, sex_w] = check_sex(member)
@@ -139,7 +139,7 @@ class ChangeMember(webapp2.RequestHandler):
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
-            if is_lead and OtherHandlers.cur_role == 'leader':
+            if is_lead and self.session.get('role') == 'leader':
                 memb_key = self.request.POST.get('change')
                 member = db.get(memb_key)
 
@@ -150,7 +150,7 @@ class ChangeMember(webapp2.RequestHandler):
                 show_unauth_page(self)
 
 
-class DeleteMember(webapp2.RequestHandler):
+class DeleteMember(BaseHandler):
 
     def post(self):
         """Deletes chosen member of current leader"""
@@ -160,7 +160,7 @@ class DeleteMember(webapp2.RequestHandler):
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
-            if is_lead and OtherHandlers.cur_role == 'leader':
+            if is_lead and self.session.get('role') == 'leader':
                 memb_key = self.request.POST.get('delete')
                 db.delete(memb_key)
                 time.sleep(0.1)
@@ -169,7 +169,7 @@ class DeleteMember(webapp2.RequestHandler):
                 show_unauth_page(self)
 
 
-class EntryMembers(webapp2.RequestHandler):
+class EntryMembers(BaseHandler):
 
     def get(self):
         """Displays list of team members to mark some on current competition"""
@@ -179,8 +179,8 @@ class EntryMembers(webapp2.RequestHandler):
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
-            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
-            if is_lead and OtherHandlers.cur_role == 'leader':
+            roles = OtherHandlers.create_roles_head(self, is_org, is_lead, is_memb)
+            if is_lead and self.session.get('role') == 'leader':
                 comp_key = self.request.GET['competition']
                 competition = Competition.get(comp_key)
                 leader = db.Query(Leader).filter('user =', user).get()
@@ -211,7 +211,7 @@ class EntryMembers(webapp2.RequestHandler):
                 show_unauth_page(self)
 
 
-class EntryMembersByDay(webapp2.RequestHandler):
+class EntryMembersByDay(BaseHandler):
 
     def post(self):
         """Displays members added to current competition to check their groups"""
@@ -221,8 +221,8 @@ class EntryMembersByDay(webapp2.RequestHandler):
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
-            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
-            if is_lead and OtherHandlers.cur_role == 'leader':
+            roles = OtherHandlers.create_roles_head(self, is_org, is_lead, is_memb)
+            if is_lead and self.session.get('role') == 'leader':
                 comp_key = self.request.POST.get('competition')
                 competition = Competition.get(comp_key)
                 days_count = competition.days_count
@@ -257,7 +257,7 @@ class EntryMembersByDay(webapp2.RequestHandler):
                 show_unauth_page(self)
 
 
-class AcceptMembers(webapp2.RequestHandler):
+class AcceptMembers(BaseHandler):
 
     def post(self):
         """Saves members that will take a part in competition to database"""
@@ -267,7 +267,7 @@ class AcceptMembers(webapp2.RequestHandler):
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
-            if is_lead and OtherHandlers.cur_role == 'leader':
+            if is_lead and self.session.get('role') == 'leader':
                 days_checked_count = int(self.request.POST.get('daysCheckedCount'))
                 comp_key = self.request.POST.get('competition')
                 competition = Competition.get(comp_key)
@@ -278,15 +278,15 @@ class AcceptMembers(webapp2.RequestHandler):
                     distinfo = db.Query(DistInfo).filter('distance =', dist).run()          # all groups for that day (=distance)
                     distinfos.append(distinfo)
                 for i_day in range(days_checked_count):         # runs through all days one by one
-                    memb_count_i_day = int(self.request.POST.get('membsInDay'+str(i_day)))
+                    memb_count_i_day = int(self.request.POST.get('membsInDay%s' % str(i_day)))
                     for j_memb in range(memb_count_i_day):       # runs through all member of i- day
-                        memb_group = self.request.POST.get('checkMembGroup'+str(i_day)+'_'+str(j_memb))
+                        memb_group = self.request.POST.get('checkMembGroup%s' % str(i_day)+'_%s' % str(j_memb))
                         keys = memb_group.split('_')
                         member = Member.get(keys[0])
                         group_code = keys[1]
                         CompMemb(competition=competition, member=member, group=group_code, day_numb=i_day+1).put()
                 time.sleep(0.1)
-                self.redirect('/competition?dbKey='+comp_key)
+                self.redirect('/competition?dbKey=%s' % comp_key)
             else:
                 show_unauth_page(self)
 

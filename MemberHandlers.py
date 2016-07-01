@@ -9,6 +9,7 @@ from google.appengine.ext import db
 from modelVisitor import Member
 from modelCompetition import Competition, CompMemb, Distance
 from LeaderHandlers import salt_pass
+from Common import BaseHandler
 
 __author__ = 'Daria'
 
@@ -18,7 +19,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     autoescape=True)
 
 
-class MemberInfo(webapp2.RequestHandler):
+class MemberInfo(BaseHandler):
 
     def get(self):
         """Displays info about certain member or empty form for adding new once"""
@@ -52,14 +53,14 @@ class MemberInfo(webapp2.RequestHandler):
             member.surname = surname
             member.birthdate = age
             member.qualification = qual
-            member.save()
+            member.put()
             time.sleep(0.1)
-            self.redirect('/entryOneMemb?competition='+comp_key)
+            self.redirect('/entryOneMemb?competition=%s' % comp_key)
         else:
-            self.redirect('/memberInfo?competition='+comp_key+'&member='+memb_key+'&tooltip=True')
+            self.redirect('/memberInfo?competition=%s' % comp_key+'&member=%s' % memb_key+'&tooltip=True')
 
 
-class MemberToComp(webapp2.RequestHandler):
+class MemberToComp(BaseHandler):
 
     def get(self):
         """Displays list of all members in system to mark whom will take a part in competition"""
@@ -87,7 +88,7 @@ class MemberToComp(webapp2.RequestHandler):
         self.response.write(template.render(temp_values))
 
 
-class AddMembToGroup(webapp2.RequestHandler):
+class AddMembToGroup(BaseHandler):
 
     def post(self):
         """Displays group of current competition to check member"""
@@ -107,7 +108,7 @@ class AddMembToGroup(webapp2.RequestHandler):
         self.response.write(template.render(temp_values))
 
 
-class EnterMember(webapp2.RequestHandler):
+class EnterMember(BaseHandler):
 
     def post(self):
         """Saves current member to database so that he will take a part in competition"""
@@ -118,12 +119,12 @@ class EnterMember(webapp2.RequestHandler):
         comp = Competition.get(comp_key)
         if salt_pass(paswd) == memb.pass_to_edit:
             for i in range(comp.days_count):
-                infos_count = int(self.request.POST.get('infosCount'+str(i)))
+                infos_count = int(self.request.POST.get('infosCount%s' % str(i)))
                 for group_num in range(infos_count):
-                    checked_group = self.request.POST.get('checkMembGroup'+str(i)+str(group_num))
+                    checked_group = self.request.POST.get('checkMembGroup%s' % (str(i)+str(group_num)))
                     if checked_group:
                         entry = CompMemb(competition=comp, member=memb, group=checked_group, day_numb=i+1)
-                        entry.save()
+                        entry.put()
                         time.sleep(0.1)
                         self.redirect('/entryOneMemb?competition=' + comp_key)
         else:
@@ -140,7 +141,7 @@ class EnterMember(webapp2.RequestHandler):
             self.response.write(template.render(temp_values))
 
 
-class DeleteMemberFromComp(webapp2.RequestHandler):
+class DeleteMemberFromComp(BaseHandler):
 
     def get(self):
         """Displays empty form to enter password of current user"""

@@ -13,6 +13,7 @@ class Command(db.Model):
     name = db.StringProperty()
     territory = db.StringProperty(multiline=False)
 
+
 class Leader(db.Model):
     user = db.UserProperty(auto_current_user_add=True)
     command = db.ReferenceProperty(Command)

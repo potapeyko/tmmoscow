@@ -6,10 +6,12 @@ from google.appengine.api import users
 from datetime import datetime
 from google.appengine.ext import db
 
+
 from modelCompetition import Competition
 from modelVisitor import Organizer, Leader, Member, Command
 from CompetitionHandlers import format_date_list
 from LeaderHandlers import salt_pass
+from Common import BaseHandler
 
 __author__ = 'Daria'
 
@@ -18,10 +20,8 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
-cur_role = 'anonim'
 
-
-class LoginHandler(webapp2.RequestHandler):
+class LoginHandler(BaseHandler):
     
     def get(self):
         """Displays login page"""
@@ -36,11 +36,14 @@ class LoginHandler(webapp2.RequestHandler):
 
 
 # Competition list
-class DefaultHandler(webapp2.RequestHandler):
+class DefaultHandler(BaseHandler):
     
     def get(self):
         """Displays list of competition"""
-        global cur_role
+        try:
+            loc_role = self.session.get('role')
+        except:
+            loc_role = 'anonim'
         comps = Competition.all().order('d_start')
         comps_count = comps.count()
         d_start = []
@@ -67,11 +70,11 @@ class DefaultHandler(webapp2.RequestHandler):
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = find_user(email)
-            roles = create_roles_head(is_org, is_lead, is_memb)
+            roles = create_roles_head(self, is_org, is_lead, is_memb)
             temp_values.update({'user_email': email, 'roles': roles, 'logout': users.create_logout_url('/login'), 
                                 'is_user': True})
             try:            # show compList corresponding to user's role
-                template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/'+cur_role+'/CompetitionList.html')
+                template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/%s/CompetitionList.html' % loc_role)
             except:         # user is anonim
                 login = users.create_login_url(dest_url='/postSignIn')
                 temp_values = {'login': login, 'comps': comps, 'c_count': comps_count, 'd_start': d_start, 'd_finish':
@@ -80,47 +83,42 @@ class DefaultHandler(webapp2.RequestHandler):
         self.response.write(template.render(temp_values))
 
 
-class AfterSignIn(webapp2.RequestHandler):
+class AfterSignIn(BaseHandler):
     
     def get(self):
         """Displays form for choosing current user role"""
         user = users.get_current_user()
         if not user:
-            global cur_role
-            cur_role = 'anonim'
-            return webapp2.redirect('/')
+            self.session['role'] = 'anonim'
+            self.redirect('/')
         else:
             try:
                 email = user.email()
                 [is_org, is_lead, is_memb] = find_user(email)
                 [roles, cur_role_local] = create_roles(is_org, is_lead, is_memb)
-                if len(roles) > 1:                      # If user has several roles, he should choose one
+                if len(roles) > 1:      # If user has several roles, he should choose one
                     temp_values = {'roles': roles, 'logout': users.create_logout_url('/login')}
                     template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/AfterSignIn.html')
                     self.response.write(template.render(temp_values))
                 else:                   # If user has only one role
-                    global cur_role
-                    cur_role = cur_role_local
+                    self.session['role'] = cur_role_local
                     return webapp2.redirect('/')
             except:                                     # If user hasn't roles in system (anonim)
-                global cur_role
-                cur_role = 'anonim'
-                return webapp2.redirect('/')
+                self.session['role'] = 'anonim'
+                self.redirect('/')
 
     def post(self):
         """Saves current user role"""
         cur_role_local = self.request.POST.get('curRole')
-        global cur_role
-        cur_role = cur_role_local
-        return webapp2.redirect('/')
+        self.session['role'] = cur_role_local
+        self.redirect('/')
 
 
-class beforeSignOut(webapp2.RequestHandler):
+class beforeSignOut(BaseHandler):
     
     def get(self):
         """Throws out current role before signing out of system"""
-        global cur_role
-        cur_role = 'member'
+        self.session['role'] = 'anonim'
 
 
 class addDb(webapp2.RequestHandler):
@@ -164,24 +162,21 @@ def find_user(keyword):
     return [is_org, is_lead, is_memb]
 
 
-def create_roles_head(is_org, is_lead, is_memb):
+def create_roles_head(self, is_org, is_lead, is_memb):
     """Returns list of registered user roles for indicating available roles at page head"""
     roles = []
     if is_org:
-        global cur_role
-        if cur_role == 'organizer':
+        if self.session.get('role') == 'organizer':
             roles.append(u'<b>Организатор</b>')
         else:
             roles.append(u'Организатор')
     if is_lead:
-        global cur_role
-        if cur_role == 'leader':
+        if self.session.get('role') == 'leader':
             roles.append(u'<b>Руководитель</b>')
         else:
             roles.append(u'Руководитель')
     if is_memb:
-        global cur_role
-        if cur_role == 'member':
+        if self.session.get('role') == 'member':
             roles.append(u'<b>Участник</b>')
         else:
             roles.append(u'Участник')

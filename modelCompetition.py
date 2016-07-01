@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime, timedelta
 from google.appengine.ext import db
-from modelVisitor import Member, Organizer
+from modelVisitor import Member
+
 __author__ = 'Daria'
 
 

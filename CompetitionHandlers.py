@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 import os
 import jinja2
-import webapp2
 from google.appengine.api import users
 from datetime import date, datetime
 from google.appengine.ext import db
 
 import OtherHandlers
+from Common import BaseHandler
 from modelCompetition import MemInfo, DistInfo, Competition, Distance, Info, CompMemb
 from Common import show_unauth_page
 
@@ -18,7 +18,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     autoescape=True)
 
 
-class NewCompetitionInfo(webapp2.RequestHandler):
+class NewCompetitionInfo(BaseHandler):
 
     def get(self):
         """Displays empty form for adding common info of that new competition"""
@@ -28,13 +28,16 @@ class NewCompetitionInfo(webapp2.RequestHandler):
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
-            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
-            temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login')}
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/NewCompetitionInfo.html')
-            self.response.write(template.render(temp_values))
+            roles = OtherHandlers.create_roles_head(self, is_org, is_lead, is_memb)
+            if is_org and self.session.get('role') == 'organizer':
+                temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login')}
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/NewCompetitionInfo.html')
+                self.response.write(template.render(temp_values))
+            else:
+                show_unauth_page(self)
 
 
-class NewCompetition(webapp2.RequestHandler):
+class NewCompetition(BaseHandler):
 
     def get(self):
         """Displays empty form for adding detailed info of that new competition"""
@@ -44,11 +47,14 @@ class NewCompetition(webapp2.RequestHandler):
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
-            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
-            temp_values = {'roles': roles, 'user_email': email}
-            temp_values.update(get_common_info(self))
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/AddCompetition.html')
-            self.response.write(template.render(temp_values))
+            roles = OtherHandlers.create_roles_head(self, is_org, is_lead, is_memb)
+            if is_org and self.session.get('role') == 'organizer':
+                temp_values = {'roles': roles, 'user_email': email}
+                temp_values.update(get_common_info(self))
+                template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/AddCompetition.html')
+                self.response.write(template.render(temp_values))
+            else:
+                show_unauth_page(self)
 
     def post(self):
         """Saves filled form described new competition"""
@@ -58,19 +64,21 @@ class NewCompetition(webapp2.RequestHandler):
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
-            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
-            [competition, comp_values] = post_competition(self)
-            info_values = post_info(self, competition)
-            diz_values = post_diz(self, competition)
-            temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login')}
-            temp_values.update(comp_values)
-            temp_values.update(info_values)
-            temp_values.update(diz_values)
-            template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/CertainCompetition.html')
-            self.response.write(template.render(temp_values))
+            roles = OtherHandlers.create_roles_head(self, is_org, is_lead, is_memb)
+            if is_org and self.session.get('role') == 'organizer':
+                [competition, comp_values] = post_competition(self)
+                info_values = post_info(self, competition)
+                diz_values = post_diz(self, competition)
+                temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login')}
+                temp_values.update(comp_values)
+                temp_values.update(info_values)
+                temp_values.update(diz_values)
+                self.redirect('/')
+            else:
+                show_unauth_page(self)
 
 
-class CertainCompetition(webapp2.RequestHandler):
+class CertainCompetition(BaseHandler):
 
     def get(self):
         """Displays info about competition stored in database"""
@@ -92,15 +100,15 @@ class CertainCompetition(webapp2.RequestHandler):
         else:
             email = user.email()
             [is_org, is_lead, is_memb] = OtherHandlers.find_user(email)
-            roles = OtherHandlers.create_roles_head(is_org, is_lead, is_memb)
+            roles = OtherHandlers.create_roles_head(self, is_org, is_lead, is_memb)
             temp_values.update({'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login')})
-            if is_org and OtherHandlers.cur_role == 'organizer':
+            if is_org and self.session.get('role') == 'organizer':
                 action = ''
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/organizer/CertainCompetition.html')
-            elif is_lead and OtherHandlers.cur_role == 'leader':
+            elif is_lead and self.session.get('role') == 'leader':
                 action = '/entryMembs'
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/leader/CertainCompetition.html')
-            elif is_memb and OtherHandlers.cur_role == 'member':
+            elif is_memb and self.session.get('role') == 'member':
                 action = '/entryOneMemb'
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/member/CertainCompetition.html')
             else:
@@ -116,7 +124,7 @@ def format_date(bad_date):
     y = ymd[0]
     m = ymd[1]
     d = ymd[2]
-    return str(d) + '.' + str(m) + '.' + str(y)
+    return '%s.%s.%s' % (str(d), str(m), str(y))
 
 
 def format_date_list(bad_date_list):
@@ -217,7 +225,7 @@ def post_competition(self):
     stat_qual = read_checkbox_post(self, 'statistic2')
     competition = Competition(name=comp_name, d_start=date_to_python(start_date), d_finish=date_to_python(finish_date),
                               days_count=d_count, statistic=[stat_day, stat_sex, stat_qual])
-    competition.save()
+    competition.put()
     temp_values = {'start': start_date, 'finish': finish_date, 'name': comp_name, 'show_places': show_places,
                    'show_map': show_map, 'days_count': range(1, int(d_count) + 1)}
     return [competition, temp_values]
@@ -235,17 +243,17 @@ def post_info(self, competition):
     org_dols = []
     org_conts = []
     for i in range(1, competition.days_count + 1):
-        pzs.append(self.request.POST.getall('trPzNew' + str(i)))
-        tzs.append(self.request.POST.getall('trTzNew' + str(i)))
-        org_fios.append(self.request.POST.getall('orgFioNew' + str(i)))
-        org_dols.append(self.request.POST.getall('orgDolNew' + str(i)))
-        org_conts.append(self.request.POST.getall('orgContNew' + str(i)))
+        pzs.append(self.request.POST.getall('trPzNew%s' % str(i)))
+        tzs.append(self.request.POST.getall('trTzNew%s' % str(i)))
+        org_fios.append(self.request.POST.getall('orgFioNew%s' % str(i)))
+        org_dols.append(self.request.POST.getall('orgDolNew%s' % str(i)))
+        org_conts.append(self.request.POST.getall('orgContNew%s' % str(i)))
     for i in range(competition.days_count):
         info = Info(competition=competition, day_numb=i, place_addr=places[i], pz_is_open=on_to_boolean(pzs[i]), 
                     pz_add_end=date_to_python(pz_end_add[i]), pz_change_end=date_to_python(pz_end_change[i]), 
                     tz_is_on=on_to_boolean(tzs[i]), link=links[i], orgs_fio=org_fios[i], orgs_dol=org_dols[i], 
                     orgs_cont=org_conts[i])
-        info.save()
+        info.put()
     pzs = on_to_checked(pzs)
     tzs = on_to_checked(tzs)
     temp_values = {'pz_end_add': pz_end_add, 'pz_end_change': pz_end_change, 'links': links, 'places': places,
@@ -271,32 +279,32 @@ def post_diz(self, competition):
     du_qual_min = []
     du_qual_max = []
     for i in range(1, competition.days_count + 1):
-        disciplines.append(self.request.POST['dizDisciplineNew' + str(i)])
-        lengths.append(self.request.POST['dizLengthNew' + str(i)])
-        diz_groups.append(self.request.POST.getall('dizGroupNew' + str(i)))
-        diz_length.append(self.request.POST.getall('dizLenNew' + str(i)))
-        diz_class.append(self.request.POST.getall('dizClassNew' + str(i)))
-        diz_min_com.append(self.request.POST.getall('dizCCminNew' + str(i)))
-        diz_max_com.append(self.request.POST.getall('dizCCmaxNew' + str(i)))
-        du_group.append(self.request.POST.getall('duGroupNew' + str(i)))
-        du_salary.append(self.request.POST.getall('duSalaryNew' + str(i)))
-        du_age_min.append(self.request.POST.getall('duAgeminNew' + str(i)))
-        du_age_max.append(self.request.POST.getall('duAgemaxNew' + str(i)))
-        du_qual_min.append(self.request.POST.getall('duQualNewmin' + str(i)))
-        du_qual_max.append(self.request.POST.getall('duQualNewmax' + str(i)))
+        disciplines.append(self.request.POST['dizDisciplineNew%s' % str(i)])
+        lengths.append(self.request.POST['dizLengthNew%s' % str(i)])
+        diz_groups.append(self.request.POST.getall('dizGroupNew%s' % str(i)))
+        diz_length.append(self.request.POST.getall('dizLenNew%s' % str(i)))
+        diz_class.append(self.request.POST.getall('dizClassNew%s' % str(i)))
+        diz_min_com.append(self.request.POST.getall('dizCCminNew%s' % str(i)))
+        diz_max_com.append(self.request.POST.getall('dizCCmaxNew%s' % str(i)))
+        du_group.append(self.request.POST.getall('duGroupNew%s' % str(i)))
+        du_salary.append(self.request.POST.getall('duSalaryNew%s' % str(i)))
+        du_age_min.append(self.request.POST.getall('duAgeminNew%s' % str(i)))
+        du_age_max.append(self.request.POST.getall('duAgemaxNew%s' % str(i)))
+        du_qual_min.append(self.request.POST.getall('duQualNewmin%s' % str(i)))
+        du_qual_max.append(self.request.POST.getall('duQualNewmax%s' % str(i)))
     for i in range(competition.days_count):  # Run through days
         distance = Distance(competition=competition, day_numb=i, type=disciplines[i], lent=lengths[i])
-        distance.save()
+        distance.put()
         dizs.append(zip(diz_groups[i], diz_length[i], diz_class[i], diz_min_com[i], diz_max_com[i]))
         dus.append(zip(du_group[i], du_salary[i], du_age_min[i], du_age_max[i], du_qual_min[i], du_qual_max[i]))
         for j in range(len(du_group[i])):  # Run through groups in one day
             mem = MemInfo(salary=float(du_salary[i][j]), age_min=int(du_age_min[i][j]),
                           age_max=int(du_age_max[i][j]), qual_min=du_qual_min[i][j], qual_max=du_qual_max[i][j])
-            mem.save()
+            mem.put()
             dist = DistInfo(group_name=diz_groups[i][j], length=float(diz_length[i][j]),
                             dist_class=int(diz_class[i][j]), min_com=int(diz_min_com[i][j]),
                             max_com=int(diz_max_com[i][j]), mem_info=mem, distance=distance)
-            dist.save()
+            dist.put()
     temp_values = {'discs': disciplines, 'lens': lengths, 'dizs': dizs, 'dus': dus, 'stat_day': competition.statistic[0],
                    'stat_sex': competition.statistic[1], 'stat_qual': competition.statistic[2], 'membs_count': 0}
     return temp_values
