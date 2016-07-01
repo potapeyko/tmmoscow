@@ -41,9 +41,15 @@
                           <div class="mdl-cell mdl-cell--7-col"></div>
                           <div class="mdl-cell mdl-cell--7-col"></div>
                           <div class="mdl-cell mdl-cell--5-col">
+                            {% if membs_i_day|length == 0 %}
+                              <button id="saveInfo" type="buttom" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="top: 14px; left:10px;" onclick="history.back();">
+                                  <i class="material-icons">arrow_back</i>
+                              </button>
+                            {% else %}
                               <button id="saveInfo" type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="top: 14px; left:10px;" form="formSaveMembs">
                                   <i class="material-icons">save</i>
                               </button>
+                            {% endif %}
                           </div>
                       </div>   <!--   .mdl-card__title  -->
                       <div class="mdl-card__actions mdl-card--border" style="border: none; background: #fff; padding: 30px 0 0 0;">
