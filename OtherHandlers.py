@@ -5,7 +5,7 @@ import webapp2
 from google.appengine.api import users
 from datetime import datetime
 from google.appengine.ext import db
-
+#from oauth2client import client, crypt
 
 from modelCompetition import Competition
 from modelVisitor import Organizer, Leader, Member, Command
@@ -29,10 +29,13 @@ class LoginHandler(BaseHandler):
         if user:
             email = user.email()
             temp_values = {'user_email': email}
-            template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/organizer/CompetitionList.html')
+            template = JINJA_ENVIRONMENT.get_template('/templates/tmmosc/LogIn.html')
             self.response.write(template.render(temp_values))
         else:
             self.redirect(users.create_login_url(dest_url='/postSignIn'))
+
+    def post(self):
+        self.response.write('gfgfhgf')
 
 
 # Competition list

@@ -2,13 +2,16 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="google-signin-client_id" content="541941382521-69ggfe7n70oj6aupo7kng746nkb8fb95.apps.googleusercontent.com"/>
   <title>Вход | Регистрация</title>
        
    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
    <link rel="stylesheet" href="../../static/css/material.min.css">
    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-   <script type = "text/javascript" src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>        
+   <script type = "text/javascript" src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
+   <script src="https://apis.google.com/js/platform.js" async defer></script>
+
    <style>
     .demo-card-wide.mdl-card {
       width: 320px;
@@ -38,8 +41,13 @@
                 <input class="mdl-textfield__input" type="password" id="pass" name="pass" style="text-align: center; color: #42A5F5; ">
                 <label class="mdl-textfield__label" for="pass" style="text-align: center;">Введите пароль</label>
               </div>            
-            </div>    
+            </div>
             <div class="mdl-card__actions mdl-card--border">
+                <div class="g-signin2" style="height: 56px;" data-onsuccess="onSignIn"></div>
+            </div>
+            <a href="#" onclick="signOut();">Sign out</a>
+
+            <div class="mdl-card__actions mdl-card--border" style="display: none;">
               <button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="LogIn" name="LogIn">
                 ВОЙТИ
               </button>
@@ -78,8 +86,7 @@
         
        
        
-</body>   
-    
+</body>
     <script type="text/javascript">
         $('#btnBack').click(function(){
                 $('#formReg').hide();
@@ -89,6 +96,23 @@
             $('#formIn').hide();
             $('#formReg').show();
         });
+
+
+        function onSignIn(googleUser) {
+          var profile = googleUser.getBasicProfile();
+          console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+          console.log('Name: ' + profile.getName());
+          console.log('Image URL: ' + profile.getImageUrl());
+          console.log('Email: ' + profile.getEmail());
+        }
+
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+              console.log('User signed out.');
+            });
+          }
+
     </script> 
     
 </html>

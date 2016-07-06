@@ -14,9 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-import os
-import jinja2
-import webapp2
 
 from ListHandlers import *
 from CompetitionHandlers import *
@@ -61,15 +58,17 @@ app = webapp2.WSGIApplication([
     # development routes
     ('/db', addDb),
     # common routes
+    ('/tokensignin', LoginHandler),
+    ('/l', LoginHandler),
     ('/postSignIn', AfterSignIn),
     ('/reg/acceptRole', AfterSignIn),
     ('/reg/nullToRole', beforeSignOut),
     ('/entryMembs', EntryMembers),
     ('/entryMembsByDay', EntryMembersByDay),
     ('/reg/leaderAcceptMembs', AcceptMembers),
+    ('/login', LoginHandler),
     # organizer routes
     ('/', DefaultHandler),
-    ('/login', LoginHandler),
     ('/competition', CertainCompetition),
     ('/reg/newCompetition', NewCompetitionInfo),
     ('/reg/addCompetition', NewCompetition),
@@ -95,7 +94,7 @@ app = webapp2.WSGIApplication([
     ('/addToGroup', AddMembToGroup),
     ('/deleteFromComp', DeleteMemberFromComp),
     ('/enterMemb', EnterMember)
-], config=config, debug=True)
+], config=config, debug=False)
 
 def handle_401(request, response, exception):
     response.set_status(401)

@@ -236,7 +236,11 @@ class EntryMembersByDay(BaseHandler):
                         membs_i_day.append(member)
                         if show_tables == False: show_tables = True
                     membs_by_day.append(membs_i_day)
-
+                show_arrow_back = True
+                for membs_i_day in membs_by_day:
+                    if len(membs_i_day) > 0:
+                        show_arrow_back = False
+                        break
                 dist_query = db.Query(Distance).filter('competition =', competition)
                 distances = dist_query.run()
                 type_lent = []
@@ -250,7 +254,7 @@ class EntryMembersByDay(BaseHandler):
                     groups_on_day.append(groups_i_day)
                 temp_values = {'roles': roles, 'user_email': email, 'logout': users.create_logout_url('/login'),
                                'membs_by_day': membs_by_day, 'dists': type_lent, 'groups': groups_on_day, 'comp_key':
-                                   comp_key, 'show_tables': show_tables}
+                                   comp_key, 'show_tables': show_tables, 'show_arrow': show_arrow_back}
                 template = JINJA_ENVIRONMENT.get_template('templates/tmmosc/leader/MembersToDays.html')
                 self.response.write(template.render(temp_values))
             else:

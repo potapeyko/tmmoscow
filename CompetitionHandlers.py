@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import jinja2
+import time
 from google.appengine.api import users
 from datetime import date, datetime
 from google.appengine.ext import db
@@ -73,6 +74,7 @@ class NewCompetition(BaseHandler):
                 temp_values.update(comp_values)
                 temp_values.update(info_values)
                 temp_values.update(diz_values)
+                time.sleep(0.1)
                 self.redirect('/')
             else:
                 show_unauth_page(self)

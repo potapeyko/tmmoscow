@@ -41,8 +41,8 @@
                           <div class="mdl-cell mdl-cell--7-col"></div>
                           <div class="mdl-cell mdl-cell--7-col"></div>
                           <div class="mdl-cell mdl-cell--5-col">
-                            {% if membs_i_day|length == 0 %}
-                              <button id="saveInfo" type="buttom" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="top: 14px; left:10px;" onclick="history.back();">
+                            {% if show_arrow %}
+                              <button id="saveInfo" type="button" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="top: 14px; left:10px;" onclick="history.back();">
                                   <i class="material-icons">arrow_back</i>
                               </button>
                             {% else %}
@@ -66,9 +66,7 @@
                                   <!--  row3  -->
                                   <div class="mdl-cell mdl-cell--1-col"></div>
                                   <div class="mdl-cell mdl-cell--10-col" >
-
                                           {% for membs_i_day in membs_by_day %}
-
                                                   {% if membs_i_day|length == 0 %}<div style="display: none;">{% endif %}
                                                     <p class="myP" style="color: #42a5f5; text-align: left; margin: 18px 0 6px 6px;">День {{ loop.index }} | {{ dists[loop.index0] }}</p>
                                                     {% set day_numb_indx = loop.index0 %}
